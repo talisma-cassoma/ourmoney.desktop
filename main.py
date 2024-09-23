@@ -1,24 +1,54 @@
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QVBoxLayout, QScrollArea,
-                             QLineEdit, QFormLayout, QHBoxLayout, QFrame, QDateEdit,
-                             QPushButton, QLabel, QComboBox)
-from PyQt5.QtCore import Qt
-
+                             QLineEdit, QFormLayout, QHBoxLayout, QFrame, QPushButton, QLabel, QComboBox, QProgressBar, QWidget)
+from PyQt5.QtCore import Qt, QTimer
 from datetime import datetime
-
+from syncdata import SyncManager  # Certifique-se de ter o arquivo syncData.py
 from db import (get_all_transactions, create_table, insert_transaction, delete_transaction)
 
-
-class CreateTransaction(QFrame):
-    def __init__(self, main_window):
+class Main(QMainWindow):
+    def __init__(self):
         super().__init__()
-        self.main_window = main_window  # Passa a referência para a janela principal
+        self.sync_manager = SyncManager()
+        self.initUI()
 
-        # Inputs para os detalhes da transação
+        # Cria um temporizador para atualizar o status de conexão
+        self.timer = QTimer(self)
+        self.timer.timeout.connect(self.update_status)
+        self.timer.start(5000)
+
+    def initUI(self):
+        self.setWindowTitle("OUR-MONKEY")
+        self.setGeometry(100, 100, 700, 600)
+
+        self.main_frame = QFrame()
+        self.main_layout = QVBoxLayout(self.main_frame)
+
+        # Coluna superior com status e sincronização
+        self.status_frame = QFrame()
+        self.status_layout = QHBoxLayout(self.status_frame)
+
+        self.status_label = QLabel("Status: Checando...")
+        self.status_layout.addWidget(self.status_label)
+
+        self.sync_button = QPushButton("Sincronizar")
+        self.sync_button.clicked.connect(self.sync_and_show_progress)
+        self.status_layout.addWidget(self.sync_button)
+
+        self.progress_bar = QProgressBar(self)
+        self.progress_bar.setValue(0)
+        self.status_layout.addWidget(self.progress_bar)
+
+        self.main_layout.addWidget(self.status_frame)
+
+        # Inputs para adicionar transações
+        self.transaction_inputs_frame = QFrame()
+        self.transaction_inputs_layout = QFormLayout(self.transaction_inputs_frame)
+
         self.description_input = QLineEdit()
         self.description_input.setPlaceholderText('Descrição')
 
         self.type_input = QComboBox()
-        self.type_input.addItems(["Saída","Entrada"])
+        self.type_input.addItems(["Saída", "Entrada"])
 
         self.category_input = QLineEdit()
         self.category_input.setPlaceholderText('Categoria')
@@ -27,19 +57,56 @@ class CreateTransaction(QFrame):
         self.price_input.setPlaceholderText('Preço')
 
         self.add_button = QPushButton(text="Adicionar Transação")
-        # Conectar o botão à função add_transaction
         self.add_button.clicked.connect(self.add_transaction)
 
-        layout = QVBoxLayout(self)
-        layout.addWidget(QLabel('Descrição:'))
-        layout.addWidget(self.description_input)
-        layout.addWidget(QLabel('Tipo:'))
-        layout.addWidget(self.type_input)
-        layout.addWidget(QLabel('Categoria:'))
-        layout.addWidget(self.category_input)
-        layout.addWidget(QLabel('Preço:'))
-        layout.addWidget(self.price_input)
-        layout.addWidget(self.add_button)
+        # Adiciona os widgets de input ao layout
+        self.transaction_inputs_layout.addRow('Descrição:', self.description_input)
+        self.transaction_inputs_layout.addRow('Tipo:', self.type_input)
+        self.transaction_inputs_layout.addRow('Categoria:', self.category_input)
+        self.transaction_inputs_layout.addRow('Preço:', self.price_input)
+        self.transaction_inputs_layout.addRow(self.add_button)
+
+        self.main_layout.addWidget(self.transaction_inputs_frame)
+
+        # Área inferior para exibir transações registradas
+        self.transaction_list_frame = QFrame()
+        self.transaction_list_layout = QVBoxLayout(self.transaction_list_frame)
+
+        self.transactions_label = QLabel('Transações Registradas')
+        self.transaction_list_layout.addWidget(self.transactions_label)
+
+        self.transaction_scroll_area = QScrollArea()
+        self.transaction_scroll_area.setWidgetResizable(True)
+        self.transaction_list_widget = QWidget()
+        self.transaction_list_layout_inside = QVBoxLayout(self.transaction_list_widget)
+        self.transaction_list_widget.setLayout(self.transaction_list_layout_inside)
+
+        self.transaction_scroll_area.setWidget(self.transaction_list_widget)
+        self.transaction_list_layout.addWidget(self.transaction_scroll_area)
+
+        self.main_layout.addWidget(self.transaction_list_frame)
+
+        self.setCentralWidget(self.main_frame)
+
+        # Carregar as transações já registradas
+        self.load_collection()
+    
+    def update_status(self):
+        online = self.sync_manager.is_online()
+        if online:
+            self.status_label.setText("Status: Online")
+        else:
+            self.status_label.setText("Status: Offline")
+
+    def sync_and_show_progress(self):
+        self.progress_bar.setValue(0)
+        for i in range(1, 101):
+            self.progress_bar.setValue(i)
+            QApplication.processEvents()
+
+        self.sync_manager.pull_data()
+        self.sync_manager.push_data()
+        self.progress_bar.setValue(100)
 
     def add_transaction(self):
         description = self.description_input.text()
@@ -47,104 +114,82 @@ class CreateTransaction(QFrame):
         category = self.category_input.text()
         price = self.price_input.text()
 
-        # Campos padrão para owner e email
-        #owner = 'talisma'
-        #email = 'talisma@email.com'
-
         if description and trans_type and category and price:
             insert_transaction(description, trans_type, category, float(price))
-            # Recarregar as transações após adicionar
-            self.main_window.load_collection()
-            # Limpar os campos de entrada
-            self.description_input.clear()
-            self.category_input.clear()
-            self.price_input.clear()
-
-
-class TransactionCard(QFrame):
-    def __init__(self, trans_id, description, trans_type, category, price, owner, email, created_at):
-        super().__init__()
-        self.setStyleSheet(
-            'background:white; border-radius:4px; color:black;'
-        )
-        self.setFixedHeight(150)
-        self.trans_id = trans_id
-        layout = QVBoxLayout()
-
-        label = QLabel(f'<strong>{description}</strong>')
-        date_label = QLabel(f"Tipo: {trans_type}, Categoria: {category}, Preço: {price}")
-
-        # Ajuste o formato de data para incluir horas, minutos e segundos
-        parsed_datetime = datetime.strptime(created_at, "%Y-%m-%d %H:%M:%S.%f")
-        formatted_datetime = parsed_datetime.strftime("%Y-%m-%d %H:%M:%S")
-        date_created = QLabel(f"Data de Criação: {formatted_datetime}")
-
-        delete_button = QPushButton(text='Deletar', clicked=self.delete_transaction_click)
-        delete_button.setStyleSheet('background:red; padding:4px;')
-
-        layout.addWidget(label)
-        layout.addWidget(date_label)
-        layout.addWidget(date_created)
-        layout.addWidget(delete_button)
-        layout.addStretch()
-        self.setLayout(layout)
-
-    def delete_transaction_click(self):
-        delete_transaction(self.trans_id)
-        self.close()
-
-
-class Main(QMainWindow):
-    def __init__(self):
-        super().__init__()
-        self.initUI()
-        self.load_collection()
-
-    def initUI(self):
-        self.main_frame = QFrame()
-        self.main_layout = QVBoxLayout(self.main_frame)
-
-        # Adicionar o widget de registro de transações
-        self.register_widget = CreateTransaction(self)
-        self.main_layout.addWidget(self.register_widget)
-
-        transactions_label = QLabel('Transações Registradas')
-        transactions_label.setStyleSheet('font-size:18px;')
-        self.main_layout.addWidget(transactions_label)
-        self.transaction_collection_area()
-
-        self.setCentralWidget(self.main_frame)
-
-    def transaction_collection_area(self):
-        scroll_frame = QFrame()
-        self.transaction_collection_layout = QVBoxLayout(scroll_frame)
-
-        scroll = QScrollArea()
-        scroll.setWidgetResizable(True)
-        scroll.setWidget(scroll_frame)
-        scroll.setStyleSheet('QScrollArea{border:0px}')
-
-        self.transaction_collection_layout.addStretch()
-        self.main_layout.addWidget(scroll)
+            self.load_collection()  # Recarrega as transações
+            self.clear_inputs()
 
     def load_collection(self):
-        # Limpar as transações anteriores antes de recarregar
-        for i in reversed(range(self.transaction_collection_layout.count())):
-            widget = self.transaction_collection_layout.itemAt(i).widget()
+        for i in reversed(range(self.transaction_list_layout_inside.count())):
+            widget = self.transaction_list_layout_inside.itemAt(i).widget()
             if widget is not None:
                 widget.deleteLater()
 
         transactions = get_all_transactions()
         for transaction in transactions:
             frame = TransactionCard(*transaction)
-            self.transaction_collection_layout.insertWidget(0, frame)
+            self.transaction_list_layout_inside.addWidget(frame)
+
+    def clear_inputs(self):
+        self.description_input.clear()
+        self.category_input.clear()
+        self.price_input.clear()
+
+
+class TransactionCard(QFrame):
+    def __init__(self, trans_id, description, trans_type, category, price, owner, email, created_at, synced=False):
+        super().__init__()
+        layout = QHBoxLayout(self)
+        
+        # Estilo da transação
+        self.setStyleSheet("""
+            border-radius: 10px;
+            padding: 2px;
+            background-color: rgb(41, 41, 46);
+            height: 20px;
+            margin-bottom: 4px;
+        """)
+
+        # Descrição
+        desc_label = QLabel(f'{description}')
+        layout.addWidget(desc_label)
+
+        # Tipo e Categoria
+        type_label = QLabel(f'{trans_type}  {category}')
+        layout.addWidget(type_label)
+
+        # Preço
+        price_label = QLabel(f'DH$ {price:.2f}')
+        price_color = (79, 255, 203) if trans_type == "Entrada" else (247, 91, 105)
+        price_label.setStyleSheet(f'color: rgb{price_color};')
+        layout.addWidget(price_label)
+
+        # Data e Sincronizado
+        parsed_datetime = datetime.strptime(created_at, "%Y-%m-%d %H:%M:%S.%f")
+        formatted_datetime = parsed_datetime.strftime("%Y-%m-%d")
+        created_at_label = QLabel(f'{formatted_datetime}')
+        layout.addWidget(created_at_label)
+        
+        synced_color = (79, 255, 203) if synced else (128, 128, 128)
+        synced_label = QLabel(f'{synced}')
+        synced_label.setStyleSheet(f'color: rgb{synced_color};')
+        layout.addWidget(synced_label)
+
+        # Botão Deletar
+        delete_button = QPushButton('Deletar')
+        delete_button.clicked.connect(lambda: self.delete_transaction(trans_id))
+        layout.addWidget(delete_button)
+
+    def delete_transaction(self, trans_id):
+        delete_transaction(trans_id)
+        self.setParent(None)  # Remove a transação da interface
 
 
 def main():
     app = QApplication([])
-    app.setStyle('fusion')
-    win = Main()
-    win.show()
+    app.setStyle('Fusion')
+    window = Main()
+    window.show()
     app.exec_()
 
 
