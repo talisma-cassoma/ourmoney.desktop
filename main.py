@@ -8,7 +8,7 @@ from db import (get_all_transactions, create_table, insert_transaction, delete_t
 class Main(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.sync_manager = SyncManager()
+        self.sync_manager = SyncManager(self)  # Passando a referência
         self.initUI()
 
         # Cria um temporizador para atualizar o status de conexão
@@ -18,7 +18,7 @@ class Main(QMainWindow):
 
     def initUI(self):
         self.setWindowTitle("OUR-MONKEY")
-        self.setGeometry(100, 100, 700, 600)
+        self.setGeometry(100, 100, 1000, 600)
 
         self.main_frame = QFrame()
         self.main_layout = QVBoxLayout(self.main_frame)
@@ -48,7 +48,7 @@ class Main(QMainWindow):
         self.description_input.setPlaceholderText('Descrição')
 
         self.type_input = QComboBox()
-        self.type_input.addItems(["Saída", "Entrada"])
+        self.type_input.addItems(["saida", "entrada"])
 
         self.category_input = QLineEdit()
         self.category_input.setPlaceholderText('Categoria')
@@ -104,8 +104,7 @@ class Main(QMainWindow):
             self.progress_bar.setValue(i)
             QApplication.processEvents()
 
-        self.sync_manager.pull_data()
-        self.sync_manager.push_data()
+        self.sync_manager.pull_data()  # Chama a função que puxa os dados
         self.progress_bar.setValue(100)
 
     def add_transaction(self):
@@ -115,7 +114,7 @@ class Main(QMainWindow):
         price = self.price_input.text()
 
         if description and trans_type and category and price:
-            insert_transaction(description, trans_type, category, float(price))
+            insert_transaction(description, ("income" if trans_type == "entrada" else "outcome"), category, float(price))
             self.load_collection()  # Recarrega as transações
             self.clear_inputs()
 
@@ -137,7 +136,7 @@ class Main(QMainWindow):
 
 
 class TransactionCard(QFrame):
-    def __init__(self, trans_id, description, trans_type, category, price, owner, email, created_at, synced=False):
+    def __init__(self, trans_id, description, trans_type, category, price, owner, email, createdAt, synced):
         super().__init__()
         layout = QHBoxLayout(self)
         
@@ -154,24 +153,28 @@ class TransactionCard(QFrame):
         desc_label = QLabel(f'{description}')
         layout.addWidget(desc_label)
 
-        # Tipo e Categoria
-        type_label = QLabel(f'{trans_type}  {category}')
+        # Tipo
+        type_label = QLabel(f'{"entrada" if trans_type == "income" else "saida"}')
         layout.addWidget(type_label)
-
+        
+        # Categoria
+        category_label = QLabel(f'{category}')
+        layout.addWidget(category_label)
+        
         # Preço
         price_label = QLabel(f'DH$ {price:.2f}')
-        price_color = (79, 255, 203) if trans_type == "Entrada" else (247, 91, 105)
+        price_color = (79, 255, 203) if trans_type == "income" else (247, 91, 105)
         price_label.setStyleSheet(f'color: rgb{price_color};')
         layout.addWidget(price_label)
 
         # Data e Sincronizado
-        parsed_datetime = datetime.strptime(created_at, "%Y-%m-%d %H:%M:%S.%f")
+        parsed_datetime = datetime.strptime(createdAt, '%Y-%m-%d %H:%M:%S.%f')
         formatted_datetime = parsed_datetime.strftime("%Y-%m-%d")
-        created_at_label = QLabel(f'{formatted_datetime}')
-        layout.addWidget(created_at_label)
+        createdAt_label = QLabel(f'{formatted_datetime}')
+        layout.addWidget(createdAt_label)
         
         synced_color = (79, 255, 203) if synced else (128, 128, 128)
-        synced_label = QLabel(f'{synced}')
+        synced_label = QLabel(f'{("sincronizado" if synced else "desincronizado")}')
         synced_label.setStyleSheet(f'color: rgb{synced_color};')
         layout.addWidget(synced_label)
 
