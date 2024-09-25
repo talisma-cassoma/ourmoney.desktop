@@ -126,6 +126,14 @@ class Main(QMainWindow):
 
         transactions = get_all_transactions()
         for transaction in transactions:
+            # Converter a tupla para lista para que possamos modificar os valores
+            transaction = list(transaction)
+            # Modificar o tipo da transação conforme necessário
+            if transaction[2] == 'income':
+                transaction[2] = 'entrada'
+            elif transaction[2] == 'outcome':
+                transaction[2] = 'saida'
+
             frame = TransactionCard(*transaction)
             self.transaction_list_layout_inside.addWidget(frame)
 
@@ -154,7 +162,7 @@ class TransactionCard(QFrame):
         layout.addWidget(desc_label)
 
         # Tipo
-        type_label = QLabel(f'{"entrada" if trans_type == "income" else "saida"}')
+        type_label = QLabel(f'{trans_type}')
         layout.addWidget(type_label)
         
         # Categoria

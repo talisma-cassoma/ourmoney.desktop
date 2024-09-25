@@ -40,7 +40,7 @@ def insert_transaction(description, type, category, price, owner='talisma', emai
     cur.execute(query, (str(uuid.uuid4()), description, type, category, price, owner, email, synced, createdAt))
     db.commit()
     db.close()
-    print('Transaction added successfully!')
+    #print('Transaction added successfully!')
 
 
 def insert_non_synced_transaction(id, description, type, category, price, createdAt, synced, owner='talisma', email='talisma@email.com'):
@@ -79,7 +79,7 @@ def insert_non_synced_transaction(id, description, type, category, price, create
             createdAt          # Data de criação
         ))
         db.commit()  # Confirma a transação no banco de dados
-        print(f"Transação com id {id} inserida com sucesso.")
+        #print(f"Transação com id {id} inserida com sucesso.")
     
     except sqlite3.Error as e:
         print(f"Erro ao inserir transação: {e}")
@@ -87,7 +87,7 @@ def insert_non_synced_transaction(id, description, type, category, price, create
 
     db.commit()
     db.close()
-    print('Transaction added successfully!')
+    #print('Transaction added successfully!')
 
 def get_all_transactions():
     db = sqlite3.connect('database.db')
@@ -95,6 +95,7 @@ def get_all_transactions():
     cur = db.cursor()
     transactions = cur.execute(statement).fetchall()
     db.close()
+
     return transactions
 
 def delete_transaction(trans_id):
