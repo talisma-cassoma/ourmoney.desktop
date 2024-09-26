@@ -171,7 +171,7 @@ class TransactionCard(QFrame):
         
         # Preço
         price_label = QLabel(f'DH$ {price:.2f}')
-        price_color = (79, 255, 203) if trans_type == "income" else (247, 91, 105)
+        price_color = (79, 255, 203) if trans_type == "entrada" else (247, 91, 105)
         price_label.setStyleSheet(f'color: rgb{price_color};')
         layout.addWidget(price_label)
 

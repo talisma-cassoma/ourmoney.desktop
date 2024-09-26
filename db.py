@@ -91,7 +91,7 @@ def insert_non_synced_transaction(id, description, type, category, price, create
 
 def get_all_transactions():
     db = sqlite3.connect('database.db')
-    statement = 'SELECT id, description, type, category, price, owner, email, createdAt, synced FROM Transactions'
+    statement = 'SELECT id, description, type, category, price, owner, email, createdAt, synced FROM Transactions ORDER BY createdAt DESC'
     cur = db.cursor()
     transactions = cur.execute(statement).fetchall()
     db.close()
