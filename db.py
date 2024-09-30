@@ -1,11 +1,29 @@
-
 import sqlite3
 import uuid
-
 import datetime
+import logging
+
+import os
+import sys
+
+def resource_path(relative_path):
+    try:
+        base_path = sys._MEIPASS2
+    except Exception:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative_path)
+
+
+# Configuração do logging
+logging.basicConfig(
+    filename=resource_path('app.log'),          # Nome do arquivo de log
+    filemode='a',                # Modo de abertura (a: anexar)
+    format='%(asctime)s - %(levelname)s - %(message)s',  # Formato das mensagens
+    level=logging.INFO            # Nível de log padrão
+)
 
 def create_table():
-    db = sqlite3.connect('database.db')
+    db = sqlite3.connect(resource_path('database.db'))
     query = """
     CREATE TABLE IF NOT EXISTS Transactions (
         id TEXT PRIMARY KEY,          -- Mantenha TEXT se o ID for uma string (UUID ou similar)
@@ -27,7 +45,8 @@ def create_table():
 create_table()
 
 def insert_transaction(description, type, category, price, owner='talisma', email='talisma@email.com', synced=False):
-    db = sqlite3.connect('database.db')
+    logging.info({resource_path('database.db')})
+    db = sqlite3.connect(resource_path('database.db'))
     
     query = """
     INSERT INTO Transactions (id, description, type, category, price, owner, email, synced, createdAt)
@@ -40,12 +59,11 @@ def insert_transaction(description, type, category, price, owner='talisma', emai
     cur.execute(query, (str(uuid.uuid4()), description, type, category, price, owner, email, synced, createdAt))
     db.commit()
     db.close()
-    #print('Transaction added successfully!')
-
+    # print('Transaction added successfully!')
+    logging.info('Transação adicionada com sucesso!')
 
 def insert_non_synced_transaction(id, description, type, category, price, createdAt, synced, owner='talisma', email='talisma@email.com'):
-    
-    db = sqlite3.connect('database.db')
+    db = sqlite3.connect(resource_path('database.db'))
     cur = db.cursor()
 
     # Verifica se o id já existe no banco de dados
@@ -53,12 +71,13 @@ def insert_non_synced_transaction(id, description, type, category, price, create
     exists = cur.fetchone()[0]
 
     if exists:
-        print(f"Transação com id {id} já existe no banco de dados.")
+        # print(f"Transação com id {id} já existe no banco de dados.")
+        logging.warning(f'Transação com id {id} já existe no banco de dados.')
         return  # Sai da função sem inserir
 
     # Verifica se createdAt é None e define a data atual se necessário
     if createdAt is None:
-        createdAt = datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')
+        createdAt = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')
 
     # Consulta de inserção
     query = """
@@ -79,18 +98,19 @@ def insert_non_synced_transaction(id, description, type, category, price, create
             createdAt          # Data de criação
         ))
         db.commit()  # Confirma a transação no banco de dados
-        #print(f"Transação com id {id} inserida com sucesso.")
+        # print(f"Transação com id {id} inserida com sucesso.")
+        logging.info(f'Transação com id {id} inserida com sucesso.')
     
     except sqlite3.Error as e:
-        print(f"Erro ao inserir transação: {e}")
-    
+        # print(f"Erro ao inserir transação: {e}")
+        logging.error(f'Erro ao inserir transação: {e}')
 
-    db.commit()
     db.close()
-    #print('Transaction added successfully!')
+    # print('Transaction added successfully!')
+    logging.info('Transação adicionada com sucesso!')
 
 def get_all_transactions():
-    db = sqlite3.connect('database.db')
+    db = sqlite3.connect(resource_path('database.db'))
     statement = 'SELECT id, description, type, category, price, owner, email, createdAt, synced FROM Transactions ORDER BY createdAt DESC'
     cur = db.cursor()
     transactions = cur.execute(statement).fetchall()
@@ -99,34 +119,36 @@ def get_all_transactions():
     return transactions
 
 def delete_transaction(trans_id):
-    db = sqlite3.connect('database.db')
+    db = sqlite3.connect(resource_path('database.db'))
     query = "DELETE FROM Transactions WHERE id = ?"
     db.execute(query, (trans_id,))
     db.commit()
     db.close()
-    print(f'Transação com id {trans_id} deletada com sucesso!')
+    # print(f'Transação com id {trans_id} deletada com sucesso!')
+    logging.info(f'Transação com id {trans_id} deletada com sucesso!')
 
 def get_unsynced_transactions():
-        db = sqlite3.connect('database.db')
-        query = 'SELECT * FROM Transactions WHERE synced = 0'  # 0 para false
-        cur = db.cursor()
-        unsynced_transactions = cur.execute(query).fetchall()
-        db.close()
-        return unsynced_transactions
+    db = sqlite3.connect(resource_path('database.db'))
+    query = 'SELECT * FROM Transactions WHERE synced = 0'  # 0 para false
+    cur = db.cursor()
+    unsynced_transactions = cur.execute(query).fetchall()
+    db.close()
+    return unsynced_transactions
 
 def mark_as_synced(transactions):
-    db = sqlite3.connect('database.db')
+    db = sqlite3.connect(resource_path('database.db'))
     cur = db.cursor()
     
     for transaction in transactions:
         query = 'UPDATE Transactions SET synced = 1 WHERE id = ?'
         cur.execute(query, (transaction['id'],))  # Marcar cada transação como sincronizada
-    
+        logging.info(f'Transação {transaction["id"]} marcada como sincronizada.')
+
     db.commit()
     db.close()
 
 def update_transaction(trans_id, description=None, trans_type=None, category=None, price=None, owner=None, email=None):
-    db = sqlite3.connect('database.db')
+    db = sqlite3.connect(resource_path('database.db'))
     cur = db.cursor()
 
     # Construir a query de update dinamicamente com base nos parâmetros fornecidos
@@ -168,4 +190,5 @@ def update_transaction(trans_id, description=None, trans_type=None, category=Non
     db.commit()
     db.close()
 
-    print(f'Transação com id {trans_id} atualizada com sucesso!')
+    # print(f'Transação com id {trans_id} atualizada com sucesso!')
+    logging.info(f'Transação com id {trans_id} atualizada com sucesso!')

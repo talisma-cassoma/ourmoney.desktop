@@ -1,6 +1,9 @@
 # Ignorar a pasta do ambiente virtual
 venv/
 
+build/
+dist/
+
 # Ignorar o arquivo do banco de dados
 database.db
 
