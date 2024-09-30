@@ -155,6 +155,13 @@ class Main(QMainWindow):
             self.clear_inputs()
 
     def load_collection(self):
+        # Hide row numbers (vertical header)
+        self.transaction_table.verticalHeader().setVisible(False)
+
+        # Hide scroll bars
+        self.transaction_table.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)  # Hide vertical scroll bar
+        self.transaction_table.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)  # Hide horizontal scroll bar
+
         # Clear previous transactions
         self.transaction_table.setRowCount(0)  # Clear the table
 
@@ -172,23 +179,32 @@ class Main(QMainWindow):
 
             # Add transaction details to the table
             self.transaction_table.setItem(row_position, 0, QTableWidgetItem(transaction[1]))  # Description
-            self.transaction_table.setItem(row_position, 1, QTableWidgetItem(transaction[2]))  # Type
-            self.transaction_table.setItem(row_position, 2, QTableWidgetItem(transaction[3]))  # Category
+            type_item = QTableWidgetItem(transaction[2])  # Type (Tipo)
+            type_item.setTextAlignment(Qt.AlignCenter)
+            self.transaction_table.setItem(row_position, 1, type_item)
+
+            category_item = QTableWidgetItem(transaction[3])  # Category (Categoria)
+            category_item.setTextAlignment(Qt.AlignCenter)
+            self.transaction_table.setItem(row_position, 2, category_item)
 
             price_color = "rgb(79, 255, 203)" if transaction[2] == "entrada"  else "rgb(247, 91, 105)"
             price = QLabel(f'DH$ {transaction[4]:.2f}')
             price.setStyleSheet(f'color: {price_color};')
+            price.setAlignment(Qt.AlignCenter)  # Center the QLabel text
             self.transaction_table.setCellWidget(row_position, 3, price)  # Price
 
             # Format the date
             parsed_datetime = datetime.strptime(transaction[7], '%Y-%m-%d %H:%M:%S.%f')
             formatted_datetime = parsed_datetime.strftime("%Y-%m-%d")
-            self.transaction_table.setItem(row_position, 4, QTableWidgetItem(formatted_datetime))  # Date
+            date_item = QTableWidgetItem(formatted_datetime)  # Date (Data)
+            date_item.setTextAlignment(Qt.AlignCenter)
+            self.transaction_table.setItem(row_position, 4, QTableWidgetItem( date_item))  # Date
 
             # Synced status
             synced_color = "rgb(79, 255, 203)" if transaction[8] else "rgb(128, 128, 128)"
             synced_status = QLabel("sincronizado" if transaction[8] else "desincronizado")
             synced_status.setStyleSheet(f'color: {synced_color};')
+            synced_status.setAlignment(Qt.AlignCenter)
             self.transaction_table.setCellWidget(row_position, 5, synced_status)
 
             # Delete button with confirmation dialog
