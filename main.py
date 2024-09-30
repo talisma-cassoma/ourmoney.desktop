@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QVBoxLayout, QScrollArea,
-                             QLineEdit, QFormLayout, QHBoxLayout, QFrame, QPushButton, QLabel, QComboBox, QProgressBar, QWidget, QTableWidget, QTableWidgetItem, QHeaderView)
+                             QLineEdit, QFormLayout, QHBoxLayout, QFrame, QPushButton, QLabel, QComboBox, QProgressBar, QWidget, QTableWidget, QTableWidgetItem, QHeaderView, QMessageBox)
+
 from PyQt5.QtCore import Qt, QTimer
 from datetime import datetime
 from syncdata import SyncManager
@@ -82,8 +83,8 @@ class Main(QMainWindow):
         self.totals_frame.setStyleSheet("background-color: rgb(61, 61, 66); border-radius: 16px; padding: 10px;")
         self.totals_layout = QVBoxLayout(self.totals_frame)
 
-        self.income_label = QLabel(f'Total de Entradas: DH$ {self.sync_manager.get_total_of_income_transactons()}')
-        self.expense_label = QLabel(f'Total de Saídas: DH$ {self.sync_manager.get_total_of_outcome_transactons()}')
+        self.income_label = QLabel(f'Entradas: {self.sync_manager.get_total_of_income_transactons()}')
+        self.expense_label = QLabel(f'Saídas:  {self.sync_manager.get_total_of_outcome_transactons()}')
         self.income_label.setStyleSheet("color: rgb(79, 255, 203);")
         self.expense_label.setStyleSheet("color: rgb(247, 91, 105);")
 
@@ -97,7 +98,7 @@ class Main(QMainWindow):
 
         # Block 3: List of registered transactions using QTableWidget
         self.transaction_list_frame = QFrame()
-        self.transaction_list_frame.setStyleSheet("background-color: rgb(41, 41, 46); border-radius: 16px;")
+        self.transaction_list_frame.setStyleSheet("background-color: rgb(41, 41, 46); border-radius: 2px;")
         self.transaction_list_layout = QVBoxLayout(self.transaction_list_frame)
 
         self.transactions_label = QLabel('Transações Registradas')
@@ -112,7 +113,7 @@ class Main(QMainWindow):
 
         # Set fixed height for rows
         #self.transaction_table.setFixedHeight(300)  # Set a fixed height for the table
-        self.transaction_table.verticalHeader().setDefaultSectionSize(30)  # Set a default row height
+        self.transaction_table.verticalHeader().setDefaultSectionSize(50)  # Set a default row height
 
         self.transaction_table.setColumnWidth(1, 150)  # Make last column stretch
         self.transaction_table.horizontalHeader().setSectionResizeMode(0, QHeaderView.Stretch)  # Resize columns to fit the table
@@ -125,6 +126,7 @@ class Main(QMainWindow):
         # Load registered transactions
         self.load_collection()
 
+        
     def update_status(self):
         online = self.sync_manager.is_online()
         if online:
@@ -188,14 +190,21 @@ class Main(QMainWindow):
             synced_status = QLabel("sincronizado" if transaction[8] else "desincronizado")
             synced_status.setStyleSheet(f'color: {synced_color};')
             self.transaction_table.setCellWidget(row_position, 5, synced_status)
-            
-            # Delete button
+
+            # Delete button with confirmation dialog
             delete_button = QPushButton('Deletar')
-            #delete_button.setFixedWidth(100)
             delete_button.setStyleSheet("color: white;")
-            # Use a default argument to capture the current transaction ID
-            delete_button.clicked.connect(lambda _, trans_id=transaction[0]: self.delete_transaction(trans_id))
-            self.transaction_table.setCellWidget(row_position, 6, delete_button)  # Use column 6 for the delete button
+            delete_button.clicked.connect(lambda _, trans_id=transaction[0]: self.confirm_delete_transaction(trans_id))
+            self.transaction_table.setCellWidget(row_position, 6, delete_button)
+
+    def confirm_delete_transaction(self, transaction_id):
+        # Create a confirmation dialog
+        reply = QMessageBox.question(self, 'Confirmação', "Você realmente quer deletar esta transação?",
+                                     QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+
+        # If user confirms, delete the transaction
+        if reply == QMessageBox.Yes:
+            self.delete_transaction(transaction_id)
 
     def delete_transaction(self, transaction_id):
         delete_transaction(transaction_id)

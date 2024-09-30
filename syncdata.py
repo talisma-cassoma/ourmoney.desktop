@@ -139,12 +139,12 @@ class SyncManager:
         transactions = get_all_transactions()
         for transaction in transactions:
             if transaction[2] == 'income':
-                total+= float(transaction[4])
+                total+= transaction[4]
         return total
     def get_total_of_outcome_transactons(self):
         total= 0
         transactions = get_all_transactions()
         for transaction in transactions:
             if transaction[2] == 'outcome':
-                total+= float(transaction[4])
+                total+= transaction[4]
         return total    
