@@ -2,9 +2,17 @@ from PyQt5.QtWidgets import (QApplication, QMainWindow, QVBoxLayout, QScrollArea
                              QLineEdit, QFormLayout, QHBoxLayout, QFrame, QPushButton, QLabel, QComboBox, QProgressBar, QWidget, QTableWidget, QTableWidgetItem, QHeaderView, QMessageBox)
 
 from PyQt5.QtCore import Qt, QTimer
+from PyQt5.QtGui import QFont
+
 from datetime import datetime
+
 from syncdata import SyncManager
+
 from db import (get_all_transactions, create_table, insert_transaction, delete_transaction)
+
+Total_font = QFont()
+Total_font.setPointSize(14)  # Set the font size to 14 (adjust as needed)
+Total_font.setBold(True)  # Make the text bold
 
 class Main(QMainWindow):
     def __init__(self):
@@ -19,7 +27,7 @@ class Main(QMainWindow):
 
     def initUI(self):
         self.setWindowTitle("OUR-MONKEY")
-        self.setGeometry(100, 100, 1000, 600)
+        self.setGeometry(100, 100, 950, 750)
 
         self.main_frame = QFrame()
         self.main_layout = QVBoxLayout(self.main_frame)
@@ -84,7 +92,11 @@ class Main(QMainWindow):
         self.totals_layout = QVBoxLayout(self.totals_frame)
 
         self.income_label = QLabel(f'Entradas: {self.sync_manager.get_total_of_income_transactons()}')
+        self.income_label.setAlignment(Qt.AlignCenter)
+        self.income_label.setFont(Total_font)
         self.expense_label = QLabel(f'Saídas:  {self.sync_manager.get_total_of_outcome_transactons()}')
+        self.expense_label.setAlignment(Qt.AlignCenter)
+        self.expense_label.setFont(Total_font)
         self.income_label.setStyleSheet("color: rgb(79, 255, 203);")
         self.expense_label.setStyleSheet("color: rgb(247, 91, 105);")
 

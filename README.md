@@ -1,0 +1,1 @@
+<p align="center"><img src="assets/appGUI.png"></p>
