@@ -1,0 +1,27 @@
+# Ignorar a pasta do ambiente virtual
+venv/
+
+build/
+dist/
+
+# Ignorar o arquivo do banco de dados
+database.db
+
+# Ignorar arquivos Python compilados
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignorar logs, temp e arquivos desnecessários
+*.log
+*.tmp
+
+# Ignorar configurações do editor/IDE
+.vscode/
+.idea/
+
+# Ignorar arquivos de backup
+*.bak
+*.swp
+*.swo
