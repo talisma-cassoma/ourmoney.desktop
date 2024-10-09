@@ -1,3 +1,0 @@
-([('app',
-   '/Users/talismamanuel/github_projects/ourmoney_desktop/dist/app',
-   'EXECUTABLE')],)
