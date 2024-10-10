@@ -55,7 +55,7 @@ def insert_transaction(description, type, category, price, owner='talisma', emai
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     """
     # Data formatada corretamente
-    createdAt = datetime.datetime.now()
+    createdAt = datetime.now()
     
     cur = db.cursor()
     cur.execute(query, (str(uuid.uuid4()), description, type, category, price, owner, email, synced, createdAt))
@@ -114,7 +114,7 @@ def insert_non_synced_transaction(id, description, type, category, price, create
 
     # Verifica se createdAt é None e define a data atual se necessário
     if createdAt is None:
-        createdAt = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')
+        createdAt = datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')
 
     # Consulta de inserção
     query = """

@@ -93,21 +93,21 @@ class SyncManager:
 
                 transactions_to_push.append(transaction_dict)
 
-            try:
-                response = requests.post(f"{self.api_url}/api/offline/transactions", json=transactions_to_push, timeout=self.timeout)
-                if response.status_code == 200:
-                    mark_as_synced(transactions_to_push)
-                    logging.info("Dados enviados com sucesso!")
-                    #print("Dados enviados com sucesso!")
-                else:
-                    logging.error(f"Erro ao enviar dados. Status Code: {response.status_code}")
-                    #print(f"Erro ao enviar dados. Status Code: {response.status_code}")
-            except Exception as e:
-                logging.error(f"Erro ao enviar transações offline: {e}")
-                #print(f"Erro ao enviar transações offline: {e}")
+            # Sending transactions in chunks
+            chunk_size = 100  # Define your chunk size
+            for i in range(0, len(transactions_to_push), chunk_size):
+                chunk = transactions_to_push[i:i + chunk_size]
+                try:
+                    response = requests.post(f"{self.api_url}/api/offline/transactions", json=chunk, timeout=self.timeout)
+                    if response.status_code == 200:
+                        mark_as_synced(chunk)  # Mark only the successfully sent chunk as synced
+                        logging.info(f"{len(chunk)} transações enviadas com sucesso!")
+                    else:
+                        logging.error(f"Erro ao enviar dados. Status Code: {response.status_code}")
+                except Exception as e:
+                    logging.error(f"Erro ao enviar transações offline: {e}")
         else:
             logging.info("Sem conexão. Dados não enviados.")
-            #print("Sem conexão. Dados não enviados.")
 
     def store_in_local_db(self, data):
         """Armazena as transações baixadas no banco de dados local."""
@@ -142,11 +142,12 @@ class SyncManager:
         for transaction in transactions:
             if transaction[2] == 'income':
                 total+= transaction[4]
-        return total
+        return f'{total:.2f}'
+        
     def get_total_of_outcome_transactons(self):
         total= 0
         transactions = get_all_transactions()
         for transaction in transactions:
             if transaction[2] == 'outcome':
                 total+= transaction[4]
-        return total    
+        return f'{total:.2f}'    
