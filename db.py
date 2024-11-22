@@ -73,30 +73,41 @@ def insert_many_transactions(transactions):
     """
     cur = db.cursor()
 
-    # Parse transactions and format them correctly
-    data = [
-        (
-            t.get('id', str(uuid.uuid4())),  # Use the id from the JSON or generate a new one if not available
-            t['description'],
-            t['type'],
-            t['category'],
-            float(t['price']),  # Ensure price is a float
-            t.get('owner', 'talisma'),  # Default owner
-            t.get('email', 'talisma@email.com'),  # Default email
-            1 if t['synced'] else 0,  # Convert boolean to 1/0 for the database
-            convert_time_format(t['createdAt'])  # Convert time correctly
-        )
-        for t in transactions
-    ]
+    successful_insertions = 0
+    failed_transactions = []
 
+    # Process the chunk
+    for t in transactions:
+        try:
+            data = (
+                t.get('id', str(uuid.uuid4())),  # Use the id from the JSON or generate a new one if not available
+                t['description'],
+                t['type'],
+                t['category'],
+                float(t['price']),  # Ensure price is a float
+                t.get('owner', 'talisma'),  # Default owner
+                t.get('email', 'talisma@email.com'),  # Default email
+                1 if t['synced'] else 0,  # Convert boolean to 1/0 for the database
+                convert_time_format(t['createdAt'])  # Convert time correctly
+            )
+            cur.execute(query, data)
+            successful_insertions += 1
+        except (sqlite3.Error, KeyError, ValueError) as e:
+            logging.error(f"Erro ao inserir transação: {t}. Detalhes do erro: {e}")
+            failed_transactions.append(t)
+
+    # Commit only once per chunk
     try:
-        cur.executemany(query, data)
         db.commit()
-        logging.info(f'{len(transactions)} transações inseridas com sucesso!')
-    except sqlite3.Error as e:
-        logging.error(f'Erro ao inserir transações em lote: {e}')
+        logging.info(f"{successful_insertions} transações inseridas com sucesso nesta fatia!")
+        if failed_transactions:
+            logging.warning(f"{len(failed_transactions)} transações falharam nesta fatia e foram ignoradas.")
+    except sqlite3.Error as commit_error:
+        logging.error(f"Erro ao commitar a fatia: {commit_error}")
     finally:
         db.close()
+        
+    logging.info(f"all failed transactions: {failed_transactions}")  # failed transactions for further inspection
 
 
 def insert_non_synced_transaction(id, description, type, category, price, createdAt, synced, owner='talisma', email='talisma@email.com'):
