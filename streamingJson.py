@@ -1,8 +1,10 @@
 import ijson
-from db import insert_many_transactions
+from controller import Controller
 
 batch_size = 1000
 transactions = []
+
+controller = Controller()
 
 with open('response.json', 'r') as file:
     parser = ijson.items(file, 'item')  # Parse the array of transactions
@@ -10,9 +12,9 @@ with open('response.json', 'r') as file:
     for transaction in parser:
         transactions.append(transaction)
         if len(transactions) >= batch_size:
-            insert_many_transactions(transactions)
+            controller.insert_many(transactions)
             transactions = []
 
     # Insert any remaining transactions
     if transactions:
-        insert_many_transactions(transactions)
+        controller.insert_many(transactions)

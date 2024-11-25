@@ -3,14 +3,23 @@ import requests
 import json
 
 from convertTimeFormat import convert_time_format
-from db import (insert_non_synced_transaction, delete_transaction, get_unsynced_transactions, mark_as_synced, get_all_transactions)
 from datetime import datetime
+from db import (insert_non_synced_transaction, 
+                get_unsynced_transactions, 
+                mark_as_synced, 
+                get_all_transactions,
+                fetch_transactions,
+                insert_one, 
+                delete,
+                get_total,
+                insert_many)
+
 
 # Configuração do logging
 logging.basicConfig(filename='app.log', level=logging.INFO, format='%(asctime)s %(levelname)s:%(message)s')
 
-class SyncManager:
-    def __init__(self, main_window):
+class Controller:
+    def __init__(self, main_window=None):
         self.main_window = main_window
         self.api_url = "https://our-money-bkd.onrender.com"
         self.timeout = 10
@@ -24,6 +33,30 @@ class SyncManager:
         except (requests.ConnectionError, requests.Timeout):
             return False
 
+    def get_all_transactions(self):
+        return get_all_transactions()
+    
+    def fetch_transactions(self, last_date=None):
+        return fetch_transactions(last_date)
+    
+    def insert_transaction(self, description, 
+                           type, category, price, 
+                           owner='talisma', 
+                           email='talisma@email.com', 
+                           synced=False):
+        insert_one(description, type, category, price, owner, email, synced)
+     
+    def delete_transaction(self, transaction_id):
+        delete(transaction_id)
+
+    def get_total_of_transactions(self):
+         total_income, total_outcome = get_total()
+         return total_income, total_outcome
+    
+    def insert_many(self, transactions):
+        insert_many(transactions)
+
+    
     def refresh_transaction_view(self):
         """Atualiza a exibição das transações na GUI."""
         self.transactions_list.clear()  # Limpa a lista atual
@@ -135,19 +168,4 @@ class SyncManager:
                 except Exception as e:
                     logging.error(f"Erro ao inserir a transação: {e}")
                     #print(f"Erro ao inserir a transação: {e}")
-    
-    def get_total_of_income_transactons(self):
-        total= 0
-        transactions = get_all_transactions()
-        for transaction in transactions:
-            if transaction[2] == 'income':
-                total+= transaction[4]
-        return f'{total:.2f}'
-        
-    def get_total_of_outcome_transactons(self):
-        total= 0
-        transactions = get_all_transactions()
-        for transaction in transactions:
-            if transaction[2] == 'outcome':
-                total+= transaction[4]
-        return f'{total:.2f}'    
+     

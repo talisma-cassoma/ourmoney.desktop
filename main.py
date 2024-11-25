@@ -1,14 +1,14 @@
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QVBoxLayout, QScrollArea,
-                             QLineEdit, QFormLayout, QHBoxLayout, QFrame, QPushButton, QLabel, QComboBox, QProgressBar, QWidget, QTableWidget, QTableWidgetItem, QHeaderView, QMessageBox)
+                             QLineEdit, QFormLayout, QHBoxLayout, QFrame, QPushButton, 
+                             QLabel, QComboBox, QProgressBar, QWidget, QTableWidget, 
+                             QTableWidgetItem, QHeaderView, QMessageBox,QListWidget )
 
-from PyQt5.QtCore import Qt, QTimer
+from PyQt5.QtCore import Qt, QTimer, QEvent
 from PyQt5.QtGui import QFont
 
 from datetime import datetime
 
-from syncData import SyncManager
-
-from db import (get_all_transactions, create_table, insert_transaction, delete_transaction)
+from controller import Controller
 
 Total_font = QFont()
 Total_font.setPointSize(14)  # Set the font size to 14 (adjust as needed)
@@ -17,7 +17,11 @@ Total_font.setBold(True)  # Make the text bold
 class Main(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.sync_manager = SyncManager(self)
+        self.controller = Controller(self)
+        self.last_date = None
+        self.last_added_transaction = {'price': 0.0, 'type': '' }
+        self.fetching = False
+        self.total_of_income, self.total_of_outcome = self.controller.get_total_of_transactions()
         self.initUI()
 
         # Timer for updating the status of connection
@@ -28,6 +32,8 @@ class Main(QMainWindow):
     def initUI(self):
         self.setWindowTitle("OUR-MONKEY")
         self.setGeometry(100, 100, 950, 750)
+        # self.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
+        # self.setMinimumHeight(400)
 
         self.main_frame = QFrame()
         self.main_layout = QVBoxLayout(self.main_frame)
@@ -91,10 +97,10 @@ class Main(QMainWindow):
         self.totals_frame.setStyleSheet("background-color: rgb(61, 61, 66); border-radius: 16px; padding: 10px;")
         self.totals_layout = QVBoxLayout(self.totals_frame)
 
-        self.income_label = QLabel(f'Entradas: {self.sync_manager.get_total_of_income_transactons()}')
+        self.income_label = QLabel(f'Entradas: {self.total_of_income:.2f} DH$')
         self.income_label.setAlignment(Qt.AlignCenter)
         self.income_label.setFont(Total_font)
-        self.expense_label = QLabel(f'Saídas:  {self.sync_manager.get_total_of_outcome_transactons()}')
+        self.expense_label = QLabel(f'Saídas: {self.total_of_outcome:.2f} DH$')
         self.expense_label.setAlignment(Qt.AlignCenter)
         self.expense_label.setFont(Total_font)
         self.income_label.setStyleSheet("color: rgb(79, 255, 203);")
@@ -123,9 +129,13 @@ class Main(QMainWindow):
         self.transaction_table.setHorizontalHeaderLabels(['Descrição', 'Tipo', 'Categoria', 'Preço', 'Data', 'Sincronizado', 'Ações'])
         self.transaction_table.setStyleSheet("color: white; ")
 
+        self.transaction_table.verticalScrollBar().valueChanged.connect(self.on_scroll) # Connect scroll event
+
         # Set fixed height for rows
         #self.transaction_table.setFixedHeight(300)  # Set a fixed height for the table
         self.transaction_table.verticalHeader().setDefaultSectionSize(50)  # Set a default row height
+        # Hide the vertical row numbers
+        self.transaction_table.verticalHeader().setVisible(False)
 
         self.transaction_table.setColumnWidth(1, 150)  # Make last column stretch
         self.transaction_table.horizontalHeader().setSectionResizeMode(0, QHeaderView.Stretch)  # Resize columns to fit the table
@@ -140,7 +150,7 @@ class Main(QMainWindow):
 
         
     def update_status(self):
-        online = self.sync_manager.is_online()
+        online = self.controller.is_online()
         if online:
             self.status_label.setText("Status: Online")
         else:
@@ -152,7 +162,7 @@ class Main(QMainWindow):
             self.progress_bar.setValue(i)
             QApplication.processEvents()
 
-        self.sync_manager.pull_data()  # Chama a função que puxa os dados
+        self.controller.pull_data()  # Chama a função que puxa os dados
         self.progress_bar.setValue(100)
 
     def add_transaction(self):
@@ -160,63 +170,58 @@ class Main(QMainWindow):
         trans_type = self.type_input.currentText()
         category = self.category_input.text()
         price = self.price_input.text()
-
         if description and trans_type and category and price:
-            insert_transaction(description, ("income" if trans_type == "entrada" else "outcome"), category, float(price))
+            self.controller.insert_transaction(description, ("income" if trans_type == "entrada" else "outcome"), category, float(price))
+            self.last_date = None
+
+            if(self.last_added_transaction['type'] == "income"):
+                self.income_label.setText(f"Total Income: {(self.total_of_income + float(price)):.2f}")
+            else:
+                self.expense_label.setText(f"Total outcome: {(self.total_of_outcome + float(price)):.2f}")
+            
             self.load_collection()  # Recarrega as transações
+
             self.clear_inputs()
 
-    def load_collection(self):
-        # Hide row numbers (vertical header)
-        self.transaction_table.verticalHeader().setVisible(False)
+    def load_collection(self, append=False):
+        """
+        Load transactions into the table. If `append` is True, add to the existing table.
+        """
+        # Set fetching flag to avoid duplicate fetches
+        if self.fetching:
+            return
 
-        # Hide scroll bars
-        self.transaction_table.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)  # Hide vertical scroll bar
-        self.transaction_table.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)  # Hide horizontal scroll bar
+        self.fetching = True
 
-        # Clear previous transactions
-        self.transaction_table.setRowCount(0)  # Clear the table
+        # Fetch transactions
+        transactions = self.controller.fetch_transactions(self.last_date)
 
-        # Load and display transactions
-        transactions = get_all_transactions()
+        if not append:
+            self.transaction_table.setRowCount(0)  # Clear the table if not appending
+
         for transaction in transactions:
-            transaction = list(transaction)
-            if transaction[2] == 'income':
-                transaction[2] = 'entrada'
-            elif transaction[2] == 'outcome':
-                transaction[2] = 'saida'
-
             row_position = self.transaction_table.rowCount()
             self.transaction_table.insertRow(row_position)
 
-            # Add transaction details to the table
+            # Map and populate transaction fields
             self.transaction_table.setItem(row_position, 0, QTableWidgetItem(transaction[1]))  # Description
-            type_item = QTableWidgetItem(transaction[2])  # Type (Tipo)
-            type_item.setTextAlignment(Qt.AlignCenter)
+            type_item = QTableWidgetItem('entrada' if transaction[2] == 'income' else 'saida')  # Type
             self.transaction_table.setItem(row_position, 1, type_item)
 
-            category_item = QTableWidgetItem(transaction[3])  # Category (Categoria)
-            category_item.setTextAlignment(Qt.AlignCenter)
-            self.transaction_table.setItem(row_position, 2, category_item)
-
-            price_color = "rgb(79, 255, 203)" if transaction[2] == "entrada"  else "rgb(247, 91, 105)"
+            self.transaction_table.setItem(row_position, 2, QTableWidgetItem(transaction[3]))  # Category
+            price_color = "rgb(79, 255, 203)" if transaction[2] == "income" else "rgb(247, 91, 105)"
             price = QLabel(f'DH$ {transaction[4]:.2f}')
             price.setStyleSheet(f'color: {price_color};')
-            price.setAlignment(Qt.AlignCenter)  # Center the QLabel text
-            self.transaction_table.setCellWidget(row_position, 3, price)  # Price
+            self.transaction_table.setCellWidget(row_position, 3, price)
 
-            # Format the date
-            parsed_datetime = datetime.strptime(transaction[7], '%Y-%m-%d %H:%M:%S.%f')
-            formatted_datetime = parsed_datetime.strftime("%Y-%m-%d")
-            date_item = QTableWidgetItem(formatted_datetime)  # Date (Data)
-            date_item.setTextAlignment(Qt.AlignCenter)
-            self.transaction_table.setItem(row_position, 4, QTableWidgetItem( date_item))  # Date
+            # Format and display the date
+            formatted_date = datetime.strptime(transaction[7], '%Y-%m-%d %H:%M:%S.%f').strftime("%Y-%m-%d")
+            self.transaction_table.setItem(row_position, 4, QTableWidgetItem(formatted_date))
 
-            # Synced status
+            # Display synced status
             synced_color = "rgb(79, 255, 203)" if transaction[8] else "rgb(128, 128, 128)"
             synced_status = QLabel("sincronizado" if transaction[8] else "desincronizado")
             synced_status.setStyleSheet(f'color: {synced_color};')
-            synced_status.setAlignment(Qt.AlignCenter)
             self.transaction_table.setCellWidget(row_position, 5, synced_status)
 
             # Delete button with confirmation dialog
@@ -224,6 +229,19 @@ class Main(QMainWindow):
             delete_button.setStyleSheet("color: white;")
             delete_button.clicked.connect(lambda _, trans_id=transaction[0]: self.confirm_delete_transaction(trans_id))
             self.transaction_table.setCellWidget(row_position, 6, delete_button)
+
+            # Save the last transaction's date
+            self.last_date = transaction[7]
+        
+        self.fetching = False
+
+    def on_scroll(self, value):
+        """
+        Detect when the user scrolls near the bottom and load more transactions.
+        """
+        scroll_bar = self.transaction_table.verticalScrollBar()
+        if value == scroll_bar.maximum() and not self.fetching:
+            self.load_collection(append=True)
 
     def confirm_delete_transaction(self, transaction_id):
         # Create a confirmation dialog
@@ -235,7 +253,13 @@ class Main(QMainWindow):
             self.delete_transaction(transaction_id)
 
     def delete_transaction(self, transaction_id):
-        delete_transaction(transaction_id)
+        self.controller.delete_transaction(transaction_id)
+        self.last_date = None
+
+        self.total_of_income, self.total_of_outcome = self.controller.get_total_of_transactions()
+        self.income_label.setText(f"Entradas: {self.total_of_income:.2f} DH$")
+        self.expense_label.setText(f"Saidas: {self.total_of_outcome:.2f} DH$")
+
         self.load_collection()  # Refresh the table after deletion
     
     def clear_inputs(self):

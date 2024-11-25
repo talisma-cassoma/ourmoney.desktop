@@ -46,7 +46,25 @@ def create_table():
 
 create_table()
 
-def insert_transaction(description, type, category, price, owner='talisma', email='talisma@email.com', synced=False):
+def get_total():
+    db = sqlite3.connect(resource_path('database.db'))
+    cursor = db.cursor()
+
+    # Query to calculate total incomes
+    cursor.execute("SELECT SUM(price) as total_incomes FROM Transactions WHERE type = 'income'")
+    total_income = cursor.fetchone()[0] or 0.0  # Default to 0.0 if no income
+
+    # Query to calculate total outcomes
+    cursor.execute("SELECT SUM(price) as total_outcomes FROM Transactions WHERE type = 'outcome'")
+    total_outcome = cursor.fetchone()[0] or 0.0  # Default to 0.0 if no outcome
+
+    # Close the database connection
+    db.close()
+
+    return total_income, total_outcome
+
+
+def insert_one(description, type, category, price, owner, email, synced):
     logging.info({resource_path('database.db')})
     db = sqlite3.connect(resource_path('database.db'))
     
@@ -65,7 +83,7 @@ def insert_transaction(description, type, category, price, owner='talisma', emai
     logging.info('Transação adicionada com sucesso!')
 
 
-def insert_many_transactions(transactions):
+def insert_many(transactions):
     db = sqlite3.connect(resource_path('database.db'))
     query = """
     INSERT INTO Transactions (id, description, type, category, price, owner, email, synced, createdAt)
@@ -166,7 +184,38 @@ def get_all_transactions():
 
     return transactions
 
-def delete_transaction(trans_id):
+def fetch_transactions(last_date):
+    """
+    Fetch 20 transactions.
+    If last_date is None, fetch the latest 20 transactions.
+    Otherwise, fetch transactions older than last_date.
+    """
+    query = """
+    SELECT id, description, type, category, price, owner, email, createdAt, synced FROM Transactions 
+    WHERE createdAt < ? 
+    ORDER BY createdAt DESC 
+    LIMIT 20;
+    """ if last_date else """
+    SELECT id, description, type, category, price, owner, email, createdAt, synced FROM Transactions 
+    ORDER BY createdAt DESC 
+    LIMIT 20;
+    """
+
+    connection = sqlite3.connect('database.db')
+    cursor = connection.cursor()
+
+    # Execute the query with or without the last_date parameter
+    if last_date:
+        cursor.execute(query, (last_date,))
+    else:
+        cursor.execute(query)
+
+    transactions = cursor.fetchall()
+    connection.close()
+  
+    return transactions
+
+def delete(trans_id):
     db = sqlite3.connect(resource_path('database.db'))
     query = "DELETE FROM Transactions WHERE id = ?"
     db.execute(query, (trans_id,))
