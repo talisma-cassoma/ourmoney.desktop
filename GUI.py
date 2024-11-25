@@ -97,10 +97,13 @@ class Main(QMainWindow):
         self.totals_frame.setStyleSheet("background-color: rgb(61, 61, 66); border-radius: 16px; padding: 10px;")
         self.totals_layout = QVBoxLayout(self.totals_frame)
 
-        self.income_label = QLabel(f'Entradas: {self.total_of_income:.2f} DH$')
+        formatted_income = f"{self.total_of_income:,.2f}".replace(",", " ")
+        formatted_outcome = f"{self.total_of_outcome:,.2f}".replace(",", " ")
+
+        self.income_label = QLabel(f'Entradas: {formatted_income} DH$')
         self.income_label.setAlignment(Qt.AlignCenter)
         self.income_label.setFont(Total_font)
-        self.expense_label = QLabel(f'Saídas: {self.total_of_outcome:.2f} DH$')
+        self.expense_label = QLabel(f'Saídas: {formatted_outcome} DH$')
         self.expense_label.setAlignment(Qt.AlignCenter)
         self.expense_label.setFont(Total_font)
         self.income_label.setStyleSheet("color: rgb(79, 255, 203);")
@@ -253,14 +256,24 @@ class Main(QMainWindow):
             self.delete_transaction(transaction_id)
 
     def delete_transaction(self, transaction_id):
+        # Delete the transaction via the controller
         self.controller.delete_transaction(transaction_id)
         self.last_date = None
 
+        # Recalculate totals
         self.total_of_income, self.total_of_outcome = self.controller.get_total_of_transactions()
-        self.income_label.setText(f"Entradas: {self.total_of_income:.2f} DH$")
-        self.expense_label.setText(f"Saidas: {self.total_of_outcome:.2f} DH$")
 
-        self.load_collection()  # Refresh the table after deletion
+        # Format totals with space as a thousands separator
+        formatted_income = f"{self.total_of_income:,.2f}".replace(",", " ")
+        formatted_outcome = f"{self.total_of_outcome:,.2f}".replace(",", " ")
+
+        # Update labels with formatted values
+        self.income_label.setText(f"Entradas: {formatted_income} DH$")
+        self.expense_label.setText(f"Saídas: {formatted_outcome} DH$")
+
+        # Refresh the table after deletion
+        self.load_collection()
+
     
     def clear_inputs(self):
         self.description_input.clear()
