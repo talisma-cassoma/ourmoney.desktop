@@ -73,7 +73,8 @@ class Controller:
                     data = response.json()
                     self.store_in_local_db(data)
                     self.push_downloaded_data(data)
-                    self.push_local_transactions()
+                    self.push_local_transaction()
+                    self.main_window.last_date = None
                     self.main_window.load_collection()
             except Exception as e:
                 logging.error(f"Erro ao puxar dados: {e}")

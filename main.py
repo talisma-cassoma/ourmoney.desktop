@@ -4,6 +4,7 @@ from GUI import Main
 def main():
     app = QApplication([])
     app.setStyle("Fusion")
+    app.setStyle("background-color: #D3D3D3;")
 
     window = Main()
     window.show()

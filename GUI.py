@@ -37,7 +37,7 @@ class Main(QMainWindow):
 
         self.main_frame = QFrame()
         self.main_layout = QVBoxLayout(self.main_frame)
-
+        self.main_frame.setStyleSheet("background-color: rgb(61, 61, 66); color: #D3D3D3;")
         # Status and sync area at the top
         self.status_frame = QFrame()
         self.status_layout = QHBoxLayout(self.status_frame)
@@ -63,7 +63,7 @@ class Main(QMainWindow):
         # Block 1: Transaction inputs
         self.transaction_inputs_frame = QFrame()
         self.transaction_inputs_frame.setFixedWidth(400)
-        self.transaction_inputs_frame.setStyleSheet("background-color: rgb(61, 61, 66); border-radius: 16px;")
+        self.transaction_inputs_frame.setStyleSheet("background-color: rgb(61, 61, 66); border-radius: 16px; color: #D3D3D3;")
         self.transaction_inputs_layout = QFormLayout(self.transaction_inputs_frame)
 
         self.description_input = QLineEdit()
