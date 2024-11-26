@@ -50,6 +50,7 @@ class Main(QMainWindow):
         self.status_layout.addWidget(self.sync_button)
 
         self.progress_bar = QProgressBar(self)
+        self.progress_bar.setStyleSheet("background-color: black")
         self.progress_bar.setValue(0)
         self.status_layout.addWidget(self.progress_bar)
 
@@ -167,6 +168,7 @@ class Main(QMainWindow):
 
         self.controller.pull_data()  # Chama a função que puxa os dados
         self.progress_bar.setValue(100)
+        self.progress_bar.setValue(0)
 
     def add_transaction(self):
         description = self.description_input.text()
