@@ -65,7 +65,6 @@ def get_total():
 
 
 def insert_one(description, type, category, price, owner, email, synced):
-    logging.info({resource_path('database.db')})
     db = sqlite3.connect(resource_path('database.db'))
     
     query = """

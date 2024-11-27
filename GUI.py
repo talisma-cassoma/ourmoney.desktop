@@ -7,6 +7,7 @@ from PyQt5.QtCore import Qt, QTimer, QEvent
 from PyQt5.QtGui import QFont
 
 from datetime import datetime
+import time
 
 from controller import Controller
 
@@ -168,7 +169,6 @@ class Main(QMainWindow):
 
         self.controller.pull_data()  # Chama a função que puxa os dados
         self.progress_bar.setValue(100)
-        self.progress_bar.setValue(0)
 
     def add_transaction(self):
         description = self.description_input.text()
@@ -180,9 +180,9 @@ class Main(QMainWindow):
             self.last_date = None
 
             if(self.last_added_transaction['type'] == "income"):
-                self.income_label.setText(f"Total Income: {(self.total_of_income + float(price)):.2f}")
+                self.income_label.setText(f"Total Income: {(self.total_of_income + float(price)):,.2f}".replace(",", " "))
             else:
-                self.expense_label.setText(f"Total outcome: {(self.total_of_outcome + float(price)):.2f}")
+                self.expense_label.setText(f"Total outcome: {(self.total_of_outcome + float(price)):,.2f}".replace(",", " "))
             
             self.load_collection()  # Recarrega as transações
 
