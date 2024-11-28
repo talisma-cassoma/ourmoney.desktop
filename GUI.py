@@ -15,6 +15,27 @@ Total_font = QFont()
 Total_font.setPointSize(14)  # Set the font size to 14 (adjust as needed)
 Total_font.setBold(True)  # Make the text bold
 
+
+from PyQt5.QtCore import QThread, pyqtSignal
+
+class StatusCheckerThread(QThread):
+    status_signal = pyqtSignal(bool)  # Signal to emit the online status
+
+    def __init__(self, controller):
+        super().__init__()
+        self.controller = controller
+        self.running = True  # Flag to control thread execution
+
+    def run(self):
+        while self.running:
+            # Check the status
+            online = self.controller.is_online()
+            self.status_signal.emit(online)
+            self.msleep(5000)  # Wait for 5 seconds between checks
+
+    def stop(self):
+        self.running = False
+
 class Main(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -25,10 +46,22 @@ class Main(QMainWindow):
         self.total_of_income, self.total_of_outcome = self.controller.get_total_of_transactions()
         self.initUI()
 
-        # Timer for updating the status of connection
-        self.timer = QTimer(self)
-        self.timer.timeout.connect(self.update_status)
-        self.timer.start(5000)
+        # Create and start the thread for status updates
+        self.status_thread = StatusCheckerThread(self.controller)
+        self.status_thread.status_signal.connect(self.update_status_label)
+        self.status_thread.start()
+
+    def update_status_label(self, online):
+        if online:
+            self.status_label.setText("Status: Online")
+        else:
+            self.status_label.setText("Status: Offline")
+
+    def closeEvent(self, event):
+        # Ensure the thread stops when the application closes
+        self.status_thread.stop()
+        self.status_thread.wait()
+        super().closeEvent(event)
 
     def initUI(self):
         self.setWindowTitle("OUR-MONKEY")
@@ -152,14 +185,6 @@ class Main(QMainWindow):
 
         # Load registered transactions
         self.load_collection()
-
-        
-    def update_status(self):
-        online = self.controller.is_online()
-        if online:
-            self.status_label.setText("Status: Online")
-        else:
-            self.status_label.setText("Status: Offline")
 
     def sync_and_show_progress(self):
         self.progress_bar.setValue(0)
