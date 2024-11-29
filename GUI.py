@@ -196,23 +196,44 @@ class Main(QMainWindow):
         self.progress_bar.setValue(100)
 
     def add_transaction(self):
-        description = self.description_input.text()
+        description = self.description_input.text().strip()
         trans_type = self.type_input.currentText()
-        category = self.category_input.text()
-        price = self.price_input.text()
-        if description and trans_type and category and price:
-            self.controller.insert_transaction(description, ("income" if trans_type == "entrada" else "outcome"), category, float(price))
-            self.last_date = None
+        category = self.category_input.text().strip()
+        price_text = self.price_input.text().strip()
+    
+        # Validação dos campos
+        if not description or not trans_type or not category or not price_text:
+            QMessageBox.warning(self, "Erro", "Todos os campos são obrigatórios!")
+            return
+    
+        try:
+            price = float(price_text)  # Tenta converter o preço para número
+        except ValueError:
+            QMessageBox.warning(self, "Erro", "Preço deve ser um número válido!")
 
-            if(self.last_added_transaction['type'] == "income"):
-                self.income_label.setText(f"Total Income: {(self.total_of_income + float(price)):,.2f}".replace(",", " "))
-            else:
-                self.expense_label.setText(f"Total outcome: {(self.total_of_outcome + float(price)):,.2f}".replace(",", " "))
+            return
+    
+        # Insere a transação se tudo estiver correto
+        self.controller.insert_transaction(
+            description, 
+            "income" if trans_type == "entrada" else "outcome", 
+            category, 
+            price
+        )
+        self.last_date = None
+    
+        # Atualiza os totais
+        if trans_type == "entrada":
+            self.total_of_income += price
+            self.income_label.setText(f"Entradas: {self.total_of_income:,.2f} DH$".replace(",", " "))
+        else:
+            self.total_of_outcome += price
+            self.expense_label.setText(f"Saídas: {self.total_of_outcome:,.2f} DH$".replace(",", " "))
+    
+        # Recarrega as transações e limpa os campos
+        self.load_collection()
+        self.clear_inputs()
             
-            self.load_collection()  # Recarrega as transações
-
-            self.clear_inputs()
-
     def load_collection(self, append=False):
         """
         Load transactions into the table. If `append` is True, add to the existing table.
