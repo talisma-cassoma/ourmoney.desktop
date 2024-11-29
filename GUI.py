@@ -210,7 +210,6 @@ class Main(QMainWindow):
             price = float(price_text)  # Tenta converter o preço para número
         except ValueError:
             QMessageBox.warning(self, "Erro", "Preço deve ser um número válido!")
-
             return
     
         # Insere a transação se tudo estiver correto
