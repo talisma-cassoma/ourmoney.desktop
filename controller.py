@@ -48,6 +48,7 @@ class Controller:
         insert_one(description, type, category, price, owner, email, synced)
     
     def edit(self, transaction_id, updates):
+        
         patch_transaction(transaction_id, updates)
 
     def delete_transaction(self, transaction_id):

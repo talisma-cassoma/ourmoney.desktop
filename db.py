@@ -188,6 +188,11 @@ def patch_transaction(transaction_id, updates):
         db = sqlite3.connect(resource_path('database.db'))
         cur= db.cursor()
 
+        cur.execute("SELECT 1 FROM transactions WHERE id = ?", (transaction_id,))
+        if cur.fetchone() is None:
+            logging.error(f"a Transaction com ID {transaction_id} não existe.")
+            return
+
         # Build the update query dynamically
         set_clause = ", ".join([f"{col} = ?" for col in updates.keys()])
         query = f"UPDATE transactions SET {set_clause} WHERE id = ?"
