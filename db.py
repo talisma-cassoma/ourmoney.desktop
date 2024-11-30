@@ -48,15 +48,15 @@ create_table()
 
 def get_total():
     db = sqlite3.connect(resource_path('database.db'))
-    cursor = db.cursor()
+    cur= db.cursor()
 
     # Query to calculate total incomes
-    cursor.execute("SELECT SUM(price) as total_incomes FROM Transactions WHERE type = 'income'")
-    total_income = cursor.fetchone()[0] or 0.0  # Default to 0.0 if no income
+    cur.execute("SELECT SUM(price) as total_incomes FROM Transactions WHERE type = 'income'")
+    total_income = cur.fetchone()[0] or 0.0  # Default to 0.0 if no income
 
     # Query to calculate total outcomes
-    cursor.execute("SELECT SUM(price) as total_outcomes FROM Transactions WHERE type = 'outcome'")
-    total_outcome = cursor.fetchone()[0] or 0.0  # Default to 0.0 if no outcome
+    cur.execute("SELECT SUM(price) as total_outcomes FROM Transactions WHERE type = 'outcome'")
+    total_outcome = cur.fetchone()[0] or 0.0  # Default to 0.0 if no outcome
 
     # Close the database connection
     db.close()
@@ -173,6 +173,38 @@ def insert_non_synced_transaction(id, description, type, category, price, create
     db.close()
     # print('Transaction added successfully!')
     logging.info('Transação adicionada com sucesso!')
+import sqlite3
+
+def patch_transaction(transaction_id, updates):
+    """
+    Updates a transaction in the SQLite database with the specified ID.
+
+    :param db_path: Path to the SQLite database.
+    :param transaction_id: The ID of the transaction to update.
+    :param updates: Dictionary containing column-value pairs to update.
+    """
+    try:
+        # Connect to the database
+        db = sqlite3.connect(resource_path('database.db'))
+        cur= db.cursor()
+
+        # Build the update query dynamically
+        set_clause = ", ".join([f"{col} = ?" for col in updates.keys()])
+        query = f"UPDATE transactions SET {set_clause} WHERE id = ?"
+
+        # Execute the query
+        cur.execute(query, (*updates.values(), transaction_id))
+        
+        # Commit the changes and close the connection
+        db.commit()
+        logging.info(f"Transaction with ID {transaction_id} has been updated successfully.")
+    
+    except sqlite3.Error as e:
+        logging.error(f"erro ao modificar a transaction: {e}")
+    
+    finally:
+        if db:
+            db.close()
 
 def get_all_transactions():
     db = sqlite3.connect(resource_path('database.db'))
@@ -201,15 +233,15 @@ def fetch_transactions(last_date):
     """
 
     connection = sqlite3.connect('database.db')
-    cursor = connection.cursor()
+    cur= connection.cursor()
 
     # Execute the query with or without the last_date parameter
     if last_date:
-        cursor.execute(query, (last_date,))
+        cur.execute(query, (last_date,))
     else:
-        cursor.execute(query)
+        cur.execute(query)
 
-    transactions = cursor.fetchall()
+    transactions = cur.fetchall()
     connection.close()
   
     return transactions

@@ -12,7 +12,8 @@ from db import (insert_non_synced_transaction,
                 insert_one, 
                 delete,
                 get_total,
-                insert_many)
+                insert_many,
+                patch_transaction)
 
 
 # Configuração do logging
@@ -45,7 +46,10 @@ class Controller:
                            email='talisma@email.com', 
                            synced=False):
         insert_one(description, type, category, price, owner, email, synced)
-     
+    
+    def edit(self, transaction_id, updates):
+        patch_transaction(transaction_id, updates)
+
     def delete_transaction(self, transaction_id):
         delete(transaction_id)
 
