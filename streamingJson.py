@@ -6,7 +6,7 @@ transactions = []
 
 controller = Controller()
 
-with open('response.json', 'r') as file:
+with open('myTransactions.json', 'r') as file:
     parser = ijson.items(file, 'item')  # Parse the array of transactions
 
     for transaction in parser:

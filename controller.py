@@ -14,6 +14,7 @@ from db import (insert_non_synced_transaction,
                 get_total,
                 insert_many,
                 patch_transaction)
+from saveTransactionsInJson import save_transactions_to_json
 
 
 # Configuração do logging
@@ -47,8 +48,7 @@ class Controller:
                            synced=False):
         insert_one(description, type, category, price, owner, email, synced)
     
-    def edit(self, transaction_id, updates):
-        
+    def edit(self, transaction_id, updates):        
         patch_transaction(transaction_id, updates)
 
     def delete_transaction(self, transaction_id):
@@ -174,4 +174,12 @@ class Controller:
                 except Exception as e:
                     logging.error(f"Erro ao inserir a transação: {e}")
                     #print(f"Erro ao inserir a transação: {e}")
+                    
+    def export_transactions_to_json(self):
+        """Controller function to handle exporting transactions."""
+        try:
+            save_transactions_to_json()
+            logging.info("status: success, Transactions saved successfully.")
+        except Exception as e:
+            logging.error(f"status: error:{ str(e)}")
      
