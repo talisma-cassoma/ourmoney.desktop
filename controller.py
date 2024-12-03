@@ -4,17 +4,10 @@ import json
 
 from convertTimeFormat import convert_time_format
 from datetime import datetime
-from db import (insert_non_synced_transaction, 
-                get_unsynced_transactions, 
-                mark_as_synced, 
-                get_all_transactions,
-                fetch_transactions,
-                insert_one, 
-                delete,
-                get_total,
-                insert_many,
-                patch_transaction)
-from saveTransactionsInJson import save_transactions_to_json
+from model import Model
+from exportJson import export_transactions_to_json
+from exportCsv import export_transactions_to_csv
+
 
 
 # Configuração do logging
@@ -23,6 +16,7 @@ logging.basicConfig(filename='app.log', level=logging.INFO, format='%(asctime)s 
 class Controller:
     def __init__(self, main_window=None):
         self.main_window = main_window
+        self.model = Model()
         self.api_url = "https://our-money-bkd.onrender.com"
         self.timeout = 10
 
@@ -36,30 +30,30 @@ class Controller:
             return False
 
     def get_all_transactions(self):
-        return get_all_transactions()
+        return self.model.get_all_transactions()
     
     def fetch_transactions(self, last_date=None):
-        return fetch_transactions(last_date)
+        return self.model.fetch_transactions(last_date)
     
     def insert_transaction(self, description, 
                            type, category, price, 
                            owner='talisma', 
                            email='talisma@email.com', 
                            synced=False):
-        insert_one(description, type, category, price, owner, email, synced)
+        self.model.insert_one(description, type, category, price, owner, email, synced)
     
     def edit(self, transaction_id, updates):        
-        patch_transaction(transaction_id, updates)
+        self.model.patch_transaction(transaction_id, updates)
 
     def delete_transaction(self, transaction_id):
-        delete(transaction_id)
+        self.model.delete(transaction_id)
 
     def get_total_of_transactions(self):
-         total_income, total_outcome = get_total()
+         total_income, total_outcome = self.model.get_total()
          return total_income, total_outcome
     
     def insert_many(self, transactions):
-        insert_many(transactions)
+        self.model.insert_many(transactions)
 
     
     def refresh_transaction_view(self):
@@ -110,7 +104,7 @@ class Controller:
     def push_local_transactions(self):
         """Envia transações locais para o servidor, convertendo o createdAt para o formato ISO 8601 (UTC)."""
         if self.is_online():
-            unsynced_transactions = get_unsynced_transactions()
+            unsynced_transactions = self.model.get_unsynced_transactions()
 
             transactions_to_push = []
             for transaction in unsynced_transactions:
@@ -139,7 +133,7 @@ class Controller:
                 try:
                     response = requests.post(f"{self.api_url}/api/offline/transactions", json=chunk, timeout=self.timeout)
                     if response.status_code == 200:
-                        mark_as_synced(chunk)  # Mark only the successfully sent chunk as synced
+                        self.model.mark_as_synced(chunk)  # Mark only the successfully sent chunk as synced
                         logging.info(f"{len(chunk)} transações enviadas com sucesso!")
                     else:
                         logging.error(f"Erro ao enviar dados. Status Code: {response.status_code}")
@@ -156,7 +150,7 @@ class Controller:
                 try:
     
                     convertedTime = convert_time_format(createdAt)
-                    insert_non_synced_transaction(
+                    self.model.insert_non_synced_transaction(
                         transaction['id'],
                         transaction['description'],
                         transaction['type'],
@@ -178,8 +172,15 @@ class Controller:
     def export_transactions_to_json(self):
         """Controller function to handle exporting transactions."""
         try:
-            save_transactions_to_json()
+            export_transactions_to_json()
             logging.info("status: success, Transactions saved successfully.")
+        except Exception as e:
+            logging.error(f"status: error:{ str(e)}")
+    def export_transactions_to_csv(self):
+        """Controller function to handle exporting transactions to CSV."""
+        try:
+            export_transactions_to_csv()
+            logging.info("status: success, Transactions exported to CSV successfully.")
         except Exception as e:
             logging.error(f"status: error:{ str(e)}")
      

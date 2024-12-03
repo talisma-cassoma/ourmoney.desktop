@@ -9,8 +9,6 @@ from PyQt5.QtGui import QFont
 from datetime import datetime
 import time
 
-from controller import Controller
-
 Total_font = QFont()
 Total_font.setPointSize(14)  # Set the font size to 14 (adjust as needed)
 Total_font.setBold(True)  # Make the text bold
@@ -36,16 +34,26 @@ class StatusCheckerThread(QThread):
     def stop(self):
         self.running = False
 
-class Main(QMainWindow):
-    def __init__(self):
+class MainWindow(QMainWindow):
+    def __init__(self,):
         super().__init__()
-        self.controller = Controller(self)
+        self.controller = None
         self.last_date = None
         self.last_added_transaction = {'price': 0.0, 'type': '' }
         self.fetching = False
-        self.total_of_income, self.total_of_outcome = self.controller.get_total_of_transactions()
-        self.initUI()
+        self.total_of_income = 0
+        self.total_of_outcome = 0
 
+        # Create and start the thread for status updates
+        self.status_thread = None
+
+    def set_controller(self, controller):
+        """Define o controlador para a GUI."""
+        self.controller = controller
+        self.total_of_income, self.total_of_outcome = self.controller.get_total_of_transactions()
+        
+        self.initUI()
+        
         # Create and start the thread for status updates
         self.status_thread = StatusCheckerThread(self.controller)
         self.status_thread.status_signal.connect(self.update_status_label)

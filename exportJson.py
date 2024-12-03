@@ -1,10 +1,12 @@
-
 import json
-from db import get_all_transactions 
+from model import Model
+from convertTimeFormat import convert_time_format
+
 
 # Convert transactions to a JSON-compatible format and save
-def save_transactions_to_json():
-    transactions = get_all_transactions()
+def export_transactions_to_json():
+    model = Model()
+    transactions = model.get_all_transactions()
     transactions_list = [
         {
             "id": transaction[0],
@@ -19,7 +21,8 @@ def save_transactions_to_json():
         }
         for transaction in transactions
     ]
-    with open("myTransactions.json", "w", encoding="utf-8") as json_file:
+    with open("myTransactions123.json", "w", encoding="utf-8") as json_file:
         json.dump(transactions_list, json_file, indent=4, ensure_ascii=False)
+
 
 

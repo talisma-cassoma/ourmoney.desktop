@@ -1,0 +1,1096 @@
+id,description,type,category,price,owner,email,createdAt,synced
+0a73c1c1-c1fd-4f47-a5b8-344d22d2e859,café e croissants,outcome,extra,12.0,talisma,talisma@email.com,2024-12-02 16:23:11.695653,1
+3a612597-771d-479f-b2b8-0af0cd86e813,corte de cabelo,outcome,yachane,15.0,talisma,talisma@email.com,2024-12-02 12:46:59.053180,1
+5ac8d198-dbaa-4931-86c3-b9f205377f66,sumo de fraise,outcome,extra,25.0,talisma,talisma@email.com,2024-12-02 12:27:31.418460,1
+30a0798b-719a-4835-9c19-a7246ee2e820,train,outcome,transporte,40.0,talisma,talisma@email.com,2024-12-02 12:26:50.632446,1
+f5032779-984b-47e4-a5b4-70940b98c382,taxi,outcome,transporte,43.0,talisma,talisma@email.com,2024-12-02 12:26:34.181256,1
+e32fa968-c519-40a7-9ef4-8189b385ad45,fotos e copias pro passaporte,outcome,documentos,62.0,talisma,talisma@email.com,2024-12-02 12:25:05.892167,1
+96366ae8-f5bb-47f0-8a60-4135a026abc5,fato para tia,outcome,presente,100.0,talisma,talisma@email.com,2024-12-02 12:23:15.901016,1
+951db3bf-e2b6-450e-bdb8-02cb14cab96d,roupas pra geovana,outcome,roupas,500.0,talisma,talisma@email.com,2024-12-02 12:22:42.598531,1
+32ee7b49-7601-4a4d-b5bb-e7494840b91d,roupas do yachane e talismã,outcome,roupas,825.0,talisma,talisma@email.com,2024-12-02 12:22:06.146192,1
+cd6e1eb9-c9a8-4d52-9fe2-3a50e6cbf23e,bilhete de train pra andrea,outcome,geovana,20.0,talisma,talisma@email.com,2024-12-01 00:41:37.237112,1
+0f1e1fa1-ce46-4d48-b296-1f57c3351117,iogurte e cacaute,outcome,EXTRA,10.0,talisma,talisma@email.com,2024-11-30 22:15:30.717262,1
+9f61e20a-954c-4d9f-836f-4cad58141619,smart watch,outcome,geovana,370.0,talisma,talisma@email.com,2024-11-30 22:14:54.730165,1
+ffbfb0ef-01a2-4116-8655-df3378b4ffb3,bebidas,outcome,extra,137.0,talisma,talisma@email.com,2024-11-30 22:14:19.326712,1
+abb2b730-c44e-4ad2-b573-3a33130bf75f,kfc,outcome,extra,59.0,talisma,talisma@email.com,2024-11-30 22:13:58.410665,1
+415c3f54-48a0-465c-8e40-145d9c7f640f,compras no carrefour,outcome,alimentacao,56.0,talisma,talisma@email.com,2024-11-30 19:35:47.440376,1
+3d9dd0c0-4d9b-49ce-934f-e4972cc6d877,divida com Alex,outcome,divida,650.0,talisma,talisma@email.com,2024-11-30 09:11:24.741826,1
+70ebe358-f8e7-4797-b819-991547540cb4,banana,outcome,extra,10.0,talisma,talisma@email.com,2024-11-30 09:09:57.602484,1
+0d6769d3-84f6-4634-b526-98b7c566846d,iogurte e croissants,outcome,extra,16.0,talisma,talisma@email.com,2024-11-29 17:57:24.467893,1
+3e06e817-b2af-4725-bd2c-05470d1e0724,compras,outcome,alimentacao,65.0,talisma,talisma@email.com,2024-11-29 17:00:39.367447,1
+3b0ec34b-d76f-487f-ae2d-6cfa2e93a17e,brinquedo,outcome,yachane,15.0,talisma,talisma@email.com,2024-11-29 17:00:11.164499,1
+4f919437-a47e-48f1-b822-4c09afb39a7c,copia e legalizacao,outcome,documentos,10.0,talisma,talisma@email.com,2024-11-29 14:08:41.828978,1
+e8f9f152-8286-4f2b-9360-fc11d53d760a,taxi,outcome,transporte,42.0,talisma,talisma@email.com,2024-11-29 14:06:33.466946,1
+0f1ffb73-9ff4-40a9-8576-e1921af6c1fc,train,outcome,transporte,40.0,talisma,talisma@email.com,2024-11-29 14:04:51.124164,1
+df10189d-eb33-44a7-909f-b329578470b0,tacos,outcome,extra,35.0,talisma,talisma@email.com,2024-11-29 14:04:25.887441,1
+553b2d5e-8fdd-4e7d-9031-d4cddfa9661d,ginguba,outcome,extra,10.0,talisma,talisma@email.com,2024-11-28 19:45:17.755985,1
+f84fbeec-6e14-4025-9603-d90bd440ba60,pao,outcome,alimentacao,4.0,talisma,talisma@email.com,2024-11-28 13:02:52.165388,1
+b21f5a0e-0ed9-4127-ab38-6ff2b4aeba7c,milwui,outcome,extra,10.0,talisma,talisma@email.com,2024-11-28 13:02:37.014132,1
+3ccc4e61-d502-4d1c-ad0d-4c3a66f487c7,bebedouro pro yachane,outcome,yachane,59.0,talisma,talisma@email.com,2024-11-28 13:02:13.979348,1
+1a9ed3b0-cfa6-4586-8ba0-dea0afc2481b,compras no BIM,outcome,casa,172.7,talisma,talisma@email.com,2024-11-28 13:01:06.291387,1
+5bbfc53f-2497-46b0-9019-fc4c645285fe,presente para estefania,outcome,extra,129.9,talisma,talisma@email.com,2024-11-28 12:59:49.635865,1
+9d0e3f6f-c82a-411c-9d8a-b9c946a53c9f,presente para o felix,outcome,extra,109.0,talisma,talisma@email.com,2024-11-28 12:57:23.142019,1
+f63c44a3-3c8f-433c-8f7a-093632947761,salario da Geoavana,income,salario,11000.0,talisma,talisma@email.com,2024-11-28 12:52:04.069966,1
+e33385f2-03b9-465c-922c-65280acec0e6,fraldas da ayla,outcome,ayla,90.0,talisma,talisma@email.com,2024-11-28 09:45:53.000910,1
+4f5f67c8-a52d-48f7-9053-9629e3cb7bc7,bolachas,outcome,extra,5.0,talisma,talisma@email.com,2024-11-27 17:08:08.991434,1
+5d481940-f213-4043-afdb-a4e8b474d610,bolachas,outcome,extra,6.0,talisma,talisma@email.com,2024-11-27 13:11:45.148850,1
+d43f82dc-b781-4c00-a0d3-fcf7ebf5f5fe,frutas e iogurte,outcome,alimentacao,14.0,talisma,talisma@email.com,2024-11-27 13:08:46.494150,1
+408532ab-24ec-4605-94e3-e2eda13b53ca,croissants,outcome,extra,6.0,talisma,talisma@email.com,2024-11-26 16:24:23.551025,1
+77cfedbf-6c80-46de-b8e2-350c561ec105,bolachas e iogurte,outcome,extra,7.0,talisma,talisma@email.com,2024-11-26 16:22:38.423543,1
+4a123f1d-6f68-4f23-92e2-5c3e8f2f7039,saldo,outcome,saldo,5.0,talisma,talisma@email.com,2024-11-26 15:35:45.825434,1
+c41b3f71-7fc1-434b-b419-d4f354043527,pao e legumes,outcome,alimentacao,12.0,talisma,talisma@email.com,2024-11-26 13:03:44.105184,1
+a16e752d-4a1a-4287-b2ee-a9732598e168,creme freche,outcome,alimentcao,10.0,talisma,talisma@email.com,2024-11-25 23:25:46.216807,1
+8887d713-8e10-498a-ab8d-c59ea088f227,pedimos 200 emprestado a celma,income,emprestimo,200.0,talisma,talisma@email.com,2024-11-25 18:17:49.899045,1
+ea0f9086-8566-478d-bf99-01c5dce9800d,reuniao,outcome,transporte,100.0,talisma,talisma@email.com,2024-11-25 18:16:58.377737,1
+a9749321-b229-4f7f-bb66-cad6af5fecae,saldo,outcome,saldo,5.0,talisma,talisma@email.com,2024-11-25 18:16:37.176068,1
+8fbcdc3e-f130-477d-a4ef-e5599d181fc4,iogurte,outcome,alimentacao,8.0,talisma,talisma@email.com,2024-11-25 18:16:07.756659,1
+3ac33255-88ab-464a-ad19-55b9fdc62e53,vinho,outcome,extra,35.5,talisma,talisma@email.com,2024-11-25 18:14:57.219407,1
+84e3a40e-509f-4a76-933b-a9a19f30a79e,FEIJAO,outcome,alimentacao,35.0,talisma,talisma@email.com,2024-11-23 21:40:56.917433,1
+7b3c45d4-4e46-439c-931b-1aca42bb7d2a,taxi,outcome,transporte,7.0,talisma,talisma@email.com,2024-11-22 18:51:06.435264,1
+3bf16076-b2f3-44d2-8544-f21586ff102e,comida pra convivio com jonh e felix,outcome,extra,147.0,talisma,talisma@email.com,2024-11-22 18:49:14.140586,1
+8d05a0bd-03f8-419b-8313-d62f55ab82e4,bebidas,outcome,extra,196.0,talisma,talisma@email.com,2024-11-22 18:46:23.342047,1
+21e71c24-e6f3-45e4-9038-eda8651f3f1d,croissants,outcome,extra,9.0,talisma,talisma@email.com,2024-11-22 17:39:37.010781,1
+8b451aec-e846-48e7-bd85-794dbc799ffb,chips igurte e bolacha,outcome,extra,14.0,talisma,talisma@email.com,2024-11-21 18:17:23.523976,1
+13d6536e-b788-4243-b8a9-6c6003d19c37,bolacha,outcome,extra,5.0,talisma,talisma@email.com,2024-11-20 18:07:50.485696,1
+e201bd96-b239-480b-915f-f4bbe75e9633,Pao,outcome,alimentacao,4.0,talisma,talisma@email.com,2024-11-20 12:57:46.678397,1
+07fd3bde-73ec-40c3-8589-9827d2ae4bf8,pedimos emprestimo com frais ao Alex ,income,emprestimo,500.0,talisma,talisma@email.com,2024-11-19 16:43:44.845823,1
+4bc013f1-7863-4939-8090-df233a6a4898,milwi e iogurtes,outcome,extra,23.0,talisma,talisma@email.com,2024-11-19 13:18:10.843907,1
+bdaea2ac-d940-4336-8f2b-251291e3146f,consulta geneco,outcome,saude,300.0,talisma,talisma@email.com,2024-11-19 13:16:55.326228,1
+ead960e3-a8c9-4bb8-bb20-a163032ace7c,cola,outcome,geovana,11.0,talisma,talisma@email.com,2024-11-19 13:16:16.017614,1
+3899d6b5-5adc-4491-a054-0a80e1d15e54,pagamos o livros estragados,outcome,yachane,68.0,talisma,talisma@email.com,2024-11-19 13:15:46.951811,1
+af1f30cb-0837-4045-89f3-9b567d3a90ba,croissants,outcome,extra,6.0,talisma,talisma@email.com,2024-11-18 19:21:48.259813,1
+d4dfb451-2b93-430c-ac92-912f89c75c23,geovana,outcome,geovana,20.0,talisma,talisma@email.com,2024-11-18 16:17:52.041718,1
+bb0c101e-ded8-4d4a-b322-bac24bf84db9,iogurte e agua,outcome,extra,7.65,talisma,talisma@email.com,2024-11-18 16:17:34.279913,1
+900c66d0-dfc5-43bc-8f47-6478a17daaef,sumo e queijo,outcome,alimentacao,14.7,talisma,talisma@email.com,2024-11-17 19:01:39.557780,1
+80016b9c-6896-4956-9df7-bf929ffbf896,papel higenico,outcome,casa,17.9,talisma,talisma@email.com,2024-11-17 19:00:30.300954,1
+2afac583-abe5-4d86-9926-65d2f4b4b684,gasosa,outcome,extra,7.5,talisma,talisma@email.com,2024-11-16 21:29:43.962473,1
+85efd83b-0c97-44c2-9818-e851b486ac6b,pao,outcome,alimentacao,10.0,talisma,talisma@email.com,2024-11-16 21:28:40.256133,1
+5bdab063-fcb9-4773-bca3-b68fa6a6bdd2,vinho,outcome,extra,50.0,talisma,talisma@email.com,2024-11-16 21:27:45.151034,1
+e9729cd0-159f-44db-acfa-45caffa56eb9,legumes,outcome,alimentacao,160.0,talisma,talisma@email.com,2024-11-16 21:26:50.516079,1
+bee6dac5-3174-4a7f-8e2e-9ead51ac7473,internet,outcome,internet,249.0,talisma,talisma@email.com,2024-11-16 14:06:33.835424,1
+fa1e23da-66d3-40a1-a5bd-57a5de12af90,forfait da geovana,outcome,geovana,68.0,talisma,talisma@email.com,2024-11-16 13:56:40.852241,1
+20019194-796b-4b68-810d-29351733e1b3,baba pra ayla,outcome,ayla,700.0,talisma,talisma@email.com,2024-11-15 21:05:19.133307,1
+35239caf-a428-4b30-bafb-9a86985c010c,vinho,outcome,extra,35.5,talisma,talisma@email.com,2024-11-15 17:26:27.292296,1
+138a299b-4bc7-45b5-ac94-14a500ed9fae,geovana,outcome,geovana,20.0,talisma,talisma@email.com,2024-11-15 17:26:00.690004,1
+cce51f60-6276-4709-bcf1-54b0f40aab1e,petit dej no trabalho,outcome,extra,9.0,talisma,talisma@email.com,2024-11-15 17:25:02.919129,1
+a483e7c9-608c-411b-bdf3-7190bc121e76,banana,outcome,extra,10.0,talisma,talisma@email.com,2024-11-15 17:24:18.718836,1
+66a52dfd-30d1-4935-9921-3f60276d5c7d,croissant iogurte e frutas,outcome,extra,18.75,talisma,talisma@email.com,2024-11-14 15:02:41.188934,1
+1355bda5-a971-457b-a83c-35e0ee428145,geovana,outcome,geovana,15.0,talisma,talisma@email.com,2024-11-14 14:23:54.166230,1
+335ff463-b3e0-4907-be4b-c3375c61759e,frutos secos,outcome,extra,11.0,talisma,talisma@email.com,2024-11-14 14:17:38.705527,1
+41104788-950d-4353-9fdd-76e459dc96d6,geovana,outcome,geovana,100.0,talisma,talisma@email.com,2024-11-14 14:17:02.171556,1
+13e7c444-abca-4e0d-820a-3a52ab66de8b,cube magic,outcome,alimentacao,6.0,talisma,talisma@email.com,2024-11-13 20:53:16.121144,1
+6a81f96d-c776-4dad-97a3-d7768bb6fe03,cnss,income,reembolso,385.0,talisma,talisma@email.com,2024-11-13 20:47:25.668954,1
+cd93512d-2444-442e-8a41-d15c422fd7f5,cafe e croissant,outcome,extra,14.0,talisma,talisma@email.com,2024-11-13 20:46:43.085289,1
+1a6d1f03-6b48-4392-a1be-ddf23a3bd619,bolo pra ayla,outcome,extra,3.5,talisma,talisma@email.com,2024-11-13 20:45:57.779282,1
+d315d198-b108-4429-820d-234176575e04,vinho,outcome,extra,35.5,talisma,talisma@email.com,2024-11-12 19:04:13.305445,1
+6ea8aee4-4557-4c63-bdca-9ff7012d7078,iogurte e milwi,outcome,extra,13.0,talisma,talisma@email.com,2024-11-11 16:33:35.893897,1
+c8bdb767-a11c-400d-9432-608082ca7823,dei 50 ao Maricio,outcome,extrra,50.0,talisma,talisma@email.com,2024-11-11 16:33:10.559179,1
+6ed1da81-7b3d-4e16-b04d-8648a169c8e9,pao e iogurte,outcome,alimentcao,31.0,talisma,talisma@email.com,2024-11-11 15:59:07.893664,1
+47d5f10c-651d-41fb-9e3f-557bd6783ad2,loyer,outcome,alugel,3100.0,talisma,talisma@email.com,2024-11-11 15:58:29.324729,1
+ddb1aea2-f07a-4862-8d28-a4199b6154d3,iogurte e doces,outcome,extra,7.5,talisma,talisma@email.com,2024-11-10 15:17:25.354308,1
+f71c92d4-cc35-43f5-ab35-eddeb382f9b1,roupas,outcome,roupas,369.0,talisma,talisma@email.com,2024-11-10 15:15:47.913708,1
+b413a2bf-00a6-466c-8093-43713649fb14,SPA,outcome,geovana,150.0,talisma,talisma@email.com,2024-11-10 12:09:27.404778,1
+05f43c79-798c-4669-b122-4b0034c59a0f,parque de diversao,outcome,extra,45.0,talisma,talisma@email.com,2024-11-10 12:08:37.270095,1
+ca4876fb-f7a0-4b16-b501-cb5d27d21bcd,compras ,outcome,alimentacao,117.0,talisma,talisma@email.com,2024-11-10 09:27:49.968592,1
+255376db-36eb-4c60-bf41-b0c673b8171c,taxi,outcome,transporte,32.0,talisma,talisma@email.com,2024-11-10 09:27:08.367645,1
+d5ab2345-ebf8-4a34-ba1e-90f38300c90e,frutas e iogurte,outcome,alimentacao,37.0,talisma,talisma@email.com,2024-11-09 17:56:20.429269,1
+538961c6-f2a6-47c9-aa4f-6127fcad9c61,vinho,outcome,extra,80.0,talisma,talisma@email.com,2024-11-08 17:34:07.478321,1
+c3316151-9a59-4605-9d6c-09bdaedebf2e,frutas,outcome,extra,13.0,talisma,talisma@email.com,2024-11-07 22:30:31.489001,1
+a993b49a-ef56-439a-91f2-12d508d1a1af,Bolacha pra ayla,outcome,extra,2.0,talisma,talisma@email.com,2024-11-07 13:39:15.659153,1
+feccb9ff-2586-4378-8766-d2472424ab90,pao,outcome,alimentacao,8.0,talisma,talisma@email.com,2024-11-07 13:34:30.933173,1
+c5fb353f-25c5-447a-9b00-896aa2e99ff2,trains da geovana,outcome,transporte,1210.0,talisma,talisma@email.com,2024-11-07 11:04:08.369166,1
+48feeb58-38f5-4ef0-b701-5fde05211810,divida com loic foi paga,outcome,divida,100.0,talisma,talisma@email.com,2024-11-07 09:17:06.948749,1
+b0606b7e-7214-46b3-aa7b-0f0adf5e29d7,mensalidade da escola do yachane,outcome,educaçao,1000.0,talisma,talisma@email.com,2024-11-07 09:05:03.330484,1
+a7668435-0422-4cd0-890b-d5a911c1d64c,bolos,outcome,extra,13.0,talisma,talisma@email.com,2024-11-06 18:55:47.345974,1
+e76f2e4c-7c39-467a-903e-6de3e0d10711,divida de bebida,outcome,divida,80.0,talisma,talisma@email.com,2024-11-06 18:09:10.870989,1
+9eb37e2e-d69a-4ba4-8ea3-a312c93123c2,salario talisma,income,salario,5000.0,talisma,talisma@email.com,2024-11-06 16:07:26.509691,1
+8d475093-b754-4fab-ad7f-540d36ed0094,bonbons,outcome,extra,9.0,talisma,talisma@email.com,2024-11-05 22:07:36.335608,1
+d93836c7-5abe-4b9f-ba3f-21811411574a,bolacha,outcome,extra,8.0,talisma,talisma@email.com,2024-11-05 16:33:58.178353,1
+085f2323-a1c8-486e-9296-4aa305b0561c,bolachas,outcome,extra,3.0,talisma,talisma@email.com,2024-11-05 12:55:13.581103,1
+2a337e17-aece-4be4-b2a0-fe9f41c49b83,compras no mercado,outcome,alimentcao,500.0,talisma,talisma@email.com,2024-11-04 16:47:27.934102,1
+e0d15103-9feb-4a4b-b087-9054ea721d75,jantar pras mulheres,outcome,EXTRA,153.0,talisma,talisma@email.com,2024-11-04 16:46:43.567808,1
+77182216-14cd-4ea4-b584-b8c7a6c949cd,montagem do chaffe eau,outcome,casa,140.0,talisma,talisma@email.com,2024-11-02 22:48:40.900401,1
+eb810374-039c-47e3-955f-59309acb2de4,corte de cabelo,outcome,estetica,45.0,talisma,talisma@email.com,2024-11-02 22:47:38.431623,1
+9445a3dd-032e-4186-8521-d535006331dd,compras,outcome,alimentcao,138.0,talisma,talisma@email.com,2024-11-02 22:42:45.450331,1
+f8fd720b-8ff5-425d-a3e5-0078b61a9375,bebidas pro jantar com amigos,outcome,extra,263.0,talisma,talisma@email.com,2024-11-01 20:16:50.077337,1
+d65759f0-0bbe-4623-b4a1-f71915416dad,filets de dinde fumé,outcome,extra,8.0,talisma,talisma@email.com,2024-11-01 15:24:01.363801,1
+2f4fbea0-3c37-4a2b-837f-23ad5a63c065,geovana gastou,outcome,geovana,163.0,talisma,talisma@email.com,2024-11-01 15:23:19.977787,1
+b7194b1f-7efb-4849-8d38-fa1f1c987ac8,simba,outcome,kiixikila,1000.0,talisma,talisma@email.com,2024-11-01 14:25:25.728750,1
+9a0abe39-c4cc-4b09-b000-c96c73e5dcfd,chauffe eau,outcome,casa,1100.0,talisma,talisma@email.com,2024-11-01 14:24:11.488012,1
+e49ff133-b7b2-47f7-b73b-ae4f919bc79d,compras marjane,outcome,aiimentacao,659.0,talisma,talisma@email.com,2024-11-01 14:23:09.431898,1
+064c2ac2-cca9-4862-9ac2-ebacd09fdd07,ginguba,outcome,extra,6.0,talisma,talisma@email.com,2024-11-01 14:21:45.707045,1
+42eab930-d89a-4ce3-b0fd-b7fc25ecca42,indrive,outcome,transporte,43.0,talisma,talisma@email.com,2024-11-01 14:21:04.104261,1
+a7e5ea71-1ae3-4045-a0a5-b5821de9074f,croissants,outcome,extra,6.0,talisma,talisma@email.com,2024-10-31 16:50:01.114240,1
+cfba2ccb-1375-4fba-b981-bb36cbc99c5d,milwi,outcome,extra,16.0,talisma,talisma@email.com,2024-10-31 16:22:42.803283,1
+0d0c6189-cb89-4b29-ab82-299d94250a4a,saldo,outcome,saldo,10.0,talisma,talisma@email.com,2024-10-31 16:22:10.251451,1
+f5836342-5db1-4789-8b8f-a8b547eb6f47,Bolachas,outcome,extra,4.0,talisma,talisma@email.com,2024-10-31 16:03:48.640779,1
+77fb3bf5-ed69-4173-bf91-680961af5cfa,pao,outcome,alimentacao,8.0,talisma,talisma@email.com,2024-10-31 16:03:12.518323,1
+bc60841d-2026-4dd0-a0f7-38a4bc5b3f25,lucas devolveu,income,emprestimo,50.0,talisma,talisma@email.com,2024-10-31 16:02:45.051085,1
+bdc3c306-9b29-4855-95c1-e75c149c0711,banana,outcome,extra,13.0,talisma,talisma@email.com,2024-10-30 20:51:49.962408,1
+f9a66e7d-3722-46f1-99db-406bc11e3ac2,milwi,outcome,extra,9.0,talisma,talisma@email.com,2024-10-30 20:51:26.076977,1
+9657a260-cd70-4342-83d3-cf000a35470b,croissants,outcome,extra,8.0,talisma,talisma@email.com,2024-10-30 20:51:09.376910,1
+75a38787-b56f-4fc3-965b-ccff6b969fc1,dinheiro pra angola,outcome,angola,600.0,talisma,talisma@email.com,2024-10-30 20:50:23.583903,1
+c84c5225-b1b8-45cb-bcaa-c2a3b5bec027,salario da geovana,income,salario,9300.0,talisma,talisma@email.com,2024-10-30 14:20:07.411071,1
+e402af15-561b-4d3e-8d32-f384ddb71e16,COMPRAS MARJANE,outcome,alimentacao,535.0,talisma,talisma@email.com,2024-10-30 14:19:17.222688,1
+2fc71bf3-97dc-418d-b156-6682161db9b9,medicamentos pras crianças,outcome,saude,503.0,talisma,talisma@email.com,2024-10-30 14:18:44.705467,1
+978d02cf-5799-4ba2-9ee6-90332dc796fc,moo,outcome,higiene,28.0,talisma,talisma@email.com,2024-10-29 22:11:37.600594,1
+f9f55a4d-d915-43f7-baef-5a0c64ffb0a5,bolachas,outcome,extra,4.0,talisma,talisma@email.com,2024-10-29 22:11:22.307247,1
+5b7542ef-2c61-4c1d-8591-c232f2c7fbdd,frango,outcome,alimentacao,40.0,talisma,talisma@email.com,2024-10-29 14:26:06.260588,1
+3943d188-da67-43c2-bf18-54c44fc03464,compras,outcome,casa,55.0,talisma,talisma@email.com,2024-10-29 14:25:49.592485,1
+b70642b4-b42f-4c0f-b018-f71f58863f04,Tacos + cafe,outcome,extra,41.0,talisma,talisma@email.com,2024-10-29 14:25:14.805582,1
+3f286525-5a2e-4a07-86f3-11661c052164,devoluçao ao nabil,outcome,emprestimo,100.0,talisma,talisma@email.com,2024-10-29 14:24:36.936735,1
+bf804890-f3e4-4239-afda-fc688703c655,compras,outcome,alimentacao,118.0,talisma,talisma@email.com,2024-10-28 01:06:25.768412,1
+3ca13629-d28b-4365-80ef-953e8c231883,Nabil emprestou,income,emprestimo,100.0,talisma,talisma@email.com,2024-10-25 13:48:16.337206,1
+a3e97921-22d0-4560-ba1f-f66a12708734,Loic emprestou,income,emprestimo,100.0,talisma,talisma@email.com,2024-10-25 13:47:39.837316,1
+4f00f18e-873f-4f23-952c-dd788f4a9586,croissant,outcome,extra,5.5,talisma,talisma@email.com,2024-10-24 16:23:13.657059,1
+860d524c-7e71-4529-bd4a-7b0e995d5afa,bolachas ,outcome,extra,7.0,talisma,talisma@email.com,2024-10-24 16:22:46.873351,1
+13cb98a5-81b0-490d-93a7-ffa8fd5e3ddc,almoço do trabalho,outcome,extra,11.0,talisma,talisma@email.com,2024-10-23 13:42:02.343283,1
+042460f4-b25e-4876-a995-3118b7887f25,fruta e bolacha,outcome,extra,9.5,talisma,talisma@email.com,2024-10-22 20:03:02.662524,1
+d1fc24a7-3a30-442b-b91f-4af57944da05,pao,outcome,alimentacao,8.0,talisma,talisma@email.com,2024-10-22 10:10:15.324489,1
+9cfcd743-8d14-46d4-a211-a16fe2208cdd,bolachas,outcome,extra,22.0,talisma,talisma@email.com,2024-10-22 10:08:50.752648,1
+6cdc7492-9315-405c-82d2-886107a9d6ee,chocolate pra geo,outcome,extra,15.0,talisma,talisma@email.com,2024-10-22 10:08:11.586673,1
+6e467762-e40a-4716-a5b6-650448ab6698,saldo,outcome,saldo,10.0,talisma,talisma@email.com,2024-10-21 16:25:28.529843,1
+8fb19d04-946a-4cca-8a12-8e36cebe3f6b,chips e bolachas,outcome,extra,9.0,talisma,talisma@email.com,2024-10-21 16:24:39.825797,1
+4e0020df-c562-4595-8dd7-e18dc0ca33d9,pao,outcome,alimentacao,20.0,talisma,talisma@email.com,2024-10-21 16:24:15.174736,1
+1ce5a69a-080d-4f70-b246-6462324e445f,Bebidas,outcome,extra,90.4,talisma,talisma@email.com,2024-10-20 19:41:02.712682,1
+f02866db-ca50-47e6-806d-f1dc3e85984f,compras ,outcome,alimentacao,170.0,talisma,talisma@email.com,2024-10-20 19:40:36.294968,1
+ff91b830-ef9c-41f5-b8f7-25eab2ab489f,ginguba pra moamba,outcome,alimentacao,10.0,talisma,talisma@email.com,2024-10-17 13:33:22.486315,1
+5c4189c6-e374-490f-998e-184941f95d5c,arroz,outcome,alimentacao,18.0,talisma,talisma@email.com,2024-10-15 22:11:05.097593,1
+6a7c469b-6962-4eb5-a992-bc0dca4cbf76,bolachas e gelado,outcome,extra,35.0,talisma,talisma@email.com,2024-10-15 22:10:40.595230,1
+6b3d8b13-ca88-4750-a91d-e90841266546,material escolar pro yachane,outcome,educacao,13.0,talisma,talisma@email.com,2024-10-15 22:09:53.544319,1
+e1f6d435-a729-4fb8-b00f-6fb6ddfe148d,iogurte,outcome,alimentacao,14.9,talisma,talisma@email.com,2024-10-14 21:58:20.696757,1
+919a7c84-d0a9-4c32-bed3-c0947398a309,geovana,outcome,geovana,100.0,talisma,talisma@email.com,2024-10-13 21:03:30.975567,1
+833ab6a9-1038-4aad-a170-d4556ba7b48f,forfait internet geovana,outcome,geovana,49.0,talisma,talisma@email.com,2024-10-13 21:02:21.218690,1
+a06c58fc-153b-49b5-8982-f290b0188c42,internet,outcome,internet,240.1,talisma,talisma@email.com,2024-10-13 21:01:32.646431,1
+6cf2c414-5767-47d0-b1ee-7875650a9d3c,taxi,outcome,transporte,12.0,talisma,talisma@email.com,2024-10-13 14:47:01.095962,1
+5f33170d-fb9c-4075-a162-a3435457cdaa,bebdias,outcome,extra,69.0,talisma,talisma@email.com,2024-10-13 14:46:39.093841,1
+4fc493a9-9163-43b8-85e8-25ce57317458,convivio com famila nicolas,outcome,alimentaçao,106.0,talisma,talisma@email.com,2024-10-13 14:39:01.987261,1
+23a8167d-c9db-41eb-a358-fec9897b052c,dei 10 ao Cosme,outcome,emprestimo,10.0,talisma,talisma@email.com,2024-10-10 23:30:11.430000,1
+59e54471-d3de-4686-9a43-2664d38b3634,loyer,outcome,aluguel,3100.0,talisma,talisma@email.com,2024-10-10 23:28:42.073000,1
+cm23e7sqz0001izgzo6zi8ehr,frutas,outcome,extra,28.0,talis,talis@gmail.com,2024-10-10 14:27:30.040000,1
+cm23dtxg00000izgzr6a4xzfa,Bolachas,outcome,extra,26.0,talis,talis@gmail.com,2024-10-10 14:16:43.911000,1
+c41c8880-8e8f-4dab-a579-fbc8d8ed9659,hogla devolveu,income,emprestimo,1000.0,talisma,talisma@email.com,2024-10-09 13:36:49.473000,1
+83f30c2c-08cf-484e-b2dc-baf203da751e,pao,outcome,alimentacao,6.0,talisma,talisma@email.com,2024-10-09 13:23:16.200000,1
+aa0a8094-c292-4633-b00d-bbde2d0a8d49,colher e bolacha,outcome,extra,2.5,talisma,talisma@email.com,2024-10-09 13:22:40.164000,1
+dcb844cd-b17a-40d9-bb6d-31115b80093f,iogurte pra ayla,outcome,extra,3.5,talisma,talisma@email.com,2024-10-09 13:22:16.929000,1
+7917cc23-2361-4348-b65b-48fe96af8015,gas,outcome,casa,60.0,talisma,talisma@email.com,2024-10-09 13:21:42.560000,1
+253f5611-e392-4897-957d-0a6f8fdd2cdc,bebida,outcome,extra,15.0,talisma,talisma@email.com,2024-10-08 16:17:15.608000,1
+a903062c-5019-425d-ba6b-9fe2275f58a1,colher de platico,outcome,extra,1.0,talisma,talisma@email.com,2024-10-08 13:07:18.540000,1
+6b3458ba-e190-4ae5-9420-d8704e2528fe,agua pro Yachane,outcome,extra,3.0,talisma,talisma@email.com,2024-10-08 13:06:48.985000,1
+3f71f34c-9b7b-4b8b-85dd-d25012903b33,salario Talisma,income,salario,4640.0,talisma,talisma@email.com,2024-10-08 00:52:37.230000,1
+6e07ef60-642f-423a-8d71-dd0c19962c53,perfumes,outcome,higiene,150.0,talisma,talisma@email.com,2024-10-08 00:51:45.943000,1
+beedee0d-7872-45de-8868-cbc4a21df925,indrive,outcome,transporte,20.0,talisma,talisma@email.com,2024-10-08 00:51:18.693000,1
+043ab5f8-c89f-4552-990f-b2ae3feaa54e,bolacahas e agua,outcome,extra,11.5,talisma,talisma@email.com,2024-10-08 00:50:35.139000,1
+8f540fc4-cf82-4f40-99b8-cd36ebe549d6,taxi,outcome,transporte,30.0,talisma,talisma@email.com,2024-10-08 00:49:53.570000,1
+7689b256-debb-4d46-be5f-90a23d3b2032,saldo,outcome,saldo,10.0,talisma,talisma@email.com,2024-10-08 00:49:31.035000,1
+eb8bfdf4-a2d2-4264-bf03-eba1fe1ed805,bus de retour,outcome,transporte,50.0,talisma,talisma@email.com,2024-10-08 00:49:08.450000,1
+f78f331a-c0b3-4a31-ad64-f1ef9c3663fd,train,outcome,transporte,55.0,talisma,talisma@email.com,2024-10-08 00:48:46.548000,1
+1ff68ca7-487f-4640-b9e3-fcfc33114592,gelado,outcome,extra,16.0,talisma,talisma@email.com,2024-10-08 00:48:17.046000,1
+a6865d89-9e57-4cd1-8d2b-e589c42b79b8,reparacao do mac,outcome,computador,100.0,talisma,talisma@email.com,2024-10-08 00:47:57.561000,1
+17d08b58-a7e4-4c5f-941e-16d8405192f2,tourne vis mac,outcome,extra,100.0,talisma,talisma@email.com,2024-10-08 00:47:30.197000,1
+9bc160d1-aa5c-41ec-a6a2-405a2dc37fb0,taxi,outcome,transporte,10.0,talisma,talisma@email.com,2024-10-08 00:47:05.965000,1
+5a1eb3ac-4675-4959-a998-d471440b8e91,indrive,outcome,transporte,36.0,talisma,talisma@email.com,2024-10-08 00:46:43.707000,1
+33e1c48b-0eb8-494f-80c8-b83b13b7bd47,saida ao bar,outcome,extra,500.0,talisma,talisma@email.com,2024-10-08 00:45:59.822000,1
+7b6e0c5e-b40a-4261-9994-19e09960497f,train aller retour,outcome,transporte,77.0,talisma,talisma@email.com,2024-10-08 00:45:00.993000,1
+764ea0a6-a4cd-420e-b9a8-2653e593f0de,hospital,outcome,saude,600.0,talisma,talisma@email.com,2024-10-08 00:43:50.115000,1
+b4efb90e-a611-4201-a03e-b14a294cc336,restaurante,outcome,extra,171.0,talisma,talisma@email.com,2024-10-08 00:42:55.308000,1
+43e94722-b2b5-41b1-877a-ccfbed7cc3fa,bebida,outcome,extra,69.0,talisma,talisma@email.com,2024-10-04 18:24:37.233000,1
+0ad38b18-1ed2-40c7-b6f6-c9a37b033a56,simba,income,kixikila,1000.0,talisma,talisma@email.com,2024-10-04 16:39:43.546000,1
+c63b3761-0f86-4004-9de4-b3a0a7b78d3c,sapateiro,outcome,calçado,20.0,talisma,talisma@email.com,2024-10-04 16:34:51.079000,1
+69658441-9688-4ef7-bba9-ad2ce35080f8,ginguba,outcome,extra,15.0,talisma,talisma@email.com,2024-10-04 10:32:27.700000,1
+de3e4809-645f-4695-8ab8-1f0d8e5411be,t-srits para o talisma,outcome,roupas,140.0,talisma,talisma@email.com,2024-10-04 10:32:06.781000,1
+905df6f2-7ce8-4b31-bde1-7dc9a71cca14,coisas pra cozinha,outcome,casa,30.0,talisma,talisma@email.com,2024-10-04 10:30:44.624000,1
+4e2e52bd-aa55-4dbb-8635-825f3d8ec696,iogurte e bolacha,outcome,extra,10.0,talisma,talisma@email.com,2024-10-04 10:30:09.355000,1
+a5f89b68-aa43-47f1-acfc-115aadba8992,gelado,outcome,extra,20.0,talisma,talisma@email.com,2024-10-04 10:29:25.584000,1
+44105fb0-e245-4c19-ad28-577a5dd76da4,taxi,outcome,transporte,40.0,talisma,talisma@email.com,2024-10-04 10:28:18.978000,1
+707a2591-1813-49ea-8588-fdcf80df5d05,sandalia,outcome,calçado,70.0,talisma,talisma@email.com,2024-10-04 10:27:51.695000,1
+c01e1eed-99db-47d7-b9c6-06249464b3af,saldo,outcome,saldo,5.0,talisma,talisma@email.com,2024-10-03 15:36:45.242000,1
+9c2c2a4a-cdfb-4c9d-838d-73604f80d3f3,agua e luz,outcome,agua-eluz,158.2,talisma,talisma@email.com,2024-10-03 15:36:11.905000,1
+cm1s0vm0m0000soueqybkmfds,dei emprestado 50 ao lucas,outcome,emprestimo,50.0,talis,talis@gmail.com,2024-10-02 15:27:50.849000,1
+cm1rs7ak20003135g2eguuemp,atum e maionese,outcome,alimentacao,60.0,talis,talis@gmail.com,2024-10-02 11:25:49.199000,1
+cm1rs6n4v0002135getaznoss,+materias didaticos pro yachane,outcome,educacao,365.0,talis,talis@gmail.com,2024-10-02 11:25:19.112000,1
+cm1rs508x0001135gy49gqhmx,escola do yachane,outcome,educacao,1000.0,talis,talis@gmail.com,2024-10-02 11:24:02.768000,1
+cm1rs37q90000135gk5dzs386,demos emprestado a hogla,outcome,emprestimo,1000.0,talis,talis@gmail.com,2024-10-02 11:22:39.117000,1
+cm1qpk8w6000111r6242pbnpb,bebidas ,outcome,extra,20.0,talis,talis@gmail.com,2024-10-01 17:24:08.138000,1
+cm1qphltu000011r6j84ie9qk,chips,outcome,extra,7.0,talis,talis@gmail.com,2024-10-01 17:20:23.718000,1
+cm1otoelf0001wi4l20bsrppb,cortes de cabelo das crianças,outcome,estetica,80.0,talis,talis@gmail.com,2024-09-30 09:43:47.773000,1
+cm1otmfh90000wi4lm0r8z8f3,compras no mercado ,outcome,alimentacao,700.0,talis,talis@gmail.com,2024-09-30 09:42:15.538000,1
+cm1mlk3r70007qce2wyf18qmy,train,outcome,transporte,34.0,talis,talis@gmail.com,2024-09-28 20:20:57.786000,1
+cm1mljm140006qce25de3ag6i,iogurtes e chips,outcome,extra,35.0,talis,talis@gmail.com,2024-09-28 20:20:34.895000,1
+cm1mlir480005qce248oyeliu,toalha de mesa,outcome,casa,104.0,talis,talis@gmail.com,2024-09-28 20:19:54.876000,1
+cm1mli3dm0004qce265nvfgrh,geovana deu emprestado 60,outcome,emprestimo,60.0,talis,talis@gmail.com,2024-09-28 20:19:24.089000,1
+cm1mlgp3a0003qce2ps5t8ofz,compras no BIM,outcome,alimentaçao,127.8,talis,talis@gmail.com,2024-09-28 20:18:18.899000,1
+cm1mlb1e00002qce216qvwoge,compras no Mariane,outcome,alimentaçao,300.0,talis,talis@gmail.com,2024-09-28 20:13:54.923000,1
+cm1mlahcy0001qce27m2vnbhw,couches et lingettes,outcome,ayla,110.0,talis,talis@gmail.com,2024-09-28 20:13:28.041000,1
+cm1ml1t260000qce2cgqju9fv,oculus da mama,outcome,Geovana,110.0,talis,talis@gmail.com,2024-09-28 20:05:59.262000,1
+cm1l5xuyn00008iwyoonc371w,VINHO,outcome,bebidas,35.0,talis,talis@gmail.com,2024-09-27 20:14:46.140000,1
+cm1l0f0uq000212ci56aiuhma,filtro de agua,outcome,casa,487.0,talis,talis@gmail.com,2024-09-27 17:41:22.447000,1
+cm1l0dorw000112cidj3iwmtb,salario geovana,income,salario,9000.0,talis,talis@gmail.com,2024-09-27 17:40:20.297000,1
+cm1l0dd2d000012ciso39i29n,escola geovana,outcome,educacao,1000.0,talis,talis@gmail.com,2024-09-27 17:39:53.556000,1
+cm1kx8xld0001gwai37oxu1k6,bolacha,outcome,extra,2.0,talis,talis@gmail.com,2024-09-27 16:12:39.601000,1
+cm1kx8nua0000gwaizqc7804z,200 com 30% de juro ao mauricio,outcome,emprestimo,200.0,talis,talis@gmail.com,2024-09-27 16:12:26.870000,1
+cm1ks36r00000et1u9tcy8ckn,saldo,outcome,saldo,5.0,talis,talis@gmail.com,2024-09-27 13:47:27.772000,1
+cm1knnito0002thgi7gvxlp86,pao,outcome,alimentacao,5.0,talis,talis@gmail.com,2024-09-27 11:44:04.233000,1
+cm1knmti60001thgitha2vv7z,iogurte para Ayla,outcome,extra,3.5,talis,talis@gmail.com,2024-09-27 11:43:31.149000,1
+cm1knlrt10000thgikjhams6w,encomenda jumia,outcome,talisma,114.0,talis,talis@gmail.com,2024-09-27 11:42:41.574000,1
+cm1kg9n0w0002fgmhe4mud4gn,compramos bureau da tata claire,outcome,casa,420.0,talis,talis@gmail.com,2024-09-27 08:17:19.059000,1
+cm1kg90ql0001fgmhmw5hb4te,compramos MacBook da tata claire,outcome,pc,1500.0,talis,talis@gmail.com,2024-09-27 08:16:50.299000,1
+cm1jl0moq00007kk0cq9s5we1,bolo,outcome,extra,16.5,talis,talis@gmail.com,2024-09-26 17:41:48.137000,1
+cm1j6zwr40000alstenky8res,devolvi 5 ao nabil,outcome,emprestimo,5.0,talis,talis@gmail.com,2024-09-26 11:10:01.915000,1
+5023b76c-a29b-49ae-9dd2-db738a669a27,sumo para jantar,outcome,extra,16.0,talisma,talisma@email.com,2024-09-25 21:17:51.886000,1
+784390ea-3dde-4fbd-9d6d-8ecb6bc9ad83,emprestei com loic 500 ao alex,income,emprestimo,250.0,talisma,talisma@email.com,2024-09-25 20:08:06.665000,1
+7c47ab13-215d-4bd5-99ca-464a070422e5,pedi emprestado 5 dh ao nabil,income,emprestimo,5.0,talisma,talisma@email.com,2024-09-25 20:06:35.592000,1
+cm1gktpot0000cu2lnpzfxb1j,sumo para escola,outcome,alimentacao,10.0,talis,talis@gmail.com,2024-09-24 15:13:50.204000,1
+cm1ezubhw0000hryy7tfnmtdo,colher de plastico,outcome,extra,1.0,talis,talis@gmail.com,2024-09-23 12:38:03.105000,1
+cm1j7z4d90002alsthxdg2pdb,escola da Geovana,outcome,educacao,800.0,talis,talis@gmail.com,2024-09-23 11:37:25.291000,1
+cm1ertipu00017vh8zxb5eyco,bolacha,outcome,extra,2.0,talis,talis@gmail.com,2024-09-23 08:54:05.265000,1
+cm1ersxi700007vh804s8fmx0,pao e leite,outcome,alimentaçao,17.0,talis,talis@gmail.com,2024-09-23 08:53:27.485000,1
+cm1dybqlq0000youm0a7z9t7r,train,outcome,transporte,200.0,talis,talis@gmail.com,2024-09-22 19:07:47.909000,1
+cm1al0jg40000wcic5uvghoxn,compras ,outcome,alimentacao,250.0,talis,talis@gmail.com,2024-09-20 10:32:30.603000,1
+cm1agcwbi00007ag5fn1rctw2,KFC para hogla,outcome,extra,89.98,talis,talis@gmail.com,2024-09-20 08:22:00.349000,1
+cm19jnhfi0000xxc19if506sw,dei 20,outcome,extra,20.0,talis,talis@gmail.com,2024-09-19 17:06:23.915000,1
+cm1965ldx0002gjibawladxs6,pao,outcome,alimentacao,4.0,talis,talis@gmail.com,2024-09-19 10:48:46.022000,1
+cm19659bf0001gjibphbabr29,copias,outcome,educacao,6.0,talis,talis@gmail.com,2024-09-19 10:48:30.367000,1
+cm1964od20000gjibo886qfgm,compras BIM,outcome,extra,19.6,talis,talis@gmail.com,2024-09-19 10:48:03.171000,1
+cm16q0p330001rsc88lz2ebz1,afonso devolveu 50,income,emprestimo,50.0,talis,talis@gmail.com,2024-09-17 17:41:31.617000,1
+cm16pz8gi0000rsc8ybwlwfgh,bebidas ,outcome,extra,35.0,talis,talis@gmail.com,2024-09-17 17:37:50.708000,1
+cm16p02fr00005fppeh8594at,milwi,outcome,extra,11.0,talis,talis@gmail.com,2024-09-17 17:13:02.537000,1
+cm16b4cxu0000sa5c7z012yxl,bolacha,outcome,extra,2.0,talis,talis@gmail.com,2024-09-17 10:43:38.153000,1
+cm15cmj7q000011a5jf7c90dv,ginguba,outcome,extra,6.0,talis,talis@gmail.com,2024-09-16 18:32:44.042000,1
+cm15557820000bks49kaor4qn,chips,outcome,extra,7.0,talis,talis@gmail.com,2024-09-16 15:09:22.615000,1
+cm142ugvs000060b2cxkkpvpy,agua,outcome,extra,24.0,talis,talis@gmail.com,2024-09-15 21:16:32.865000,1
+cm13minrr0000k44zj1fr8n45,+ compras do convivo,outcome,extra,70.0,talis,talis@gmail.com,2024-09-15 13:39:18.798000,1
+cm13bmq70000310iclcvrfvhh,asswak salam,outcome,extra,50.0,talis,talis@gmail.com,2024-09-15 08:35:26.655000,1
+cm13bloww000210icfldmn8nu,carne pro convivio,outcome,extra,50.0,talis,talis@gmail.com,2024-09-15 08:34:38.369000,1
+cm13bk7wc000110icyevlacqd,meterias de pintura Geovana,outcome,extra,100.0,talis,talis@gmail.com,2024-09-15 08:33:29.649000,1
+cm13bicce000010ic8gm89lqf,dei emprestado 50 ao Afonso,outcome,emprestimo,50.0,talis,talis@gmail.com,2024-09-15 08:31:43.213000,1
+cm110sdrn0000kk6mau9e8f86,bebidas ,outcome,extra,69.0,talis,talis@gmail.com,2024-09-13 17:54:42.637000,1
+cm10fnwzs00024avyv40c4g7m,agua-luz,outcome,agua-luz,136.0,talis,talis@gmail.com,2024-09-13 08:05:01.832000,1
+cm10fn33100014avyk2xy187z,internet,outcome,internet,250.0,talis,talis@gmail.com,2024-09-13 08:04:23.216000,1
+cm10fmh2k00004avy8wjnn19j,forfait internet,outcome,saldo,49.0,talis,talis@gmail.com,2024-09-13 08:03:54.619000,1
+cm0zror7n0003ecdn3ma6i0sz,JUMIA,outcome,CASA,194.0,talis,talis@gmail.com,2024-09-12 20:52:02.249000,1
+cm0zro37v0002ecdndscc3dyn,TRANSPORTE,outcome,transporte,62.0,talis,talis@gmail.com,2024-09-12 20:51:31.273000,1
+cm0zrmfst0001ecdnxxcvsa12,LANCHES,outcome,ALIMENTACAO,25.0,talis,talis@gmail.com,2024-09-12 20:50:14.296000,1
+cm0zrjyx30000ecdnaj1nqtg4,SALAO,outcome,ESTETICA,220.0,talis,talis@gmail.com,2024-09-12 20:47:49.676000,1
+cm0zgl6al000089tt91jx0vw5,bolacha,outcome,extra,7.0,talis,talis@gmail.com,2024-09-12 15:42:29.573000,1
+cm0y1rky8000096ywq82ayytj,tranças de geovana,outcome,estetica,220.0,talis,talis@gmail.com,2024-09-11 16:00:26.383000,1
+cm0xzydvs0000ookebr9zwdvg,chips,outcome,extra,11.0,talis,talis@gmail.com,2024-09-11 15:07:08.514000,1
+cm0wuuwv60001127dypjg5712,reparacao do AC,outcome,casa,400.0,talis,talis@gmail.com,2024-09-10 19:59:17.868000,1
+cm0wutrtk0000127df3418pgk,alugel,outcome,loyer,2700.0,talis,talis@gmail.com,2024-09-10 19:58:23.972000,1
+cm0wl5sw500029xglur4l61fs,pao,outcome,alimentacao,10.0,talis,talis@gmail.com,2024-09-10 15:27:49.529000,1
+cm0wl5cpn00019xgl0gidm506,milwi,outcome,extra,8.0,talis,talis@gmail.com,2024-09-10 15:27:28.330000,1
+cm0wks3ur00009xglorrg93oy,saldo,outcome,saldo,10.0,talis,talis@gmail.com,2024-09-10 15:16:27.277000,1
+cm0v9log000036zicuqrwox2b,copias para reinscricao no doctorado,outcome,educaçao,15.0,talis,talis@gmail.com,2024-09-09 17:16:26.974000,1
+cm0v9kgf600026zic6tipdn0x,bus larache,outcome,transporte,50.0,talis,talis@gmail.com,2024-09-09 17:15:30.051000,1
+cm0v9jt6q00016zicmx1kuf8h,sumo yachane,outcome,yachane,2.0,talis,talis@gmail.com,2024-09-09 17:14:59.866000,1
+cm0v9geaq00006zicyytueci2,copias das chaves,outcome,CASA,20.0,talis,talis@gmail.com,2024-09-09 17:11:07.609000,1
+cm0v7yejn0000ib323gdb1diz,iogurte e agua ,outcome,extra,8.0,talis,talis@gmail.com,2024-09-09 16:26:27.414000,1
+cm0uqmtfm0003z8z7p86c5jiu,Afonso devolveu o empréstimo,outcome,emprestimo,70.0,talis,talis@gmail.com,2024-09-09 08:25:29.400000,1
+cm0uqlm4z0002z8z77c54rlyk,train para Larache,outcome,transporte,54.0,talis,talis@gmail.com,2024-09-09 08:24:33.296000,1
+cm0uqkr6k0001z8z7aol3yath,gasto extra do pic-nic,outcome,extra,45.0,talis,talis@gmail.com,2024-09-09 08:23:53.176000,1
+cm0uqi18e0000z8z7i5pv3vnh,comida pra pic-nic,outcome,extra,102.0,talis,talis@gmail.com,2024-09-09 08:21:20.886000,1
+cm0qse18u0001ijud3aqvr8s4,recebi 10 que emprestei ao Cosme,income,emprestimo,10.0,talis,talis@gmail.com,2024-09-06 14:03:33.451000,1
+cm0qscnyc0000ijud0v2zlw32,dei emprestado 20 ao afonso,outcome,emprestimo,20.0,talis,talis@gmail.com,2024-09-06 14:02:29.655000,1
+cm0qoi7en000010ud3251yj9m,iogurt,outcome,extra,7.0,talis,talis@gmail.com,2024-09-06 12:13:31.398000,1
+cm0qmafc600034ss2lbwosdlr,cnss,income,extra,600.0,talis,talis@gmail.com,2024-09-06 11:12:47.659000,1
+cm0qm9mmd00024ss2ezrt2th5,pao,outcome,alimentacao,6.0,talis,talis@gmail.com,2024-09-06 11:12:10.426000,1
+cm0qm9f4g00014ss28q3b413w,frango,outcome,alimentacao,200.0,talis,talis@gmail.com,2024-09-06 11:12:00.651000,1
+cm0qm78dp00004ss2qrp50jqh,sumo para escola,outcome,alimentacao,2.0,talis,talis@gmail.com,2024-09-06 11:10:18.396000,1
+cm0pl1gz90000w25ffevnvdwz,bolacha,outcome,extra,4.0,talis,talis@gmail.com,2024-09-05 17:49:16.550000,1
+cm0pcchly0000p6j581bk83fm,envio do assurance maladie pela amana,outcome,saude,55.0,talis,talis@gmail.com,2024-09-05 13:46:39.254000,1
+cm0p92dyd0000b33pv58qi19j,gasosa,outcome,extra,5.4,talis,talis@gmail.com,2024-09-05 12:14:07.317000,1
+cm1j7tg1t0001alstjzycbnlk,salario talisma,income,salario,4520.0,talis,talis@gmail.com,2024-09-05 11:33:00.311000,1
+cm0p6va570004p9iy79qxvjzu,compras no marjene,outcome,alimentacao,114.0,talis,talis@gmail.com,2024-09-05 11:13:23.008000,1
+cm0p6urj40003p9iy6xi8ra6y,materias escolares do yachane,outcome,educacao,110.0,talis,talis@gmail.com,2024-09-05 11:12:58.856000,1
+cm0p6svo50002p9iyouwhkg2b,gel da ayla,outcome,ayla,90.0,talis,talis@gmail.com,2024-09-05 11:11:30.993000,1
+cm0p6scxd0001p9iysp1ss962,restaurante,outcome,extra,170.0,talis,talis@gmail.com,2024-09-05 11:11:06.489000,1
+cm0p6s2ez0000p9iyle74kgtd,materias escolares do yachane,outcome,educacao,1074.0,talis,talis@gmail.com,2024-09-05 11:10:52.301000,1
+cm0o072ls00007huudisp75ed,milwi,outcome,extra,6.0,talis,talis@gmail.com,2024-09-04 15:17:55.968000,1
+cm0nqqwvj00009ugvnnvak0up,saldo,outcome,saldo,10.0,talis,talis@gmail.com,2024-09-04 10:53:47.876000,1
+cm0mm1pde0001ufnevzskmjle,dei ao javier,outcome,extra,10.0,talis,talis@gmail.com,2024-09-03 15:54:57.260000,1
+cm0mm0vdy0000ufne0rtqhcl3,ginguba,outcome,extra,7.0,talis,talis@gmail.com,2024-09-03 15:53:27.094000,1
+cm0mco0ux0000epzn6uuxb5sx,dei emprestado 50 ao afonso,outcome,emprestimo,50.0,talis,talis@gmail.com,2024-09-03 11:32:01.445000,1
+cm0mc1c6y0003zga7cw7t5re7,dei 5 ao afonso,outcome,extra,5.0,talis,talis@gmail.com,2024-09-03 11:14:44.001000,1
+cm0mc0org0002zga7250c357h,chips e iogurte,outcome,extra,18.0,talis,talis@gmail.com,2024-09-03 11:14:13.579000,1
+cm0mbjkbe0001zga7018mllz1,mensalidade yachane,outcome,educacao,1000.0,talis,talis@gmail.com,2024-09-03 11:00:54.227000,1
+cm0mbbvxt0000zga70wx86102,gas,outcome,casa,70.0,talis,talis@gmail.com,2024-09-03 10:53:59.172000,1
+cm0kz93mz000dsa7c6w4s657h,ovos e pao,outcome,alimentacao,16.0,talis,talis@gmail.com,2024-09-02 12:29:06.230000,1
+cm0kz8j4c000csa7clelk26ll,tabua de frio pro convivio,outcome,extra,50.0,talis,talis@gmail.com,2024-09-02 12:28:39.429000,1
+cm0kz74o3000bsa7cg9feqxys,saldo net ,outcome,extra,10.0,talis,talis@gmail.com,2024-09-02 12:27:33.604000,1
+cm0kyxh19000asa7cxzczrd4o,comida restaurante,outcome,extra,150.0,talis,talis@gmail.com,2024-09-02 12:20:03.678000,1
+cm0kywnpp0009sa7cmja61zjv,roupas aychane e ayla,outcome,roupas,1000.0,talis,talis@gmail.com,2024-09-02 12:19:25.701000,1
+cm0kyvv9j0008sa7c6nga9djo,ovos,outcome,alimentacao,6.0,talis,talis@gmail.com,2024-09-02 12:18:48.853000,1
+cm0kyvojd0007sa7ccuj86wms,pao,outcome,alimentacao,10.0,talis,talis@gmail.com,2024-09-02 12:18:39.958000,1
+cm0kyvcc60006sa7cvhnnvinr,milwi e gasosa,outcome,extra,20.0,talis,talis@gmail.com,2024-09-02 12:18:24.325000,1
+cm0kyv00p0005sa7cgvqh5qdm,petit dej no hospital,outcome,extra,50.0,talis,talis@gmail.com,2024-09-02 12:18:08.365000,1
+cm0kyuo7e0004sa7c30z2fn0p,vinho,outcome,extra,75.0,talis,talis@gmail.com,2024-09-02 12:17:52.590000,1
+cm0kyn94q0003sa7cfyizh4gm,train,outcome,transporte,40.0,talis,talis@gmail.com,2024-09-02 12:12:06.918000,1
+cm0kymtc70002sa7ch7aqkstw,divida hogla,outcome,divida,1650.0,talis,talis@gmail.com,2024-09-02 12:11:45.895000,1
+cm0kyfbgs0001sa7cgo2dl1vc,alimentacao,outcome,alimentacao,1300.0,talis,talis@gmail.com,2024-09-02 12:05:56.607000,1
+cm0kydbtg0000sa7ctru2r9uj,salario geovana,income,salario,9000.0,talis,talis@gmail.com,2024-09-02 12:04:22.726000,1
+cm0gmumx20000jwyljtfqk0xm,petit dej no hospital,outcome,extra,50.0,talis,talis@gmail.com,2024-08-30 11:30:45.513000,1
+cm0f6ifxk0000dbcd33g62ubs,ovos,outcome,alimentacao,4.5,talis,talis@gmail.com,2024-08-29 11:05:39.889000,1
+cm0f1ishf00002avaksfoivp1,LEITE E PAO,outcome,alimentacao,10.0,talis,talis@gmail.com,2024-08-29 08:45:37.686000,1
+cm0f0da350000zs1uv4uycegz,vaquinha vinho,outcome,extra,13.0,talis,talis@gmail.com,2024-08-29 08:13:20.807000,1
+cm0co6pz20003sqjzrm70e0up,emprestimo nabil,outcome,extra,5.0,talis,talis@gmail.com,2024-08-27 16:57:08.239000,1
+cm0co56810002sqjz80h7qzj3,açucar,outcome,alimentacao,6.0,talis,talis@gmail.com,2024-08-27 16:55:56.066000,1
+cm0co4ig80001sqjz1ecl2erw,gelado para as crianças,outcome,extra,6.0,talis,talis@gmail.com,2024-08-27 16:55:25.227000,1
+cm0co450u0000sqjzg38v8x2v,iogurt para as crianças,outcome,alimentacao,5.0,talis,talis@gmail.com,2024-08-27 16:54:58.881000,1
+cm0bcwp56000114jb67pcxzjl,vinho,outcome,extra,45.0,talis,talis@gmail.com,2024-08-26 18:53:39.651000,1
+cm0bcwggz000014jb4187bvts,loic,income,emprestimo,45.0,talis,talis@gmail.com,2024-08-26 18:52:53.523000,1
+cm0b386wp0001azi8rdjav7hj,ovos,outcome,alimentacao,9.0,talis,talis@gmail.com,2024-08-26 14:22:39.681000,1
+cm0b32wir0000azi8rcreex48,taxi para o convivio,outcome,transporte,100.0,talis,talis@gmail.com,2024-08-26 14:18:32.239000,1
+cm08bdcnw0001f5uuzjuxk65j,sprinte iogurte,outcome,extra,13.5,talis,talis@gmail.com,2024-08-24 15:47:17.683000,1
+cm08bcgni0000f5uub0xatjgq,pao,outcome,alimentacao,11.0,talis,talis@gmail.com,2024-08-24 15:46:35.530000,1
+cm071dwao0001cnjcd0ry9nsp,vinho,outcome,bebidas,46.0,talis,talis@gmail.com,2024-08-23 18:20:01.035000,1
+cm071cvsn0000cnjci2g1rk7x,emprestimo isaacar,income,emprestimo,100.0,talis,talis@gmail.com,2024-08-23 18:19:13.692000,1
+cm06is4pp0001gayv4debsrlm,smida,outcome,alimentacao,10.0,talis,talis@gmail.com,2024-08-23 09:39:11.888000,1
+cm06ib0f20000gayvvevbukgh,bolachas,outcome,extra,4.0,talis,talis@gmail.com,2024-08-23 09:25:29.056000,1
+cm05b49kz000111b8pmnj9786,bolacha,outcome,extra,18.0,talis,talis@gmail.com,2024-08-22 13:16:55.935000,1
+cm05b36xj000011b8yxisuwns,pao,outcome,alimentacao,15.0,talis,talis@gmail.com,2024-08-22 13:16:04.710000,1
+cm058ygt70000xreqy301b538,gasosa,outcome,extra,5.0,talis,talis@gmail.com,2024-08-22 12:15:38.316000,1
+cm02bn1br0002t5a52n1vt8c2,iogurte,outcome,alimentacao,5.0,talis,talis@gmail.com,2024-08-20 11:08:13.517000,1
+cm02bmffk0001t5a567dqrwed,pao,outcome,alimentacao,8.5,talis,talis@gmail.com,2024-08-20 11:07:45.102000,1
+cm02bl36y0000t5a5uxstml4y,insecticida,outcome,higiene,26.0,talis,talis@gmail.com,2024-08-20 11:05:45.666000,1
+cm0031sn30000g1uvhez8tcet,convivio na casa da emilia,outcome,extra,100.0,talis,talis@gmail.com,2024-08-18 21:31:53.373000,1
+clzy8o9x500006r4otog9mwj7,frutas e iogurte e pao,outcome,ealimentacao,39.0,talis,talis@gmail.com,2024-08-17 14:33:24.707000,1
+clzx17ui700019co8o92s0uww,bolacha,outcome,extra,13.0,talis,talis@gmail.com,2024-08-16 18:17:36.388000,1
+clzx0y4oz00009co8z11gywfe,bebidas,outcome,extra,56.0,talis,talis@gmail.com,2024-08-16 18:09:08.903000,1
+clzwlhkox0000dw9oskxo3oqr,pao,outcome,alimentacao,6.5,talis,talis@gmail.com,2024-08-16 10:55:16.458000,1
+clzu5qk19000113ld0ylkp9bm,cholate pra geo,outcome,extra,5.0,talis,talis@gmail.com,2024-08-14 18:00:50.081000,1
+clzu5oksx000013ld8zyh6bmm,trancas da geovana,outcome,estetica,200.0,talis,talis@gmail.com,2024-08-14 17:58:14.312000,1
+clzsorpq00000okn4j1znx060,cafe ,outcome,extra,5.0,talis,talis@gmail.com,2024-08-13 17:17:18.088000,1
+clzsfveij0000tbcdmt9an3ds,pao,outcome,alimentacao,5.5,talis,talis@gmail.com,2024-08-13 13:08:20.357000,1
+clzrj2bgp0000tch7xwhp3768,bolachas para geovana,outcome,extra,8.0,talis,talis@gmail.com,2024-08-12 21:50:34.884000,1
+clzr6kalt00001t3eyfcyst25,chips,outcome,extra,7.0,talis,talis@gmail.com,2024-08-12 15:58:12.904000,1
+clzr3dgo40001cvl1mxtxip6r,clinex,outcome,extra,2.0,talis,talis@gmail.com,2024-08-12 14:31:21.057000,1
+clzr30e8o0000cvl1dg32bvz3,agua,outcome,extra,2.0,talis,talis@gmail.com,2024-08-12 14:20:03.412000,1
+clzqvwo1o0001lipww30cpbhr,carnes pro almoço,outcome,extra,200.0,talis,talis@gmail.com,2024-08-12 11:02:20.172000,1
+clzqvvjdu0000lipwq6ocyqi4,bebidas do convivio,outcome,extra,800.0,talis,talis@gmail.com,2024-08-12 11:01:27.296000,1
+clzoq8vhk000614bbftmgvj4d,alugel,outcome,loyer,3100.0,talis,talis@gmail.com,2024-08-10 22:48:19.357000,1
+clzoq7dpb000514bbdeamapbe,gelado Ginguba e agua,outcome,extra,23.0,talis,talis@gmail.com,2024-08-10 22:47:09.860000,1
+clzoq6o7k000414bbf8k91nac,Taxi,outcome,transporte,40.0,talis,talis@gmail.com,2024-08-10 22:46:36.754000,1
+clzoq5i97000314bbxgv870h1,quadros para fotos,outcome,geovana,50.0,talis,talis@gmail.com,2024-08-10 22:45:39.366000,1
+clzoq4pvn000214bbda6l9kbf,CNSS,income,extra geovana,600.0,talis,talis@gmail.com,2024-08-10 22:45:05.681000,1
+clzoq405g000114bbykpv2wmi,imeuble tv,outcome,geovana,550.0,talis,talis@gmail.com,2024-08-10 22:44:32.128000,1
+clzoq2se2000014bbo1u01upj,compras pro almoço,outcome,extra,164.0,talis,talis@gmail.com,2024-08-10 22:43:35.612000,1
+clznaky8e000089r0emuqqq3a,bebidas,outcome,extra,52.5,talis,talis@gmail.com,2024-08-09 22:41:45.161000,1
+clzmv7p520001goj1e4hf4faw,iogurtes para crianças,outcome,extra,5.0,talis,talis@gmail.com,2024-08-09 15:31:49.978000,1
+clzmuvq1m0000goj1qwtf1ack,pao,outcome,alimentacao,8.0,talis,talis@gmail.com,2024-08-09 15:21:48.973000,1
+clzmmktzq0000e0qnryqkj5f4,bolachas,outcome,extra,10.0,talis,talis@gmail.com,2024-08-09 11:29:05.617000,1
+clzmlhoxp0001epf2wpt3fn8w,laranjas e bolachas,outcome,extra,20.0,talis,talis@gmail.com,2024-08-09 10:59:42.123000,1
+clzmlgiik0000epf25k9sbxht,cabo hdmi,outcome,casa,50.0,talis,talis@gmail.com,2024-08-09 10:58:11.471000,1
+clzlk0yge00004mpk2235zrj0,salario talisma,income,salario,5000.0,talis,talis@gmail.com,2024-08-08 17:28:58.604000,1
+clzlhm8uq000267ndm7pcng1g,chips,outcome,extra,6.5,talis,talis@gmail.com,2024-08-08 16:23:29.360000,1
+clzlhbk87000167ndwls3e6dz,dinheiro pra ANGOLA,outcome,ANGOLA,1000.0,talis,talis@gmail.com,2024-08-08 16:15:10.821000,1
+clzlhaocs000067ndixgnf6y1,chips,outcome,extra,14.5,talis,talis@gmail.com,2024-08-08 16:13:30.200000,1
+clzkalboh0000n5bk52416gta,chips e bolachas,outcome,extra,9.0,talis,talis@gmail.com,2024-08-07 20:18:38.485000,1
+clzk3xq1u0001sno19u8958tv,garrafa termica,outcome,talisma,69.0,talis,talis@gmail.com,2024-08-07 17:12:43.613000,1
+clzk3wxf00000sno1a48jbbw1,chips,outcome,extra,7.5,talis,talis@gmail.com,2024-08-07 17:11:21.609000,1
+clzjw3dyo0001ivr7gekzcvxs,transporte para rabat,outcome,transporte,50.0,talis,talis@gmail.com,2024-08-07 13:33:10.959000,1
+clzjw1x590000ivr73kti3d5a,suporte para maquina de lavar,outcome,casa,20.0,talis,talis@gmail.com,2024-08-07 13:32:02.585000,1
+clzil42v30000weyta9zwkjk1,bolacha,outcome,extra,7.0,talis,talis@gmail.com,2024-08-06 15:37:11.598000,1
+clzi3t6ws000070a4x1nyn3in,carnes ,outcome,alimentacao,59.0,talis,talis@gmail.com,2024-08-06 07:33:02.630000,1
+clzhbqxdz0001b0sdf6viqt8s,croissants,outcome,extra,9.0,talis,talis@gmail.com,2024-08-05 18:28:03.673000,1
+clzhbej860000b0sd7h7t59jt,ginguba,outcome,extra,7.0,talis,talis@gmail.com,2024-08-05 18:17:49.108000,1
+clzgwn9lp0008vyt1djiqplzm,agua e luz,outcome,agua e luz,102.78,talis,talis@gmail.com,2024-08-05 11:25:19.517000,1
+clzgwmtwl0007vyt14yauvkpu,trains trainways e taxis,outcome,transporte,102.0,talis,talis@gmail.com,2024-08-05 11:24:59.149000,1
+clzgwldsj0006vyt1z6iah91k,relogio,outcome,geovana,30.0,talis,talis@gmail.com,2024-08-05 11:23:51.629000,1
+clzgwklzf0005vyt1ai5j84wv,brinquedo do yachane,outcome,yachane,50.0,talis,talis@gmail.com,2024-08-05 11:23:15.541000,1
+clzgwk1hl0004vyt1v5492s19,poussette,outcome,ayla,430.0,talis,talis@gmail.com,2024-08-05 11:22:48.757000,1
+clzgwjerz0003vyt1aolyzi1x,iphone 13 geovana,outcome,geovana,4550.0,talis,talis@gmail.com,2024-08-05 11:22:19.573000,1
+clzgwi9700002vyt1fgo3htzv,sumo,outcome,extra,6.0,talis,talis@gmail.com,2024-08-05 11:21:25.358000,1
+clzgwhrre0001vyt16exn5rq0,pao,outcome,alimentacao,10.0,talis,talis@gmail.com,2024-08-05 11:21:03.094000,1
+clzgwh8xf0000vyt13c9r34pe,compras,outcome,alimentacao,850.0,talis,talis@gmail.com,2024-08-05 11:20:38.682000,1
+clzcwgrr90000lspq2dzpoa8y,agua,outcome,extra,4.0,talis,talis@gmail.com,2024-08-02 16:09:11.398000,1
+clzcvnkfc000fg0j2at4n48re,sumo,outcome,extra,10.0,talis,talis@gmail.com,2024-08-02 15:46:24.367000,1
+clzcvmc2s000eg0j273ob4wu1,pizza ,outcome,extra,89.0,talis,talis@gmail.com,2024-08-02 15:45:30.175000,1
+clzcvle8k000dg0j2hsw9gcql,Toalha,outcome,higiene,20.0,talis,talis@gmail.com,2024-08-02 15:44:46.339000,1
+clzcvkofc000cg0j2y93t1nez,ginguba e milho,outcome,extra,6.0,talis,talis@gmail.com,2024-08-02 15:44:12.491000,1
+clzcvk358000bg0j2tnvcgn9n,quadro geo,outcome,casa,368.0,talis,talis@gmail.com,2024-08-02 15:43:45.301000,1
+clzcvjhdi000ag0j2wqwnyihm,oleo de coco,outcome,estetica,40.0,talis,talis@gmail.com,2024-08-02 15:43:18.175000,1
+clzcviqso0009g0j2mejstjb4,acento Ayla,outcome,Ayla,45.0,talis,talis@gmail.com,2024-08-02 15:42:41.995000,1
+clzcvi0j90008g0j2c3cgxaum,PAO ,outcome,ALIMENTACAO,5.0,talis,talis@gmail.com,2024-08-02 15:42:08.239000,1
+clzcvh67z0007g0j2a3vqd9f8,Ovos,outcome,ALIMENTACAO,90.0,talis,talis@gmail.com,2024-08-02 15:41:29.336000,1
+clzcvgftn0006g0j2brb0xl7c,tacos+sumos,outcome,EXTRA,68.0,talis,talis@gmail.com,2024-08-02 15:40:56.215000,1
+clzcvfr0j0005g0j2yldjljhq,COMPRAS CARREFOUR,outcome,EXTRA,250.0,talis,talis@gmail.com,2024-08-02 15:40:24.139000,1
+clzcvf6jn0004g0j2ow2zsiqb,PETIT DEJ E BOLACHA,outcome,EXTRA,17.5,talis,talis@gmail.com,2024-08-02 15:39:56.055000,1
+clzcve4x80003g0j2s974c2mm,PETIT DEJ NO TRABALHO,outcome,EXTRA,15.0,talis,talis@gmail.com,2024-08-02 15:39:08.773000,1
+clzcvd4fi0002g0j2o7rf8ktk,fraldas ayla,outcome,ayla,200.0,talis,talis@gmail.com,2024-08-02 15:38:18.001000,1
+clzcvcpsw0001g0j24zj865a4,Compras CARREFOUR,outcome,alimentacao,675.0,talis,talis@gmail.com,2024-08-02 15:38:02.593000,1
+clzcvbfvx0000g0j2ap5tn7fa, PIZZA + SUMO,outcome,extra,95.0,talis,talis@gmail.com,2024-08-02 15:37:01.160000,1
+clzctthyo0000au1d9ukpgb9b,iogurte,outcome,extra,5.0,talis,talis@gmail.com,2024-08-02 14:55:03.461000,1
+clzbi2xj10000pxr89yiwyw4h,bolacha,outcome,extra,10.0,talis,talis@gmail.com,2024-08-01 16:38:17.623000,1
+d4f9265e-7f84-45b7-84a8-4fc220137fa1,salario geoavana,income,salario,8750.0,talisma,talisma@email.com,2024-07-29 09:40:38.343421,1
+clz5nditk0003mj96qi22m9tg,Anacelma devolveu,income,investimento,1000.0,talis,talis@gmail.com,2024-07-28 14:20:20.078000,1
+clz5n9dce0002mj96qa58cniu,saldo talisma,outcome,saldo,10.0,talis,talis@gmail.com,2024-07-28 14:17:05.519000,1
+clz5n8uwt0001mj96xqff71xg,compras,outcome,alimentacao,300.0,talis,talis@gmail.com,2024-07-28 14:16:42.518000,1
+clz5n6ywo0000mj961fn95v3a,porte-chaussures,outcome,geovana,345.0,talis,talis@gmail.com,2024-07-28 14:14:51.176000,1
+clz0awb3c0001vrszy9jce5z4,sumo e pastilha,outcome,extra,10.0,talis,talis@gmail.com,2024-07-24 20:32:10.422000,1
+clz0av9di0000vrsz2h20bnal,compras carrefour,outcome,alimentacao,227.0,talis,talis@gmail.com,2024-07-24 20:31:21.407000,1
+clyzqqi0i0002op1zb0dsgwrw,milho para pipoca,outcome,alimentacao,3.0,talis,talis@gmail.com,2024-07-24 11:07:46.785000,1
+clyzqpp320001op1zuzi242eq,compras carrefour,outcome,alimentacao,85.0,talis,talis@gmail.com,2024-07-24 11:07:09.474000,1
+clyzqot960000op1z5uq0rr3u,pao,outcome,alimentacao,6.0,talis,talis@gmail.com,2024-07-24 11:05:52.198000,1
+clyyfq2fw0001kmwwx329p85k,avance sur salaire geovana,income,salario,5000.0,talis,talis@gmail.com,2024-07-23 13:11:45.201000,1
+clyyfoqp20000kmwwxilfqz31,iogurte,outcome,extra,4.5,talis,talis@gmail.com,2024-07-23 13:09:31.588000,1
+clyycbzir0000mn8snpo1tpkm,demos emprestado 500 ao henry,outcome,emprestimo,540.0,talis,talis@gmail.com,2024-07-23 11:31:27.778000,1
+clyx8b0zf00003zarka9lcwu4,petit dej no trabalho,outcome,extra,24.5,talis,talis@gmail.com,2024-07-22 16:55:32.394000,1
+clyx37kgt0000a9vk1do2urnf,iogurte,outcome,extra,5.0,talis,talis@gmail.com,2024-07-22 14:33:01.638000,1
+clysl4z1100009yt91gj3uiek,bolachas,outcome,extra,10.0,talis,talis@gmail.com,2024-07-19 10:56:41.670000,1
+clyr9kqn80002a7kav3he9zuz,bolachas,outcome,extra,12.0,talis,talis@gmail.com,2024-07-18 12:45:13.815000,1
+clyr9j8dn0001a7kahouik142,iogurte,outcome,extra,5.0,talis,talis@gmail.com,2024-07-18 12:44:03.320000,1
+clyr9ikwr0000a7ka87g23j8r,saldo,outcome,saldo,10.0,talis,talis@gmail.com,2024-07-18 12:42:13.041000,1
+clyoao84n0000lxb0yumvvgqz,bolachas e iogurte,outcome,extra,9.0,talis,talis@gmail.com,2024-07-16 10:52:12.787000,1
+clynb8xci000219circrps7lh,bolachas,outcome,extra,4.0,talis,talis@gmail.com,2024-07-15 18:20:59.265000,1
+clynb8emw000119cic6kl9c1v,pao e croissant,outcome,alimentacao,30.0,talis,talis@gmail.com,2024-07-15 18:20:34.991000,1
+clynb5uh7000019ciz2dcib8j,compras carrefour,outcome,alimentacao,150.0,talis,talis@gmail.com,2024-07-15 18:17:35.338000,1
+clyioynwi0000wfgl761k8emb,JOHN,income,emprestimo,300.0,talis,talis@gmail.com,2024-07-12 12:44:49.281000,1
+clyio9woo0002kf5rzs5xhs2n,compra carefour,outcome,alimentacao,30.0,talis,talis@gmail.com,2024-07-12 12:26:42.524000,1
+clyio8yv00001kf5rfzzjxq6b,FRALDAS ,outcome,ayla,100.0,talis,talis@gmail.com,2024-07-12 12:26:03.572000,1
+clyio6vge0000kf5rqgzit15t,pedi emprestado 100 ao marcelo ,income,divida,100.0,talis,talis@gmail.com,2024-07-12 12:24:25.532000,1
+clyhlz4wv000011p9wjm6ojjj,CHIPS,outcome,extra,13.0,talis,talis@gmail.com,2024-07-11 18:30:43.698000,1
+clyhe5l4v000scbrsfwyh14xn,SALDO,outcome,SALDO,10.0,talis,talis@gmail.com,2024-07-11 14:55:45.262000,1
+clyhe55oz000rcbrs5t06mcqk,VINHO,outcome,BEBIDA,35.0,talis,talis@gmail.com,2024-07-11 14:55:25.143000,1
+clyhe3tr5000qcbrsfr9kfykf,CABO USB,outcome,TALISMA,15.0,talis,talis@gmail.com,2024-07-11 14:54:23.119000,1
+clyhe38ht000pcbrskmd65jai,gelados,outcome,EXTRA,17.0,talis,talis@gmail.com,2024-07-11 14:53:55.184000,1
+clyhe2jhm000ocbrsf45rvo5x,BRINQUEDO DO YACHANE ,outcome,EXTRA,20.0,talis,talis@gmail.com,2024-07-11 14:53:23.148000,1
+clyhe0esb000ncbrsiykclbc6,COPIA DO BAGDE DO ELEVADOR,outcome,CASA,10.0,talis,talis@gmail.com,2024-07-11 14:51:26.701000,1
+clyhdjzyy000mcbrsif1nisyr,BOLACHA E FRUTA,outcome,EXTRA,15.5,talis,talis@gmail.com,2024-07-11 14:38:57.059000,1
+clyhdizet000lcbrsz04poxce,IOGURTE,outcome,EXTRA,6.5,talis,talis@gmail.com,2024-07-11 14:38:09.672000,1
+clyhdimpc000kcbrsnq6u3cz5,INTERNET,outcome,SALDO,60.0,talis,talis@gmail.com,2024-07-11 14:37:53.237000,1
+clyhdhnsc000jcbrs927ho3z3,PAO,outcome,ALIMENTACAO,10.0,talis,talis@gmail.com,2024-07-11 14:37:06.616000,1
+clyhdaz9k000icbrssjb5vs7r,ALEX NOS DEU EMPRESTADO,outcome,EMPRESTIMO,500.0,talis,talis@gmail.com,2024-07-11 14:31:56.167000,1
+clyhd9cct000gcbrsdgdom0im,TAXI,outcome,TRANSPORTE,40.0,talis,talis@gmail.com,2024-07-11 14:30:39.626000,1
+clyhd8x1m000fcbrswxw0szh6,CADEIRAS,outcome,EXTRA,240.0,talis,talis@gmail.com,2024-07-11 14:30:20.059000,1
+clyhd80x3000ecbrs151hw97p,EDUARDO,outcome,ANGOLA,1000.0,talis,talis@gmail.com,2024-07-11 14:29:38.056000,1
+clyhd7ehr000dcbrseulis1yj,demos emprestado AO ALEX,outcome,EMPRESTIMO,500.0,talis,talis@gmail.com,2024-07-11 14:29:08.418000,1
+clyhd6is5000ccbrs6slwuqoz,DIVIDA PERSIDE ,outcome,DIVIDA,3200.0,talis,talis@gmail.com,2024-07-11 14:28:28.281000,1
+clyhd5wyi000bcbrsdths0vxq,DIVIDA ORANGE,outcome,INTERNET,1220.0,talis,talis@gmail.com,2024-07-11 14:27:59.995000,1
+clyhd4tpn000acbrsk0q2qbur,QUIEIJO FIAMBRE ,outcome,alimentacao,50.0,talis,talis@gmail.com,2024-07-11 14:27:09.073000,1
+clyhd42al0009cbrs1wd6e6vi,BEBIDAS,outcome,BEBIDAS,80.0,talis,talis@gmail.com,2024-07-11 14:26:33.636000,1
+clyhd3of10008cbrs1ix9zq9u,SALDO,outcome,SALDO,10.0,talis,talis@gmail.com,2024-07-11 14:26:15.618000,1
+clyhd3ase0007cbrsfocdh8gb,CHIPS E AGUA IOGURTE,outcome,EXTRA,18.5,talis,talis@gmail.com,2024-07-11 14:25:57.951000,1
+clyhd2iac0006cbrsn1nplpd4,FRUTAS MILHO E CHIPS,outcome,extra,34.0,talis,talis@gmail.com,2024-07-11 14:25:20.730000,1
+clyhd1nqu0005cbrsbkrb8ecx,SALDO INTERNET,outcome,SALDO,10.0,talis,talis@gmail.com,2024-07-11 14:24:41.309000,1
+clyhczade0004cbrssp98j3am,Mauricio,outcome,ANGOLA,500.0,talis,talis@gmail.com,2024-07-11 14:22:50.486000,1
+clyhcuwyq0002cbrsrxnsymr4,navette geovana,outcome,transporte ,900.0,talis,talis@gmail.com,2024-07-11 14:19:26.485000,1
+clyhcu0oz0001cbrs7yrcn3db,mayonese e atum,outcome,Alimentacao,60.0,talis,talis@gmail.com,2024-07-11 14:18:44.782000,1
+clyhcrrog0000cbrssjrj4yyz,simba,outcome,kixikila,1000.0,talis,talis@gmail.com,2024-07-11 14:16:23.398000,1
+clyftvdiu0000112nmy5685tv,petit dej no trabalho,outcome,extra,16.0,talis,talis@gmail.com,2024-07-10 12:40:09.039000,1
+clye40pvk0000to4q6b3ofvpk,maya,outcome,guarda das crianças,200.0,talis,talis@gmail.com,2024-07-09 07:48:43.064000,1
+clydfeybe0003kcy1znn7gzlb,pao,outcome,alimentacao,4.0,talis,talis@gmail.com,2024-07-08 20:19:56.579000,1
+clydfe9ge0002kcy18xkkv6h7,petit dej,outcome,extra,15.0,talis,talis@gmail.com,2024-07-08 20:19:24.459000,1
+clydfdrke0001kcy1swgminj1,goluseimas,outcome,extra,30.0,talis,talis@gmail.com,2024-07-08 20:19:01.191000,1
+clydfcq9m0000kcy1w2go6pjl,salario do TALISMA,income,salario,4650.0,talis,talis@gmail.com,2024-07-08 20:18:12.895000,1
+clybl3qww0005hw97x37wyi56,bolachas,outcome,extra,8.0,talis,talis@gmail.com,2024-07-07 13:23:39.618000,1
+clybl3dqq0004hw973vf2t0xg,fralda,outcome,ayla,64.0,talis,talis@gmail.com,2024-07-07 13:23:22.250000,1
+clybl2e1n0003hw97f1dyctdi,corte de cabelo,outcome,estetica,30.0,talis,talis@gmail.com,2024-07-07 13:22:36.042000,1
+clybl19i30002hw9789fkkbby,divida farmacia,outcome,saude,170.0,talis,talis@gmail.com,2024-07-07 13:21:43.756000,1
+clybl0p7x0001hw970x3e9den,internet  4g,outcome,internet,250.0,talis,talis@gmail.com,2024-07-07 13:21:17.388000,1
+clybkzht00000hw97rtprzxdw,pao e trigo,outcome,alimentacao,25.0,talis,talis@gmail.com,2024-07-07 13:20:20.938000,1
+cly3dczbu0003fe7oof0moxnt,salario geovana,income,salario,10000.0,talis,talis@gmail.com,2024-07-01 19:24:44.252000,1
+cly3d8ydo0002fe7odaoezvmk,lapiseira,outcome,educaçao,1.5,talis,talis@gmail.com,2024-07-01 19:21:36.061000,1
+cly3d86q10001fe7on4eflho3,croissant,outcome,extra,6.0,talis,talis@gmail.com,2024-07-01 19:21:00.550000,1
+cly3d7dd70000fe7o76x58e5a,net maroc telecom,outcome,saldo,10.0,talis,talis@gmail.com,2024-07-01 19:20:22.370000,1
+cly24o9690003u2nqdhlkjqao,peticos ,outcome,extra,90.0,talis,talis@gmail.com,2024-06-30 22:33:46.680000,1
+cly24nqiu0002u2nq8wmlr8n2,cremes anacelma,outcome,extra,132.0,talis,talis@gmail.com,2024-06-30 22:33:23.063000,1
+cly24n6xy0001u2nqlvuhk9r4,saida da geo pra rabat ,outcome,extra,100.0,talis,talis@gmail.com,2024-06-30 22:32:57.017000,1
+cly24lyd50000u2nqixxm7pm5,compras geovana,outcome,extra,250.0,talis,talis@gmail.com,2024-06-30 22:30:55.573000,1
+cly1zd58v0000ymux1ckaybd7,compras no mercado,outcome,alimentacao,900.0,talis,talis@gmail.com,2024-06-30 20:05:10.795000,1
+clxsytwr200015tsbdd7kvle4,petit dej no trabalho,outcome,extra,16.5,talis,talis@gmail.com,2024-06-24 12:40:17.739000,1
+clxsyotgl00005tsbj0c294x2,javier,outcome,divida,30.0,talis,talis@gmail.com,2024-06-24 12:36:06.285000,1
+clxsusmou0005jm8vux08okml,avan'e7o de inscricao,outcome,escola,1900.0,talis,talis@gmail.com,2024-06-24 10:47:19.820000,1
+clxsuraiu0004jm8vryffk2tx,fotos para escola,outcome,escola,100.0,talis,talis@gmail.com,2024-06-24 10:46:17.452000,1
+clxsuqldu0003jm8vjfv5e3ay,geovana,outcome,geovana,20.0,talis,talis@gmail.com,2024-06-24 10:45:44.684000,1
+clxsuq9qm0002jm8vv9ov6so2,vinhos,outcome,extra,104.0,talis,talis@gmail.com,2024-06-24 10:45:29.605000,1
+clxsupmyx0001jm8v89usdoox,taxi,outcome,transporte,40.0,talis,talis@gmail.com,2024-06-24 10:45:00.268000,1
+clxsup8m70000jm8vvuawgx06,pao,outcome,alimentacao,7.0,talis,talis@gmail.com,2024-06-24 10:44:41.016000,1
+clxqg448s000188o8h2o1zbyk,compras fim de semana,outcome,extra,300.0,talis,talis@gmail.com,2024-06-22 18:20:12.001000,1
+clxqg3f8m000088o8aglyvs5y,VINHO,outcome,extra,105.0,talis,talis@gmail.com,2024-06-22 18:19:12.478000,1
+clxoknig00001jpnogcsz0qat,bolachas,outcome,extra,6.0,talis,talis@gmail.com,2024-06-21 10:52:19.773000,1
+clxokkk9v0000jpno4301n27r,atum,outcome,alimentacao,16.0,talis,talis@gmail.com,2024-06-21 10:48:33.015000,1
+clxndyg8b00012x1in1lj9wxe,bolachas,outcome,extra,8.5,talis,talis@gmail.com,2024-06-20 14:57:06.352000,1
+clxndxlqa00002x1iquephy7q,iogurte,outcome,extra,6.0,talis,talis@gmail.com,2024-06-20 14:56:26.652000,1
+clxn6dwzs00011hhkhazehm6f,pasta de dente,outcome,higiene,10.0,talis,talis@gmail.com,2024-06-20 11:25:10.970000,1
+clxn6d3zo00001hhkhkld6ihl,leite,outcome,alimentacao,21.0,talis,talis@gmail.com,2024-06-20 11:24:33.317000,1
+clxlsqu780001xl7x60mb9iz6,pao,outcome,alimentacao,11.0,talis,talis@gmail.com,2024-06-19 12:15:33.750000,1
+clxlsq1s40000xl7xr7dxi3ex,petit dej no trabalho,outcome,extra,6.0,talis,talis@gmail.com,2024-06-19 12:14:56.945000,1
+clxkkgh2b0000qftqgqcaddeh,internet,outcome,saldo,10.0,talis,talis@gmail.com,2024-06-18 15:35:46.748000,1
+clxjiqt1y0002u6x0ypmfvzy6,internet,outcome,SALDO,25.0,talis,talis@gmail.com,2024-06-17 21:59:34.689000,1
+clxjiq75p0001u6x0hcjoz78i,GEOVANA,outcome,EXTRA,12.0,talis,talis@gmail.com,2024-06-17 21:59:07.361000,1
+clxjipqi50000u6x0sr0notti,TAXI,outcome,TRANPORTE,32.0,talis,talis@gmail.com,2024-06-17 21:58:45.432000,1
+clxglx7gj00032qvxu93zqamg,sumos para as crian'e7as,outcome,extra,4.0,talis,talis@gmail.com,2024-06-15 21:05:18.768000,1
+clxglw2wi00022qvx3chw9u9h,taxi,outcome,transporte,10.0,talis,talis@gmail.com,2024-06-15 21:04:26.330000,1
+clxglvba500012qvxeqzip2n6,pao,outcome,alimentacao,10.0,talis,talis@gmail.com,2024-06-15 21:03:50.472000,1
+clxglstop00002qvxilop04hj,compras fim de semana,outcome,extra,80.0,talis,talis@gmail.com,2024-06-15 21:01:50.039000,1
+clxey2g0t0000o7dp7yfrh2or,CHIPS,outcome,extra,10.5,talis,talis@gmail.com,2024-06-14 17:09:10.460000,1
+clxekqbwe0000ib4bz5bc2dcf,frutas e bolachas,outcome,extra,10.0,talis,talis@gmail.com,2024-06-14 10:56:49.660000,1
+clxd5oxpj00015yca9yxtn2tg,saldo inuwi para net,outcome,saldo,50.0,talis,talis@gmail.com,2024-06-13 11:08:03.606000,1
+clxd5lnv700005ycavq20h7ru,compras carrefour,outcome,alimentacao,300.0,talis,talis@gmail.com,2024-06-13 11:05:04.168000,1
+clxbqgkxc0001taj0u8mlg188,geovana,outcome,geovana,65.0,talis,talis@gmail.com,2024-06-12 11:13:53.915000,1
+clxbqfk770000taj0rnuu97ja,geovana,outcome,estetica,85.0,talis,talis@gmail.com,2024-06-12 11:07:57.797000,1
+clxacjr6g00004l4jswy86sxc,compras,outcome,alimentacao,400.0,talis,talis@gmail.com,2024-06-11 11:56:39.403000,1
+clx9c4qhj0000xjmrfp61ktsf,Petit dej au travail,outcome,extra,10.0,talis,talis@gmail.com,2024-06-10 18:56:35.930000,1
+clx925pow0001odz5juw6siad,saldo de dados,outcome,saldo,10.0,talis,talis@gmail.com,2024-06-10 14:18:02.806000,1
+clx91pw800000odz5925m2tkr,alex emprestou 1000,outcome,emprestimo,1000.0,talis,talis@gmail.com,2024-06-10 14:05:45.694000,1
+clx7x4ufy00008gm619n6p77y,compras,outcome,alimenta'e7ao,143.0,talis,talis@gmail.com,2024-06-09 19:09:29.844000,1
+clx6ymjmv00014106znc3b1jl,gastos extras da mudan'e7a,outcome,extra,1000.0,talis,talis@gmail.com,2024-06-09 03:03:38.224000,1
+clx6yl6nz0000410667j2vj1o,transporte para mudan'e7a,outcome,transporte,850.0,talis,talis@gmail.com,2024-06-09 03:02:34.869000,1
+clx4smni50001oymc8pg9f0g2,caussion e frais d'agence,outcome,loyer,10200.0,talis,talis@gmail.com,2024-06-07 14:40:13.471000,1
+clx4sipbg0000oymcbqdad9ri,petit dej no trabalho,outcome,extra,14.0,talis,talis@gmail.com,2024-06-07 14:36:45.509000,1
+clx4dvgcw0002hyb35v48oudq,compras ,outcome,alimentacao,12.0,talis,talis@gmail.com,2024-06-07 07:47:09.188000,1
+clx4duoub0001hyb36d8vns9m,train,outcome,transporte,54.0,talis,talis@gmail.com,2024-06-07 07:46:33.564000,1
+clx4dtk3a0000hyb3fd42r28l,couscous,outcome,creche,40.0,talis,talis@gmail.com,2024-06-07 07:45:40.702000,1
+clx409gao0003jom7k3xn4ymp,devolvemos dinherio do simba,outcome,emprestimo,5500.0,talis,talis@gmail.com,2024-06-07 01:26:08.507000,1
+clx408al30002jom7givfdkas,taxi,outcome,transporte,13.0,talis,talis@gmail.com,2024-06-07 01:25:14.479000,1
+clx407vs20001jom7gj9jvj9b,Xavier pagou a divida,income,emprestimo,500.0,talis,talis@gmail.com,2024-06-07 01:24:55.244000,1
+clx406w0d0000jom70wcrhxut,salario Talisma,income,salario,5600.0,talis,talis@gmail.com,2024-06-07 01:24:08.819000,1
+clx3gmco60000vskjmbdbdk23,bolachas,outcome,extra,14.0,talis,talis@gmail.com,2024-06-06 16:14:34.386000,1
+clx36eqgk0005potsehwckk92,geovana,outcome,geovana,180.0,talis,talis@gmail.com,2024-06-06 11:30:25.416000,1
+clx36e0za0004pots678xpsfc,agua,outcome,extra,5.0,talis,talis@gmail.com,2024-06-06 11:29:52.213000,1
+clx36dlbh0003potsrdjex9ot,saldo ,outcome,saldo,10.0,talis,talis@gmail.com,2024-06-06 11:29:31.942000,1
+clx36d7ur0002potsvs6xek26,train,outcome,transporte,36.0,talis,talis@gmail.com,2024-06-06 11:29:14.790000,1
+clx36cs9v0001pots7t0ru40u,simo mais bolachas,outcome,extra,25.0,talis,talis@gmail.com,2024-06-06 11:28:53.975000,1
+clx35tyht0000potswn2yw4we,taxi,outcome,transporte,13.0,talis,talis@gmail.com,2024-06-06 11:14:16.173000,1
+clx1shqe90000cyybbxry424w,contrato de agua e luz la rak,outcome,agua e luz,800.0,talis,talis@gmail.com,2024-06-05 12:12:35.568000,1
+clx1pj93d0002l10tizmjukk2,a'e7ucar para caf'e9,outcome,extra,6.0,talis,talis@gmail.com,2024-06-05 10:50:16.309000,1
+clx1p8ckm0001l10t5e5zlbjm,bolachas,outcome,extra,12.0,talis,talis@gmail.com,2024-06-05 10:41:48.190000,1
+clx1p7ul70000l10trel4fimp,train,outcome,transporte,52.0,talis,talis@gmail.com,2024-06-05 10:41:24.867000,1
+clx0m3xja0000157ukpctnobg,saldo ,outcome,saldo,5.0,talis,talis@gmail.com,2024-06-04 16:25:51.052000,1
+clx0fqdvw0000zc23kni66eq0,caf'e9,outcome,extra,35.0,talis,talis@gmail.com,2024-06-04 13:28:07.743000,1
+clx0bipr40000ivswyvoummk2,train,outcome,transporte,36.0,talis,talis@gmail.com,2024-06-04 11:28:39.265000,1
+clx0afvnp0002x84znx11gat4,trainway ,outcome,transporte,6.0,talis,talis@gmail.com,2024-06-04 10:59:59.544000,1
+clx0aeno60001x84zp517ier5,taxi para embaixada,outcome,transporte,38.0,talis,talis@gmail.com,2024-06-04 10:59:02.425000,1
+clx0aee5j0000x84zp7ev8ch7,AMCI,income,bolsa AMCI,1250.0,talis,talis@gmail.com,2024-06-04 10:58:49.814000,1
+clwzl7t1y0000pb0ist2snm96,iogurte,outcome,extra,10.0,talis,talis@gmail.com,2024-06-03 23:12:32.590000,1
+clwzici840001oamwruywtped,pao,outcome,alimentacao,4.5,talis,talis@gmail.com,2024-06-03 21:53:33.312000,1
+clwzic0hj0000oamwdk4ybezi,pacote de fralda,outcome,ayla,95.0,talis,talis@gmail.com,2024-06-03 21:53:10.075000,1
+clwz7tfg3000010uvmkdnj2hn,+200 pelo rapport de estat'edstica,income,bisness,200.0,talis,talis@gmail.com,2024-06-03 16:58:46.658000,1
+clwz2k41a0001uq4kj74a1vum,compras,outcome,alimentacao,105.0,talis,talis@gmail.com,2024-06-03 14:31:33.353000,1
+clwz2hzfa0000uq4kdphuq8jq,caf'e9,outcome,extra,2.0,talis,talis@gmail.com,2024-06-03 14:29:02.198000,1
+clwyzu6c500022d8hn1j94kyd,train,outcome,transporte,36.0,talis,talis@gmail.com,2024-06-03 13:15:24.755000,1
+clwyztmq000012d8h4wvhxda6,compras ,outcome,alimentacao,75.0,talis,talis@gmail.com,2024-06-03 13:14:58.653000,1
+clwyzswm900002d8hgztkv6xp,transporte geovana ,outcome,transporte,1000.0,talis,talis@gmail.com,2024-06-03 13:14:25.341000,1
+clwwbh8iu0000d0novbc4c0f1,gelados,outcome,extra,15.0,talis,talis@gmail.com,2024-06-01 16:17:57.891000,1
+clwvzn9yp0000u1c8prmt6402,biscoitos  ,outcome,extra,7.5,talis,talis@gmail.com,2024-06-01 10:46:34.750000,1
+clwvsmwli00015hwzpgul0j8s,croissants,outcome,extra,10.0,talis,talis@gmail.com,2024-06-01 07:30:27.834000,1
+clwvskfkl00005hwzbht8bgfz,frusta,outcome,extra,20.0,talis,talis@gmail.com,2024-06-01 07:27:43.240000,1
+clwusoolu00027u3a4o4incwc,alugel,outcome,loyer,2000.0,talis,talis@gmail.com,2024-05-31 14:44:06.179000,1
+clwusnd9s00017u3am7zdydeh,train,outcome,transporte,36.0,talis,talis@gmail.com,2024-05-31 14:43:04.820000,1
+clwuslwd500007u3a1c1a3otx,petit dej no trabalho,outcome,extra,12.0,talis,talis@gmail.com,2024-05-31 14:41:22.014000,1
+clwufcfur0000ft3srsa124d4,compras,outcome,alimentacao,64.0,talis,talis@gmail.com,2024-05-31 08:30:15.453000,1
+clwtfa8g0000013gf7av5jbox,train,outcome,transporte,36.0,talis,talis@gmail.com,2024-05-30 15:40:11.818000,1
+clwsbe9ql0000f1qazptrgvcp,TAXI,outcome,TAXI,25.0,talis,talis@gmail.com,2024-05-29 21:03:32.682000,1
+clws0icz90000113q9q53dmka,petit dej no trabalho,outcome,extra,10.0,talis,talis@gmail.com,2024-05-29 15:59:13.385000,1
+clwrxu4gk0000jvzgaqqmv6vx,TRAIN,outcome,TRANPORTE,32.0,talis,talis@gmail.com,2024-05-29 14:44:07.762000,1
+clwrw9s3n0000s0kxncdfrtch,REDAL,outcome,agua e luz,135.15,talis,talis@gmail.com,2024-05-29 14:00:45.362000,1
+clwrw9s3r0001s0kxfp2mw8c4,TAXI,outcome,TRANPORTE,18.0,talis,talis@gmail.com,2024-05-29 14:00:29.461000,1
+clwrp303s00027w62ysc10b5g,iogurte e agua,outcome,extra,12.0,talis,talis@gmail.com,2024-05-29 10:39:57.356000,1
+clwrp09p000017w6238a35xg6,train,outcome,transporte,36.0,talis,talis@gmail.com,2024-05-29 10:37:49.725000,1
+clwroztqx00007w621hjp08qj,taxi,outcome,transporte,8.0,talis,talis@gmail.com,2024-05-29 10:35:23.528000,1
+clwqxjpj600006dusx00habwa,taxi,outcome,transporte,13.0,talis,talis@gmail.com,2024-05-28 21:48:15.900000,1
+clwqluxie0000ye2546asz91h,gateaux,outcome,extra,19.5,talis,talis@gmail.com,2024-05-28 16:21:55.882000,1
+clwqjixrc0004uhhaqp0d6vuq,esmola e iogurte,outcome,extra,10.0,talis,talis@gmail.com,2024-05-28 15:16:37.221000,1
+clwqji0y10003uhhamv8muozq,trainway train e taxi,outcome,transporte,78.0,talis,talis@gmail.com,2024-05-28 15:15:54.685000,1
+clwqjekzc0002uhhacog3pthb,pagamento da nova casa,outcome,casa,5100.0,talis,talis@gmail.com,2024-05-28 15:13:14.003000,1
+clwqjbxhy0001uhhakchroyhw,John emprestou,income,emprestimo,1000.0,talis,talis@gmail.com,2024-05-28 15:11:10.291000,1
+clwqja5jo0000uhhaes7mr5qe,simba emprestou,outcome,emprestimo,1500.0,talis,talis@gmail.com,2024-05-28 15:09:47.259000,1
+clwp9nar1000011mjnp3psoef,visita de appt ,outcome,extra,50.0,talis,talis@gmail.com,2024-05-27 17:52:18.246000,1
+clwov70nh0004do82bq8ne4pv,bolachas para as crian'e7as ,outcome,alimentacao ,5.0,talis,talis@gmail.com,2024-05-27 11:07:43.697000,1
+clwov63e90003do82yfbu751u,Croissants,outcome,extra,8.0,talis,talis@gmail.com,2024-05-27 11:07:00.927000,1
+clwov5lhr0002do82keumegyy,meias brancas,outcome,extra,10.0,talis,talis@gmail.com,2024-05-27 11:06:37.475000,1
+clwov55yp0001do82zhg2fo1h,train,outcome,transporte,36.0,talis,talis@gmail.com,2024-05-27 11:06:17.579000,1
+clwov4jtb0000do820em4dt5r,taxi aller-retour rabat,outcome,transporte,58.0,talis,talis@gmail.com,2024-05-27 11:05:46.920000,1
+clwnzyzl1000b749n3g9y1me8,geovana deu 20 a amiga,outcome,extra,20.0,talis,talis@gmail.com,2024-05-26 20:33:41.441000,1
+clwnzydni000a749nt4r3kn9l,agua,outcome,extra,6.0,talis,talis@gmail.com,2024-05-26 20:33:12.721000,1
+clwnzwylj0009749npg93ciul,taxi,outcome,transporte,10.0,talis,talis@gmail.com,2024-05-26 20:32:06.742000,1
+clwnzvzfn0008749nzsuv1385,emprestimo da geovana a casa,outcome,roupas,300.0,talis,talis@gmail.com,2024-05-26 20:31:21.237000,1
+clwnzvkj20007749n3ci5pcs4,emprestimo da talisma a casa,outcome,roupas,420.0,talis,talis@gmail.com,2024-05-26 20:31:01.769000,1
+clwnzrm6x0006749nkql8o160,consulta dos olhos talisma,outcome,saude,250.0,talis,talis@gmail.com,2024-05-26 20:27:57.355000,1
+clwnzr5oe0005749nwaa31exg,bolachas iogurtes,outcome,extra,21.0,talis,talis@gmail.com,2024-05-26 20:27:35.953000,1
+clwnzqnn10004749ncwii0rh1,saldo,outcome,saldo,10.0,talis,talis@gmail.com,2024-05-26 20:27:12.618000,1
+clwnzq71f0003749njbn8529k,bus,outcome,transporte,9.0,talis,talis@gmail.com,2024-05-26 20:26:51.101000,1
+clwnzpshw0002749n8m7vaoz5,train ,outcome,transporte,36.0,talis,talis@gmail.com,2024-05-26 20:26:32.232000,1
+clwnzoofa0001749nvsnl7gym,carrefour,outcome,alimentacao,279.22,talis,talis@gmail.com,2024-05-26 20:25:40.313000,1
+clwnznxmm0000749nbi88a65s,emprestimo da geovana a casa,outcome,emprestimo,350.0,talis,talis@gmail.com,2024-05-26 20:25:05.531000,1
+clwnvniex000014if12dgu682,comer fora ,outcome,extra,154.0,talis,talis@gmail.com,2024-05-26 18:32:15.535000,1
+ec88a826-3a0d-4609-ba2b-59eb73bc82b4,salario da geovana,income,salario,12336.0,talisma,talisma@email.com,2024-05-26 09:40:38.343421,1
+clwl7xfqn0001mruyeoeu4qol,compras ,outcome,alimentacao,256.0,talis,talis@gmail.com,2024-05-24 21:53:06.344000,1
+clwl7v7ds0000mruyfswxugb4,train,outcome,transporte,18.0,talis,talis@gmail.com,2024-05-24 21:51:22.419000,1
+clwkzgc7y0000tpdjm0cs4a4a,bebidas,outcome,bebidas,91.0,talis,talis@gmail.com,2024-05-24 17:55:16.625000,1
+clwkwo4v50000dw4rvcecho83,ginguba,outcome,extra,6.0,talis,talis@gmail.com,2024-05-24 16:37:57.255000,1
+clwjti9ak0001296037302pt6,sardinha para gata,outcome,pets,6.0,talis,talis@gmail.com,2024-05-23 22:21:38.409000,1
+clwjtgxav00002960n1frr028,Fast food,outcome,extra,119.0,talis,talis@gmail.com,2024-05-23 22:20:35.444000,1
+clwjfta1u0001ltkedlvqd7d6,iogurte e suma para as crianças ,outcome,alimentacao,4.5,talis,talis@gmail.com,2024-05-23 15:58:17.516000,1
+clwjfs8zx0000ltkebwkihhoj,iogurte,outcome,extra,10.0,talis,talis@gmail.com,2024-05-23 15:56:50.021000,1
+clwibwu7x0004b2t3wfnybxfi,CHIP E GINGUBA,outcome,EXTRA,9.5,talis,talis@gmail.com,2024-05-22 21:21:02.766000,1
+clwibvcae0003b2t3z07b7rlg,PAO,outcome,ALIMENTACAO,6.0,talis,talis@gmail.com,2024-05-22 21:19:52.940000,1
+clwibuyck0002b2t37fvow59g,TRAIN,outcome,TRANPORTE,36.0,talis,talis@gmail.com,2024-05-22 21:19:34.874000,1
+clwibuk1k0001b2t3d8qviu12,BOLACHAS E IOGURTE,outcome,EXTRA,10.0,talis,talis@gmail.com,2024-05-22 21:19:16.292000,1
+clwibtqah0000b2t3h7o1wpp1,babeiro,outcome,ESTETICA,20.0,talis,talis@gmail.com,2024-05-22 21:17:57.198000,1
+clwhxo3c400011fecfx58h9c8,café,outcome,extra,35.0,talis,talis@gmail.com,2024-05-22 14:42:36.701000,1
+clwhxniz300001fecesecbe3t,internet,outcome,internet,249.0,talis,talis@gmail.com,2024-05-22 14:42:10.249000,1
+clwhpymvc00005ep853phvf4n,train,outcome,transporte,32.0,talis,talis@gmail.com,2024-05-22 11:06:01.169000,1
+clwgy1eor000113klzkegjvux,pao,outcome,alimentacao,6.0,talis,talis@gmail.com,2024-05-21 22:05:11.848000,1
+clwgy106h000013klvvku0v88,iogurte e chocolate,outcome,extra,15.0,talis,talis@gmail.com,2024-05-21 22:04:52.867000,1
+clwgs209n000014binphlr7ia,echange com mauricio ,outcome,angola,500.0,talis,talis@gmail.com,2024-05-21 19:17:41.485000,1
+clwgjhy6q000112ctct9vcbiw,trabalho de estatstica,income,negocio,700.0,talis,talis@gmail.com,2024-05-21 15:18:08.722000,1
+clwgjfnuq000012ctqtcc0uku,petit dej no trabalho,outcome,extra,21.0,talis,talis@gmail.com,2024-05-21 15:15:45.029000,1
+clwg69pou0000pmlfdjphtjuj,alfaiate,outcome,calçados,20.0,talis,talis@gmail.com,2024-05-21 09:06:58.291000,1
+clwg58ceb000010cet9za6qcq,train,outcome,transporte,36.0,talis,talis@gmail.com,2024-05-21 08:38:19.256000,1
+clwfci4fi0002sxbm9k41rxz4,agua,outcome,extra,3.5,talis,talis@gmail.com,2024-05-20 19:14:33.695000,1
+clwfchiqh0001sxbm9la158yj,train,outcome,transporte,36.0,talis,talis@gmail.com,2024-05-20 19:14:05.729000,1
+clwfchbo00000sxbmg0kr4av1,petit dej no trabalho,outcome,extra,10.0,talis,talis@gmail.com,2024-05-20 19:13:56.491000,1
+clwdpy4gj000012jmzqr5rsed,chocolat,outcome,extra,23.0,talis,talis@gmail.com,2024-05-19 15:55:23.009000,1
+clwc4kddc0000su3ksjaaltru,compras,outcome,casa,132.0,talis,talis@gmail.com,2024-05-18 13:09:04.054000,1
+clwb2i7v00000mju248xwa12c,vinhos,outcome,bebida,79.45,talis,talis@gmail.com,2024-05-17 19:20:25.245000,1
+clwajx5fy000110dz51hkfykj,taxi,outcome,transporte,10.0,talis,talis@gmail.com,2024-05-17 10:43:21.357000,1
+clwajwies000010dzz91iat73,açurcar para beber café ,outcome,extra,6.0,talis,talis@gmail.com,2024-05-17 10:42:34.377000,1
+clw9qiyex0001rpb4cerhrbp8,taxi,outcome,transporte,9.0,talis,talis@gmail.com,2024-05-16 21:00:29.657000,1
+clw9qilub0000rpb4r9dyyk66,taxi,outcome,transporte,16.0,talis,talis@gmail.com,2024-05-16 21:00:12.562000,1
+clw9nxo260000110nxbbb4tm9,bolacha,outcome,extra,9.5,talis,talis@gmail.com,2024-05-16 19:47:11.313000,1
+clw941eht0001bte85jfn6wd3,dinheiro pra fazer o bolso,outcome,geovana,100.0,talis,talis@gmail.com,2024-05-16 10:30:58.305000,1
+clw93z7vi0000bte82xy2c2xf,consulta genoco geovana ,outcome,saude,500.0,talis,talis@gmail.com,2024-05-16 10:29:16.751000,1
+clw8ywc7q0001ka1459e4ehpq,train,outcome,transporte,36.0,talis,talis@gmail.com,2024-05-16 08:07:05.587000,1
+clw8yvwi10000ka14novnwvlh,chips e bolacha,outcome,extra,5.5,talis,talis@gmail.com,2024-05-16 08:06:45.098000,1
+clw7yp7o80000rhkn668oo9t9,bolacha,outcome,extra,5.0,talis,talis@gmail.com,2024-05-15 15:13:46.188000,1
+clw6vulrx0004y9gt7lhfhpbn,train,outcome,transporte,36.0,talis,talis@gmail.com,2024-05-14 21:06:10.489000,1
+clw6vubnb0003y9gt5auoz9tg,iogurte,outcome,extra,4.0,talis,talis@gmail.com,2024-05-14 21:05:57.355000,1
+clw6vtylj0002y9gt6kgkrk1p,pao,outcome,alimentacao,6.0,talis,talis@gmail.com,2024-05-14 21:05:40.445000,1
+clw6vtj260001y9gt2c71jbyy,forfait  geovana,outcome,geovana,69.0,talis,talis@gmail.com,2024-05-14 21:05:20.262000,1
+clw6vsj7d0000y9gtfy0ax993,frusta,outcome,alimentacao,14.0,talis,talis@gmail.com,2024-05-14 21:03:59.198000,1
+clw6prwnt0001j0pbm4ka8fwm,train,outcome,transporte,36.0,talis,talis@gmail.com,2024-05-14 18:16:08.633000,1
+clw6pphpz0000j0pbp7n86aip,taxi,outcome,transporte,9.0,talis,talis@gmail.com,2024-05-14 18:14:07.755000,1
+clw5i1tol000211n014qjfpx3,chips e iogurte,outcome,extra,8.0,talis,talis@gmail.com,2024-05-13 21:52:08.592000,1
+clw5hiygw000111n0ouf7tbeo,pao,outcome,alimentaçao,6.0,talis,talis@gmail.com,2024-05-13 21:37:29.158000,1
+clw5hhi9l000011n05v0n5afl,jinguba,outcome,extra,6.0,talis,talis@gmail.com,2024-05-13 21:35:52.821000,1
+clw4tmgs30001xbgpw3p894mp,taxi,outcome,transporte,10.0,talis,talis@gmail.com,2024-05-13 10:28:19.068000,1
+clw4tjl3h0000xbgpix8x7qof,train,outcome,transporte,36.0,talis,talis@gmail.com,2024-05-13 10:25:34.980000,1
+clw4057m20000epwa6umgjful,sumo e bolacha,outcome,extra,33.0,talis,talis@gmail.com,2024-05-12 20:42:56.730000,1
+clw3pjuha0000kttynbfs5rzs,roupas dos yachane,outcome,yachane,100.0,talis,talis@gmail.com,2024-05-12 15:46:05.445000,1
+clw3ftnmq0000o4lff53y7lne,pao,outcome,alimentacao,6.0,talis,talis@gmail.com,2024-05-12 11:13:46.907000,1
+clw2omu1a00002pjiz8mho6h9,sumo chips e ginguba ,outcome,extra,27.0,talis,talis@gmail.com,2024-05-11 22:33:08.073000,1
+clw1wp78h0006dpqkc29ub4by,feijao eduardo,outcome,emprestimo,20.0,talis,talis@gmail.com,2024-05-11 09:31:09.834000,1
+clw1wopgo0005dpqkxxvcv3g4,taxi,outcome,transporte,5.0,talis,talis@gmail.com,2024-05-11 09:30:47.003000,1
+clw1wod4g0004dpqkj99kl4eq,chocolate ,outcome,extra,5.0,talis,talis@gmail.com,2024-05-11 09:30:30.841000,1
+clw1wngb10003dpqk1r25ixk0,train,outcome,transporte,135.0,talis,talis@gmail.com,2024-05-11 09:29:47.730000,1
+clw1wekid0002dpqk0ke7uc88,pizza,outcome,extra,77.0,talis,talis@gmail.com,2024-05-11 09:22:53.816000,1
+clw1watd80001dpqkj010eqle,coucous na escola ,outcome,yachane,20.0,talis,talis@gmail.com,2024-05-11 09:19:58.385000,1
+clw1w009p0000dpqkw9ip58q8,taxi,outcome,transporte,13.0,talis,talis@gmail.com,2024-05-11 09:10:54.659000,1
+clw0xsfnh00014iqwtc5x1xog,agua e iogurte,outcome,extra,6.7,talis,talis@gmail.com,2024-05-10 17:13:54.235000,1
+clw0xrey200004iqw3ougk27w,vinhos,outcome,bebida,78.4,talis,talis@gmail.com,2024-05-10 17:13:04.022000,1
+clvzq1ypi0001z2s06w41x7lz,banana,outcome,extra,7.5,talis,talis@gmail.com,2024-05-09 20:49:35.821000,1
+clvzq0ncm0000z2s0zz6ckb3h,taxi,outcome,transporte,13.0,talis,talis@gmail.com,2024-05-09 20:48:30.174000,1
+clvybr33r0003i46t2zv3ax3c,FEIJAO MACUNDE E ATUM,outcome,ALIMENTACAO,30.0,talis,talis@gmail.com,2024-05-08 21:21:26.040000,1
+clvybqhra0002i46tr9xqq0pq,TRAIN,outcome,TRANPORTE,277.0,talis,talis@gmail.com,2024-05-08 21:20:58.514000,1
+clvyblgsz0001i46tqo69gft3,salario talisma,income,salario,4700.0,talis,talis@gmail.com,2024-05-08 21:17:04.244000,1
+clvyb9t4v0000i46todj4v02q,agua e pastilha,outcome,extra,4.0,talis,talis@gmail.com,2024-05-08 21:07:10.817000,1
+clvwysgtg0000hr19hqm3j86e,sapateiro,outcome,calçados,30.0,talis,talis@gmail.com,2024-05-07 22:30:50.455000,1
+clvwvc2l20002eh0wp0m6h0r0,TRAIN,outcome,TRANPORTE,295.0,talis,talis@gmail.com,2024-05-07 20:54:06.539000,1
+clvwv9ioj0001eh0wztkqbj7u,TAXI,outcome,TRANPORTE,20.0,talis,talis@gmail.com,2024-05-07 20:51:53.627000,1
+clvwv9io60000eh0wx5jcp7k7,taxi,outcome,transporte,13.0,talis,talis@gmail.com,2024-05-07 20:51:49.308000,1
+clvw3xsve0000f51wq89x770o,pas,outcome,alimentacao,4.0,talis,talis@gmail.com,2024-05-07 08:06:49.971000,1
+clvvceq0z0000weelcp2ksdsd,dei 5 ao mauricio,outcome,ajuda,5.0,talis,talis@gmail.com,2024-05-06 19:15:06.125000,1
+clvv6tyk80000112qmpr5ug34,croissant,outcome,extra,10.0,talis,talis@gmail.com,2024-05-06 16:40:24.205000,1
+clvuveao40001v2kk6582bst7,train,outcome,transporte,18.0,talis,talis@gmail.com,2024-05-06 11:20:18.084000,1
+clvuvdhze0000v2kkekyh0cib,train Geovana,outcome,transporte,270.0,talis,talis@gmail.com,2024-05-06 11:19:41.177000,1
+clvtx8h7a0000u5yw5kfnmgpm,saida pro zoo,outcome,convivio,374.0,talis,talis@gmail.com,2024-05-05 19:22:58.103000,1
+clvtcmihr0001cdunjzyrja0x,sumo e copos plastico,outcome,extra,26.0,talis,talis@gmail.com,2024-05-05 09:47:03.251000,1
+clvtcg5ow0000cduna3mh7h9m,legumes,outcome,alimentacao,100.0,talis,talis@gmail.com,2024-05-05 09:41:54.727000,1
+clvsjdmih000611dihm57dxpg,Pizza,outcome,extra,77.0,talis,talis@gmail.com,2024-05-04 20:08:19.441000,1
+clvsjd0m4000511di09pvnrqk,taxi,outcome,transporte ,76.0,talis,talis@gmail.com,2024-05-04 20:07:50.741000,1
+clvsj82n9000411diwfman79e,preside devolveu os 300,income,emprestimo,300.0,talis,talis@gmail.com,2024-05-04 20:04:00.218000,1
+clvsj61z8000311dix8e6wmse,accessories échineras pra ayla,outcome,ayla,50.0,talis,talis@gmail.com,2024-05-04 20:02:25.942000,1
+clvsj4u0h000211dih2ntjx2x,roupa pro Yachane,outcome,roupas ,200.0,talis,talis@gmail.com,2024-05-04 20:01:29.180000,1
+clvsj2exb000111di6zirgzzw,calças ,outcome,roupas,210.0,talis,talis@gmail.com,2024-05-04 19:59:36.309000,1
+clvsj1ua4000011di68o1fvp9,compras da comida e fraldas,outcome,alimentacao,1485.15,talis,talis@gmail.com,2024-05-04 19:59:08.691000,1
+clvrwsg0r0005u82acslkbgf7,comida fora geo,outcome,extra,50.0,talis,talis@gmail.com,2024-05-04 09:35:59.606000,1
+clvrwrxh00004u82aj3zv8zjm,train,outcome,transporte,36.0,talis,talis@gmail.com,2024-05-04 09:35:35.406000,1
+clvrwr7fk0003u82a8yx37qap,train geo,outcome,transporte,294.0,talis,talis@gmail.com,2024-05-04 09:35:01.753000,1
+clvrwqhit0002u82ad0pdllj6,taxi,outcome,transporte,23.0,talis,talis@gmail.com,2024-05-04 09:34:28.074000,1
+clvrwpi3d0001u82ao3lhbs8o,CHIPS PARA GEO,outcome,extra,40.0,talis,talis@gmail.com,2024-05-04 09:33:42.320000,1
+clvrwotq90000u82a6rnq8hfy,comida,outcome,alimentacao,150.0,talis,talis@gmail.com,2024-05-04 09:33:10.708000,1
+clvp4jlvr0000luhweoz8gnvy,calçado talisma,outcome,calçados,458.9,talis,talis@gmail.com,2024-05-02 10:49:45.706000,1
+clvoxzx550001bo6r8jssob6c,langette,outcome,ayla,12.0,talis,talis@gmail.com,2024-05-02 07:46:29.039000,1
+clvoxzag70000bo6r2j97lnxo,ovo,outcome,alimentacao,7.5,talis,talis@gmail.com,2024-05-02 07:45:45.997000,1
+clvobv1570003pq0dobm0qd5u,LAMPADA,outcome,CASA,9.0,talis,talis@gmail.com,2024-05-01 21:26:26.059000,1
+clvobu24r0002pq0db0bip7mf,COMIDA,outcome,ALIMENTACAO,8.0,talis,talis@gmail.com,2024-05-01 21:25:40.648000,1
+clvobtroo0001pq0de9vgz1vw,TAXI,outcome,TRANSPORTE,5.0,talis,talis@gmail.com,2024-05-01 21:25:27.130000,1
+clvobtgy90000pq0dyc47nvko,UNHAS,outcome,ESTETICA,160.0,talis,talis@gmail.com,2024-05-01 21:25:13.027000,1
+clvo8flt5000029mihkih6oy4,bisness com Mauricio,outcome,angola,100.0,talis,talis@gmail.com,2024-05-01 19:50:50.264000,1
+clvn0od1n0000dz4zra2gcxbe,oculos,outcome,saude,400.0,talis,talis@gmail.com,2024-04-30 23:25:55.726000,1
+clvmwag7z000a36mlgw2ygwuk,REDAL,outcome,agua e luz,181.54,talis,talis@gmail.com,2024-04-30 21:23:08.717000,1
+clvmvoleo000936ml1lltcy3c,Anacelma devolveu os 2175,income,emprestimo,2175.0,talis,talis@gmail.com,2024-04-30 21:06:09.345000,1
+clvmvloqn000836mlyiipf8rd,esmola,outcome,esmola,2.5,talis,talis@gmail.com,2024-04-30 21:03:53.815000,1
+clvmvjq8l000736mlkva490ef,bisness com Mauricio,outcome,angola,400.0,talis,talis@gmail.com,2024-04-30 21:02:22.425000,1
+clvmvgvwr000636mlv0ijx0mb,iogurte,outcome,extra,4.0,talis,talis@gmail.com,2024-04-30 21:00:09.830000,1
+clvmvggo6000536mln6d1w9eh,taxi,outcome,transporte,39.0,talis,talis@gmail.com,2024-04-30 20:59:50.007000,1
+clvmvfucg000436mljbgfc1n5,farmacia,outcome,saude,390.0,talis,talis@gmail.com,2024-04-30 20:59:21.140000,1
+clvmvf0z5000336mloosrucph,consulta dos olhos geovana,outcome,saude,250.0,talis,talis@gmail.com,2024-04-30 20:58:43.053000,1
+clvmvedzv000236mlkw5z9vqy,geovana emprestou ,outcome,emprestimo,400.0,talis,talis@gmail.com,2024-04-30 20:58:13.301000,1
+clvmvd3d0000136mls7j2yreu,lampada,outcome,casa,5.0,talis,talis@gmail.com,2024-04-30 20:57:12.813000,1
+clvmvad58000036ml19fhh3w3,pao e legumes e frutas,outcome,alimentacao,60.0,talis,talis@gmail.com,2024-04-30 20:54:56.269000,1
+clvm8ju7f000010yujm5t20xo,bolachas,outcome,extra,2.5,talis,talis@gmail.com,2024-04-30 10:18:34.849000,1
+clvlh4vag0000hmm32zfqys7m,pao,outcome,alimentacao,6.0,talis,talis@gmail.com,2024-04-29 21:30:41.185000,1
+clvlbxx4z0000lnveeb91o4ui,ginguba,outcome,extra,6.0,talis,talis@gmail.com,2024-04-29 19:05:45.620000,1
+clvku6mct0004to5f03f06oga,1kg batata,outcome,alimentacao,6.5,talis,talis@gmail.com,2024-04-29 10:48:34.343000,1
+clvku5fw50003to5f73c257l2,taxi aller-retour ao carrefour ,outcome,transporte,28.0,talis,talis@gmail.com,2024-04-29 10:47:39.182000,1
+clvku36ph0002to5fniuouf2x,taxi,outcome,transporte,8.0,talis,talis@gmail.com,2024-04-29 10:45:53.520000,1
+clvktvmrm0001to5fhude8qzx,pizza,outcome,extra,55.0,talis,talis@gmail.com,2024-04-29 10:40:01.449000,1
+clvktvcs50000to5fmrb29ohd,creche,outcome,creche,1200.0,talis,talis@gmail.com,2024-04-29 10:38:36.845000,1
+clvkt3ts10000w6y3rxmmcnn8,train,outcome,transporte,36.0,talis,talis@gmail.com,2024-04-29 10:18:24.235000,1
+clvjy47os0004wzacr2oaghp3,azeitonas,outcome,alimentacao,10.0,talis,talis@gmail.com,2024-04-28 19:50:58.459000,1
+clvjy2eyl0003wzacpynyztel,compras,outcome,alimentacao,29.5,talis,talis@gmail.com,2024-04-28 19:49:34.579000,1
+clvjy0zdj0002wzacw3xuk7m8,pagamos divida da anacelma,outcome,emprestimo,2175.0,talis,talis@gmail.com,2024-04-28 19:48:27.748000,1
+clvjy0a3k0001wzacp5khne8w,loyer,outcome,loyer,2000.0,talis,talis@gmail.com,2024-04-28 19:47:54.978000,1
+clvjxznff0000wzac0asgv7ld,vinhos,outcome,bebida,160.0,talis,talis@gmail.com,2024-04-28 19:47:02.278000,1
+clvis2uxd0001hmlv2lshtmim,salario da geovana,income,salario,10000.0,talis,talis@gmail.com,2024-04-28 00:14:11.901000,1
+clvirzlx30000hmlvhlwyxhnf,kixikila com simba ,income,kixikila,1000.0,talis,talis@gmail.com,2024-04-28 00:11:05.270000,1
+clviadqud0000obkun2yjhb7b,ginguba para almoço,outcome,alimentacao,20.0,talis,talis@gmail.com,2024-04-27 15:58:03.224000,1
+clvi374jq0002ftedbjkvrqd6,taxi,outcome,transporte,12.0,talis,talis@gmail.com,2024-04-27 12:37:40.138000,1
+clvi36x2t0001ftedbllc6wh3,comida,outcome,alimentacao,120.0,talis,talis@gmail.com,2024-04-27 12:37:30.396000,1
+clvi34o0j0000fted27db1ibr,COPOS,outcome,casa,130.0,talis,talis@gmail.com,2024-04-27 12:35:45.216000,1
+clvh8yxmv0000ek1j4zgzcw15,taxi,outcome,transporte,13.0,talis,talis@gmail.com,2024-04-26 22:30:06.771000,1
+clvh84ay80002nxuywvw5c5m1,azeitona,outcome,alimentacao,5.0,talis,talis@gmail.com,2024-04-26 22:07:40.653000,1
+clvh83v2i0001nxuywael9jow,biscoitos  ,outcome,extra,12.0,talis,talis@gmail.com,2024-04-26 22:07:20.075000,1
+clvh83hto0000nxuymq2f8f9q,train,outcome,transporte,18.0,talis,talis@gmail.com,2024-04-26 22:07:02.832000,1
+clvgzd0jz000013cd6o8b3dfy,vinhos,outcome,bebida,79.8,talis,talis@gmail.com,2024-04-26 18:02:11.305000,1
+clvp4ybd90001luhwfgce7uq6,encomenda com anacelma,outcome,extra,220.0,talis,talis@gmail.com,2024-04-26 11:01:10.388000,1
+clvge8sk9000032xkl2147ro5,bolacha pro yachane,outcome,yachane,2.0,talis,talis@gmail.com,2024-04-26 08:11:15.058000,1
+clvfq0m4f0000141yjzre4c2y,pao,outcome,alimentacao,6.0,talis,talis@gmail.com,2024-04-25 20:52:33.097000,1
+clveaxshx0004x1o52jwk1q8x,iogurte para as  crianças,outcome,alimentacao,10.0,talis,talis@gmail.com,2024-04-24 21:03:16.513000,1
+clveax2ji0003x1o54qrt6up1,encomenda,outcome,encomenda,10.0,talis,talis@gmail.com,2024-04-24 21:02:42.948000,1
+clveavnry0002x1o50ewffoyc,açucar e pao,outcome,alimentacao,14.5,talis,talis@gmail.com,2024-04-24 21:01:37.209000,1
+clveauhrk0001x1o5tldush6o,train,outcome,transporte,36.0,talis,talis@gmail.com,2024-04-24 21:00:42.802000,1
+clveaua8i0000x1o5dtv41eaj,croissant,outcome,extra,6.0,talis,talis@gmail.com,2024-04-24 21:00:32.944000,1
+clvdny1dq0000xj38t9ey1vbs,croissant,outcome,extra,6.0,talis,talis@gmail.com,2024-04-24 10:19:36.148000,1
+clvdkgfbd0000i4g1ij60q7ep,internet,outcome,internet,249.0,talis,talis@gmail.com,2024-04-24 08:41:40.901000,1
+clvcvl9x80002kzz4l93mg2qe,iogurte para as crinças,outcome,extra,5.0,talis,talis@gmail.com,2024-04-23 21:05:52.882000,1
+clvcvjqit0001kzz4lkhz8xrl,bolachas e pastilha,outcome,extra,3.0,talis,talis@gmail.com,2024-04-23 21:04:41.127000,1
+clvcvj72b0000kzz48yv8wo29,corte de cabelo yachane,outcome,yachane,20.0,talis,talis@gmail.com,2024-04-23 21:04:15.804000,1
+clvcajekf00017ak72gan158f,petit dej no trabalho,outcome,extra,19.0,talis,talis@gmail.com,2024-04-23 11:16:32.401000,1
+clvcaimvd00007ak7i01675ue,manteiga,outcome,alimentacao,11.0,talis,talis@gmail.com,2024-04-23 11:15:23.772000,1
+clvc3zpdl00007krmebc8w1hu,compras carrefour,outcome,alimentacao,90.0,talis,talis@gmail.com,2024-04-23 08:12:40.933000,1
+clvazsee70002384cxpepdhlo,train,outcome,transporte,36.0,talis,talis@gmail.com,2024-04-22 13:27:50.824000,1
+clvazlad40001384cufr6d389,petit dej no trabalho,outcome,extra,20.0,talis,talis@gmail.com,2024-04-22 13:22:19.265000,1
+clvazj8rm0000384c9ixsqrww,saldo ,outcome,saldo,10.0,talis,talis@gmail.com,2024-04-22 13:20:10.005000,1
+clva28nx90000x6zqqqzyz326,chips e chocolate,outcome,extra,10.0,talis,talis@gmail.com,2024-04-21 21:47:57.048000,1
+clv9sid1f000012jms1psdprk,emprestimo a perside,outcome,emprestimo,301.0,talis,talis@gmail.com,2024-04-21 17:16:06.414000,1
+clv8n9grx0003709aotp8rihf,saco de lixo,outcome,casa,10.0,talis,talis@gmail.com,2024-04-20 22:01:40.045000,1
+clv8n8h3w0002709akvs7ep0m,iogurte,outcome,alimentacao,20.0,talis,talis@gmail.com,2024-04-20 22:00:53.997000,1
+clv8n76lk0001709ag72rf049,jantar,outcome,alimentacao,70.0,talis,talis@gmail.com,2024-04-20 21:59:53.578000,1
+clv8n5q3b0000709ag191cz2c,pao e ovos,outcome,alimentacao,10.0,talis,talis@gmail.com,2024-04-20 21:58:34.956000,1
+clv6xhrao0000127g10d1n5wf,vinhos,outcome,bebida,80.0,talis,talis@gmail.com,2024-04-19 17:11:55.811000,1
+clv6k0r3w0001uhxan1gitlfl,café,outcome,extra,14.5,talis,talis@gmail.com,2024-04-19 10:55:21.470000,1
+clv6jztzo0000uhxa5tk7y1os,petit dej no trabalho,outcome,extra,15.0,talis,talis@gmail.com,2024-04-19 10:53:59.473000,1
+clv5sho8p0003wv5xua2g8lqx,Geovana deu 2Dh ao yachane ,outcome,yachane ,2.0,talis,talis@gmail.com,2024-04-18 22:04:42.814000,1
+clv5sge4m0002wv5xtkj8c3u0,CHPIS ,outcome,extra,3.5,talis,talis@gmail.com,2024-04-18 22:03:43.026000,1
+clv5sfzd30001wv5xb21y5k50,compras pra casa,outcome,alimentacao,74.0,talis,talis@gmail.com,2024-04-18 22:03:23.709000,1
+clv5se7a80000wv5xxvpkxzv3,train,outcome,transporte,36.0,talis,talis@gmail.com,2024-04-18 22:01:27.853000,1
+clv5frkjj0000affsm2ce32j4,bolachas,outcome,extra,10.6,talis,talis@gmail.com,2024-04-18 16:08:28.715000,1
+clv4zayj0000163ilxlxq38fu,yachane,outcome,yachane,5.0,talis,talis@gmail.com,2024-04-18 08:27:40.610000,1
+clv4yy3m4000063ilsz3ilfee,train,outcome,transporte,36.0,talis,talis@gmail.com,2024-04-18 08:17:40.588000,1
+clv4dmros0002mjzzyiz7hpey,dinheiro para fazer o bolso,outcome,GEOVANA,20.0,talis,talis@gmail.com,2024-04-17 22:21:00.018000,1
+clv4dlfgz0001mjzzml6xlbbn,bolachas,outcome,extra,7.0,talis,talis@gmail.com,2024-04-17 22:19:57.521000,1
+clv4dkms30000mjzz4011soj4,oleo de coco para cabelo,outcome,estetica,45.0,talis,talis@gmail.com,2024-04-17 22:19:20.189000,1
+clv3ync9p00014cgrm6mkdtqw,dei emprestado 30 ao lucas,outcome,emprestimo,30.0,talis,talis@gmail.com,2024-04-17 15:21:32.160000,1
+clv3y4fru00004cgrzp8pgr1t,petit dej no trabalho,outcome,extra,16.5,talis,talis@gmail.com,2024-04-17 15:06:50.510000,1
+clv3optu10003ryq31pe8n9gd,açucar,outcome,extra,15.4,talis,talis@gmail.com,2024-04-17 10:43:32.287000,1
+clv3ojx5a0002ryq322euze4r,taxi,outcome,transporte,14.0,talis,talis@gmail.com,2024-04-17 10:38:56.657000,1
+clv3oh5gv0001ryq37gv0pzv7,train,outcome,transporte,36.0,talis,talis@gmail.com,2024-04-17 10:36:47.538000,1
+clv3oex9m0000ryq3gzzy29ri,bolachas,outcome,extra,5.0,talis,talis@gmail.com,2024-04-17 10:34:36.429000,1
+clv2w2w6300032b99xk4120ju,PAO,outcome,ALIMENTACAO,3.0,talis,talis@gmail.com,2024-04-16 21:21:50.542000,1
+clv2w260n00022b99cmxtxjbk,CORES FELTRE,outcome,EXTRA,13.0,talis,talis@gmail.com,2024-04-16 21:21:16.693000,1
+clv2w1fsc00012b99fv1khcei,LEGUME,outcome,ALIMENTACAO,2.0,talis,talis@gmail.com,2024-04-16 21:20:42.732000,1
+clv2w124f00002b994fiv8njs,TRANSPORTE,outcome,TAXI,54.0,talis,talis@gmail.com,2024-04-16 21:20:24.935000,1
+clv2b5fb3000413lvsjmk1qcz,taxi,outcome,transporte,15.0,talis,talis@gmail.com,2024-04-16 11:35:58.606000,1
+clv2b52dv000313lvfhgbrahb,consulta yachane,outcome,saude,300.0,talis,talis@gmail.com,2024-04-16 11:35:41.831000,1
+clv2b4hqx000213lvsy5cdttg,grand taxi,outcome,transporte,15.0,talis,talis@gmail.com,2024-04-16 11:35:15.126000,1
+clv2b3rrd000113lvpv8np4ya,train,outcome,transporte,18.0,talis,talis@gmail.com,2024-04-16 11:34:41.475000,1
+clv2b38rr000013lv6o34o34m,petit dej no trabalho,outcome,extra,11.5,talis,talis@gmail.com,2024-04-16 11:34:16.126000,1
+clv1hyt3v0000izbn1py87ks4,bolachas yachane,outcome,extra,4.0,talis,talis@gmail.com,2024-04-15 21:58:09.631000,1
+clv1di6u2000coe98mz92zfu3,passaporte geovana,outcome,documentacçao,980.0,talis,talis@gmail.com,2024-04-15 19:54:06.712000,1
+clv1derzx000boe98z5ipdelm,crteira,outcome,extra,99.0,talis,talis@gmail.com,2024-04-15 19:51:27.726000,1
+clv1de83r000aoe9845zjl8kw,saldo,outcome,saldo,5.0,talis,talis@gmail.com,2024-04-15 19:51:01.992000,1
+clv1dcfj90009oe98y6bybo66,saldo inwi,outcome,saldo,50.0,talis,talis@gmail.com,2024-04-15 19:49:38.323000,1
+clv1dbqvf0008oe98rch778em,fotografia,outcome,documentacçao,30.0,talis,talis@gmail.com,2024-04-15 19:49:06.259000,1
+clv1dawmc0007oe980z4r9gje,tacos,outcome,extra,73.0,talis,talis@gmail.com,2024-04-15 19:48:26.970000,1
+clv1d9lo00006oe982lowirh0,taxi,outcome,transporte,15.0,talis,talis@gmail.com,2024-04-15 19:47:26.257000,1
+clv1d8lu70005oe98va3q4d8d,train,outcome,transporte,32.0,talis,talis@gmail.com,2024-04-15 19:46:39.826000,1
+clv1d7b970004oe98gdq8a3hq,train,outcome,transporte,238.0,talis,talis@gmail.com,2024-04-15 19:45:39.477000,1
+clv1d45fz0003oe98bqg7ua49,chocolate,outcome,extra,5.0,talis,talis@gmail.com,2024-04-15 19:43:11.897000,1
+clv1d1dn10002oe98i6xpm4t5,bolo,outcome,extra,11.0,talis,talis@gmail.com,2024-04-15 19:41:02.672000,1
+clv1d13w30001oe98ta49kmry,sardinha para a gata,outcome,pet,6.0,talis,talis@gmail.com,2024-04-15 19:40:50.019000,1
+clv1d03vg0000oe98d70jzqtk,copias para passaport,outcome,documentacçao,5.0,talis,talis@gmail.com,2024-04-15 19:40:03.215000,1
+clv18lqn20006581vmxgoy6ur,biscoitos  ,outcome,extra,3.5,talis,talis@gmail.com,2024-04-15 17:36:54.635000,1
+clv18knz80005581v1120r9kd,medicamentos yachane,outcome,saude,49.5,talis,talis@gmail.com,2024-04-15 17:36:04.470000,1
+clv18j0290004581vsd09c6ta,taxi,outcome,transporte,10.0,talis,talis@gmail.com,2024-04-15 17:34:46.830000,1
+clv18gx080003581v97zlwz2k,chips,outcome,extra,13.0,talis,talis@gmail.com,2024-04-15 17:33:09.581000,1
+clv18dw2o0002581vbik5mi2x,iogurte,outcome,extra,7.0,talis,talis@gmail.com,2024-04-15 17:30:48.413000,1
+clv18cmda0001581vhinvk4oj,train,outcome,transporte,36.0,talis,talis@gmail.com,2024-04-15 17:29:49.189000,1
+clv18bd3i0000581vzkmffks4,taxi,outcome,transporte,10.0,talis,talis@gmail.com,2024-04-15 17:28:49.873000,1
+cluzzk0zo0006o44m5lfr5rf0,parc de jeu yachane,outcome,yachane,28.0,talis,talis@gmail.com,2024-04-14 20:35:52.791000,1
+cluzzivc70005o44mw3lbjals,trrain do eduardo,outcome,extra,24.0,talis,talis@gmail.com,2024-04-14 20:34:58.878000,1
+cluzzi0320004o44mt2l4awb3,garafa  de agua,outcome,extra,5.0,talis,talis@gmail.com,2024-04-14 20:34:18.368000,1
+cluzzhcew0003o44m5705esel,taxi,outcome,transporte,25.0,talis,talis@gmail.com,2024-04-14 20:33:47.708000,1
+cluzzgspy0002o44mr8ojwayp,fato e calçadon para geovana,outcome,roupas,280.0,talis,talis@gmail.com,2024-04-14 20:33:22.052000,1
+cluzzfiho0001o44mbr1ln473,trainway,outcome,transporte,24.0,talis,talis@gmail.com,2024-04-14 20:32:22.135000,1
+cluzzeha00000o44mq82xkiyc,comer fora ,outcome,extra,222.0,talis,talis@gmail.com,2024-04-14 20:31:16.222000,1
+cluyjocp10002nzstdh5f22j5,fraldas,outcome,ayla,4.5,talis,talis@gmail.com,2024-04-13 20:23:34.681000,1
+cluyjmnql0001nzstwn3bvnm4,SARDINHA  ppra gta,outcome,pet,6.0,talis,talis@gmail.com,2024-04-13 20:22:15.688000,1
+cluyjldij0000nzstgn86d4pc,taxi,outcome,transporte,17.0,talis,talis@gmail.com,2024-04-13 20:20:30.953000,1
+clux7kpq60003vxzh6ye1ffxp,pixa,outcome,extra,78.0,talis,talis@gmail.com,2024-04-12 21:57:03.358000,1
+clux7kebg0002vxzhjl9zm7j0,convivio religioso,outcome,convivio,150.0,talis,talis@gmail.com,2024-04-12 21:56:47.838000,1
+clux7i6sr0001vxzh2o00o4qe,tranças da Geovana,outcome,estetica,150.0,talis,talis@gmail.com,2024-04-12 21:55:05.368000,1
+clux7fq6j0000vxzhbv88xm9b,chips,outcome,extra,20.0,talis,talis@gmail.com,2024-04-12 21:52:35.031000,1
+cluwmvm8s0000aj1bi7zwz3vu,CHIPS,outcome,extra,12.0,talis,talis@gmail.com,2024-04-12 12:16:52.000000,1
+cluwj0pfb0000h5w3d16erweo,agua,outcome,extra,3.0,talis,talis@gmail.com,2024-04-12 10:28:38.691000,1
+cluvsr4m90000n3xet9cw1w7z,nova botija de gas,outcome,gas,120.0,talis,talis@gmail.com,2024-04-11 22:14:22.037000,1
+cluvmj3v90000qfuwaqrwrepu,agua,outcome,extra,5.0,talis,talis@gmail.com,2024-04-11 19:19:25.163000,1
+cluv5lc750000oquv56eojfj4,train,outcome,transporte,36.0,talis,talis@gmail.com,2024-04-11 11:23:27.893000,1
+cluv4p7wn0000xjlmirowc8bb,corta-unhas,outcome,higiene,5.0,talis,talis@gmail.com,2024-04-11 11:01:01.228000,1
+cluud3eoj0000volec5n9dns1,chips e iogurte,outcome,extra,10.0,talis,talis@gmail.com,2024-04-10 22:08:14.883000,1
+cluu6bbr10000vkhbv08pv497,dei 50 ao mauricio,outcome,extra,50.0,talis,talis@gmail.com,2024-04-10 18:58:26.816000,1
+clusxag2g0004muswf39v9336,carne legume e frutas,outcome,alimentacao,110.0,talis,talis@gmail.com,2024-04-09 21:58:03.025000,1
+clusx9njf0003muswlaa5jbfl,poupança do yachane,outcome,presente,5.0,talis,talis@gmail.com,2024-04-09 21:57:26.344000,1
+clusx8kx20002muswmdv71rwc,train,outcome,transporte,36.0,talis,talis@gmail.com,2024-04-09 21:56:36.358000,1
+clusx89un0001muswg5e48707,carne,outcome,alimentacao,102.0,talis,talis@gmail.com,2024-04-09 21:56:21.672000,1
+clusx7u4u0000musw9iijacce,biscoitos  ,outcome,extra,4.0,talis,talis@gmail.com,2024-04-09 21:55:35.835000,1
+clusle1ep0000gh5ovse9qihw,café,outcome,extra,2.0,talis,talis@gmail.com,2024-04-09 16:24:01.668000,1
+clus99508000011r7f7be1ezt,petit dej no trabalho,outcome,extra,28.78,talis,talis@gmail.com,2024-04-09 10:45:10.471000,1
+clurj2r8200075ctglnb9vmwn,Bolacha,outcome,extra,5.0,talis,talis@gmail.com,2024-04-08 22:31:12.356000,1
+clurizyl400065ctgfwlj7h5r,CHOCOLATE e yogurte,outcome,extra,11.0,talis,talis@gmail.com,2024-04-08 22:29:01.601000,1
+cluriyn5q00055ctgvpan6jga,CHOCOLATE,outcome,extra,12.0,talis,talis@gmail.com,2024-04-08 22:28:00.523000,1
+cluriy4lh00045ctggaw6wsqn,MOBILIA,outcome,MOBILIA,360.0,talis,talis@gmail.com,2024-04-08 22:27:36.491000,1
+clurixe1w00035ctgbgs5ictt,COMIDA MARJANE,outcome,ALIMENTACAO,278.0,talis,talis@gmail.com,2024-04-08 22:27:01.903000,1
+cluriwrf600025ctgvt5stylq,TAXI,outcome,TRANSPORTE,16.0,talis,talis@gmail.com,2024-04-08 22:26:32.733000,1
+clurid1bv00015ctg75dyfh71,banana e ginguba e  bolacha,outcome,extra,22.5,talis,talis@gmail.com,2024-04-08 22:12:23.676000,1
+cluribjhf00005ctghwnu8p02,train,outcome,tran,36.0,talis,talis@gmail.com,2024-04-08 22:10:54.863000,1
+clurceb9y00009qva0q7w05qy,salario talisma,income,salario,4900.0,talis,talis@gmail.com,2024-04-08 19:25:25.450000,1
+cluqsxc65000110zbdwy6un4l,train,outcome,transporte,36.0,talis,talis@gmail.com,2024-04-08 10:20:18.208000,1
+cluqsx38f000010zb168ipzm1,taxi,outcome,transporte,10.0,talis,talis@gmail.com,2024-04-08 10:20:06.354000,1
+clupxvgsf0003b6evvcke92rs,dívida brinquedos,outcome,divida,130.0,talis,talis@gmail.com,2024-04-07 19:51:05.441000,1
+clupxtoad0002b6evrayrnxvk,emprestimo da hogla,income,emprestimo,1000.0,talis,talis@gmail.com,2024-04-07 19:49:41.855000,1
+clupxrrdh0001b6evw2030q9w,Corte de cabelo  talismã,outcome,estetica,30.0,talis,talis@gmail.com,2024-04-07 19:48:12.432000,1
+clupxqhkg0000b6evsc2pik9v,taxi Geovana,outcome,transporte,10.0,talis,talis@gmail.com,2024-04-07 19:47:12.532000,1
+cluptqsm70000k8m12njqgvtj,chips e gasosa,outcome,extra,14.0,talis,talis@gmail.com,2024-04-07 17:55:04.661000,1
+cluobtqb10003rjbcsle41nmb,sardinha pra gata,outcome,pet,6.0,talis,talis@gmail.com,2024-04-06 16:46:06.877000,1
+cluobrqtm0002rjbcw7qk9w3r,Bolinha,outcome,presentes,7.0,talis,talis@gmail.com,2024-04-06 16:44:34.236000,1
+cluobqd460001rjbcrpx6ejbz,pao,outcome,alimentacao,8.0,talis,talis@gmail.com,2024-04-06 16:43:29.529000,1
+cluobpq830000rjbc0laqf397,feijao,outcome,alimentacao,24.0,talis,talis@gmail.com,2024-04-06 16:42:43.959000,1
+clun8k4a30004bcaf5ob24w2t,Tenis para o Talisma,outcome,calçados,358.9,talis,talis@gmail.com,2024-04-05 22:26:53.391000,1
+clun8ibsj0003bcafqnm0s22r,bolachas,outcome,extra,4.0,talis,talis@gmail.com,2024-04-05 22:25:29.749000,1
+clun8hgve0002bcafmrk5wt5a,Alimentacao,outcome,alimentacao,63.0,talis,talis@gmail.com,2024-04-05 22:24:49.716000,1
+clun8gj7q0001bcafs5d2x9ft,Taxi,outcome,transporte,12.0,talis,talis@gmail.com,2024-04-05 22:24:06.093000,1
+clun8fzkz0000bcaf8fmmuqc6,MOO,outcome,higiene,49.0,talis,talis@gmail.com,2024-04-05 22:23:23.829000,1
+clumj8jqe0000mhp90hm636yp,chips e iogurte,outcome,extra,14.0,talis,talis@gmail.com,2024-04-05 10:38:01.452000,1
+cluly0y4k0000nvlwxc7knibg,train,outcome,transporte,36.0,talis,talis@gmail.com,2024-04-05 00:43:22.438000,1
+clulej76800003et29jiee83z,Bolos e chocolate,outcome,extra,15.0,talis,talis@gmail.com,2024-04-04 15:38:35.707000,1
+clul3ruih00011yfx2sextpdz,train,outcome,transporte,36.0,talis,talis@gmail.com,2024-04-04 10:37:22.508000,1
+clul3r8wf00001yfxggg8r4da,bolsa AMCI,income,bolsa AMCI,1250.0,talis,talis@gmail.com,2024-04-04 10:36:54.486000,1
+cluk2j89d0000mwhw2jn6qtjs,CHIPS,outcome,extra,20.0,talis,talis@gmail.com,2024-04-03 17:14:49.321000,1
+cluiyav6p000225bzggsg5qn5,TRAIN,outcome,TRANPORTE,36.0,talis,talis@gmail.com,2024-04-02 22:27:37.340000,1
+cluiya040000125bztmj6vtap,bolacha e ginguba,outcome,EXTRA,12.0,talis,talis@gmail.com,2024-04-02 22:26:56.907000,1
+cluiy9kn6000025bzlajb97w8,caderno ,outcome,Educaçao,2.5,talis,talis@gmail.com,2024-04-02 22:26:36.841000,1
+cluin4n0q0001bukra8iieveh,compras de casa,outcome,alimentacao,150.0,talis,talis@gmail.com,2024-04-02 17:15:54.090000,1
+cluin3wdo0000bukr05duf3qo,sindica,outcome,sindica,200.0,talis,talis@gmail.com,2024-04-02 17:15:19.630000,1
+cluim4rdi00008dt7znjq3fxe,ginguba e bolacha,outcome,extra,7.0,talis,talis@gmail.com,2024-04-02 16:47:18.598000,1
+cluhl88pj00001lfjbm5dpzxp,pao,outcome,alimentacao,4.0,talis,talis@gmail.com,2024-04-01 23:34:05.216000,1
+cluhkaat00000146i5t7ygg9g,chocolates pro yachane,outcome,presentes,18.5,talis,talis@gmail.com,2024-04-01 23:08:33.538000,1
+cluhgjssa00004ujlb4u4xfm1,devolvi 5 dh ao marcelo,outcome,divida,5.0,talis,talis@gmail.com,2024-04-01 21:22:48.266000,1
+cluh5bza500012tmr4lwu9p8v,sapateiro,outcome,calçados,20.0,talis,talis@gmail.com,2024-04-01 16:09:54.110000,1
+cluh54icn00002tmr43aw0t7n,pao e esmola,outcome,extra,4.0,talis,talis@gmail.com,2024-04-01 16:03:31.367000,1
+clugyhste0007rarru853gumk,petit dej no trabalho,outcome,extra,22.0,talis,talis@gmail.com,2024-04-01 12:58:27.372000,1
+clugy5csy0006rarro30vhrat,saldo,outcome,saldo,5.0,talis,talis@gmail.com,2024-04-01 12:48:47.535000,1
+clugy4jap0005rarrvbnynavd,net maroc telecom,outcome,internet,250.0,talis,talis@gmail.com,2024-04-01 12:48:09.530000,1
+clugxvboj0004rarr1v60jl28,EXAME DO YACHANE,outcome,educaçao,100.0,talis,talis@gmail.com,2024-04-01 12:40:59.577000,1
+clugxtk5u0003rarrome2nfg6,train,outcome,transporte,18.0,talis,talis@gmail.com,2024-04-01 12:39:37.417000,1
+clugxs3pn0002rarrullti8gh,taxi,outcome,transporte,8.0,talis,talis@gmail.com,2024-04-01 12:38:29.386000,1
+clugxqsv70001rarr22thkm43,taxi,outcome,transporte,5.0,talis,talis@gmail.com,2024-04-01 12:37:28.762000,1
+clugxqj7i0000rarrylupkvvj,taxi,outcome,transporte,20.0,talis,talis@gmail.com,2024-04-01 12:37:16.062000,1
+clufhjdr60001aikymnzq9hvr,almoço da geovana ,outcome,extra,150.0,talis,talis@gmail.com,2024-03-31 12:16:06.012000,1
+clufhgo6t0000aikyda2p4hbk,ovo,outcome,alimentacao,42.0,talis,talis@gmail.com,2024-03-31 12:12:37.760000,1
+clueliqdx0002yzcxirhhvzlz,simba,outcome,kixikila,1000.0,talis,talis@gmail.com,2024-03-30 21:19:46.987000,1
+clueli3sa0001yzcx6hqolu2w,compras CARREFOUR,outcome,alimentacao,841.16,talis,talis@gmail.com,2024-03-30 21:19:16.957000,1
+cluelbht50000yzcxjup2erj6,taxi,outcome,transporte,30.0,talis,talis@gmail.com,2024-03-30 21:14:09.129000,1
+clue6ik2h0002451n830r33vv,farmacia,outcome,saude,1132.3,talis,talis@gmail.com,2024-03-30 14:19:45.106000,1
+clue6hhb70001451nucj6vp11,sumo,outcome,extra,10.0,talis,talis@gmail.com,2024-03-30 14:18:54.731000,1
+clue6dxxg0000451nfq75b8yj,pao e ovo,outcome,alimentacao,17.0,talis,talis@gmail.com,2024-03-30 14:15:56.764000,1
+cludb8y54000214dtt2o40c3k,chose chocolate,outcome,extra,8.5,talis,talis@gmail.com,2024-03-29 23:44:29.195000,1
+cludb6ir5000114dt26lco93x,sumo,outcome,extra,10.0,talis,talis@gmail.com,2024-03-29 23:42:35.926000,1
+cludb5ica000014dt141uwwxq,Taxi,outcome,transporte,14.0,talis,talis@gmail.com,2024-03-29 23:41:48.691000,1
+clud6a51x0005mieeg8n1g61e,PIZZA,outcome,EXTRA,38.0,talis,talis@gmail.com,2024-03-29 21:24:28.148000,1
+clud67t780004miee2axibtov,SAPATEIRO,outcome,EXTRA,20.0,talis,talis@gmail.com,2024-03-29 21:22:39.393000,1
+clud67in30003mieeagkp8oil,FRANGO,outcome,ALIMENTACAO,35.0,talis,talis@gmail.com,2024-03-29 21:22:25.749000,1
+clud671md0002miee28wm7ae9,LIMPEZA LEGUMES E FRUTAS,outcome,CASA,15.0,talis,talis@gmail.com,2024-03-29 21:22:03.768000,1
+clud66keu0001miee9x0dnsji,PRESENT Anacelma,outcome,EXTRA,30.0,talis,talis@gmail.com,2024-03-29 21:21:41.472000,1
+clud65zwi0000mieew5x6blrf,TAXI,outcome,transporte,55.0,talis,talis@gmail.com,2024-03-29 21:21:14.381000,1
+clucy13kb0000npnh8b6cuqrl,geovana,outcome,pra fazer o bolso,50.0,talis,talis@gmail.com,2024-03-29 17:34:27.133000,1
+cluclpdug0001n5h9epdw1gdr,taxi,outcome,transporte,6.0,talis,talis@gmail.com,2024-03-29 11:49:25.430000,1
+cluclojwj0000n5h9fs0j9ka9,petit dej no trabalho,outcome,extra,24.5,talis,talis@gmail.com,2024-03-29 11:48:10.465000,1
+cluchw0eu0004waezrotgnjyh,reparacao do telefone da geovana,outcome,telefone,190.0,talis,talis@gmail.com,2024-03-29 10:02:36.005000,1
+cluchntkd0003waezhukad5oi,bolacha,outcome,extra,2.0,talis,talis@gmail.com,2024-03-29 09:56:14.361000,1
+cluchn5tq0002waez3h4aybbr,frusta,outcome,extra,10.0,talis,talis@gmail.com,2024-03-29 09:55:43.582000,1
+cluch32by0001waez50ltovun,divida da geovana,outcome,emprestimo,200.0,talis,talis@gmail.com,2024-03-29 09:40:05.946000,1
+cluch1gnb0000waezzbx56ff6,redal,outcome,agua e luz,230.0,talis,talis@gmail.com,2024-03-29 09:38:50.622000,1
+clubvynx20001sqgtbf6jzsep,yogurt,outcome,extra,10.0,talis,talis@gmail.com,2024-03-28 23:48:48.849000,1
+clubvv4100000sqgtfp2gb12z,noses e outros,outcome,angola,159.0,talis,talis@gmail.com,2024-03-28 23:46:03.139000,1
+clubs6qes0004aituawepjpx0,loyer,outcome,alugel,2000.0,talis,talis@gmail.com,2024-03-28 22:03:06.874000,1
+clubs50j00003aitux78gyai7,ovo eatum,outcome,alimentacao,15.0,talis,talis@gmail.com,2024-03-28 22:01:46.777000,1
+clubs4bz10002aituas0ts83u,tangerina,outcome,extra,5.0,talis,talis@gmail.com,2024-03-28 22:01:14.897000,1
+clubs3v1w0001aituys9k49yg,taxi,outcome,transporte,10.0,talis,talis@gmail.com,2024-03-28 22:00:52.848000,1
+clubs2q2k0000aitu1xczhew4,telefones,outcome,angola,2370.0,talis,talis@gmail.com,2024-03-28 21:59:59.842000,1
+clubathn70002z8t7onrrpqew,train geovana e talisma,outcome,transporte,72.0,talis,talis@gmail.com,2024-03-28 13:56:54.956000,1
+clubaklby0001z8t7xa34tzdn,tacos,outcome,extra,87.0,talis,talis@gmail.com,2024-03-28 13:50:00.390000,1
+clubajfd60000z8t7s9xs09ya,salario geovana,income,salario,10000.0,talis,talis@gmail.com,2024-03-28 13:49:05.914000,1
+clua8phyi0000p8xl2eo05szz,CHIPS,outcome,extra,11.0,talis,talis@gmail.com,2024-03-27 20:09:21.771000,1
+clu9q19840004lz30s1wz846w,geovana me deu 50,income,geovana,50.0,talis,talis@gmail.com,2024-03-27 11:27:18.551000,1
+clu9pyl250003lz30q9hit3yb,train,outcome,transporte,36.0,talis,talis@gmail.com,2024-03-27 11:25:14.054000,1
+clu9pyaaq0002lz302n8ygzuf,ovos,outcome,alimentacao,5.0,talis,talis@gmail.com,2024-03-27 11:25:00.040000,1
+clu9pxird0001lz30mn8rd4v9,aveia,outcome,alimentacao,5.0,talis,talis@gmail.com,2024-03-27 11:24:24.391000,1
+clu9pwz390000lz300t0gpcep,bolachas,outcome,extra,5.0,talis,talis@gmail.com,2024-03-27 11:23:58.840000,1
+clu8wkgyf0000q315t1fd2vyq,pedi 5 ao marcelo,income,emprestimo,5.0,talis,talis@gmail.com,2024-03-26 21:42:25.748000,1
+clu8hjahl00021nkq53ppdrm8,milui,outcome,extra,2.0,talis,talis@gmail.com,2024-03-26 14:41:38.268000,1
+clu8hiur100011nkqoho8wwvr,bolo de chocolate,outcome,extra,10.0,talis,talis@gmail.com,2024-03-26 14:41:17.861000,1
+clu8hhoto00001nkqt9suacex,train,outcome,transporte,36.0,talis,talis@gmail.com,2024-03-26 14:39:36.304000,1
+clu7jh3210001fafppaky68rr,train,outcome,transporte,18.0,talis,talis@gmail.com,2024-03-25 22:48:08.440000,1
+clu7jgu0j0000fafpjvq7q0r6,taxi,outcome,transporte,15.0,talis,talis@gmail.com,2024-03-25 22:47:05.121000,1
+clu7eyuxd0000wba8ep5hihk8,CHIPS,outcome,extra,14.5,talis,talis@gmail.com,2024-03-25 20:41:59.750000,1
+clu6ujx92000055ey8ttb1kmn,train,outcome,transporte,18.0,talis,talis@gmail.com,2024-03-25 11:10:11.882000,1
+clu6346b10003k02qfttka7uu,sumo e chips,outcome,extra,15.0,talis,talis@gmail.com,2024-03-24 22:21:35.051000,1
+clu633omf0002k02qthcni0jr,TAXI,outcome,transporte,10.0,talis,talis@gmail.com,2024-03-24 22:21:12.120000,1
+clu632vv20001k02qwenn0v8v,agua,outcome,extra,13.0,talis,talis@gmail.com,2024-03-24 22:20:35.044000,1
+clu632dws0000k02qysbmjdht,BANANA,outcome,extra,13.0,talis,talis@gmail.com,2024-03-24 22:20:11.455000,1
+clu4krukq0001uj9krtina8n8,smida,outcome,alimentacao,10.0,talis,talis@gmail.com,2024-03-23 21:01:11.934000,1
+clu4kqyi60000uj9kn50jab4o,yoghourt ,outcome,extra,15.0,talis,talis@gmail.com,2024-03-23 21:00:26.263000,1
+clu4jzr2f0000vgofmafvifi2,Sumo para o jantar,outcome,extra,15.0,talis,talis@gmail.com,2024-03-23 20:39:20.594000,1
+clu4fx7hs00009s6pjnpbpo3o,compras,outcome,alimentacao,200.0,talis,talis@gmail.com,2024-03-23 18:45:23.831000,1
+clu30fklp00001kgp7unsvmg9,chips,outcome,extra,4.0,talis,talis@gmail.com,2024-03-22 18:43:16.445000,1
+clu2seupy0001w5fkswe09g1g,petit dej no trabalho,outcome,extra,12.0,talis,talis@gmail.com,2024-03-22 14:59:29.129000,1
+clu2sch020000w5fkbgftw2df,banana,outcome,extra,6.0,talis,talis@gmail.com,2024-03-22 14:56:46.093000,1
+clu2kd83u000013lzxj2nq9qu,train,outcome,transporte,18.0,talis,talis@gmail.com,2024-03-22 11:14:00.720000,1
+clu1ohoiv0000en4h47a8g3cy,taxi,outcome,transporte,9.0,talis,talis@gmail.com,2024-03-21 20:18:17.361000,1
+clu170e53000170gkwi86bghr,train,outcome,transporte,36.0,talis,talis@gmail.com,2024-03-21 12:12:37.236000,1
+clu16zm1u000070gkx50tm6e0,petit dej no trabalho,outcome,extra,24.0,talis,talis@gmail.com,2024-03-21 12:11:27.183000,1
+clu0chxla0001gwikyz1vt8az,gas,outcome,gas,42.0,talis,talis@gmail.com,2024-03-20 21:58:26.874000,1
+clu0ch8600000gwikq10miovd,Banana,outcome,extra,7.0,talis,talis@gmail.com,2024-03-20 21:57:54.118000,1
+clu01mhhq0000n84amqim0e0s,pao e açucar no trabalho,outcome,extra,8.0,talis,talis@gmail.com,2024-03-20 16:53:42.045000,1
+cltzw53h50000u3wu06cupv58,petit dej no trabalho,outcome,extra,12.0,talis,talis@gmail.com,2024-03-20 14:20:04.436000,1
+clu171f2l000270gknfxfj0cy,reembolso cnss ,income,cnss,500.0,geovana,talis@gmail.com,2024-03-20 12:13:25.277000,1
+cltzpq6pg000259xhhz2aic79,saldo maroc telecom,outcome,saldo,5.0,talis,talis@gmail.com,2024-03-20 11:20:59.466000,1
+cltzpp89g000159xhlunu3j9n,consulta medica da geovana,outcome,transporte,30.0,talis,talis@gmail.com,2024-03-20 11:20:14.851000,1
+cltzpnx1f000059xhvftpg86b,train,outcome,transporte,36.0,talis,talis@gmail.com,2024-03-20 11:18:38.504000,1
+cltyu02s20000t95g8y52imcn,ginguba,outcome,extra,12.0,talis,talis@gmail.com,2024-03-19 20:32:14.344000,1
+cltybjjr10001wf86tv9lbwby,chips,outcome,extra,10.0,talis,talis@gmail.com,2024-03-19 11:56:11.141000,1
+cltybhr5h0000wf86zm29smei,train,outcome,transporte,36.0,talis,talis@gmail.com,2024-03-19 11:54:47.216000,1
+cltx6axh7000011pn5je83sr3,ginguba,outcome,extra,6.0,talis,talis@gmail.com,2024-03-18 16:41:21.270000,1
+cltwweal30002l7znfwgtwsyb,geovana,outcome,pra fazer o bolso,8.0,talis,talis@gmail.com,2024-03-18 12:04:25.483000,1
+cltwwdl1b0001l7zni6489f3g,taxi,outcome,transporte,9.0,talis,talis@gmail.com,2024-03-18 12:03:52.500000,1
+cltwwdbea0000l7znldsv4tfx,train,outcome,transporte,36.0,talis,talis@gmail.com,2024-03-18 12:03:39.431000,1
+cltvvgtpq0004cy03m3zxggm3,bolacha,outcome,extra,2.0,talis,talis@gmail.com,2024-03-17 18:50:37.961000,1
+cltvvgggk0003cy03zqp7ovlw,smida e knore,outcome,alimentacao,7.0,talis,talis@gmail.com,2024-03-17 18:50:20.380000,1
+cltvvezkh0002cy03ktezaegt,taxi,outcome,transporte,10.0,talis,talis@gmail.com,2024-03-17 18:49:12.085000,1
+cltvvekpb0001cy03lnk1mbs2,taxi,outcome,transporte,15.0,talis,talis@gmail.com,2024-03-16 18:48:52.668000,1
+cltvvdob30000cy03otfj64qy,jantar(tacos e pizza),outcome,extra,109.0,talis,talis@gmail.com,2024-03-16 18:48:10.557000,1
+cltt41qbg0000ff1f5rg3g99e,bolo e gingiba,outcome,extra,11.0,talis,talis@gmail.com,2024-03-15 20:27:31.502000,1
+cltskn5td0001vvx8xr4fg0ua,geovana,outcome,pra fazer o bolso,100.0,talis,talis@gmail.com,2024-03-15 11:24:17.257000,1
+cltskie4a0000vvx8ksew219o,petit dej no trabalho,outcome,extra,17.0,talis,talis@gmail.com,2024-03-15 11:20:18.878000,1
+cltrl7obi0000pgenh40cwejl,chocolate e batatas,outcome,extra,20.0,talis,talis@gmail.com,2024-03-14 18:52:29.130000,1
+cltqdin620003uf2cvxj6q2hb,chocolate e rebuçados,outcome,extra,12.5,talis,talis@gmail.com,2024-03-13 22:29:18.419000,1
+cltqdgtkl0002uf2ciqujei1t,smida,outcome,alimentacao,5.0,talis,talis@gmail.com,2024-03-13 22:27:53.617000,1
+cltqdg1390001uf2cy9ht77wd,pao,outcome,alimentacao,2.5,talis,talis@gmail.com,2024-03-13 22:27:16.403000,1
+cltqde53x0000uf2cuuyejcbv,train,outcome,transporte,36.0,talis,talis@gmail.com,2024-03-13 22:25:09.296000,1
+cltq7thrn0002ax501acki2ay,train,outcome,transporte,36.0,talis,talis@gmail.com,2024-03-13 19:49:47.287000,1
+cltq7rsqv0001ax50fay3vtq8,sumo de laranja,outcome,extra,11.0,talis,talis@gmail.com,2024-03-13 19:48:26.503000,1
+cltq7hklp0000ax50r1pmy6ah,saldo ,outcome,saldo,10.0,talis,talis@gmail.com,2024-03-13 19:40:18.385000,1
+cltorxxiu000013l42ifywn6x,petit dej no trabalho,outcome,extra,20.0,talis,talis@gmail.com,2024-03-12 19:36:42.505000,1
+cltobfifb0000118hxen4xc0h,train,outcome,transporte,36.0,talis,talis@gmail.com,2024-03-12 11:55:05.072000,1
+cltncix6w00001297fzp5rf38,geovana,outcome,pra fazer o bolso,50.0,talis,talis@gmail.com,2024-03-11 19:37:11.877000,1
+cltnbj3sq0000acw5n6f54z0a,petit dej no trabalho,outcome,extra,9.0,talis,talis@gmail.com,2024-03-11 19:09:20.855000,1
+cltmx7c5f0000u33c0r00d3cr,train,outcome,transporte,36.0,talis,talis@gmail.com,2024-03-11 12:28:28.839000,1
+cltlzb6l600001017ub71rqos,biscoitos  ,outcome,extra,8.0,talis,talis@gmail.com,2024-03-10 20:40:30.651000,1
+cltlh85if00002bffmxwdduwn,loyer,outcome,aluguel,2000.0,talis,talis@gmail.com,2024-03-10 12:14:15.837000,1
+cltkn93es0000iftqcxlo5gwa,Lapiseira e envelope,outcome,presentes,2.0,talis,talis@gmail.com,2024-03-09 22:15:11.951000,1
+cltklntfg0002f4kgpf6vx4gt,TAXI,outcome,TRANSPORTE,30.0,talis,talis@gmail.com,2024-03-09 21:30:08.878000,1
+cltkllyqi0001f4kgfev3wo17,BRINQUEDO,outcome,EXTRA,15.0,talis,talis@gmail.com,2024-03-09 21:28:42.594000,1
+cltkllh450000f4kg74t6rr43,COMIDA MERCADO,outcome,ALIMENTACAO,400.0,talis,talis@gmail.com,2024-03-09 21:28:19.626000,1
+cltj617p5000712ms8hwfno6a,BOLACHAS,outcome,EXTRAS,6.0,talis,talis@gmail.com,2024-03-08 21:24:55.013000,1
+cltj60r6o000612msfr18q37r,ESFREGAO,outcome,LIMPEZA,3.0,talis,talis@gmail.com,2024-03-08 21:24:33.574000,1
+cltj60fi5000512mshkwkwjk8,BICARBONATO,outcome,LIMPEZA,6.0,talis,talis@gmail.com,2024-03-08 21:24:18.463000,1
+cltj5zy76000412ms1wq025l5,SALCICHA,outcome,ALIMENTACAO,14.0,talis,talis@gmail.com,2024-03-08 21:23:55.996000,1
+cltj5ywbi000312msm7elpljz,ARMARIO COZINHA,outcome,MOBILIAS,200.0,talis,talis@gmail.com,2024-03-08 21:23:06.808000,1
+cltj5xc7g000212msbiwr151o,TAXI,outcome,TRANSPORTE,20.0,talis,talis@gmail.com,2024-03-08 21:21:54.087000,1
+cltj5wyz4000112ms0naazr1w,CONSULTA ORL,outcome,SAUDE,300.0,talis,talis@gmail.com,2024-03-08 21:21:37.027000,1
+cltj5va28000012msk8ovih5m,Bonus,income,bonus da Geovana,200.0,talis,talis@gmail.com,2024-03-08 21:20:17.738000,1
+cltj254or0000mvc8stwj8jcq,milui,outcome,extra,9.0,talis,talis@gmail.com,2024-03-08 19:35:27.486000,1
+cltird0xg0000f4h17zwog9lz,agua e yogurte,outcome,extra,7.5,talis,talis@gmail.com,2024-03-08 14:34:19.787000,1
+cltid0ykp0000zb2zzvtd1vhc,train,outcome,transporte,18.0,talis,talis@gmail.com,2024-03-08 07:53:00.327000,1
+clthhddbt0000gtuwi81yms97,milui,outcome,extra,8.0,talis,talis@gmail.com,2024-03-07 17:06:47.590000,1
+clthdifv700003o7h4brqakxm,bisno angola com delcio,outcome,angola,2350.0,talis,talis@gmail.com,2024-03-07 15:18:58.289000,1
+clthalgmm0000fw2g3rs9o3xh,train,outcome,transporte,36.0,talis,talis@gmail.com,2024-03-07 13:57:35.125000,1
+clth6jb4y0000kgr6g1qewnf4,petit dej no trabalho,outcome,extra,9.0,talis,talis@gmail.com,2024-03-07 12:03:43.058000,1
+clth0vy4u0000r4r2xhcltc6z,taxi,outcome,transporte,9.0,talis,talis@gmail.com,2024-03-07 09:24:35.680000,1
+cltg94h4n0000ymdo9p2hmfbx,dei 500 a Javier,outcome,emprestimo,500.0,talis,talis@gmail.com,2024-03-06 20:28:36.847000,1
+cltg65f4o0000t4t19ckkcyqs,salario Talisma,income,salario,4500.0,talis,talis@gmail.com,2024-03-06 19:04:48.825000,1
+cltfpzfl70000dn6u6vdhz8t2,petit dej no trabalho,outcome,extra,15.0,talis,talis@gmail.com,2024-03-06 11:32:48.854000,1
+cltf65zoe0002x8vwtablb87s,rembolso CNSS,income,CNSS,300.0,talis,talis@gmail.com,2024-03-06 02:18:02.744000,1
+cltf5zio00001x8vwdy7qhi40,pao no trabalho,outcome,extra,4.0,talis,talis@gmail.com,2024-03-06 02:13:00.947000,1
+cltf5yg1q0000x8vwnbro8tkj,rebuçados,outcome,extra,1.5,talis,talis@gmail.com,2024-03-06 02:12:10.777000,1
+clteh72id0000eu2sesmwjcpm,abacate,outcome,extra,7.0,talis,talis@gmail.com,2024-03-05 14:38:32.143000,1
+clted6z760003bd7tvkg3i3ir,taxi,outcome,transporte,54.0,talis,talis@gmail.com,2024-03-05 12:46:59.569000,1
+clted0ct40002bd7tnb6ktjk4,bolos,outcome,extra,8.0,talis,talis@gmail.com,2024-03-05 12:41:51.249000,1
+cltecumey0001bd7tvf0t60kg,train,outcome,transporte,36.0,talis,talis@gmail.com,2024-03-05 12:37:23.673000,1
+cltectzjy0000bd7txml1o4zh,consulta ayla varicela,outcome,saude,300.0,talis,talis@gmail.com,2024-03-05 12:36:53.918000,1
+cltdc661f0000jahekp1do9si,ginguba,outcome,extra,6.0,talis,talis@gmail.com,2024-03-04 19:29:34.855000,1
+cltd8nusz0000vlfxtxku4044,carne,outcome,alimentacao,31.0,talis,talis@gmail.com,2024-03-04 17:52:20.442000,1
+cltd0q2vy0004vdmta1p2m9i5,train e taxi geovana,outcome,transporte,30.0,talis,talis@gmail.com,2024-03-04 14:10:09.705000,1
+cltd0pf6w0003vdmtz479pbwe,petit dej,outcome,extra,8.0,talis,talis@gmail.com,2024-03-04 14:09:38.793000,1
+cltd0ogca0002vdmt3fnaf1bc,café com a mulher,outcome,extra,38.0,talis,talis@gmail.com,2024-03-04 14:08:53.720000,1
+cltd0nly20001vdmtjab3d1d8,taxi,outcome,transporte,8.5,talis,talis@gmail.com,2024-03-04 14:08:14.385000,1
+cltd0n8fr0000vdmt8j8z2puq,train,outcome,transporte,36.0,talis,talis@gmail.com,2024-03-04 14:07:53.979000,1
+cltedcl6a0005bd7t0i8y6p1d,lollipop,outcome,extra,1.5,talis,talis@gmail.com,2024-03-04 12:51:21.852000,1
+clted976a0004bd7t9l09o84c,dei 100 ao John,outcome,emprestimo,100.0,talis,talis@gmail.com,2024-03-04 12:48:43.816000,1
+cltbi6kew0000caxndfxoyneb,petit dej,outcome,alimentacao,28.0,talis,talis@gmail.com,2024-03-03 12:42:59.594000,1
+cltadqigm0006u1v0ovci3nff,bolachas e ginguba,outcome,extra,10.0,talis,talis@gmail.com,2024-03-02 17:51:07.085000,1
+cltadpou00005u1v08lx96hk8,comer fora,outcome,extra,58.0,talis,talis@gmail.com,2024-03-02 17:50:28.664000,1
+cltadp8fy0004u1v0tc79vjgd,papel da cnss,outcome,extra,1.0,talis,talis@gmail.com,2024-03-02 17:50:07.378000,1
+cltadogj30003u1v0acemkprr,taxi,outcome,transporte,38.5,talis,talis@gmail.com,2024-03-02 17:49:30.838000,1
+cltadmuje0002u1v0dl7cij7v,train,outcome,transporte,72.0,talis,talis@gmail.com,2024-03-02 17:48:15.894000,1
+cltadluhw0001u1v0tuy7581w,consulta geneco,outcome,saude,400.0,talis,talis@gmail.com,2024-03-02 17:47:29.106000,1
+cltadl3ex0000u1v07dqcsdvq,carrefour(alimento e fraldas),outcome,alimentacao,1250.4,talis,talis@gmail.com,2024-03-02 17:46:54.234000,1
+clt8wexi400002rmo0rd1z73x,milouy ,outcome,extra,9.5,talis,talis@gmail.com,2024-03-01 16:58:26.008000,1
+clt8orfpv0000m5kkgpy6fxel,cuscus,outcome,ALIMENTACAO,65.0,talis,talis@gmail.com,2024-03-01 13:23:01.037000,1
+clt8e5yd60002qeeq93azzw9g,train,outcome,transporte,18.0,talis,talis@gmail.com,2024-03-01 08:27:34.716000,1
+clt8e4aef0001qeeq6rb8357y,train,outcome,transporte,36.0,talis,talis@gmail.com,2024-03-01 08:26:16.963000,1
+clt8e0wfx0000qeeqenpgp89k,pao+ovos,outcome,alimentacao,12.5,talis,talis@gmail.com,2024-03-01 08:23:23.866000,1
+clt7ruczu0006zowj1pl7yak0,bolachas,outcome,extra,3.0,talis,talis@gmail.com,2024-02-29 22:02:42.786000,1
+clt7rc3p30005zowjfslg2djv,ELASTICOS DO CABELO,outcome,EXTRA,8.0,geovana,talis@gmail.com,2024-02-29 21:48:10.473000,1
+clt7razlw0004zowj5wu4pf8a,OCULOS,outcome,saude,100.0,geovana,talis@gmail.com,2024-02-29 21:47:18.497000,1
+clt7ra2rl0003zowj77bfc1y9,LAPIS MAKUP,outcome,EXTRA,5.0,geovana,talis@gmail.com,2024-02-29 21:46:36.002000,1
+clt7r9l5h0002zowjhp0dwesn,PRESENTE FILHO,outcome,PRESENTES,25.0,geovana,talis@gmail.com,2024-02-29 21:46:12.849000,1
+clt7r8iw70001zowjcujn9yss,restaurante,outcome,EXTRA,50.0,geovana,talis@gmail.com,2024-02-29 21:45:23.575000,1
+clt7r5xhm0000zowj26ktoza1,TAXI,outcome,TAXI,10.0,geovana,talis@gmail.com,2024-02-29 21:42:32.215000,1
+clt7omnij0000la7gf19vsyxd,ginguba,outcome,extra,4.0,talis,talis@gmail.com,2024-02-29 20:32:13.980000,1
+clt7jgcc10000v6ej2adkrygx,bolachas,outcome,extra,10.0,talis,talis@gmail.com,2024-02-29 18:07:28.553000,1
+clt75e70b0001ekmkf9l4pc95,pao,outcome,alimentacao,4.5,talis,talis@gmail.com,2024-02-29 11:34:14.350000,1
+clt75djz30000ekmklysaatn5,creche,outcome,creche,1800.0,talis,talis@gmail.com,2024-02-29 11:33:40.592000,1
+clt6d70bu0006jg8dhym9ohf5,bolachas ,outcome,extra,10.0,talis,talis@gmail.com,2024-02-28 22:24:52.296000,1
+clt6d673u0005jg8daab5o5o2,train,outcome,transporte ,18.0,talis,talis@gmail.com,2024-02-28 22:24:14.012000,1
+clt6d1vsu0004jg8dx1u4elxi,bolachas ,outcome,extra,5.0,geovana,talis@gmail.com,2024-02-28 22:20:53.314000,1
+clt6d13hm0003jg8dcrbqdv21,yogurte,outcome,alimentacao,5.0,geovana,talis@gmail.com,2024-02-28 22:20:16.629000,1
+clt6d0clm0002jg8djnwic06h,frutas ,outcome,alimentacao,13.0,geovana,talis@gmail.com,2024-02-28 22:19:41.075000,1
+clt6co1xe0001jg8dmmprzwla,petit dej,outcome,alimentacao,70.0,geovana,talis@gmail.com,2024-02-28 22:10:08.090000,1
+clt6cl62i0000jg8dr30t45i3,garrafas das crianças,outcome,familia,138.0,geovana,talis@gmail.com,2024-02-28 22:07:53.087000,1
+clt68gdap0002mj6x66zgtx0x,internet,outcome,internet,249.0,geovana,talis@gmail.com,2024-02-28 20:12:10.638000,1
+clt68f0b80001mj6xpux9wron,REDAL,outcome,agua e luz,231.0,geovana,talis@gmail.com,2024-02-28 20:11:07.174000,1
+clt689z710000mj6xp7v1hqpb,alex emprestimo,outcome,divida,650.0,talis,talis@gmail.com,2024-02-28 20:07:12.289000,1
+clt5utfgc00003n7edh34c5j5,petit dej no trabalho,outcome,extra,20.0,talis,talis@gmail.com,2024-02-28 13:50:02.211000,1
+clt5s6h8e000333o83t0fam2d,pastilhas ,outcome,extra,2.0,talis,talis@gmail.com,2024-02-28 12:36:35.579000,1
+clt5rgi0a000233o8x26nz5xn,taxi,outcome,transporte,6.0,talis,talis@gmail.com,2024-02-28 12:16:23.321000,1
+clt5rf10f000133o80dd65nce,taxi,outcome,transporte,19.0,geovana,talis@gmail.com,2024-02-28 12:15:14.674000,1
+clt5qrfdb000033o8r4k0wm25,reparacao de carregador g,outcome,imprevisto,20.0,geovana,talis@gmail.com,2024-02-28 11:55:51.732000,1
+clt5q2jyt0004fxjww6sg5c41,train,outcome,transporte,36.0,talis,talis@gmail.com,2024-02-28 11:37:33.083000,1
+clt5pype00003fxjw2u57h817,perside,outcome,divida,1300.0,geovana,talis@gmail.com,2024-02-28 11:34:33.364000,1
+clt5pwby70001fxjwf4b6fi66,salario geovana,income,salario,10000.0,geovana,talis@gmail.com,2024-02-28 11:32:43.076000,1
+clt5pvhok0000fxjw5rtp3orp,pharmacie e leite ayla,outcome,saude,742.2,talis,talis@gmail.com,2024-02-28 11:32:03.639000,1
+cltaeb85g0007u1v0pdn5lxgs,bolachas,outcome,extra,30.0,geovana,talis@gmail.com,2024-02-02 18:07:12.970000,1
