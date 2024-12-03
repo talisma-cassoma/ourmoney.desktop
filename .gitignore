@@ -17,6 +17,7 @@ __pycache__/
 *.json
 *.log
 *.tmp
+*.csv
 
 # Ignorar configurações do editor/IDE
 .vscode/
