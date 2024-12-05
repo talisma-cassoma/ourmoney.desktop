@@ -96,6 +96,20 @@ class MainWindow(QMainWindow):
         self.progress_bar.setValue(0)
         self.status_layout.addWidget(self.progress_bar)
 
+        """ save file """
+        self.save_file_frame = QFrame()
+        self.save_file_layout = QFormLayout(self.save_file_frame)
+
+        self.file_type_input = QComboBox()
+        self.file_type_input.setStyleSheet("color: white;")
+        self.file_type_input.addItems(["json", "csv"])
+        self.save_file_layout.addRow('guardar em:', self.file_type_input)
+        # Connect signals to the methods.
+        self.file_type_input.activated.connect(self.save_file)
+        # # Add block 1 to thes status layout
+        self.status_layout.addWidget(self.save_file_frame)
+        
+
         self.main_layout.addWidget(self.status_frame)
 
         # Two blocks (side by side) for transaction input and totals
@@ -123,6 +137,7 @@ class MainWindow(QMainWindow):
         self.price_input.setPlaceholderText('Preço')
 
         self.add_button = QPushButton(text="Adicionar Transação")
+        self.add_button.setStyleSheet("background-color: black")
         self.add_button.clicked.connect(self.add_transaction)
 
         # Add widgets to the layout
@@ -193,6 +208,9 @@ class MainWindow(QMainWindow):
 
         # Load registered transactions
         self.load_collection()
+
+    def save_file(self, index):
+        self.controller.export_file(index)
 
     def sync_and_show_progress(self):
         self.progress_bar.setValue(0)

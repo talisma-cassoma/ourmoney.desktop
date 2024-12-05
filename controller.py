@@ -183,4 +183,9 @@ class Controller:
             logging.info("status: success, Transactions exported to CSV successfully.")
         except Exception as e:
             logging.error(f"status: error:{ str(e)}")
+    def export_file(self, index):
+        if index == 0:
+            export_transactions_to_json()
+        if index == 1:
+            export_transactions_to_csv()
      
