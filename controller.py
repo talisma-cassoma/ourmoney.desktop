@@ -170,8 +170,8 @@ class Controller:
                     #print(f"Erro ao inserir a transação: {e}")
                     
     def export_file(self, index):
-        # 0 for json 
-        # 1 for csv
+        # index 0 for json 
+        # index 1 for csv
         if index == 0:
             try:
                 export_transactions_to_json()
