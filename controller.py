@@ -169,23 +169,19 @@ class Controller:
                     logging.error(f"Erro ao inserir a transação: {e}")
                     #print(f"Erro ao inserir a transação: {e}")
                     
-    def export_transactions_to_json(self):
-        """Controller function to handle exporting transactions."""
-        try:
-            export_transactions_to_json()
-            logging.info("status: success, Transactions saved successfully.")
-        except Exception as e:
-            logging.error(f"status: error:{ str(e)}")
-    def export_transactions_to_csv(self):
-        """Controller function to handle exporting transactions to CSV."""
-        try:
-            export_transactions_to_csv()
-            logging.info("status: success, Transactions exported to CSV successfully.")
-        except Exception as e:
-            logging.error(f"status: error:{ str(e)}")
     def export_file(self, index):
+        # 0 for json 
+        # 1 for csv
         if index == 0:
-            export_transactions_to_json()
+            try:
+                export_transactions_to_json()
+                logging.info("status: success, Transactions saved successfully.")
+            except Exception as e:
+                logging.error(f"status: error:{ str(e)}")
         if index == 1:
-            export_transactions_to_csv()
+            try:
+                export_transactions_to_csv()
+                logging.info("status: success, Transactions exported to CSV successfully.")
+            except Exception as e:
+                logging.error(f"status: error:{ str(e)}")
      
