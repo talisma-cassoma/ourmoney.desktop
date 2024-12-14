@@ -28,3 +28,7 @@ __pycache__/
 *.swp
 *.swo
 *node_modules/
+
+# Exception for package.json and package-lock.json
+!package.json
+!package-lock.json
