@@ -18,6 +18,7 @@ __pycache__/
 *.log
 *.tmp
 *.csv
+*.xlsx
 
 # Ignorar configurações do editor/IDE
 .vscode/
