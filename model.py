@@ -6,8 +6,6 @@ import logging
 import os
 import sys
 
-from convertTimeFormat import convert_time_format
-
 def resource_path(relative_path):
     try:
         base_path = sys._MEIPASS2
@@ -107,7 +105,6 @@ class Model:
                     t.get('owner', 'talisma'),  # Default owner
                     t.get('email', 'talisma@email.com'),  # Default email
                     1 if t['synced'] else 0,  # Convert boolean to 1/0 for the database
-                    #convert_time_format(t['createdAt'])  # Convert time correctly
                     t['createdAt'] #
                 )
                 cur.execute(query, data)
