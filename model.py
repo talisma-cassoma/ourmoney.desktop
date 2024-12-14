@@ -34,7 +34,7 @@ class Model:
         CREATE TABLE IF NOT EXISTS Transactions (
             "id" TEXT NOT NULL,                           -- UUID gerado pelo Prisma
             "description" TEXT NOT NULL,                 -- Descrição da transação
-            "type" TEXT NOT NULL,                        -- Tipo da transação (ex.: income ou expense)
+            "type" TEXT NOT NULL,                        -- Tipo da transação 
             "category" TEXT NOT NULL,                    -- Categoria da transação
             "price" FLOAT NOT NULL,                      -- Float para alinhar com o Prisma
             "owner" TEXT NOT NULL DEFAULT 'talisma',     -- Valor padrão do Prisma
