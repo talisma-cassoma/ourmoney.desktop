@@ -8,7 +8,7 @@ def import_transactions_to_json():
 
     model = Model()
 
-    with open('myTransactions.json', 'r') as file:
+    with open('myTransactions_20241206.json', 'r') as file:
         parser = ijson.items(file, 'item')  # Parse the array of transactions
 
         for transaction in parser:
@@ -19,4 +19,6 @@ def import_transactions_to_json():
 
         # Insert any remaining transactions
         if transactions:
-            model.insert_many(transactions)   
+            model.insert_many(transactions) 
+
+import_transactions_to_json()

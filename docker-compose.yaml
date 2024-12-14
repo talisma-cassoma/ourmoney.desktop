@@ -1,0 +1,12 @@
+services:
+  prisma:
+    build: .
+    container_name: prisma_service
+    volumes:
+      - ./prisma:/usr/app/prisma
+      - ./database.db:/usr/app/database.db
+      - /usr/app/node_modules # Prevent overwriting with host's empty node_modules
+    ports:
+      - "5555:5555"
+    environment:
+      DATABASE_URL: "file:/usr/app/database.db"

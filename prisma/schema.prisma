@@ -1,0 +1,20 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:../database.db"
+}
+
+model Transactions {
+  id          String   @id @default(cuid())
+  description String
+  type        String
+  category    String
+  price       Float
+  owner       String @default("talisma")
+  email       String @default("talisma@email.com")
+  synced      Boolean  @default(false)
+  createdAt   DateTime @default(now())
+}

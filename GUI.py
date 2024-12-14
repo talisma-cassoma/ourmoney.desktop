@@ -102,7 +102,7 @@ class MainWindow(QMainWindow):
 
         self.file_type_input = QComboBox()
         self.file_type_input.setStyleSheet("color: white;")
-        self.file_type_input.addItems(["json", "csv"])
+        self.file_type_input.addItems(["json", "csv", "excel"])
         # Connect signals to the methods.
         self.file_type_input.activated.connect(self.save_file)
         # # Add block 1 to thes status layout
@@ -288,7 +288,7 @@ class MainWindow(QMainWindow):
             self.transaction_table.setCellWidget(row_position, 3, price)
 
             # Format and display the date
-            formatted_date = datetime.strptime(transaction[7], '%Y-%m-%d %H:%M:%S.%f').strftime("%Y-%m-%d")
+            formatted_date = datetime.strptime(transaction[7], '%Y-%m-%dT%H:%M:%S.%f'+'Z').strftime("%Y-%m-%d")
             self.transaction_table.setItem(row_position, 4, QTableWidgetItem(formatted_date))
 
             # Display synced status

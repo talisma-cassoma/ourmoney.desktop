@@ -22,14 +22,10 @@ def export_transactions_to_json():
         for transaction in transactions
     ]
     
-    filename = "myTransactions.json"
-    
+    # Get the current timestamp in the desired format
+    timestamp = datetime.now().strftime("%Y%m%d")
+    filename = f"myTransactions_{timestamp}.json"
     # Check if the file already exists
-    if os.path.exists(filename):
-        # Get the current timestamp in the desired format
-        timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
-        # Modify the filename to include the timestamp
-        filename = f"myTransactions_{timestamp}.json"
-    
-    with open(filename, "w", encoding="utf-8") as json_file:
-        json.dump(transactions_list, json_file, indent=4, ensure_ascii=False)
+    if not os.path.exists(filename):
+        with open(filename, "w", encoding="utf-8") as json_file:
+            json.dump(transactions_list, json_file, indent=4, ensure_ascii=False)

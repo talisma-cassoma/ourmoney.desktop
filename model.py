@@ -32,15 +32,17 @@ class Model:
         db = sqlite3.connect(resource_path('database.db'))
         query = """
         CREATE TABLE IF NOT EXISTS Transactions (
-            id TEXT PRIMARY KEY,          -- Mantenha TEXT se o ID for uma string (UUID ou similar)
-            description TEXT NOT NULL,
-            type TEXT NOT NULL,
-            category TEXT NOT NULL,
-            price REAL NOT NULL,
-            owner TEXT NOT NULL DEFAULT 'talisma',  -- Definido um valor padrão
-            email TEXT NOT NULL DEFAULT 'talisma@email.com',  -- Definido um valor padrão
-            synced BOOLEAN NOT NULL CHECK (synced IN (0, 1)),  -- Assegura que synced seja 0 ou 1
-            createdAt DATETIME default current_timestamp
+            "id" TEXT NOT NULL,                           -- UUID gerado pelo Prisma
+            "description" TEXT NOT NULL,                 -- Descrição da transação
+            "type" TEXT NOT NULL,                        -- Tipo da transação (ex.: income ou expense)
+            "category" TEXT NOT NULL,                    -- Categoria da transação
+            "price" FLOAT NOT NULL,                      -- Float para alinhar com o Prisma
+            "owner" TEXT NOT NULL DEFAULT 'talisma',     -- Valor padrão do Prisma
+            "email" TEXT NOT NULL DEFAULT 'talisma@email.com', -- Valor padrão do Prisma
+            "synced" BOOLEAN NOT NULL DEFAULT FALSE,     -- Boolean alinhado com o Prisma
+            "createdAt" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, -- TIMESTAMP sem precisão
+
+            CONSTRAINT "Transactions_pkey" PRIMARY KEY ("id") -- Chave primária
         )
         """
         cur = db.cursor()
@@ -73,7 +75,7 @@ class Model:
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
         """
         # Data formatada corretamente
-        createdAt = datetime.now()
+        createdAt = datetime.now().isoformat(timespec='milliseconds') + 'Z' # padrão ISO 8601 para datas
 
         cur = db.cursor()
         cur.execute(query, (str(uuid.uuid4()), description, type, category, price, owner, email, synced, createdAt))
@@ -106,7 +108,7 @@ class Model:
                     t.get('email', 'talisma@email.com'),  # Default email
                     1 if t['synced'] else 0,  # Convert boolean to 1/0 for the database
                     #convert_time_format(t['createdAt'])  # Convert time correctly
-                    ['createdAt']
+                    t['createdAt'] #
                 )
                 cur.execute(query, data)
                 successful_insertions += 1
@@ -142,7 +144,8 @@ class Model:
 
         # Verifica se createdAt é None e define a data atual se necessário
         if createdAt is None:
-            createdAt = datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')
+            #createdAt = datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')
+            createdAt = datetime.now().isoformat(timespec='milliseconds') + 'Z'  #padrão ISO 8601 para datas
 
         # Consulta de inserção
         query = """

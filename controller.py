@@ -7,6 +7,7 @@ from datetime import datetime
 from model import Model
 from exportJson import export_transactions_to_json
 from exportCsv import export_transactions_to_csv
+from exportXlsx import export_transactions_to_excel
 
 
 
@@ -172,6 +173,7 @@ class Controller:
     def export_file(self, index):
         # index 0 for json 
         # index 1 for csv
+        # index 2 for xlsx
         if index == 0:
             try:
                 export_transactions_to_json()
@@ -182,6 +184,12 @@ class Controller:
             try:
                 export_transactions_to_csv()
                 logging.info("status: success, Transactions exported to CSV successfully.")
+            except Exception as e:
+                logging.error(f"status: error:{ str(e)}")
+        if index == 2:
+            try:
+                export_transactions_to_excel()
+                logging.info("status: success, Transactions exported to excel successfully.")
             except Exception as e:
                 logging.error(f"status: error:{ str(e)}")
      
