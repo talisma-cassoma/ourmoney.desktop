@@ -109,10 +109,6 @@ class Controller:
 
             transactions_to_push = []
             for transaction in unsynced_transactions:
-                created_at_str = transaction[8]
-                created_at_dt = datetime.strptime(created_at_str, '%Y-%m-%d %H:%M:%S.%f')
-                created_at_iso = created_at_dt.strftime('%Y-%m-%dT%H:%M:%S.%fZ')[:-4] + 'Z'
-
                 transaction_dict = {
                     "id": transaction[0],
                     "description": transaction[1],
@@ -122,7 +118,7 @@ class Controller:
                     "owner": transaction[5],
                     "email": transaction[6],
                     "synced": True,
-                    "createdAt": created_at_iso
+                    "createdAt": transaction[8]
                 }
 
                 transactions_to_push.append(transaction_dict)
