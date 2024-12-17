@@ -2,7 +2,7 @@ import logging
 import requests
 import json
 
-from convertTimeFormat import convert_time_format
+from convertTimeFormat import convert_to_iso8601
 from datetime import datetime
 from model import Model
 from exportJson import export_transactions_to_json
@@ -118,7 +118,7 @@ class Controller:
                     "owner": transaction[5],
                     "email": transaction[6],
                     "synced": True,
-                    "createdAt": transaction[8]
+                    "createdAt": convert_to_iso8601(transaction[8])
                 }
 
                 transactions_to_push.append(transaction_dict)
@@ -144,9 +144,8 @@ class Controller:
         for transaction in data:
             createdAt = transaction.get('createdAt')
             if createdAt is not None:
-                try:
-    
-                    convertedTime = convert_time_format(createdAt)
+                try: 
+                    convertedTime = convert_to_iso8601(createdAt)
                     self.model.insert_non_synced_transaction(
                         transaction['id'],
                         transaction['description'],

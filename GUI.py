@@ -5,9 +5,15 @@ from PyQt5.QtWidgets import (QApplication, QMainWindow, QVBoxLayout, QScrollArea
 
 from PyQt5.QtCore import Qt, QTimer, QEvent
 from PyQt5.QtGui import QFont
+from convertTimeFormat import convert_to_iso8601
 
 from datetime import datetime
 import time
+import logging
+
+# Configuração do logging
+logging.basicConfig(filename='app.log', level=logging.INFO, format='%(asctime)s %(levelname)s:%(message)s')
+
 
 Total_font = QFont()
 Total_font.setPointSize(14)  # Set the font size to 14 (adjust as needed)
@@ -286,10 +292,17 @@ class MainWindow(QMainWindow):
             price = QLabel(f'DH$ {transaction[4]:.2f}')
             price.setStyleSheet(f'color: {price_color};')
             self.transaction_table.setCellWidget(row_position, 3, price)
-
-            # Format and display the date
-            formatted_date = datetime.strptime(transaction[7], '%Y-%m-%dT%H:%M:%S.%f'+'Z').strftime("%Y-%m-%d")
-            self.transaction_table.setItem(row_position, 4, QTableWidgetItem(formatted_date))
+            
+            try:
+                # Check if transaction[7] is not None or empty
+                if not transaction[7]:
+                    raise ValueError("Empty or None date string")
+                date = convert_to_iso8601(transaction[7])
+                # Format and display the date
+                formatted_date = datetime.strptime(date, '%Y-%m-%dT%H:%M:%S.%fZ').strftime("%Y-%m-%d")
+                self.transaction_table.setItem(row_position, 4, QTableWidgetItem(formatted_date))
+            except Exception as e:
+                logging.error(f'Unexpected error with id: {transaction[0]} with date: {date} , error: {e}')
 
             # Display synced status
             synced_color = "rgb(79, 255, 203)" if transaction[8] else "rgb(128, 128, 128)"

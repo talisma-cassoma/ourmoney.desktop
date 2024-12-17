@@ -1,7 +1,19 @@
-from datetime import datetime
+import logging
+from datetime import datetime, timezone
 
-def convert_time_format(time):
-    #convert from 2024-12-14T12:34:56.789Z to 2024-12-14 12:34:56.301991
-    convertedTimeZ = datetime.strptime(time[:-1], '%Y-%m-%dT%H:%M:%S.%f')
-    convertedTime = convertedTimeZ.strftime('%Y-%m-%d %H:%M:%S.%f')
-    return convertedTime
+
+# Configuração do logging
+logging.basicConfig(filename='app.log', level=logging.INFO, format='%(asctime)s %(levelname)s:%(message)s')
+
+
+def convert_to_iso8601(date):
+    # Verifica se a data é um int (timestamp em milissegundos)
+    if isinstance(date, int):
+        dt = datetime.fromtimestamp(date / 1000, tz=timezone.utc)
+        # Substitui +00:00 por Z para indicar UTC
+        return dt.isoformat(timespec='milliseconds').replace("+00:00", "Z")
+    # Verifica se a data já está no formato string
+    elif isinstance(date, str):
+        return date  # Assume que está correta
+    else:
+         logging.error("Formato de data inválido: esperado int ou string.")

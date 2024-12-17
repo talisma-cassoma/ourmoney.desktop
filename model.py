@@ -6,6 +6,8 @@ import logging
 import os
 import sys
 
+from convertTimeFormat import convert_to_iso8601
+
 def resource_path(relative_path):
     try:
         base_path = sys._MEIPASS2
@@ -105,7 +107,7 @@ class Model:
                     t.get('owner', 'talisma'),  # Default owner
                     t.get('email', 'talisma@email.com'),  # Default email
                     1 if t['synced'] else 0,  # Convert boolean to 1/0 for the database
-                    t['createdAt'] #
+                    convert_to_iso8601(t['createdAt']) #
                 )
                 cur.execute(query, data)
                 successful_insertions += 1
