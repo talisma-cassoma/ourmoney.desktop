@@ -1,6 +1,7 @@
 from openpyxl import Workbook
 from model import Model
 from datetime import datetime
+from convertTimeFormat import convert_time_format
 
 
 def export_transactions_to_excel(file_path="transactions.xlsx"):
@@ -24,8 +25,7 @@ def export_transactions_to_excel(file_path="transactions.xlsx"):
         formatted_transaction = list(transaction)  # Convert tuple to list if needed
         # Format the createdAt field
         try:
-            created_at = datetime.strptime(formatted_transaction[7], "%Y-%m-%d %H:%M:%S.%f")
-            formatted_transaction[7] = created_at.strftime("%d-%m-%Y")  # Format as day-month-year
+            formatted_transaction[7] = convert_time_format(formatted_transaction[7])           
         except (ValueError, IndexError):
             pass  # Leave the original value if formatting fails
         

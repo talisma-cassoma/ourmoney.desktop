@@ -100,9 +100,9 @@ class Model:
             try:
                 data = (
                     t.get('id', str(uuid.uuid4())),  # Use the id from the JSON or generate a new one if not available
-                    t['description'],
+                    str(t['description']).strip().lower(),
                     t['type'],
-                    t['category'],
+                    str(t['category']).strip().lower(),
                     float(t['price']),  # Ensure price is a float
                     t.get('owner', 'talisma'),  # Default owner
                     t.get('email', 'talisma@email.com'),  # Default email

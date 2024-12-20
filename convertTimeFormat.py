@@ -6,6 +6,13 @@ from datetime import datetime, timezone
 logging.basicConfig(filename='app.log', level=logging.INFO, format='%(asctime)s %(levelname)s:%(message)s')
 
 
+def convert_time_format(date):
+    converted_date = convert_to_iso8601(date)
+    #convert from 2024-12-14T12:34:56.789Z to 2024-12-14 12:34:56.301991
+    converted_date= datetime.strptime(converted_date, "%Y-%m-%dT%H:%M:%S.%fZ")
+    # Formate no estilo dia-mes-ano
+    return converted_date.strftime("%d-%m-%Y")
+
 def convert_to_iso8601(date):
     # Verifica se a data é um int (timestamp em milissegundos)
     if isinstance(date, int):

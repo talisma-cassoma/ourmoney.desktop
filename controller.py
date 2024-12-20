@@ -148,9 +148,9 @@ class Controller:
                     convertedTime = convert_to_iso8601(createdAt)
                     self.model.insert_non_synced_transaction(
                         transaction['id'],
-                        transaction['description'],
+                        str(transaction['description']).strip().lower(),
                         transaction['type'],
-                        transaction['category'],
+                        str(transaction['category']).strip().lower(),
                         transaction['price'],
                         convertedTime,
                         synced=True

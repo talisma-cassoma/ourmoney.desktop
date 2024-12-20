@@ -225,9 +225,9 @@ class MainWindow(QMainWindow):
         self.progress_bar.setValue(100)
 
     def add_transaction(self):
-        description = self.description_input.text().strip()
-        trans_type = self.type_input.currentText()
-        category = self.category_input.text().strip()
+        description = self.description_input.text().strip().lower()
+        trans_type = self.type_input.currentText().lower()
+        category = self.category_input.text().strip().lower()
         price_text = self.price_input.text().strip()
     
         # Validação dos campos
