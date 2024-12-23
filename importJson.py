@@ -9,7 +9,7 @@ def import_transactions_to_json():
 
     model = Model()
 
-    with open('myTransactions_20241220.json', 'r') as file:
+    with open('myTransactions_20241222.json', 'r') as file:
         parser = ijson.items(file, 'item')  # Parse the array of transactions
 
         for transaction in parser:
