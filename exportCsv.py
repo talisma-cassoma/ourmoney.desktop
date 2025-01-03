@@ -9,7 +9,7 @@ def export_transactions_to_csv(file_path="transactions.csv"):
     transactions = model.get_all_transactions()
     
     # Define the CSV header
-    header = ["id", "description", "type", "category", "price", "owner", "email", "createdAt", "synced"]
+    header = ["id", "description", "type", "category", "price", "owner", "email", "createdAt", "status"]
     
     # Write to CSV file
     with open(file_path, mode="w", newline="", encoding="utf-8") as csv_file:

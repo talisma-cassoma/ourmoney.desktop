@@ -18,7 +18,8 @@ class Controller:
     def __init__(self, main_window=None):
         self.main_window = main_window
         self.model = Model()
-        self.api_url = "https://our-money-bkd.onrender.com"
+        #self.api_url = "https://our-money-bkd.onrender.com"
+        self.api_url = "http://localhost:3000"
         self.timeout = 10
 
     def is_online(self):
@@ -40,11 +41,8 @@ class Controller:
                            type, category, price, 
                            owner='talisma', 
                            email='talisma@email.com', 
-                           synced=False):
-        self.model.insert_one(description, type, category, price, owner, email, synced)
-    
-    def edit(self, transaction_id, updates):        
-        self.model.patch_transaction(transaction_id, updates)
+                           status='unsynced'):
+        self.model.insert_one(description, type, category, price, owner, email, status)
 
     def delete_transaction(self, transaction_id):
         self.model.delete(transaction_id)
@@ -64,51 +62,57 @@ class Controller:
         for transaction in transactions:
             self.transactions_list.addItem(f"{transaction['description']} - {transaction['price']} - {transaction['createdAt']}")
 
-    def pull_data(self):
+    def synchronize_data(self):
         """Baixa dados do servidor para o SQLite local e sincroniza as transações baixadas."""
-        if self.is_online():
-            try:
-                response = requests.get(f"{self.api_url}/api/transactions/unsynced", timeout=self.timeout)
-                if response.status_code == 200:
-                    data = response.json()
-                    self.store_in_local_db(data)
-                    self.push_downloaded_data(data)
-                    self.push_local_transactions()
-                    self.main_window.last_date = None
-                    self.main_window.load_collection()
-            except Exception as e:
-                logging.error(f"Erro ao puxar dados: {e}")
-                #print(f"Erro ao puxar dados: {e}")
-        else:
+        if not self.is_online():
             logging.info("Sem conexão. Dados não puxados.")
-             #print("Sem conexão. Dados não puxados.")
+            return None
 
-    def push_downloaded_data(self, transactions):
+        try:
+            response = requests.get(f"{self.api_url}/api/transactions/unsynced", timeout=self.timeout)
+            if response.status_code == 200:
+                data = response.json()
+                self.store_in_local_db(data)
+                self.push_local_transactions()
+                return data
+            else:
+                logging.error(f"Erro na resposta do servidor: {response.status_code}")
+                return None
+        except Exception as e:
+            logging.error(f"Erro ao puxar dados: {e}")
+            return None
+
+    def upadate_status(self, transactions):
         """Atualiza o status de 'synced' das transações baixadas no servidor."""
         for transaction in transactions:
             try:
                 response = requests.patch(
-                    f"{self.api_url}/api/transactions/{transaction['id']}/sync",
-                    json={'synced': True},
+                    f"{self.api_url}/api/transactions/{transaction['id']}",
+                    json={'status': 'synced'},
                     timeout=self.timeout
                 )
                 if response.status_code == 200:
                     logging.info(f"Transação {transaction['id']} marcada como sincronizada no servidor.")
-                    #print(f"Transação {transaction['id']} marcada como sincronizada no servidor.")
                 else:
                     logging.error(f"Erro ao marcar transação {transaction['id']} como sincronizada: {response.status_code}")
-                    #print(f"Erro ao marcar transação {transaction['id']} como sincronizada: {response.status_code}")
             except Exception as e:
                 logging.error(f"Erro ao atualizar status de sincronização no servidor para a transação {transaction['id']}: {e}")
-                #print(f"Erro ao atualizar status de sincronização no servidor para a transação {transaction['id']}: {e}")
 
     def push_local_transactions(self):
         """Envia transações locais para o servidor, convertendo o createdAt para o formato ISO 8601 (UTC)."""
         if self.is_online():
             unsynced_transactions = self.model.get_unsynced_transactions()
-
+            
             transactions_to_push = []
+            deleted_transactions_ids = []  # To store transactions with status 'deleted'
+            updated_transactions = [] 
+
             for transaction in unsynced_transactions:
+                if transaction[8] == 'deleted':
+                    deleted_transactions_ids.append(transaction[0])
+                if transaction[8] == 'updated':
+                   updated_transactions.append(transaction)
+
                 transaction_dict = {
                     "id": transaction[0],
                     "description": transaction[1],
@@ -117,10 +121,9 @@ class Controller:
                     "price": transaction[4],
                     "owner": transaction[5],
                     "email": transaction[6],
-                    "synced": True,
-                    "createdAt": convert_to_iso8601(transaction[8])
+                    "createdAt": convert_to_iso8601(transaction[7]),
+                    "status": "synced" if transaction[8] == "unsynced" else transaction[8]
                 }
-
                 transactions_to_push.append(transaction_dict)
 
             # Sending transactions in chunks
@@ -136,9 +139,11 @@ class Controller:
                         logging.error(f"Erro ao enviar dados. Status Code: {response.status_code}")
                 except Exception as e:
                     logging.error(f"Erro ao enviar transações offline: {e}")
+            self.model.update_many(updated_transactions)
+            self.model.delete_many(deleted_transactions_ids)
         else:
             logging.info("Sem conexão. Dados não enviados.")
-
+   
     def store_in_local_db(self, data):
         """Armazena as transações baixadas no banco de dados local."""
         for transaction in data:
@@ -153,17 +158,14 @@ class Controller:
                         str(transaction['category']).strip().lower(),
                         transaction['price'],
                         convertedTime,
-                        synced=True
+                        status='synced'
                     )
                 except ValueError as ve:
                     logging.error(f"Erro ao analisar a data: {ve}")
-                    #print(f"Erro ao analisar a data: {ve}")
                 except KeyError as ke:
                     logging.error(f"Chave ausente na transação: {ke}")
-                    #print(f"Chave ausente na transação: {ke}")
                 except Exception as e:
                     logging.error(f"Erro ao inserir a transação: {e}")
-                    #print(f"Erro ao inserir a transação: {e}")
                     
     def export_file(self, index):
         # index 0 for json 

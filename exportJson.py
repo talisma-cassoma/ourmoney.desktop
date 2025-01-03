@@ -17,7 +17,7 @@ def export_transactions_to_json():
             "owner": transaction[5],
             "email": transaction[6],
             "createdAt": transaction[7],
-            "synced": transaction[8]
+            "status": transaction[8]
         }
         for transaction in transactions
     ]

@@ -15,6 +15,6 @@ model Transactions {
   price       Float
   owner       String @default("talisma")
   email       String @default("talisma@email.com")
-  synced      Boolean  @default(false)
+  status      String @default("unsynced")
   createdAt   DateTime @default(now())
 }

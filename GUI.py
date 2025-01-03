@@ -40,6 +40,24 @@ class StatusCheckerThread(QThread):
     def stop(self):
         self.running = False
 
+class SyncThread(QThread):
+    progress_signal = pyqtSignal(int)  # Sinal para atualizar a barra de progresso
+    finished_signal = pyqtSignal()  # Sinal para enviar os dados sincronizados
+
+    def __init__(self, controller):
+        super().__init__()
+        self.controller = controller
+
+    def run(self):
+       
+        for i in range(0, 101, 10):  # Simula progresso
+            self.progress_signal.emit(i)
+            self.msleep(100)
+        
+        # Executa o processo de sincronização
+        self.controller.synchronize_data()
+        self.finished_signal.emit()
+        
 class MainWindow(QMainWindow):
     def __init__(self,):
         super().__init__()
@@ -52,6 +70,8 @@ class MainWindow(QMainWindow):
 
         # Create and start the thread for status updates
         self.status_thread = None
+
+        self.sync_thread = None
 
     def set_controller(self, controller):
         """Define o controlador para a GUI."""
@@ -216,12 +236,25 @@ class MainWindow(QMainWindow):
         self.controller.export_file(index)
 
     def sync_and_show_progress(self):
-        self.progress_bar.setValue(0)
-        for i in range(1, 101):
-            self.progress_bar.setValue(i)
-            QApplication.processEvents()
+        if self.sync_thread and self.sync_thread.isRunning():
+            QMessageBox.warning(self, "Sincronização em andamento", "A sincronização já está em andamento!")
+            return
 
-        self.controller.pull_data()  # Chama a função que puxa os dados
+        self.sync_thread = SyncThread(self.controller)
+        self.sync_thread.progress_signal.connect(self.update_progress_bar)
+        self.sync_thread.finished_signal.connect(self.sync_finished)
+
+        self.progress_bar.setValue(0)
+        self.sync_thread.start()
+
+    def update_progress_bar(self, value):
+        """Atualiza o valor da barra de progresso."""
+        self.progress_bar.setValue(value)
+
+    def sync_finished(self):
+        """Executado quando a sincronização termina."""       
+        self.controller.main_window.last_date = None
+        self.controller.main_window.load_collection()
         self.progress_bar.setValue(100)
 
     def add_transaction(self):
@@ -305,8 +338,8 @@ class MainWindow(QMainWindow):
                 logging.error(f'Unexpected error with id: {transaction[0]} with date: {date} , error: {e}')
 
             # Display synced status
-            synced_color = "rgb(79, 255, 203)" if transaction[8] else "rgb(128, 128, 128)"
-            synced_status = QLabel("sincronizado" if transaction[8] else "desincronizado")
+            synced_color = "rgb(79, 255, 203)" if transaction[8]=='synced' else "rgb(128, 128, 128)"
+            synced_status = QLabel("sincronizado" if transaction[8]=='synced' else "desincronizado")
             synced_status.setStyleSheet(f'color: {synced_color};')
             self.transaction_table.setCellWidget(row_position, 5, synced_status)
 

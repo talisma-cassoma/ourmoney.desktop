@@ -19,9 +19,10 @@ __pycache__/
 *.tmp
 *.csv
 *.xlsx
+*.pdf
 
 # Ignorar configurações do editor/IDE
-.vscode/
+#.vscode/
 .idea/
 
 # Ignorar arquivos de backup

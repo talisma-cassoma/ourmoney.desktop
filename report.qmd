@@ -1,0 +1,58 @@
+---
+title: "our money Report"
+author: "Talisma Manuel"
+format: pdf
+echo: False
+error: False
+warning: False
+engine: jupyter
+---
+
+## Introduction
+
+This is a sample Quarto report generated programmatically.
+
+## Data
+
+```{python}
+from IPython.display import HTML, display
+from lib import DataProcessor
+
+file_path = "./transactions.xlsx"
+data_processor = DataProcessor(file_path)
+df = data_processor.get_dataframe()
+display(df.head(4).style.background_gradient())
+```
+
+```{python}
+import warnings
+from IPython.display import HTML, display
+from lib import ( ExpenseAnalyzer,PivotTableVisualizer )
+warnings.filterwarnings('ignore')
+ about_recurring_categories = """
+<div>
+<H2>verificando gastos recurrentes</H2>
+<p>
+Vamos começar explorando os dados, visualizando a distribuição de despesas por categoria, comparando<br>
+despesas e receitas mensais e identificando categorias recorrentes nos últimos meses.</p>
+</div>
+"""
+display(HTML(about_recurring_categories))
+
+expenses_by_month = ExpenseAnalyzer(df)
+
+#Set the number of months to filter
+expenses_by_month.set_time_period(-3)
+recurring_categories = expenses_by_month.find_recurring_categories()
+
+display(recurring_categories.style.background_gradient())
+
+about_annual_expenses_by_category = """
+<div>
+<H2>Análise Anual de Despesas por Categoria</H2>
+<p>abaixo podemos visualizar da distribuição de despesas e receitas por categoria no ano.</p>
+</div>
+"""
+display(HTML(about_annual_expenses_by_category))
+
+```

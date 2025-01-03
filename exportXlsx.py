@@ -10,7 +10,7 @@ def export_transactions_to_excel(file_path="transactions.xlsx"):
     transactions = model.get_all_transactions()
     
     # Define the Excel header
-    header = ["id", "description", "type", "category", "price", "owner", "email", "createdAt", "synced"]
+    header = ["id", "description", "type", "category", "price", "owner", "email", "createdAt", "status"]
     
     # Create a new Excel workbook and add a worksheet
     workbook = Workbook()

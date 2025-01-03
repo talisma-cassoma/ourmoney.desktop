@@ -33,3 +33,7 @@ Follow these steps to set up the project locally:
    ```bash
    pip3 freeze > requirements.txt
    ```
+
+   ## for the repports
+
+   its use quarto to generate pdf repport, sgestion: use quarto vs code extension  
