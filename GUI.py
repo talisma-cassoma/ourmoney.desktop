@@ -5,7 +5,6 @@ from PyQt5.QtWidgets import (QApplication, QMainWindow, QVBoxLayout, QScrollArea
 
 from PyQt5.QtCore import Qt, QTimer, QEvent
 from PyQt5.QtGui import QFont
-from convertTimeFormat import convert_to_iso8601
 
 from datetime import datetime
 import time
@@ -316,41 +315,40 @@ class MainWindow(QMainWindow):
             self.transaction_table.insertRow(row_position)
 
             # Map and populate transaction fields
-            self.transaction_table.setItem(row_position, 0, QTableWidgetItem(transaction[1]))  # Description
-            type_item = QTableWidgetItem('entrada' if transaction[2] == 'income' else 'saida')  # Type
+            self.transaction_table.setItem(row_position, 0, QTableWidgetItem(transaction.description))  # Description
+            type_item = QTableWidgetItem('entrada' if transaction.type == 'income' else 'saida')  # Type
             self.transaction_table.setItem(row_position, 1, type_item)
 
-            self.transaction_table.setItem(row_position, 2, QTableWidgetItem(transaction[3]))  # Category
-            price_color = "rgb(79, 255, 203)" if transaction[2] == "income" else "rgb(247, 91, 105)"
-            price = QLabel(f'DH$ {transaction[4]:.2f}')
+            self.transaction_table.setItem(row_position, 2, QTableWidgetItem(transaction.category))  # Category
+            price_color = "rgb(79, 255, 203)" if transaction.type == "income" else "rgb(247, 91, 105)"
+            price = QLabel(f'{transaction.price}')
             price.setStyleSheet(f'color: {price_color};')
             self.transaction_table.setCellWidget(row_position, 3, price)
             
             try:
                 # Check if transaction[7] is not None or empty
-                if not transaction[7]:
+                if not transaction.created_at:
                     raise ValueError("Empty or None date string")
-                date = convert_to_iso8601(transaction[7])
-                # Format and display the date
-                formatted_date = datetime.strptime(date, '%Y-%m-%dT%H:%M:%S.%fZ').strftime("%Y-%m-%d")
-                self.transaction_table.setItem(row_position, 4, QTableWidgetItem(formatted_date))
+                date = transaction.created_at
+
+                self.transaction_table.setItem(row_position, 4, QTableWidgetItem(date))
             except Exception as e:
-                logging.error(f'Unexpected error with id: {transaction[0]} with date: {date} , error: {e}')
+                logging.error(f'Unexpected error with id: {transaction.id} with date: {date} , error: {e}')
 
             # Display synced status
-            synced_color = "rgb(79, 255, 203)" if transaction[8]=='synced' else "rgb(128, 128, 128)"
-            synced_status = QLabel("sincronizado" if transaction[8]=='synced' else "desincronizado")
+            synced_color = "rgb(79, 255, 203)" if transaction.status =='synced' else "rgb(128, 128, 128)"
+            synced_status = QLabel("sincronizado" if transaction.status=='synced' else "desincronizado")
             synced_status.setStyleSheet(f'color: {synced_color};')
             self.transaction_table.setCellWidget(row_position, 5, synced_status)
 
             # Delete button with confirmation dialog
             delete_button = QPushButton('Deletar')
             delete_button.setStyleSheet("color: white;")
-            delete_button.clicked.connect(lambda _, trans_id=transaction[0]: self.confirm_delete_transaction(trans_id))
+            delete_button.clicked.connect(lambda _, trans_id=transaction.id: self.confirm_delete_transaction(trans_id))
             self.transaction_table.setCellWidget(row_position, 6, delete_button)
 
             # Save the last transaction's date
-            self.last_date = transaction[7]
+            self.last_date = transaction.created_at
         
         self.fetching = False
 

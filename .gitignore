@@ -5,7 +5,7 @@
 *dist/
 
 # Ignorar o arquivo do banco de dados
-*database.db
+*.db
 
 # Ignorar arquivos Python compilados
 __pycache__/
@@ -34,3 +34,4 @@ __pycache__/
 # Exception for package.json and package-lock.json
 !package.json
 !package-lock.json
+!.vscode/settings.json

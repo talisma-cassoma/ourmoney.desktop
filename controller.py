@@ -2,22 +2,30 @@ import logging
 import requests
 import json
 
-from convertTimeFormat import convert_to_iso8601
+from utils.shared.convertTimeFormat import convert_to_iso8601
 from datetime import datetime
-from model import Model
-from exportJson import export_transactions_to_json
-from exportCsv import export_transactions_to_csv
-from exportXlsx import export_transactions_to_excel
-
+from dto.transaction_dto import TransactionDTO
+from services.list_transactions_service import ListTransactions
+from services.delete_transation_service import DeleteTransactionService
+from services.update_transaction_service import UpdateTransactionService
+from services.insert_transaction_service import InsertTransactionService
+from services.export_json_file_service import export_transactions_to_json
+from services.export_csv_file_service import export_transactions_to_csv
+from services.export_xlsx_file_service import export_transactions_to_excel
 
 
 # Configuração do logging
 logging.basicConfig(filename='app.log', level=logging.INFO, format='%(asctime)s %(levelname)s:%(message)s')
 
+
 class Controller:
     def __init__(self, main_window=None):
         self.main_window = main_window
-        self.model = Model()
+        self._transactions = ListTransactions()
+        self._delete = DeleteTransactionService()
+        self._update = UpdateTransactionService()
+        self._insert = InsertTransactionService()
+
         #self.api_url = "https://our-money-bkd.onrender.com"
         self.api_url = "http://localhost:3000"
         self.timeout = 10
@@ -31,56 +39,83 @@ class Controller:
         except (requests.ConnectionError, requests.Timeout):
             return False
 
-    def get_all_transactions(self):
-        return self.model.get_all_transactions()
+    # def get_all_transactions(self):
+    #     transactions = self._transactions.fetch_all()
+    #     dtos = [
+    #         TransactionDTO(
+    #             id=transaction.id,
+    #             description=transaction.description,
+    #             type=transaction.type,
+    #             category=transaction.category,
+    #             price=f"{transaction.price:.2f}",  # Converter para formato seguro
+    #             created_at= datetime.strptime(convert_to_iso8601(transaction.created_at), '%Y-%m-%dT%H:%M:%S.%fZ').strftime("%d-%m-%Y"),
+    #             status= transaction.status 
+    #         )
+    #         for transaction in transactions
+    #     ]
+    #     return dtos
     
     def fetch_transactions(self, last_date=None):
-        return self.model.fetch_transactions(last_date)
+        transactions = self._transactions.fetch(last_date=last_date)
+        dtos = [
+            TransactionDTO(
+                id=transaction.id,
+                description=transaction.description,
+                type=transaction.type,
+                category=transaction.category,
+                price=f"{transaction.price:.2f} DH$",  # Converter para formato seguro
+                status= "synced" if transaction.status == "synced" else "unsynced",
+                created_at=datetime.strptime(
+                    convert_to_iso8601(transaction.created_at
+                                       ), '%Y-%m-%dT%H:%M:%S.%fZ').strftime("%d-%m-%Y")
+            )
+            for transaction in transactions
+        ]
+        return dtos
     
     def insert_transaction(self, description, 
-                           type, category, price, 
-                           owner='talisma', 
-                           email='talisma@email.com', 
-                           status='unsynced'):
-        self.model.insert_one(description, type, category, price, owner, email, status)
+                            type, category, price, 
+                            status='unsynced'):
+        # Criar o DTO
+        transaction_dto = TransactionDTO(
+                description=description,
+                type=type,
+                category=category,
+                price=float(price),
+                status=status
+            )
+        
+        self._insert.one(transaction_dto)
 
     def delete_transaction(self, transaction_id):
-        self.model.delete(transaction_id)
+        self._delete.one(transaction_id)
 
     def get_total_of_transactions(self):
-         total_income, total_outcome = self.model.get_total()
+         total_income, total_outcome = self._transactions.total()
          return total_income, total_outcome
     
     def insert_many(self, transactions):
-        self.model.insert_many(transactions)
-
-    
-    def refresh_transaction_view(self):
-        """Atualiza a exibição das transações na GUI."""
-        self.transactions_list.clear()  # Limpa a lista atual
-        transactions = self.get_all_transactions()  # Método para obter todas as transações do DB
-        for transaction in transactions:
-            self.transactions_list.addItem(f"{transaction['description']} - {transaction['price']} - {transaction['createdAt']}")
+         self._insert.many(transactions)
 
     def synchronize_data(self):
-        """Baixa dados do servidor para o SQLite local e sincroniza as transações baixadas."""
-        if not self.is_online():
-            logging.info("Sem conexão. Dados não puxados.")
-            return None
-
-        try:
-            response = requests.get(f"{self.api_url}/api/transactions/unsynced", timeout=self.timeout)
-            if response.status_code == 200:
-                data = response.json()
-                self.store_in_local_db(data)
-                self.push_local_transactions()
-                return data
-            else:
-                logging.error(f"Erro na resposta do servidor: {response.status_code}")
-                return None
-        except Exception as e:
-            logging.error(f"Erro ao puxar dados: {e}")
-            return None
+         """Baixa dados do servidor para o SQLite local e sincroniza as transações baixadas."""
+         if not self.is_online():
+             logging.info("Sem conexão. Dados não puxados.")
+             return None
+           
+         try:
+             response = requests.get(f"{self.api_url}/api/transactions/unsynced", timeout=self.timeout)
+             if response.status_code == 200:
+                 data = response.json()
+                 self.store_in_local_db(data)
+                 self.push_local_transactions()
+                 return data
+             else:
+                 logging.error(f"Erro na resposta do servidor: {response.status_code}")
+                 return None
+         except Exception as e:
+             logging.error(f"Erro ao puxar dados: {e}")
+             return None
 
     def upadate_status(self, transactions):
         """Atualiza o status de 'synced' das transações baixadas no servidor."""
@@ -101,65 +136,79 @@ class Controller:
     def push_local_transactions(self):
         """Envia transações locais para o servidor, convertendo o createdAt para o formato ISO 8601 (UTC)."""
         if self.is_online():
-            unsynced_transactions = self.model.get_unsynced_transactions()
-            
+            unsynced_transactions = self._transactions.fetch_unsynced()
+            print(unsynced_transactions)
             transactions_to_push = []
             deleted_transactions_ids = []  # To store transactions with status 'deleted'
-            updated_transactions = [] 
+            updated_transactions_dto:list[TransactionDTO] = [] 
 
             for transaction in unsynced_transactions:
-                if transaction[8] == 'deleted':
-                    deleted_transactions_ids.append(transaction[0])
-                if transaction[8] == 'updated':
-                   updated_transactions.append(transaction)
+                if transaction.status == 'deleted':
+                    deleted_transactions_ids.append(transaction.id)
+                if transaction.status == 'updated':
+                   updated_transactions_dto.append(TransactionDTO(
+                       description=transaction.description,
+                       category=transaction.category,
+                       price=transaction.price,
+                       type=transaction.type,
+                       status="synced")
+                       )
 
                 transaction_dict = {
-                    "id": transaction[0],
-                    "description": transaction[1],
-                    "type": transaction[2],
-                    "category": transaction[3],
-                    "price": transaction[4],
-                    "owner": transaction[5],
-                    "email": transaction[6],
-                    "createdAt": convert_to_iso8601(transaction[7]),
-                    "status": "synced" if transaction[8] == "unsynced" else transaction[8]
+                    "id": transaction.id,
+                    "description": transaction.description,
+                    "type": transaction.type,
+                    "category": transaction.category,
+                    "price": transaction.price,
+                    "owner": transaction.owner,
+                    "email": transaction.email,
+                    "status": "synced" if transaction.status== "unsynced" else transaction.status,
+                    "createdAt": transaction.created_at
                 }
                 transactions_to_push.append(transaction_dict)
-
+            
             # Sending transactions in chunks
             chunk_size = 100  # Define your chunk size
             for i in range(0, len(transactions_to_push), chunk_size):
                 chunk = transactions_to_push[i:i + chunk_size]
+                print(transaction_dict)
                 try:
                     response = requests.post(f"{self.api_url}/api/offline/transactions", json=chunk, timeout=self.timeout)
                     if response.status_code == 200:
-                        self.model.mark_as_synced(chunk)  # Mark only the successfully sent chunk as synced
+                        self._update.mark_as_synced(chunk)  # Mark only the successfully sent chunk as synced
                         logging.info(f"{len(chunk)} transações enviadas com sucesso!")
                     else:
                         logging.error(f"Erro ao enviar dados. Status Code: {response.status_code}")
                 except Exception as e:
                     logging.error(f"Erro ao enviar transações offline: {e}")
-            self.model.update_many(updated_transactions)
-            self.model.delete_many(deleted_transactions_ids)
+
+            self._update.many(updated_transactions_dto)
+            self._delete.many(deleted_transactions_ids)
         else:
             logging.info("Sem conexão. Dados não enviados.")
    
     def store_in_local_db(self, data):
         """Armazena as transações baixadas no banco de dados local."""
         for transaction in data:
-            createdAt = transaction.get('createdAt')
-            if createdAt is not None:
+            created_at = transaction.get('created_at')
+            if created_at is not None:
                 try: 
-                    convertedTime = convert_to_iso8601(createdAt)
-                    self.model.insert_non_synced_transaction(
-                        transaction['id'],
-                        str(transaction['description']).strip().lower(),
-                        transaction['type'],
-                        str(transaction['category']).strip().lower(),
-                        transaction['price'],
-                        convertedTime,
+                    convertedTime = convert_to_iso8601(created_at)
+                    # Criar o DTO
+                    transactions_dto = [
+                        TransactionDTO(
+                        id= transaction['id'],
+                        description=str(transaction['description']).strip().lower(),
+                        category=str(transaction['category']).strip().lower(),
+                        type=transaction['type'],
+                        price=float(transaction['price']),
+                        created_at=convertedTime,
                         status='synced'
-                    )
+                        )
+                    for transaction in transactions_dto
+                    ]
+                    self._insert.many(transactions_dto)
+
                 except ValueError as ve:
                     logging.error(f"Erro ao analisar a data: {ve}")
                 except KeyError as ke:
