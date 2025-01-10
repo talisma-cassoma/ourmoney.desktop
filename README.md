@@ -37,3 +37,11 @@ Follow these steps to set up the project locally:
    ## for the repports
 
    its use quarto to generate pdf repport, sgestion: use quarto vs code extension  
+
+### Obkectivos
+
+- [x] criar GUI para anotocoes dos gastos
+- [x] gerar pdf com analises dos dados
+- [ ] criar um executavel(pyinstaller)
+- [ ] criar um installer setup wizard(inno setup)
+- [ ] automatizar a criacao do setup wizard com CI/CD a cada commit na branch main 

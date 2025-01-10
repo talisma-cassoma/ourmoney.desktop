@@ -62,7 +62,7 @@ class MainWindow(QMainWindow):
         super().__init__()
         self.controller = None
         self.last_date = None
-        self.last_added_transaction = {'price': 0.0, 'type': '' }
+        #self.last_added_transaction = {'price': 0.0, 'type': '' }
         self.fetching = False
         self.total_of_income = 0
         self.total_of_outcome = 0

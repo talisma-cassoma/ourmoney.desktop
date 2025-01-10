@@ -26,8 +26,8 @@ class Controller:
         self._update = UpdateTransactionService()
         self._insert = InsertTransactionService()
 
-        #self.api_url = "https://our-money-bkd.onrender.com"
-        self.api_url = "http://localhost:3000"
+        self.api_url = "https://our-money-bkd.onrender.com"
+        #self.api_url = "http://localhost:3000"
         self.timeout = 10
 
     def is_online(self):
@@ -56,6 +56,12 @@ class Controller:
     #     return dtos
     
     def fetch_transactions(self, last_date=None):
+        
+        if last_date:
+            date=str(last_date)
+            format = "%d-%m-%Y"
+            last_date = datetime.strptime(date, format).strftime("%Y-%m-%d") # convert %Y-%m-%d in to search
+
         transactions = self._transactions.fetch(last_date=last_date)
         dtos = [
             TransactionDTO(
@@ -66,8 +72,8 @@ class Controller:
                 price=f"{transaction.price:.2f} DH$",  # Converter para formato seguro
                 status= "synced" if transaction.status == "synced" else "unsynced",
                 created_at=datetime.strptime(
-                    convert_to_iso8601(transaction.created_at
-                                       ), '%Y-%m-%dT%H:%M:%S.%fZ').strftime("%d-%m-%Y")
+                    convert_to_iso8601(transaction.created_at)
+                    , '%Y-%m-%dT%H:%M:%S.%fZ').strftime("%d-%m-%Y")
             )
             for transaction in transactions
         ]
@@ -137,7 +143,7 @@ class Controller:
         """Envia transações locais para o servidor, convertendo o createdAt para o formato ISO 8601 (UTC)."""
         if self.is_online():
             unsynced_transactions = self._transactions.fetch_unsynced()
-            print(unsynced_transactions)
+            
             transactions_to_push = []
             deleted_transactions_ids = []  # To store transactions with status 'deleted'
             updated_transactions_dto:list[TransactionDTO] = [] 
@@ -171,7 +177,7 @@ class Controller:
             chunk_size = 100  # Define your chunk size
             for i in range(0, len(transactions_to_push), chunk_size):
                 chunk = transactions_to_push[i:i + chunk_size]
-                print(transaction_dict)
+            
                 try:
                     response = requests.post(f"{self.api_url}/api/offline/transactions", json=chunk, timeout=self.timeout)
                     if response.status_code == 200:

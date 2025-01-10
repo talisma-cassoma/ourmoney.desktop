@@ -43,16 +43,6 @@ class TransactionsRepository:
         createdAt = datetime.now().isoformat(timespec='milliseconds') + 'Z' # padrão ISO 8601 para datas
         with self._connect() as conn:
             try:
-
-
-                # Solução 1: Fechando a string em cada linha
-                print(f"description: {transaction.description}, "
-                      f"type: {transaction.type}, "
-                      f"category: {transaction.category}, "
-                      f"price: {transaction.price}, "
-                      f"createdAt: {transaction.created_at}, "
-                      f"status: {transaction.status}")
-
                 conn.execute(query, (
                     str(uuid.uuid4()),
                     transaction.description,
@@ -123,7 +113,8 @@ class TransactionsRepository:
                 self.logger.error(f"Error inserting non-synced transaction: {e}")
 
 #fetch methods
-    def fetch_somes(self, last_date) -> list[TransactionEntity]:
+    def fetch_somes(self, last_date) -> list[TransactionEntity]: # last_date shoulb be in format %Y-%m-%d
+
         query = """
         SELECT id, description, type, category, price, owner, email, status, createdAt
         FROM Transactions 
@@ -137,6 +128,7 @@ class TransactionsRepository:
         ORDER BY createdAt DESC 
         LIMIT 20
         """
+
         with self._connect() as conn:
             cur = conn.cursor()
             cur.execute(query, (last_date,) if last_date else ())
