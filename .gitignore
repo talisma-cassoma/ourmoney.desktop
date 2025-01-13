@@ -1,5 +1,6 @@
 # Ignorar a pasta do ambiente virtual
 *venv/
+*env/
 
 *build/
 *dist/

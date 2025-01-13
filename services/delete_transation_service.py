@@ -1,5 +1,3 @@
-from typing import List
-from entities.transactions_entity import TransactionEntity
 from repositories.transactions_repository import TransactionsRepository
 from utils.logger import get_logger
 

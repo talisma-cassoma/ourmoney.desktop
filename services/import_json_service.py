@@ -10,7 +10,7 @@ def import_transactions_to_json():
 
     model = TransactionsRepository()
 
-    with open('myTransactions_20250103.json', 'r') as file:
+    with open('myTransactions_20250113.json', 'r') as file:
         parser = ijson.items(file, 'item')  # Parse the array of transactions
 
         for transaction in parser:
@@ -22,7 +22,7 @@ def import_transactions_to_json():
                 price=float(transaction["price"]),
                 owner=transaction["owner"],
                 email=transaction["email"],
-                createdAt=transaction["createdAt"],
+                created_at=transaction["createdAt"],
                 status=transaction["status"],
             )
             transactions.append(transaction)

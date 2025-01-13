@@ -1,6 +1,5 @@
 # services/transaction_service.py
 import csv
-from typing import List
 from repositories.transactions_repository import TransactionsRepository
 
 

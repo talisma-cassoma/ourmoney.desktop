@@ -1,7 +1,5 @@
 from openpyxl import Workbook
 from repositories.transactions_repository import TransactionsRepository
-from entities.transactions_entity import TransactionEntity
-from datetime import datetime
 from utils.shared.convertTimeFormat import convert_time_format
 
 

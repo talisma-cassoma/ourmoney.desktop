@@ -1,12 +1,10 @@
-from utils.shared.convertTimeFormat import convert_to_iso8601
+#Data Transfer Object for Transactions (controller <-> services)
 from datetime import datetime
 
 class TransactionDTO:
-    def __init__(self, id=None, description=None, type=None, category=None, 
-                 price=0.0, 
-                 status="unsynced", created_at= datetime.now().isoformat(timespec='milliseconds') + 'Z'):
+    def __init__(self, id=None, description=None, type=None, category=None, price=0.0, status="unsynced", 
+                 created_at= datetime.now().isoformat(timespec='milliseconds') + 'Z'):
         
-
         self.id = id
         self.description = description
         self.type = type
