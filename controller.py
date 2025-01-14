@@ -39,22 +39,6 @@ class Controller:
         except (requests.ConnectionError, requests.Timeout):
             return False
 
-    # def get_all_transactions(self):
-    #     transactions = self._transactions.fetch_all()
-    #     dtos = [
-    #         TransactionDTO(
-    #             id=transaction.id,
-    #             description=transaction.description,
-    #             type=transaction.type,
-    #             category=transaction.category,
-    #             price=f"{transaction.price:.2f}",  # Converter para formato seguro
-    #             created_at= datetime.strptime(convert_to_iso8601(transaction.created_at), '%Y-%m-%dT%H:%M:%S.%fZ').strftime("%d-%m-%Y"),
-    #             status= transaction.status 
-    #         )
-    #         for transaction in transactions
-    #     ]
-    #     return dtos
-    
     def fetch_transactions(self, last_date=None):
         
         if last_date:
@@ -95,6 +79,37 @@ class Controller:
 
     def delete_transaction(self, transaction_id):
         self._delete.one(transaction_id)
+
+    def edit_transaction(self, id:str, description:str, type_input:str, category:str, price:float, status: str, date:str)->None:
+        
+        # Check if the input is a string
+        if isinstance(date, str):
+            try:
+                # Attempt to parse the string in %d-%m-%Y format
+                dt = datetime.strptime(date, "%d-%m-%Y")
+            except ValueError:
+                try:
+                    # Attempt to parse the string in %Y-%m-%d format
+                    dt = datetime.strptime(date, "%Y-%m-%d")
+                except ValueError:
+                    # Raise an error if neither format matches
+                    raise ValueError("The date string must be in %d-%m-%Y or %Y-%m-%d format.")
+
+            date = str(dt.strftime("%Y-%m-%dT%H:%M:%S.%fZ"))[:-4] + "Z"
+           
+            # Criar o DTO
+            transaction_dto = TransactionDTO(
+                id=id,
+                description=description,
+                type= type_input,
+                category=category,
+                price=price,
+                status= status,
+                created_at= date
+            )
+            self._update.one(transaction_dto)
+        else:
+            raise ValueError("Input must be a string or a date instance.")
 
     def get_total_of_transactions(self):
          total_income, total_outcome = self._transactions.total()
@@ -143,7 +158,7 @@ class Controller:
         """Envia transações locais para o servidor, convertendo o createdAt para o formato ISO 8601 (UTC)."""
         if self.is_online():
             unsynced_transactions = self._transactions.fetch_unsynced()
-            
+
             transactions_to_push = []
             deleted_transactions_ids = []  # To store transactions with status 'deleted'
             updated_transactions_dto:list[TransactionDTO] = [] 
@@ -153,11 +168,13 @@ class Controller:
                     deleted_transactions_ids.append(transaction.id)
                 if transaction.status == 'updated':
                    updated_transactions_dto.append(TransactionDTO(
+                       id= transaction.id,
                        description=transaction.description,
                        category=transaction.category,
                        price=transaction.price,
                        type=transaction.type,
-                       status="synced")
+                       status="synced"),
+                       created_at = transaction.created_at
                        )
 
                 transaction_dict = {

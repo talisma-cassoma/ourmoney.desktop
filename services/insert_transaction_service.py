@@ -2,6 +2,8 @@ from entities.transactions_entity import TransactionEntity
 from repositories.transactions_repository import TransactionsRepository
 from dto.transaction_dto import TransactionDTO
 from utils.logger import get_logger
+from utils.shared.convertTimeFormat import is_iso8601_format
+
 
 class InsertTransactionService:
     def __init__(self):
@@ -21,6 +23,7 @@ class InsertTransactionService:
         self._repository.insert_one(transaction)
     
     def many(self, transactions_dto: list[TransactionDTO]):
+
 
         transactions_entity = [
             TransactionEntity(

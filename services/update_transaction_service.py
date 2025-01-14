@@ -1,6 +1,7 @@
 from entities.transactions_entity import TransactionEntity
 from repositories.transactions_repository import TransactionsRepository
 from utils.logger import get_logger
+from utils.shared.convertTimeFormat import is_iso8601_format
 from dto.transaction_dto import TransactionDTO
 
 class UpdateTransactionService:
@@ -10,13 +11,16 @@ class UpdateTransactionService:
 
     def one(self, transaction_dto:TransactionDTO):
 
+        status = "updated" if transaction_dto.status == "synced" else transaction_dto.status
+        
         transaction = TransactionEntity(
+            id= transaction_dto.id,
             description=transaction_dto.description,
             type=transaction_dto.type,
             category=transaction_dto.category,
             price=transaction_dto.price,
+            status= status,
             created_at= transaction_dto.created_at,
-            status=transaction_dto.status
         )
         self._repository.update_one(transaction)
     

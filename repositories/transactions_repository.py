@@ -174,9 +174,10 @@ class TransactionsRepository:
     def get_unsynced_transactions(self) -> list[TransactionEntity]:
         query = """
         SELECT id, description, type, category, price, owner, email, status, createdAt
-        FROM Transactions 
-        WHERE status == 'unsynced' OR status == 'deleted' OR status == 'updated'
+        FROM Transactions
+        WHERE status IN ('unsynced', 'deleted', 'updated')
         """
+
         with self._connect() as conn:
             cur = conn.cursor()
             cur.execute(query)
@@ -240,7 +241,7 @@ class TransactionsRepository:
             cur = conn.cursor()
             query = "UPDATE transactions SET status = ? WHERE id = ?"
             cur.execute(query, ("deleted", transaction_id))
-            logging.info(f'Transação com id {transaction_id} updeleted com sucesso!')
+            logging.info(f'Transação com id {transaction_id} marcada como deleted com sucesso!')
 
 #update methods 
     def update_many(self, transactions: list[TransactionEntity]):
@@ -273,9 +274,10 @@ class TransactionsRepository:
     def update_one(self, transaction: TransactionEntity):
         query = """
         UPDATE Transactions SET 
-        description = ?, type = ?, category = ?, price = ?, owner = ?, email = ?, status = ?, createdAt = ?
+        description = ?, type = ?, category = ?, price = ?, status = ?, createdAt = ?
         WHERE id = ?
         """
+       
         with self._connect() as conn:
             try:
                 conn.execute(query, (
@@ -283,13 +285,11 @@ class TransactionsRepository:
                     transaction.type,
                     transaction.category,
                     transaction.price,
-                    transaction.owner,
-                    transaction.email,
                     transaction.status,
                     transaction.created_at,
                     transaction.id
                 ))
-                self.logger.info(f"Transaction with ID {transaction.id} updated successfully!")
+                self.logger.info(f"Transaçao com id: {transaction.id} updated successfully!")
             except sqlite3.Error as e:
                 self.logger.error(f"Error updating transaction: {e}")
 

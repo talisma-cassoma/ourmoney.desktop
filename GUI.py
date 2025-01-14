@@ -1,10 +1,11 @@
 from PyQt5 import QtCore
-from PyQt5.QtWidgets import (QApplication, QMainWindow, QVBoxLayout, QScrollArea,
+from PyQt5.QtWidgets import (QMainWindow, QVBoxLayout,
                              QLineEdit, QFormLayout, QHBoxLayout, QFrame, QPushButton, 
-                             QLabel, QComboBox, QProgressBar, QWidget, QTableWidget, 
-                             QTableWidgetItem, QHeaderView, QMessageBox,QListWidget, QMenu)
+                             QLabel, QComboBox, QProgressBar, QTableWidget, 
+                             QTableWidgetItem, QHeaderView, QMessageBox, QMenu,
+                             QDialog, QDateEdit)
 
-from PyQt5.QtCore import Qt, QTimer, QEvent
+from PyQt5.QtCore import Qt, QDate
 from PyQt5.QtGui import QFont
 
 from datetime import datetime
@@ -379,7 +380,13 @@ class MainWindow(QMainWindow):
             ellipsis_button.setMenu(menu)
         
             # Connect actions
-            edit_action.triggered.connect(lambda: print("editar"))
+            edit_action.triggered.connect(lambda _,id = transaction.id,
+                description=transaction.description,
+                type=transaction.type,
+                category=transaction.category,
+                price= transaction.price,
+                status= transaction.status,
+                date=date: self.open_edit_dialog(id,description,type,category, price, status, date))
             delete_action.triggered.connect(lambda _, trans_id=transaction.id: self.confirm_delete_transaction(trans_id))
         
             # Add ellipsis button to table
@@ -424,6 +431,67 @@ class MainWindow(QMainWindow):
         self.income_label.setText(f"Entradas: {formatted_income} DH$")
         self.expense_label.setText(f"Saídas: {formatted_outcome} DH$")
 
+        # Refresh the table after deletion
+        self.load_collection()
+    
+    def open_edit_dialog(self, id,description,type,category,price, status, date):
+        # Criar o diálogo
+        dialog = QDialog(self)
+        dialog.setWindowTitle("Editar Transação")
+        dialog.setFixedWidth(400)
+
+        # Layout do diálogo
+        layout = QFormLayout(dialog)
+
+        # Inputs
+        description_input = QLineEdit(description)
+        type_input = QComboBox()
+        type_input.addItems(["saida", "entrada"])
+        type_input.setCurrentText(type)
+        category_input = QLineEdit(category)
+        date_input = QDateEdit()
+        date_input.setCalendarPopup(True)
+        date_input.setDate(QDate.fromString(date, "dd-MM-yyyy"))
+        price_input = QLineEdit(price.replace(" DH$", ""))
+
+
+        # Botões
+        buttons_layout = QHBoxLayout()
+        save_button = QPushButton("Salvar")
+        cancel_button = QPushButton("Cancelar")
+        buttons_layout.addWidget(save_button)
+        buttons_layout.addWidget(cancel_button)
+
+        # Adicionar ao layout
+        layout.addRow("Descrição:", description_input)
+        layout.addRow("Tipo:", type_input)
+        layout.addRow("Categoria:", category_input)
+        layout.addRow("Preço:", price_input)
+        layout.addRow("Data:", date_input)
+        layout.addRow(buttons_layout)
+
+        # Conectar botões
+        cancel_button.clicked.connect(dialog.reject)
+        save_button.clicked.connect(lambda: self.save_edited_transaction(dialog, id, description_input, type_input, category_input, price, status, date_input))
+
+        # Mostrar o diálogo
+        dialog.exec_()
+
+    def save_edited_transaction(self, dialog, id, description_input, type_input, category_input, price, status, date_input):
+        # Obter valores dos inputs
+        self.last_date = None
+        id= str(id)
+        description = str(description_input.text())
+        type_input = str(type_input.currentText())
+        category = str(category_input.text())
+        date = date_input.date().toString("yyyy-MM-dd")
+        price =  float(price.replace(" DH$", ""))
+        status = str(status)
+
+        self.controller.edit_transaction(id, description, type_input, category, price, status, date)
+
+        # Fechar o diálogo
+        dialog.accept()
         # Refresh the table after deletion
         self.load_collection()
 

@@ -21,6 +21,15 @@ def convert_to_iso8601(date):
         return dt.isoformat(timespec="milliseconds")[:-6] + "Z"
     # Verifica se a data já está no formato string
     elif isinstance(date, str):
-        return date  # Assume que está correta
+        if not is_iso8601_format(date):
+            logging.error(f"a {date} nao está no formato %Y-%m-%dT%H:%M:%S.%fZ")   
+            return datetime.now().isoformat(timespec='milliseconds') + 'Z'
+        else: 
+            return date  # Assume que está correta
     else:
          logging.error("Formato de data inválido: esperado int ou string.")
+import re
+
+def is_iso8601_format(datetime_string: str) -> bool:
+    pattern = r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$"
+    return bool(re.match(pattern, datetime_string))
