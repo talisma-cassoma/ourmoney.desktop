@@ -3,7 +3,7 @@ from datetime import datetime
 
 class TransactionDTO:
     def __init__(self, id=None, description=None, type=None, category=None, price=0.0, status="unsynced", 
-                 created_at= datetime.now().isoformat(timespec='milliseconds') + 'Z'):
+                 created_at= lambda: datetime.now().isoformat(timespec='milliseconds') + 'Z'):
         
         self.id = id
         self.description = description

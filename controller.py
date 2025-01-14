@@ -93,7 +93,7 @@ class Controller:
                     dt = datetime.strptime(date, "%Y-%m-%d")
                 except ValueError:
                     # Raise an error if neither format matches
-                    raise ValueError("The date string must be in %d-%m-%Y or %Y-%m-%d format.")
+                    logging.error("The date string must be in %d-%m-%Y or %Y-%m-%d format.")
 
             date = str(dt.strftime("%Y-%m-%dT%H:%M:%S.%fZ"))[:-4] + "Z"
            
@@ -162,49 +162,53 @@ class Controller:
             transactions_to_push = []
             deleted_transactions_ids = []  # To store transactions with status 'deleted'
             updated_transactions_dto:list[TransactionDTO] = [] 
-
-            for transaction in unsynced_transactions:
-                if transaction.status == 'deleted':
-                    deleted_transactions_ids.append(transaction.id)
-                if transaction.status == 'updated':
-                   updated_transactions_dto.append(TransactionDTO(
-                       id= transaction.id,
-                       description=transaction.description,
-                       category=transaction.category,
-                       price=transaction.price,
-                       type=transaction.type,
-                       status="synced"),
-                       created_at = transaction.created_at
-                       )
-
-                transaction_dict = {
-                    "id": transaction.id,
-                    "description": transaction.description,
-                    "type": transaction.type,
-                    "category": transaction.category,
-                    "price": transaction.price,
-                    "owner": transaction.owner,
-                    "email": transaction.email,
-                    "status": "synced" if transaction.status== "unsynced" else transaction.status,
-                    "createdAt": transaction.created_at
-                }
-                transactions_to_push.append(transaction_dict)
             
-            # Sending transactions in chunks
-            chunk_size = 100  # Define your chunk size
-            for i in range(0, len(transactions_to_push), chunk_size):
-                chunk = transactions_to_push[i:i + chunk_size]
-            
-                try:
-                    response = requests.post(f"{self.api_url}/api/offline/transactions", json=chunk, timeout=self.timeout)
-                    if response.status_code == 200:
-                        self._update.mark_as_synced(chunk)  # Mark only the successfully sent chunk as synced
-                        logging.info(f"{len(chunk)} transações enviadas com sucesso!")
-                    else:
-                        logging.error(f"Erro ao enviar dados. Status Code: {response.status_code}")
-                except Exception as e:
-                    logging.error(f"Erro ao enviar transações offline: {e}")
+            try:
+                for transaction in unsynced_transactions:
+                    if transaction.status == 'deleted':
+                        deleted_transactions_ids.append(transaction.id)
+                    if transaction.status == 'updated':
+                        updated_transactions_dto.append(TransactionDTO(
+                            id=transaction.id,
+                            description=transaction.description,
+                            type=transaction.type,
+                            category=transaction.category,
+                            price=transaction.price,
+                            status="synced",
+                            created_at=transaction.created_at  
+                        ))
 
+                    transaction_dict = {
+                        "id": transaction.id,
+                        "description": transaction.description,
+                        "type": transaction.type,
+                        "category": transaction.category,
+                        "price": transaction.price,
+                        "owner": transaction.owner,
+                        "email": transaction.email,
+                        "status": "synced" if transaction.status== "unsynced" else transaction.status,
+                        "createdAt": transaction.created_at
+                    }
+                    transactions_to_push.append(transaction_dict)
+            except Exception as e:
+                logging.error(f"erros ao pegar Dados: {e}")
+            try:
+                # Sending transactions in chunks
+                chunk_size = 100  # Define your chunk size
+                for i in range(0, len(transactions_to_push), chunk_size):
+                    chunk = transactions_to_push[i:i + chunk_size]
+
+                    try:
+                        response = requests.post(f"{self.api_url}/api/offline/transactions", json=chunk, timeout=self.timeout)
+                        if response.status_code == 200:
+                            self._update.mark_as_synced(chunk)  # Mark only the successfully sent chunk as synced
+                            logging.info(f"{len(chunk)} transações enviadas com sucesso!")
+                        else:
+                            logging.error(f"Erro ao enviar dados. Status Code: {response.status_code}")
+                    except Exception as e:
+                        logging.error(f"Erro ao enviar transações offline: {e}")
+            except:
+                logging.error("erros ao enviar Dados ao server.")
             self._update.many(updated_transactions_dto)
             self._delete.many(deleted_transactions_ids)
         else:
