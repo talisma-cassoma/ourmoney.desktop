@@ -1,7 +1,8 @@
+from PyQt5 import QtCore
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QVBoxLayout, QScrollArea,
                              QLineEdit, QFormLayout, QHBoxLayout, QFrame, QPushButton, 
                              QLabel, QComboBox, QProgressBar, QWidget, QTableWidget, 
-                             QTableWidgetItem, QHeaderView, QMessageBox,QListWidget )
+                             QTableWidgetItem, QHeaderView, QMessageBox,QListWidget, QMenu)
 
 from PyQt5.QtCore import Qt, QTimer, QEvent
 from PyQt5.QtGui import QFont
@@ -181,10 +182,10 @@ class MainWindow(QMainWindow):
         formatted_outcome = f"{self.total_of_outcome:,.2f}".replace(",", " ")
 
         self.income_label = QLabel(f'Entradas: {formatted_income} DH$')
-        self.income_label.setAlignment(Qt.AlignCenter)
+        self.income_label.setAlignment(QtCore.Qt.AlignCenter)
         self.income_label.setFont(Total_font)
         self.expense_label = QLabel(f'Saídas: {formatted_outcome} DH$')
-        self.expense_label.setAlignment(Qt.AlignCenter)
+        self.expense_label.setAlignment(QtCore.Qt.AlignCenter)
         self.expense_label.setFont(Total_font)
         self.income_label.setStyleSheet("color: rgb(79, 255, 203);")
         self.expense_label.setStyleSheet("color: rgb(247, 91, 105);")
@@ -209,7 +210,7 @@ class MainWindow(QMainWindow):
         # Create the table widget
         self.transaction_table = QTableWidget()
         self.transaction_table.setColumnCount(7)  # Adjust number of columns based on the data
-        self.transaction_table.setHorizontalHeaderLabels(['Descrição', 'Tipo', 'Categoria', 'Preço', 'Data', 'Sincronizado', 'Ações'])
+        self.transaction_table.setHorizontalHeaderLabels(['Descrição', 'Ações', 'Tipo', 'Categoria', 'Preço', 'Data', 'Sincronizado'])
         self.transaction_table.setStyleSheet("color: white; ")
 
         self.transaction_table.verticalScrollBar().valueChanged.connect(self.on_scroll) # Connect scroll event
@@ -220,7 +221,8 @@ class MainWindow(QMainWindow):
         # Hide the vertical row numbers
         self.transaction_table.verticalHeader().setVisible(False)
 
-        self.transaction_table.setColumnWidth(1, 150)  # Make last column stretch
+        self.transaction_table.setColumnWidth(0, 150)  # Make last column stretch
+        self.transaction_table.setColumnWidth(1, 60) # 
         self.transaction_table.horizontalHeader().setSectionResizeMode(0, QHeaderView.Stretch)  # Resize columns to fit the table
         self.transaction_list_layout.addWidget(self.transaction_table)
 
@@ -317,13 +319,13 @@ class MainWindow(QMainWindow):
             # Map and populate transaction fields
             self.transaction_table.setItem(row_position, 0, QTableWidgetItem(transaction.description))  # Description
             type_item = QTableWidgetItem('entrada' if transaction.type == 'income' else 'saida')  # Type
-            self.transaction_table.setItem(row_position, 1, type_item)
+            self.transaction_table.setItem(row_position, 2, type_item)
 
-            self.transaction_table.setItem(row_position, 2, QTableWidgetItem(transaction.category))  # Category
+            self.transaction_table.setItem(row_position, 3, QTableWidgetItem(transaction.category))  # Category
             price_color = "rgb(79, 255, 203)" if transaction.type == "income" else "rgb(247, 91, 105)"
             price = QLabel(f'{transaction.price}')
             price.setStyleSheet(f'color: {price_color};')
-            self.transaction_table.setCellWidget(row_position, 3, price)
+            self.transaction_table.setCellWidget(row_position, 4, price)
             
             try:
                 # Check if transaction[7] is not None or empty
@@ -331,7 +333,7 @@ class MainWindow(QMainWindow):
                     raise ValueError("Empty or None date string")
                 date = transaction.created_at
 
-                self.transaction_table.setItem(row_position, 4, QTableWidgetItem(date))
+                self.transaction_table.setItem(row_position, 5, QTableWidgetItem(date))
             except Exception as e:
                 logging.error(f'Unexpected error with id: {transaction.id} with date: {date} , error: {e}')
 
@@ -339,13 +341,50 @@ class MainWindow(QMainWindow):
             synced_color = "rgb(79, 255, 203)" if transaction.status =='synced' else "rgb(128, 128, 128)"
             synced_status = QLabel("sincronizado" if transaction.status=='synced' else "desincronizado")
             synced_status.setStyleSheet(f'color: {synced_color};')
-            self.transaction_table.setCellWidget(row_position, 5, synced_status)
+            self.transaction_table.setCellWidget(row_position, 6, synced_status)
 
             # Delete button with confirmation dialog
-            delete_button = QPushButton('Deletar')
-            delete_button.setStyleSheet("color: white;")
-            delete_button.clicked.connect(lambda _, trans_id=transaction.id: self.confirm_delete_transaction(trans_id))
-            self.transaction_table.setCellWidget(row_position, 6, delete_button)
+            # delete_button = QPushButton('Deletar')
+            # delete_button.setStyleSheet("color: white;")
+            # delete_button.clicked.connect(lambda _, trans_id=transaction.id: self.confirm_delete_transaction(trans_id))
+            # self.transaction_table.setCellWidget(row_position, 6, delete_button)
+            
+            # Create ellipsis menu for actions
+            ellipsis_button = QPushButton("⋮")
+            ellipsis_button.setStyleSheet("background: transparent; font-size: 18px; color: white; width: 5px;")
+            ellipsis_button.setCursor(Qt.PointingHandCursor)
+            
+            # Add menu to button
+            menu = QMenu()
+            menu.setStyleSheet("""
+                QMenu {
+                    background-color: rgb(61, 61, 66);
+                    color: white;
+                    border: 1px solid rgb(41, 41, 46);
+                    padding: 4px;
+                    width: 60px; /* Reduce width */
+                }
+                QMenu::item {
+                    padding: 4px 10px; /* Adjust padding for compactness */
+                    font-size: 12px; /* Smaller font size */
+                }
+                QMenu::item:selected {
+                    background-color: rgb(79, 255, 203); /* Highlight color */
+                    color: rgb(128, 128, 128)
+                }
+             """)
+            edit_action = menu.addAction("Edit")
+            delete_action = menu.addAction("Delete")
+        
+            ellipsis_button.setMenu(menu)
+        
+            # Connect actions
+            edit_action.triggered.connect(lambda: print("editar"))
+            delete_action.triggered.connect(lambda _, trans_id=transaction.id: self.confirm_delete_transaction(trans_id))
+        
+            # Add ellipsis button to table
+            self.transaction_table.setCellWidget(row_position, 1, ellipsis_button)
+        
 
             # Save the last transaction's date
             self.last_date = transaction.created_at
@@ -388,7 +427,6 @@ class MainWindow(QMainWindow):
         # Refresh the table after deletion
         self.load_collection()
 
-    
     def clear_inputs(self):
         self.description_input.clear()
         self.category_input.clear()
