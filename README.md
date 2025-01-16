@@ -33,12 +33,8 @@ Follow these steps to set up the project locally:
    ```bash
    pip3 freeze > requirements.txt
    ```
-
-   ## for the repports
-
-   its use quarto to generate pdf repport, sgestion: use quarto vs code extension  
-
-### Obkectivos
+   
+### Objectivos
 
 - [x] criar GUI para anotocoes dos gastos
       features 
@@ -47,10 +43,10 @@ Follow these steps to set up the project locally:
    
    features :
    
-   - [ ] tableau dos os gastos mensais por categoria
-   - [ ] tableau dos gastos recurrentes
-   - [ ] tableau dos gastos previsoes
+   - [x] table dos os gastos mensais por categoria
+   - [x] table dos gastos recurrentes
+   - [x] table dos gastos com previsões
 
 - [ ] criar um executavel(pyinstaller)
 - [ ] criar um installer setup wizard(inno setup)
-- [ ] automatizar a criacao do setup wizard com CI/CD a cada commit na branch main 
+- [ ] automatizar a criaçao do setup wizard com CI/CD a cada commit na branch main 
