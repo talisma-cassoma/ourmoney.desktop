@@ -6,8 +6,6 @@ from utils.logger import get_logger
 from utils.helppers import resource_path
 from entities.transactions_entity import TransactionEntity
 
-
-
 class TransactionsRepository:
     def __init__(self):
         self._db_path = resource_path('database/database.db')

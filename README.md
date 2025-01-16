@@ -44,10 +44,12 @@ Follow these steps to set up the project locally:
       features 
       [x]
 - [x] gerar pdf com analises dos dados
-      features 
-      [] tableau dos os gastos mensais por categoria
-      [] tableau dos gastos recurrentes
-      [] tableau dos gastos previsoes
+   
+   features :
+   
+   - [ ] tableau dos os gastos mensais por categoria
+   - [ ] tableau dos gastos recurrentes
+   - [ ] tableau dos gastos previsoes
 
 - [ ] criar um executavel(pyinstaller)
 - [ ] criar um installer setup wizard(inno setup)
