@@ -116,13 +116,13 @@ class TransactionsRepository:
         query = """
         SELECT id, description, type, category, price, owner, email, status, createdAt
         FROM Transactions 
-        WHERE status != 'deleted' AND createdAt < ? 
+        WHERE status IN ('synced', 'unsynced', 'updated') AND createdAt < ? 
         ORDER BY createdAt DESC 
         LIMIT 20
         """ if last_date else """
         SELECT id, description, type, category, price, owner, email, status, createdAt
         FROM Transactions 
-        WHERE status != 'deleted' 
+        WHERE status IN ('synced', 'unsynced', 'updated')
         ORDER BY createdAt DESC 
         LIMIT 20
         """

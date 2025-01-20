@@ -10,7 +10,7 @@ def import_transactions_to_json():
 
     model = TransactionsRepository()
 
-    with open('myTransactions_20250114.json', 'r') as file:
+    with open('myTransactions_20250120.json', 'r') as file:
         parser = ijson.items(file, 'item')  # Parse the array of transactions
 
         for transaction in parser:

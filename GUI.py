@@ -11,6 +11,7 @@ from PyQt5.QtGui import QFont
 from datetime import datetime
 import time
 import logging
+import random
 
 # Configuração do logging
 logging.basicConfig(filename='app.log', level=logging.INFO, format='%(asctime)s %(levelname)s:%(message)s')
@@ -484,7 +485,7 @@ class MainWindow(QMainWindow):
         description = str(description_input.text())
         type_input = str(type_input.currentText())
         category = str(category_input.text())
-        date = date_input.date().toString("yyyy-MM-dd")
+        date = f"{date_input.date().toString("yyyy-MM-dd")}T{f"12:34:{f'{random.randint(0, 59):02d}'}.789Z"}"
         price =  float(price.replace(" DH$", ""))
         status = str(status)
 

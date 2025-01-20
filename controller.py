@@ -83,33 +83,33 @@ class Controller:
     def edit_transaction(self, id:str, description:str, type_input:str, category:str, price:float, status: str, date:str)->None:
         
         # Check if the input is a string
-        if isinstance(date, str):
-            try:
-                # Attempt to parse the string in %d-%m-%Y format
-                dt = datetime.strptime(date, "%d-%m-%Y")
-            except ValueError:
-                try:
-                    # Attempt to parse the string in %Y-%m-%d format
-                    dt = datetime.strptime(date, "%Y-%m-%d")
-                except ValueError:
-                    # Raise an error if neither format matches
-                    logging.error("The date string must be in %d-%m-%Y or %Y-%m-%d format.")
+        # if isinstance(date, str):
+        #     try:
+        #         # Attempt to parse the string in %d-%m-%Y format
+        #         dt = datetime.strptime(date, "%d-%m-%Y")
+        #     except ValueError:
+        #         try:
+        #             # Attempt to parse the string in %Y-%m-%d format
+        #             dt = datetime.strptime(date, "%Y-%m-%d")
+        #         except ValueError:
+        #             # Raise an error if neither format matches
+        #             logging.error("The date string must be in %d-%m-%Y or %Y-%m-%d format.")
 
-            date = str(dt.strftime("%Y-%m-%dT%H:%M:%S.%fZ"))[:-4] + "Z"
+        #     date = str(dt.strftime("%Y-%m-%dT%H:%M:%S.%fZ"))[:-4] + "Z"
            
             # Criar o DTO
             transaction_dto = TransactionDTO(
                 id=id,
                 description=description,
-                type= type_input,
+                type='outcome' if type_input == 'saida' else 'income',
                 category=category,
                 price=price,
                 status= status,
                 created_at= date
             )
             self._update.one(transaction_dto)
-        else:
-            raise ValueError("Input must be a string or a date instance.")
+        # else:
+        #     raise ValueError("Input must be a string or a date instance.")
 
     def get_total_of_transactions(self):
          total_income, total_outcome = self._transactions.total()
