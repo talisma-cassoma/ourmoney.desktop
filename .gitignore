@@ -13,6 +13,7 @@ __pycache__/
 *.pyc
 *.pyo
 *.pyd
+*teste.py
 
 # Ignorar logs, temp e arquivos desnecessários
 *.json

@@ -1,3 +1,0 @@
-from services.import_json_service import import_transactions_to_json
-
-import_transactions_to_json()
