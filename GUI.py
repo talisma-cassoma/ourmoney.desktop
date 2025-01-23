@@ -454,8 +454,7 @@ class MainWindow(QMainWindow):
         date_input.setCalendarPopup(True)
         date_input.setDate(QDate.fromString(date, "dd-MM-yyyy"))
         price_input = QLineEdit(price.replace(" DH$", ""))
-
-
+        
         # Botões
         buttons_layout = QHBoxLayout()
         save_button = QPushButton("Salvar")
@@ -473,20 +472,22 @@ class MainWindow(QMainWindow):
 
         # Conectar botões
         cancel_button.clicked.connect(dialog.reject)
-        save_button.clicked.connect(lambda: self.save_edited_transaction(dialog, id, description_input, type_input, category_input, price, status, date_input))
+        save_button.clicked.connect(lambda: self.save_edited_transaction(dialog, id, description_input, type_input, category_input, price_input.text().strip(), status, date_input))
 
         # Mostrar o diálogo
         dialog.exec_()
 
     def save_edited_transaction(self, dialog, id, description_input, type_input, category_input, price, status, date_input):
         # Obter valores dos inputs
+        
+        
         self.last_date = None
         id= str(id)
         description = str(description_input.text())
         type_input = str(type_input.currentText())
         category = str(category_input.text())
         date = f"{date_input.date().toString("yyyy-MM-dd")}T{f"12:34:{f'{random.randint(0, 59):02d}'}.789Z"}"
-        price =  float(price.replace(" DH$", ""))
+        price =  float(price)
         status = str(status)
 
         self.controller.edit_transaction(id, description, type_input, category, price, status, date)

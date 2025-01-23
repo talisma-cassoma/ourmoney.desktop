@@ -18,7 +18,7 @@ class UpdateTransactionService:
             description=transaction_dto.description,
             type=transaction_dto.type,
             category=transaction_dto.category,
-            price=transaction_dto.price,
+            price=float(transaction_dto.price),
             status= status,
             created_at= transaction_dto.created_at,
         )

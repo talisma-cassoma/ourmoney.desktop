@@ -96,9 +96,9 @@ class Controller:
         #             logging.error("The date string must be in %d-%m-%Y or %Y-%m-%d format.")
 
         #     date = str(dt.strftime("%Y-%m-%dT%H:%M:%S.%fZ"))[:-4] + "Z"
-           
-            # Criar o DTO
-            transaction_dto = TransactionDTO(
+        
+        # Criar o DTO
+        transaction_dto = TransactionDTO(
                 id=id,
                 description=description,
                 type='outcome' if type_input == 'saida' else 'income',
@@ -107,7 +107,7 @@ class Controller:
                 status= status,
                 created_at= date
             )
-            self._update.one(transaction_dto)
+        self._update.one(transaction_dto)
         # else:
         #     raise ValueError("Input must be a string or a date instance.")
 

@@ -14,6 +14,7 @@ __pycache__/
 *.pyo
 *.pyd
 *teste.py
+entrypoint.sh
 
 # Ignorar logs, temp e arquivos desnecessários
 *.json

@@ -275,7 +275,7 @@ class TransactionsRepository:
         description = ?, type = ?, category = ?, price = ?, status = ?, createdAt = ?
         WHERE id = ?
         """
-       
+        
         with self._connect() as conn:
             try:
                 conn.execute(query, (
