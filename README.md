@@ -7,7 +7,7 @@ Follow these steps to set up the project locally:
 
 1. **Clone and Create a Virtual Environment** 
  
-   Clone the projectse and use the following command to create a virtual environment:  
+   Clone the project and use the following command to create a virtual environment:  
    ```bash
    python3 -m venv env
    ```
@@ -34,6 +34,14 @@ Follow these steps to set up the project locally:
    pip3 freeze > requirements.txt
    ```
    
+### create a shortcut in terminal`
+5. create a entrypoint.sh to run the app:
+6. open new terminal and tape:
+```bash
+alias ourmoney_desktop='zsh  ~/desktop/entrypoint.sh'
+```
+7. run : ```ourmoney_desktop```
+
 ### Objectivos
 
 - [x] criar GUI para anotocoes dos gastos

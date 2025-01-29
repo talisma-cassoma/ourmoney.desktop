@@ -33,6 +33,7 @@ entrypoint.sh
 *.swp
 *.swo
 *node_modules/
+*.egg-info/
 
 # Exception for package.json and package-lock.json
 !package.json
