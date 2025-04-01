@@ -1,7 +1,8 @@
 from openpyxl import Workbook
 from repositories.transactions_repository import TransactionsRepository
 from utils.shared.convertTimeFormat import convert_time_format
-
+from utils.shared.convertTimeFormat import convert_to_iso8601
+from datetime import datetime
 
 def export_transactions_to_excel(file_path="transactions.xlsx"):
     """Fetch all transactions and save them as an Excel file."""
@@ -30,7 +31,9 @@ def export_transactions_to_excel(file_path="transactions.xlsx"):
             transaction.price,
             transaction.owner,
             transaction.email,
-            transaction.created_at,
+            datetime.strptime(
+                    convert_to_iso8601(transaction.created_at)
+                    , '%Y-%m-%dT%H:%M:%S.%fZ').strftime("%d-%m-%Y"),
             transaction.status,
         ]
         

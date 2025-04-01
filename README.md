@@ -34,13 +34,8 @@ Follow these steps to set up the project locally:
    pip3 freeze > requirements.txt
    ```
    
-### create a shortcut in terminal`
-5. create a entrypoint.sh to run the app:
-6. open new terminal and tape:
-```bash
-alias ourmoney_desktop='zsh  ~/desktop/entrypoint.sh'
-```
-7. run : ```ourmoney_desktop```
+5. **create a shortcut in terminal(Optional)** 
+  ...
 
 ### Objectivos
 
@@ -58,3 +53,38 @@ alias ourmoney_desktop='zsh  ~/desktop/entrypoint.sh'
 - [ ] criar um executavel(pyinstaller)
 - [ ] criar um installer setup wizard(inno setup)
 - [ ] automatizar a criaçao do setup wizard com CI/CD a cada commit na branch main 
+
+project structure:
+.
+├── assets/
+│    └── logo_icon.icns
+├── database/
+│    └── database.db
+├── dto/
+│    └── transaction_dto.py
+├── entities/
+│    └── transactions_entity.py
+├── env/
+├── repositories/
+│    └── transactions_repository.py
+├── services/
+│    ├── delete_transation_service.py
+│    ├── GenerateAnalyticsReportService.py
+│    ├── export_csv_file_service.py
+│    ├── export_json_file_service.py
+│    ├── export_json_file_service.py
+│    ├── import_json_file_service.py
+│    ├── insert_transaction_service.py
+│    ├── list_transaction_service.py
+│    └── update_transaction_service.py
+├── utils/
+│    ├── helppers.py
+│    ├── logger.py       
+│    └── shared/
+├── .gitignore
+├── GUI.py
+├── README.md
+├── app.spec
+├── controller.py
+├── requirements.txt
+└── main.py

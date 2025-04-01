@@ -1,0 +1,33 @@
+.
+├── assets/
+│    └── logo_icon.icns
+├── database/
+│    └── database.db
+├── dto/
+│    └── transaction_dto.py
+├── entities/
+│    └── transactions_entity.py
+├── env/
+├── repositories/
+│    └── transactions_repository.py
+├── services/
+│    ├── delete_transation_service.py
+│    ├── GenerateAnalyticsReportService.py
+│    ├── export_csv_file_service.py
+│    ├── export_json_file_service.py
+│    ├── export_json_file_service.py
+│    ├── import_json_file_service.py
+│    ├── insert_transaction_service.py
+│    ├── list_transaction_service.py
+│    └── update_transaction_service.py
+├── utils/
+│    ├── helppers.py
+│    ├── logger.py       
+│    └── shared/
+├── .gitignore
+├── GUI.py
+├── README.md
+├── app.spec
+├── controller.py
+├── requirements.txt
+└── main.py

@@ -1,36 +1,39 @@
 # -*- mode: python ; coding: utf-8 -*-
+import os # <-- Add this
 
-def resource_path(relative_path):
-    try:
-        base_path = sys._MEIPASS2
-    except Exception:
-        base_path = os.path.abspath(".")
-
-    return os.path.join(base_path, relative_path)
-
+block_cipher = None
+project_root = os.path.dirname(SPEC) # <-- Get the directory containing this spec file
 
 a = Analysis(
-    ['main.py'],
-    pathex=['/Developer/PItests/minimal'],
+    ['main.py'], # Ensure this points to main.py
+    pathex=[project_root], # <-- Explicitly add the project root directory
     binaries=[],
-    datas=[(resource_path('database.db'), '.'), (resource_path('database.db'), '.')],
-    hiddenimports=[],
+    datas=[
+        ('database/database.db', 'database'),
+        ('assets', 'assets')
+    ],
+    hiddenimports=[], # <-- See Step 4 if needed
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
     excludes=[],
+    win_no_prefer_redirects=False,
+    win_private_assemblies=False,
+    cipher=block_cipher,
     noarchive=False,
-    optimize=0,
 )
-pyz = PYZ(a.pure)
+# ... (rest of your spec file - PYZ, EXE, BUNDLE sections) ...
 
+# Make sure the EXE and BUNDLE sections are configured correctly as before
+pyz = PYZ(a.pure, a.zipped_data, cipher=block_cipher)
 exe = EXE(
     pyz,
     a.scripts,
     a.binaries,
+    a.zipfiles,
     a.datas,
     [],
-    name='app',
+    name='OurMoney',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
@@ -39,15 +42,14 @@ exe = EXE(
     runtime_tmpdir=None,
     console=False,
     disable_windowed_traceback=False,
-    argv_emulation=False,
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon=['logo_icon.icns'],
+    icon='assets/logo_icon.icns',
 )
 app = BUNDLE(
     exe,
-    name='app.app',
-    icon='logo_icon.icns',
+    name='OurMoney.app',
+    icon='assets/logo_icon.icns',
     bundle_identifier=None,
 )
