@@ -55,6 +55,7 @@ Follow these steps to set up the project locally:
 - [ ] automatizar a criaçao do setup wizard com CI/CD a cada commit na branch main 
 
 project structure:
+```php
 .
 ├── assets/
 │    └── logo_icon.icns
@@ -88,3 +89,4 @@ project structure:
 ├── controller.py
 ├── requirements.txt
 └── main.py
+```
