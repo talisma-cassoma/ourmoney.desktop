@@ -1,4 +1,5 @@
 from repositories.transactions_repository import TransactionsRepository
+from utils.logger import get_logger
 from datetime import datetime
 import json
 import os
@@ -6,6 +7,8 @@ import os
 
 # Convert transactions to a JSON-compatible format and save
 def export_transactions_to_json():
+    logger = get_logger("exportJSONFile")
+    #logger.info("Iniciando a exportação do json...")
     model = TransactionsRepository()
     transactions = model.get_all()
     

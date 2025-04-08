@@ -1,36 +1,47 @@
 import ijson
 from entities.transactions_entity import TransactionEntity
 from repositories.transactions_repository import TransactionsRepository
+from utils.logger import get_logger
 
-
-def import_transactions_to_json():
-
-    batch_size = 1000
-    transactions: list[TransactionEntity] = []
-
+def import_transactions_from_json():
+    logger = get_logger("importJsonFile")
     model = TransactionsRepository()
 
-    with open('myTransactions_20250120.json', 'r') as file:
-        parser = ijson.items(file, 'item')  # Parse the array of transactions
+    if model.is_database_empty():
+        try:
+            batch_size = 1000
+            transactions: list[TransactionEntity] = []
 
-        for transaction in parser:
-            transaction = TransactionEntity(
-                id=transaction["id"],
-                description=transaction["description"],
-                type=transaction["type"],
-                category=transaction["category"],
-                price=float(transaction["price"]),
-                owner=transaction["owner"],
-                email=transaction["email"],
-                created_at=transaction["createdAt"],
-                status=transaction["status"],
-            )
-            transactions.append(transaction)
-            if len(transactions) >= batch_size:
-                model.insert_many(transactions)
-                transactions = []
+            with open('myTransactions_20250408.json', 'r', encoding='utf-8') as file:
+                parser = ijson.items(file, 'item')  # Ajuste conforme a estrutura do JSON
 
-        # Insert any remaining transactions
-        if transactions:
-            model.insert_many(transactions) 
+                for transaction in parser:
+                    transactions.append(TransactionEntity(
+                        id=transaction["id"],
+                        description=transaction["description"],
+                        type=transaction["type"],
+                        category=transaction["category"],
+                        price=float(transaction["price"]),
+                        owner=transaction["owner"],
+                        email=transaction["email"],
+                        created_at=transaction["createdAt"],
+                        status=transaction["status"],
+                    ))
 
+                    if len(transactions) >= batch_size:
+                        model.insert_many(transactions)
+                        #print(model.insert_many)  # Deve imprimir algo como <bound method ...> e não None
+
+                        transactions.clear()  # Melhor que transactions = []
+
+                if transactions:  # Insere o restante dos dados
+                    model.insert_many(transactions)
+        except FileNotFoundError as e:
+            #print(f"Erro ao importar o arquivo JSON: {str(e)}")
+            logger.error(f"Erro ao importar o arquivo JSON: {str(e)}")
+        except KeyError as e:
+            #print(f"Chave ausente no JSON: {str(e)}")
+            logger.error(f"Chave ausente no JSON: {str(e)}")
+        except Exception as e:
+            #print(f"Erro inesperado: {str(e)}")
+            logger.error(f"Erro inesperado: {str(e)}")

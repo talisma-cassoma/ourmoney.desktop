@@ -7,6 +7,7 @@ from utils.helppers import resource_path
 from entities.transactions_entity import TransactionEntity
 
 class TransactionsRepository:
+    
     def __init__(self):
         self._db_path = resource_path('database/database.db')
         self.logger = get_logger("TransactionsRepository")
@@ -111,6 +112,14 @@ class TransactionsRepository:
                 self.logger.error(f"Error inserting non-synced transaction: {e}")
 
 #fetch methods
+    def is_database_empty(self):
+        with self._connect() as conn:
+            cur = conn.cursor()
+            query = "SELECT COUNT(*) FROM transactions"
+            cur.execute(query)
+            count = cur.fetchone()[0]
+            return count == 0
+        
     def fetch_somes(self, last_date) -> list[TransactionEntity]: # last_date shoulb be in format %Y-%m-%d
 
         query = """

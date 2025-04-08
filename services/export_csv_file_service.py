@@ -1,10 +1,12 @@
 # services/transaction_service.py
 import csv
 from repositories.transactions_repository import TransactionsRepository
-
+from utils.logger import get_logger
 
 def export_transactions_to_csv(file_path="transactions.csv"):
     """Fetch all transactions and save them as a CSV file."""
+    logger = get_logger("exportCSVFile")
+    #logger.info("Iniciando a exportação do CSV...")
     model = TransactionsRepository()
     transactions = model.get_all()
     

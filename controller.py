@@ -13,10 +13,25 @@ from services.export_json_file_service import export_transactions_to_json
 from services.export_csv_file_service import export_transactions_to_csv
 from services.export_xlsx_file_service import export_transactions_to_excel
 from services.export_analytics_report_service import export_analytics_report
+from services.import_json_service import import_transactions_from_json
 
 
 # Configuração do logging
 logging.basicConfig(filename='app.log', level=logging.INFO, format='%(asctime)s %(levelname)s:%(message)s')
+
+class ExportServiceFactory:
+    """Fábrica para retornar a instância correta do serviço de exportação."""
+
+    @staticmethod
+    def get_export_service(index):
+        services = {
+            0: export_transactions_to_json,
+            1: export_transactions_to_csv,
+            2: export_transactions_to_excel,
+            3: export_analytics_report,
+            # ... Novos formatos podem ser adicionados facilmente aqui
+        }
+        return services.get(index, lambda: print("Formato de exportação inválido!"))  # Função padrão
 
 
 class Controller:
@@ -26,11 +41,14 @@ class Controller:
         self._delete = DeleteTransactionService()
         self._update = UpdateTransactionService()
         self._insert = InsertTransactionService()
-
+        
         self.api_url = "https://our-money-bkd.onrender.com"
         #self.api_url = "http://localhost:3000"
         self.timeout = 10
-
+        
+        #if empty import transactions from json()
+        import_transactions_from_json()
+    
     def is_online(self):
         """Checa se a máquina está conectada ao servidor."""
         try:
@@ -121,10 +139,12 @@ class Controller:
 
     def synchronize_data(self):
          """Baixa dados do servidor para o SQLite local e sincroniza as transações baixadas."""
+
+
          if not self.is_online():
              logging.info("Sem conexão. Dados não puxados.")
              return None
-           
+         
          try:
              response = requests.get(f"{self.api_url}/api/transactions/unsynced", timeout=self.timeout)
              if response.status_code == 200:
@@ -247,34 +267,8 @@ class Controller:
         if transactions_dto:
             self._insert.many(transactions_dto)
 
-                    
     def export_file(self, index):
-        # index 0 for json 
-        # index 1 for csv
-        # index 2 for xlsx
-        if index == 0:
-            try:
-                export_transactions_to_json()
-                logging.info("status: success, Transactions saved successfully.")
-            except Exception as e:
-                logging.error(f"status: error:{ str(e)}")
-        if index == 1:
-            try:
-                export_transactions_to_csv()
-                logging.info("status: success, Transactions exported to CSV successfully.")
-            except Exception as e:
-                logging.error(f"status: error:{ str(e)}")
-        if index == 2:
-            try:
-                export_transactions_to_excel()
-                logging.info("status: success, Transactions exported to excel successfully.")
-            except Exception as e:
-                logging.error(f"status: error:{ str(e)}")
-        if index == 3:
-            try:
-                export_analytics_report()
-                logging.info("status: success, created analytics pdf successfully.")
-            except Exception as e:
-                logging.error(f"status: error:{ str(e)}")
-     
+        export_function = ExportServiceFactory.get_export_service(index)
+        export_function()  # Executa a função correspondente
+
      

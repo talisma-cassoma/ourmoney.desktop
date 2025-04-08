@@ -2,7 +2,9 @@ import subprocess
 from utils.logger import get_logger
 
 def export_analytics_report():
-    logging = get_logger("analyticsReport")
+    logger = get_logger("analyticsReport")
+    #logger.info("Iniciando a exportação do relatório em PDF...")
+
     try:
         result = subprocess.run(
             ["quarto", "render", "report.qmd", "--to", "pdf"],
@@ -10,6 +12,7 @@ def export_analytics_report():
             capture_output=True,
             text=True
         )
-        print("PDF export successful:", result.stdout)
+        logger.info(f"Exportação para PDF bem-sucedida: {result.stdout.strip()}")
+
     except subprocess.CalledProcessError as e:
-        print("Error during PDF export:", e.stderr)
+        logger.error(f"Erro ao exportar PDF: {e.stderr.strip()}")
