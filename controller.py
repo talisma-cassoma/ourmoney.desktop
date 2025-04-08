@@ -12,6 +12,7 @@ from services.insert_transaction_service import InsertTransactionService
 from services.export_json_file_service import export_transactions_to_json
 from services.export_csv_file_service import export_transactions_to_csv
 from services.export_xlsx_file_service import export_transactions_to_excel
+from services.export_analytics_report_service import export_analytics_report
 
 
 # Configuração do logging
@@ -216,32 +217,36 @@ class Controller:
    
     def store_in_local_db(self, data):
         """Armazena as transações baixadas no banco de dados local."""
+        transactions_dto = []  # Lista para armazenar os DTOs antes da inserção
         for transaction in data:
-            created_at = transaction.get('created_at')
+            created_at = transaction.get('createdAt')
             if created_at is not None:
                 try: 
                     convertedTime = convert_to_iso8601(created_at)
-                    # Criar o DTO
-                    transactions_dto = [
+                    # Criar o DTO e adicioná-lo à lista
+                    transactions_dto.append(
                         TransactionDTO(
-                        id= transaction['id'],
-                        description=str(transaction['description']).strip().lower(),
-                        category=str(transaction['category']).strip().lower(),
-                        type=transaction['type'],
-                        price=float(transaction['price']),
-                        created_at=convertedTime,
-                        status='synced'
+                            id=transaction['id'],
+                            description=str(transaction['description']).strip().lower(),
+                            category=str(transaction['category']).strip().lower(),
+                            type=transaction['type'],
+                            price=float(transaction['price']),
+                            created_at=convertedTime,
+                            status='synced'
                         )
-                    for transaction in transactions_dto
-                    ]
-                    self._insert.many(transactions_dto)
-
+                    )
                 except ValueError as ve:
                     logging.error(f"Erro ao analisar a data: {ve}")
                 except KeyError as ke:
                     logging.error(f"Chave ausente na transação: {ke}")
                 except Exception as e:
-                    logging.error(f"Erro ao inserir a transação: {e}")
+                    logging.error(f"Erro ao processar a transação: {e}")
+
+        # Inserir todas as transações de uma vez no banco
+        
+        if transactions_dto:
+            self._insert.many(transactions_dto)
+
                     
     def export_file(self, index):
         # index 0 for json 
@@ -265,4 +270,11 @@ class Controller:
                 logging.info("status: success, Transactions exported to excel successfully.")
             except Exception as e:
                 logging.error(f"status: error:{ str(e)}")
+        if index == 3:
+            try:
+                export_analytics_report()
+                logging.info("status: success, created analytics pdf successfully.")
+            except Exception as e:
+                logging.error(f"status: error:{ str(e)}")
+     
      

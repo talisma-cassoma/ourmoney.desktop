@@ -130,7 +130,7 @@ class MainWindow(QMainWindow):
 
         self.file_type_input = QComboBox()
         self.file_type_input.setStyleSheet("color: white;")
-        self.file_type_input.addItems(["json", "csv", "excel"])
+        self.file_type_input.addItems(["json", "csv", "excel", "report"])
         # Connect signals to the methods.
         self.file_type_input.activated.connect(self.save_file)
         # # Add block 1 to thes status layout

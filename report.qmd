@@ -1,58 +1,126 @@
 ---
-title: "our money Report"
+title: "Our Money Report"
 author: "Talisma Manuel"
 format: pdf
-echo: False
-error: False
-warning: False
-engine: jupyter
+echo: False  # Não mostra o código Python no PDF
+error: False # Não mostra erros no PDF
+warning: False # Não mostra avisos no PDF
+# A engine jupyter é inferida quando blocos python são usados, mas pode ser explícita
+engine: jupyter 
 ---
 
-## Introduction
 
-This is a sample Quarto report generated programmatically.
 
-## Data
+## despesas mensais
 
 ```{python}
-from IPython.display import HTML, display
-from lib import DataProcessor
+#| results: 'asis'  
 
+import pandas as pd
+from plotnine import ggplot, aes, geom_line, labs, theme, element_text, scale_x_datetime, element_rect, element_line
+from great_tables import GT, loc, exibble, html  
+from IPython.display import display, Markdown  
+import os
+import sys  
+
+# --- Configurações ---
 file_path = "./transactions.xlsx"
-data_processor = DataProcessor(file_path)
-df = data_processor.get_dataframe()
-display(df.head(4).style.background_gradient())
-```
+currency_symbol = "MAD"  
 
-```{python}
-import warnings
-from IPython.display import HTML, display
-from lib import ( ExpenseAnalyzer,PivotTableVisualizer )
-warnings.filterwarnings('ignore')
- about_recurring_categories = """
-<div>
-<H2>verificando gastos recurrentes</H2>
-<p>
-Vamos começar explorando os dados, visualizando a distribuição de despesas por categoria, comparando<br>
-despesas e receitas mensais e identificando categorias recorrentes nos últimos meses.</p>
-</div>
-"""
-display(HTML(about_recurring_categories))
+# --- Carregar e Preparar os Dados ---
+try:
+    df = pd.read_excel(file_path)
+except FileNotFoundError:
+    print(f"**ERRO CRÍTICO:** O arquivo '{file_path}' não foi encontrado.", file=sys.stderr)
+    df = pd.DataFrame()
 
-expenses_by_month = ExpenseAnalyzer(df)
+if not df.empty:
+    try:
+        df["createdAt"] = pd.to_datetime(df["createdAt"], dayfirst=True, errors='coerce')
+    except Exception as e:
+        print(f"**ERRO:** Falha ao converter 'createdAt'.", file=sys.stderr)
+        print(f"Detalhes: {e}", file=sys.stderr)
+        df = pd.DataFrame()
 
-#Set the number of months to filter
-expenses_by_month.set_time_period(-3)
-recurring_categories = expenses_by_month.find_recurring_categories()
+    df = df.sort_values("createdAt")
 
-display(recurring_categories.style.background_gradient())
+    required_cols = ["createdAt", "category", "price"]
+    if not all(col in df.columns for col in required_cols):
+        print(f"**ERRO:** Faltam colunas essenciais: {required_cols}", file=sys.stderr)
+        df = pd.DataFrame()
 
-about_annual_expenses_by_category = """
-<div>
-<H2>Análise Anual de Despesas por Categoria</H2>
-<p>abaixo podemos visualizar da distribuição de despesas e receitas por categoria no ano.</p>
-</div>
-"""
-display(HTML(about_annual_expenses_by_category))
+# --- Processamento Mês a Mês ---
+if df.empty:
+    display(Markdown("## Dados Indisponíveis."))
+else:
+    grouped_by_month = df.groupby([df["createdAt"].dt.year, df["createdAt"].dt.month])
+
+    if grouped_by_month.ngroups == 0:
+        display(Markdown("## Nenhum Dado"))
+    else:
+        for (year, month), group in grouped_by_month:
+            group = group.copy()
+            month_name = pd.Timestamp(f"{year}-{month}-01").strftime("%B %Y")
+
+            display(Markdown(f"## {month_name}\n"))
+
+            # --- Tabela de Totais por Categoria ---
+            category_totals = group.groupby("category")["price"].sum().reset_index()
+            category_totals = category_totals.sort_values("price", ascending=False)
+
+            if not category_totals.empty:
+                display(Markdown("### Resumo de Gastos por Categoria\n"))
+
+                gt_table = GT(data=category_totals)
+
+                gt_table = (
+                    gt_table
+                    .cols_label({"category": "Categoria", "price": "Total Gasto"})
+                    .cols_align(align="right", columns="price")
+                    .cols_width({"category": "60%", "price": "40%"})
+                    .tab_options(
+                        table_font_size="10pt",
+                        heading_title_font_size="12pt",
+                        table_border_top_style="solid",
+                        table_border_top_width="2px",
+                        table_border_top_color="#ddd",
+                        column_labels_border_bottom_style="solid",
+                        column_labels_border_bottom_width="1px",
+                        column_labels_border_bottom_color="#ddd",
+                    )
+                )
+
+                display(gt_table)
+            else:
+                display(Markdown("*Nenhuma transação registrada neste mês.*"))
+
+            # --- Gráfico de Gastos Acumulados ---
+            if not group.empty:
+                display(Markdown("\n### Gastos Acumulados por Categoria ao Longo do Mês\n"))
+
+                group = group.sort_values("createdAt")
+                group.loc[:, "cumulative_price"] = group.groupby("category")["price"].cumsum()
+
+                p = (
+                    ggplot(group, aes(x='createdAt', y='cumulative_price', color='category'))
+                    + geom_line(size=1)
+                    + labs(x="Data", y=f"Gasto Acumulado ({currency_symbol})", color="Categoria")
+                    + scale_x_datetime(date_labels="%d/%m", date_breaks="7 days")
+                    + theme(
+                        axis_text_x=element_text(rotation=45, hjust=1),
+                        figure_size=(10, 4),
+                        legend_position="right",
+                        panel_background=element_rect(fill="white", colour="grey"),
+                        panel_grid_major=element_line(colour="lightgrey")
+                    )
+                )
+                display(p)
+            else:
+                if category_totals.empty:
+                    pass
+                else:
+                    display(Markdown("*Não foi possível gerar o gráfico de gastos acumulados.*"))
+
+            display(Markdown("\n---\n"))
 
 ```

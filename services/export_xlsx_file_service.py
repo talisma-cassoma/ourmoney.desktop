@@ -10,7 +10,7 @@ def export_transactions_to_excel(file_path="transactions.xlsx"):
     transactions = model.get_all()
     
     # Define the Excel header
-    header = ["id", "description", "type", "category", "price", "owner", "email", "createdAt", "status"]
+    header = ["description", "type", "category", "price", "owner", "email", "createdAt", "status"]
     
     # Create a new Excel workbook and add a worksheet
     workbook = Workbook()
@@ -24,7 +24,6 @@ def export_transactions_to_excel(file_path="transactions.xlsx"):
     for transaction in transactions:
         # Extract attributes from the TransactionEntity object
         formatted_transaction = [
-            transaction.id,
             transaction.description,
             transaction.type,
             transaction.category,
@@ -39,7 +38,7 @@ def export_transactions_to_excel(file_path="transactions.xlsx"):
         
         # Format the createdAt field
         try:
-            formatted_transaction[7] = convert_time_format(transaction.createdAt)
+            formatted_transaction[6] = convert_time_format(transaction.createdAt)
         except (ValueError, AttributeError):
             pass  # Leave the original value if formatting fails
         
