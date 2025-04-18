@@ -4,7 +4,7 @@
 
 *build/
 *dist/
-*report_files
+*report_files/
 *report*
 # Ignorar o arquivo do banco de dados
 *.db
