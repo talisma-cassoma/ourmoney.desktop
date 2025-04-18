@@ -8,14 +8,18 @@ format:
     typst:
         font-paths: ["fonts"]
         format: custom.typ
+        margin:
+          left: 1cm
+          rest: 0.5cm
     # color-links: true
     page-layout: full
     toc: true
     # toc-depth: 2
     include-in-header:
-      text: |
-        \usepackage{etoolbox}
-        \pretocmd{\tableofcontents}{\clearpage}{}{}
+        text: |
+           \usepackage{etoolbox}
+           \pretocmd{\tableofcontents}{\clearpage}{}{}
+           \apptocmd{\tableofcontents}{\clearpage}{}{}
     # number-sections: true
     keep-tex: true
     papersize: a4
@@ -27,7 +31,6 @@ engine: jupyter
 jupyter: python3
 kernel: env
 ---
-
 
 ```{python}
 from dateutil.relativedelta import relativedelta
@@ -48,6 +51,20 @@ plt.rcParams["font.family"] = "Open Sans"
 df = pd.read_excel("transactions.xlsx")
 df['category'] = df['category'].str.lower().str.strip()
 df['createdAt'] = pd.to_datetime(df['createdAt'], format='%d-%m-%Y')
+
+def show(df):
+    styled = (
+        df.style
+        .format(precision=2)
+        .hide(axis='index')
+        .set_table_styles([
+            {'selector': 'thead',
+             'props': 'background-color: #0077b6; color: white; font-weight: bold; padding: 6px;'}
+        ])
+        .set_table_attributes('style="border-collapse: collapse; border: 1px solid black; font-size: 14px;"')
+    )
+    return display(styled)
+
 
 # Current date and month
 now = datetime.now()
@@ -82,14 +99,16 @@ last_six_months_outcomes = df[
 total_last_six_months = last_six_months_outcomes['price'].sum()
 
 # High expenses this month (> 1000)
-high_expenses = category_sum[category_sum > 1000]
+high_expenses = category_sum[category_sum > 1000].reset_index()
+high_expenses.columns = ['Categoria', 'Total']
 ```
 
 ## Gestao dos Gastos 
 
-::: {layout="[[1,1], [1, 1]]"}
+::: {layout-ncol="2"}
 
 ### Onde estou gastando mais dinheiro? 
+
 ```{python}
 if biggest_category:
     labels = [biggest_category, 'Outros']
@@ -104,6 +123,7 @@ if biggest_category:
 else:
    display("Nenhuma despesa registrada para o mês atual.")
 ```
+
 <div>
 
 ### Quanto gastei no total o ultimo mes?
@@ -120,7 +140,9 @@ Categorias com gasto acima de 1000:
 
 ```{python}
 if not high_expenses.empty:
-    display(high_expenses.to_frame("Total gasto").sort_values(by="Total gasto", ascending=False))
+   # Mostrar o DataFrame com as categorias e valores
+   high_expenses
+   show(high_expenses)
 else:
     display("Nenhuma categoria ultrapassou 1000 este mês.")
 
@@ -131,6 +153,8 @@ if biggest_category:
 </div>
 
 :::
+
+::: {layout-ncol="2"}
 
 ### Existem despesas recorrentes nos trimeste / simestre ?
 
@@ -156,32 +180,36 @@ category_6m = category_6m.rename(columns={'price': 'Total', '%': 'Percentual (%)
 category_6m = category_6m.sort_values(by='Total', ascending=False)
 ```
 
-<b>ultimo trimeste</b>
+ultimo trimeste
+
+</div>
+ <div>
 
 ```{python}
 if not category_3m.empty:
-    display(category_3m.style.format({'Total': '{:,.2f}', 'Percentual (%)': '{:.2f}%'}))
+    show(category_3m)
 else:
     display("Nenhuma despesa registrada nos últimos 3 meses.")
 ```
 
-<b>ultimo semeste</b>
+ </div>
+ <div>
+
+ultimo semestre
 
 ```{python}
 if not category_6m.empty:
-    display(category_6m.style.format({'Total': '{:,.2f}', 'Percentual (%)': '{:.2f}%'}))
+    show(category_6m)
 else:
     display("Nenhuma despesa registrada nos últimos 6 meses.")
-
 ```
 
+ </div>
+</div>
 
-
-
+:::
 
 ### Meu padrao de gasto mudou comprado ao meses anteriores ?
-
-::: {layout-ncol=3}
 
 ```{python}
 np.random.seed(42)
@@ -271,8 +299,6 @@ else: # No monthly data was generated
      display("Skipping plotting as no monthly data was generated.")
 ```
 
-
-
 ### Como meus gastos em evoluíram ao longo do tempo?
 
 ```{python}
@@ -334,9 +360,6 @@ for i, category in enumerate(monthly_totals['category'].unique()):
         ax.plot(x, y, label=category.capitalize(), color=category_colors[category], linewidth=1, marker='o', markersize=5, linestyle='--')
         # print(f"Warning: Not enough data points ({len(x_num)}) for smoothing category '{category}'. Plotting original points.")
 
-
-# --- Aesthetics Configuration ---
-
 # Remove borders (spines)
 ax.spines['top'].set_visible(False)
 ax.spines['right'].set_visible(False)
@@ -377,6 +400,7 @@ plt.show()
 ## RECEITAS
 
 ### Quais são minhas principais fontes de receita?
+
 ```{python}
 # Filtrar receitas
 df_income = df[df['type'] == 'income'].copy()
@@ -395,7 +419,7 @@ income_grouped['Total'] = income_grouped['Total '].round(2)
 income_grouped['Porcentagem (%)'] = income_grouped['Porcentagem (%)'].round(1)
 
 # Exibir tabela
-display(income_grouped)
+show(income_grouped)
 ```
 
 ### Minha receita total aumentou ou diminuiu nos últimos meses?
@@ -457,6 +481,7 @@ budget = {
 ```
 
 ### Estou conseguindo seguir meu orçamento nesse mes?
+
 ```{python}
 # Filtrar o mês atual e tipo=outcome
 df_outcome = df[df['type'] == 'outcome'].copy()
@@ -508,8 +533,8 @@ plt.yticks([500, 1000, 1500, 2000, 2500, 3000], ["500", "1000", "1500", "2000", 
 plt.ylim(0, max(budget_values + actual_values) + 500)
 
 # Plotar o orçamento
-ax.plot(angles, budget_values, color='blue', linewidth=2, linestyle='solid', label='Orçamento')
-ax.fill(angles, budget_values, color='blue', alpha=0.1)
+ax.plot(angles, budget_values, color='#0077b6', linewidth=2, linestyle='solid', label='Orçamento')
+ax.fill(angles, budget_values, color='#0077b6', alpha=0.1)
 
 # Plotar os gastos reais
 ax.plot(angles, actual_values, color='red', linewidth=2, linestyle='solid', label='Gasto Atual')
@@ -526,6 +551,7 @@ plt.show()
 ::: {layout-ncol="2"}
 
 ### Em quais categorias de orçamento estou estourando o limite com mais frequência?
+
 ```{python}
 # Filtrar apenas os dados de despesas (type='outcome')
 df_outcome = df[df['type'] == 'outcome'].copy()
@@ -556,7 +582,7 @@ for category, limit in budget.items():
 over_budget_df = pd.DataFrame(over_budget_percentages)
 
 # Exibir a tabela
-display(over_budget_df)
+show(over_budget_df)
 ```
 
 ### Quanto ainda tenho disponível para gastar em cada categoria neste mês?
@@ -585,13 +611,14 @@ for category, limit in budget.items():
 
 # Criar a tabela final
 remaining_budget_df = pd.DataFrame(remaining_budget)
-display(remaining_budget_df.sort_values(by='restou'))
+show(remaining_budget_df.sort_values(by='restou'))
 
 ```
 
 :::
 
 ### Qual o meu progresso em relação à minha meta de economia?
+
 ```{python}
 # Adiciona colunas auxiliares
 df['year'] = df['createdAt'].dt.year
@@ -624,7 +651,7 @@ economy_table = economy_table.applymap(lambda x: f"{x:.2f}" if pd.notnull(x) els
 
 
 # Exibe a tabela
-display(economy_table)
+show(economy_table)
 ``` 
 
 ### Quanto estou conseguindo economizar em média por mês?

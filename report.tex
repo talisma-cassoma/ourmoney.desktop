@@ -97,6 +97,7 @@
 
 \usepackage{etoolbox}
 \pretocmd{\tableofcontents}{\clearpage}{}{}
+\apptocmd{\tableofcontents}{\clearpage}{}{}
 \KOMAoption{captions}{tableheading}
 \makeatletter
 \@ifpackageloaded{caption}{}{\usepackage{caption}}
@@ -197,19 +198,23 @@ mes?}\label{quais-foram-minhas-maiores-dispesas-esse-mes}
 Categorias com gasto acima de 1000:
 
 \begin{longtable}[]{@{}ll@{}}
+\caption{}\label{T_90dd5}\tabularnewline
 \toprule\noalign{}
-& Total gasto \\
-category & \\
+Categoria & Total \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+Categoria & Total \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-aparelhos & 4799.00 \\
+alimentaçao & 1785.84 \\
 aluguel & 3100.00 \\
 angola & 2850.00 \\
-alimentaçao & 1785.84 \\
-transporte & 1177.00 \\
+aparelhos & 4799.00 \\
 geovana & 1115.00 \\
+transporte & 1177.00 \\
 \end{longtable}
 
 O maior gasto este mês foi em: \textbf{aparelhos} com \textbf{4,799.00}
@@ -218,112 +223,133 @@ O maior gasto este mês foi em: \textbf{aparelhos} com \textbf{4,799.00}
 
 \end{figure}%
 
+\begin{figure}
+
+\begin{minipage}{0.50\linewidth}
+
 \subsubsection{Existem despesas recorrentes nos trimeste / simestre
 ?}\label{existem-despesas-recorrentes-nos-trimeste-simestre}
 
-ultimo trimeste
+ultimo trimeste\end{minipage}%
+%
+\begin{minipage}{0.50\linewidth}
 
-\begin{longtable}[]{@{}llll@{}}
-\caption{}\label{T_f754f}\tabularnewline
+\end{minipage}%
+\newline
+\begin{minipage}{0.50\linewidth}
+
+\begin{longtable}[]{@{}lll@{}}
+\caption{}\label{T_4ca06}\tabularnewline
 \toprule\noalign{}
-~ & category & Total & Percentual (\%) \\
+category & Total & Percentual (\%) \\
 \midrule\noalign{}
 \endfirsthead
 \toprule\noalign{}
-~ & category & Total & Percentual (\%) \\
+category & Total & Percentual (\%) \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-5 & aluguel & 9,300.00 & 19.07\% \\
-3 & alimentaçao & 7,028.61 & 14.41\% \\
-7 & aparelhos & 5,049.00 & 10.35\% \\
-17 & educaçao & 4,028.00 & 8.26\% \\
-33 & transporte & 3,209.00 & 6.58\% \\
-6 & angola & 2,850.00 & 5.84\% \\
-24 & geovana & 2,605.00 & 5.34\% \\
-29 & roupas & 2,308.85 & 4.73\% \\
-31 & saude & 1,939.70 & 3.98\% \\
-18 & emprestimo & 1,620.00 & 3.32\% \\
-23 & gastos extra & 1,441.13 & 2.95\% \\
-16 & documentos & 1,100.00 & 2.26\% \\
-13 & casa & 972.00 & 1.99\% \\
-26 & internet & 748.00 & 1.53\% \\
-28 & presentes & 622.00 & 1.28\% \\
-19 & emprestmo & 600.00 & 1.23\% \\
-0 & agua e luz & 490.99 & 1.01\% \\
-2 & alimentacao & 410.82 & 0.84\% \\
-10 & babysitting & 400.00 & 0.82\% \\
-9 & babysitter & 400.00 & 0.82\% \\
-4 & alimentçao & 195.00 & 0.40\% \\
-34 & yachane & 180.00 & 0.37\% \\
-21 & estetica & 170.00 & 0.35\% \\
-11 & bebida & 149.30 & 0.31\% \\
-32 & talisma & 139.00 & 0.29\% \\
-30 & saldo & 133.00 & 0.27\% \\
-27 & netflix & 130.00 & 0.27\% \\
-14 & divida & 106.00 & 0.22\% \\
-22 & gas & 100.00 & 0.21\% \\
-15 & documentaçao & 100.00 & 0.21\% \\
-20 & empréstimo & 100.00 & 0.21\% \\
-12 & bebidas & 91.00 & 0.19\% \\
-25 & higiene pessoal & 30.00 & 0.06\% \\
-8 & ayla & 20.00 & 0.04\% \\
-1 & ajuda & 5.00 & 0.01\% \\
+aluguel & 9300.00 & 19.07 \\
+alimentaçao & 7028.61 & 14.41 \\
+aparelhos & 5049.00 & 10.35 \\
+educaçao & 4028.00 & 8.26 \\
+transporte & 3209.00 & 6.58 \\
+angola & 2850.00 & 5.84 \\
+geovana & 2605.00 & 5.34 \\
+roupas & 2308.85 & 4.73 \\
+saude & 1939.70 & 3.98 \\
+emprestimo & 1620.00 & 3.32 \\
+gastos extra & 1441.13 & 2.95 \\
+documentos & 1100.00 & 2.26 \\
+casa & 972.00 & 1.99 \\
+internet & 748.00 & 1.53 \\
+presentes & 622.00 & 1.28 \\
+emprestmo & 600.00 & 1.23 \\
+agua e luz & 490.99 & 1.01 \\
+alimentacao & 410.82 & 0.84 \\
+babysitting & 400.00 & 0.82 \\
+babysitter & 400.00 & 0.82 \\
+alimentçao & 195.00 & 0.40 \\
+yachane & 180.00 & 0.37 \\
+estetica & 170.00 & 0.35 \\
+bebida & 149.30 & 0.31 \\
+talisma & 139.00 & 0.29 \\
+saldo & 133.00 & 0.27 \\
+netflix & 130.00 & 0.27 \\
+divida & 106.00 & 0.22 \\
+gas & 100.00 & 0.21 \\
+documentaçao & 100.00 & 0.21 \\
+empréstimo & 100.00 & 0.21 \\
+bebidas & 91.00 & 0.19 \\
+higiene pessoal & 30.00 & 0.06 \\
+ayla & 20.00 & 0.04 \\
+ajuda & 5.00 & 0.01 \\
 \end{longtable}
 
-ultimo semeste
+\end{minipage}%
+%
+\begin{minipage}{0.50\linewidth}
+ultimo semestre
 
-\begin{longtable}[]{@{}llll@{}}
-\caption{}\label{T_e4a42}\tabularnewline
+\begin{longtable}[]{@{}lll@{}}
+\caption{}\label{T_4b45d}\tabularnewline
 \toprule\noalign{}
-~ & category & Total & Percentual (\%) \\
+category & Total & Percentual (\%) \\
 \midrule\noalign{}
 \endfirsthead
 \toprule\noalign{}
-~ & category & Total & Percentual (\%) \\
+category & Total & Percentual (\%) \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-5 & aluguel & 18,600.00 & 19.19\% \\
-3 & alimentaçao & 13,840.50 & 14.28\% \\
-7 & aparelhos & 7,504.00 & 7.74\% \\
-35 & transporte & 7,313.00 & 7.55\% \\
-17 & educaçao & 6,148.50 & 6.34\% \\
-25 & geovana & 5,607.00 & 5.79\% \\
-13 & casa & 5,206.60 & 5.37\% \\
-31 & roupas & 4,344.85 & 4.48\% \\
-6 & angola & 3,450.00 & 3.56\% \\
-24 & gastos extra & 3,113.88 & 3.21\% \\
-33 & saude & 3,042.70 & 3.14\% \\
-18 & emprestimo & 2,145.00 & 2.21\% \\
-28 & kixikila & 2,000.00 & 2.06\% \\
-11 & bebida & 1,665.70 & 1.72\% \\
-22 & familia & 1,610.00 & 1.66\% \\
-27 & internet & 1,246.00 & 1.29\% \\
-8 & ayla & 1,174.00 & 1.21\% \\
-16 & documentos & 1,100.00 & 1.14\% \\
-34 & talisma & 943.00 & 0.97\% \\
-14 & divida & 936.00 & 0.97\% \\
-30 & presentes & 921.00 & 0.95\% \\
-0 & agua e luz & 860.29 & 0.89\% \\
-2 & alimentacao & 691.82 & 0.71\% \\
-19 & emprestmo & 600.00 & 0.62\% \\
-10 & babysitting & 500.00 & 0.52\% \\
-36 & yachane & 421.00 & 0.43\% \\
-9 & babysitter & 400.00 & 0.41\% \\
-21 & estetica & 335.00 & 0.35\% \\
-23 & gas & 270.00 & 0.28\% \\
-4 & alimentçao & 195.00 & 0.20\% \\
-15 & documentaçao & 172.00 & 0.18\% \\
-32 & saldo & 163.00 & 0.17\% \\
-29 & netflix & 130.00 & 0.13\% \\
-20 & empréstimo & 100.00 & 0.10\% \\
-12 & bebidas & 91.00 & 0.09\% \\
-26 & higiene pessoal & 58.00 & 0.06\% \\
-1 & ajuda & 5.00 & 0.01\% \\
+aluguel & 18600.00 & 19.19 \\
+alimentaçao & 13840.50 & 14.28 \\
+aparelhos & 7504.00 & 7.74 \\
+transporte & 7313.00 & 7.55 \\
+educaçao & 6148.50 & 6.34 \\
+geovana & 5607.00 & 5.79 \\
+casa & 5206.60 & 5.37 \\
+roupas & 4344.85 & 4.48 \\
+angola & 3450.00 & 3.56 \\
+gastos extra & 3113.88 & 3.21 \\
+saude & 3042.70 & 3.14 \\
+emprestimo & 2145.00 & 2.21 \\
+kixikila & 2000.00 & 2.06 \\
+bebida & 1665.70 & 1.72 \\
+familia & 1610.00 & 1.66 \\
+internet & 1246.00 & 1.29 \\
+ayla & 1174.00 & 1.21 \\
+documentos & 1100.00 & 1.14 \\
+talisma & 943.00 & 0.97 \\
+divida & 936.00 & 0.97 \\
+presentes & 921.00 & 0.95 \\
+agua e luz & 860.29 & 0.89 \\
+alimentacao & 691.82 & 0.71 \\
+emprestmo & 600.00 & 0.62 \\
+babysitting & 500.00 & 0.52 \\
+yachane & 421.00 & 0.43 \\
+babysitter & 400.00 & 0.41 \\
+estetica & 335.00 & 0.35 \\
+gas & 270.00 & 0.28 \\
+alimentçao & 195.00 & 0.20 \\
+documentaçao & 172.00 & 0.18 \\
+saldo & 163.00 & 0.17 \\
+netflix & 130.00 & 0.13 \\
+empréstimo & 100.00 & 0.10 \\
+bebidas & 91.00 & 0.09 \\
+higiene pessoal & 58.00 & 0.06 \\
+ajuda & 5.00 & 0.01 \\
 \end{longtable}
+
+\end{minipage}%
+\newline
+\begin{minipage}{0.50\linewidth}
+
+\end{minipage}%
+
+\end{figure}%
 
 \subsubsection{Meu padrao de gasto mudou comprado ao meses anteriores
 ?}\label{meu-padrao-de-gasto-mudou-comprado-ao-meses-anteriores}
@@ -340,23 +366,28 @@ tempo?}\label{como-meus-gastos-em-evoluuxedram-ao-longo-do-tempo}
 \subsubsection{Quais são minhas principais fontes de
 receita?}\label{quais-suxe3o-minhas-principais-fontes-de-receita}
 
-\begin{longtable}[]{@{}lllll@{}}
+\begin{longtable}[]{@{}llll@{}}
+\caption{}\label{T_54e3c}\tabularnewline
 \toprule\noalign{}
-& Categoria & Total & Porcentagem (\%) & Total \\
+Categoria & Total & Porcentagem (\%) & Total \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+Categoria & Total & Porcentagem (\%) & Total \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-0 & salario & 217596.0 & 89.3 & 217596.0 \\
-1 & emprestimo & 8471.0 & 3.5 & 8471.0 \\
-2 & seguro & 8385.0 & 3.4 & 8385.0 \\
-3 & kixikila & 4100.0 & 1.7 & 4100.0 \\
-4 & bolsa amci & 2500.0 & 1.0 & 2500.0 \\
-5 & investimento & 1200.0 & 0.5 & 1200.0 \\
-6 & gastos extra & 900.0 & 0.4 & 900.0 \\
-7 & extra & 240.0 & 0.1 & 240.0 \\
-8 & divida & 100.0 & 0.0 & 100.0 \\
-9 & geovana & 50.0 & 0.0 & 50.0 \\
+salario & 217596.00 & 89.30 & 217596.00 \\
+emprestimo & 8471.00 & 3.50 & 8471.00 \\
+seguro & 8385.00 & 3.40 & 8385.00 \\
+kixikila & 4100.00 & 1.70 & 4100.00 \\
+bolsa amci & 2500.00 & 1.00 & 2500.00 \\
+investimento & 1200.00 & 0.50 & 1200.00 \\
+gastos extra & 900.00 & 0.40 & 900.00 \\
+extra & 240.00 & 0.10 & 240.00 \\
+divida & 100.00 & 0.00 & 100.00 \\
+geovana & 50.00 & 0.00 & 50.00 \\
 \end{longtable}
 
 \subsubsection{Minha receita total aumentou ou diminuiu nos últimos
@@ -379,20 +410,25 @@ mes?}\label{estou-conseguindo-seguir-meu-oruxe7amento-nesse-mes}
 limite com mais
 frequência?}\label{em-quais-categorias-de-oruxe7amento-estou-estourando-o-limite-com-mais-frequuxeancia}
 
-\begin{longtable}[]{@{}lll@{}}
+\begin{longtable}[]{@{}ll@{}}
+\caption{}\label{T_36fe2}\tabularnewline
 \toprule\noalign{}
-& Categoria & Percentual de Estouro (\%) \\
+Categoria & Percentual de Estouro (\%) \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+Categoria & Percentual de Estouro (\%) \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-0 & alimentacao & 0.0 \\
-1 & roupas & 87.5 \\
-2 & bebidas & 0.0 \\
-3 & agua-luz & 0.0 \\
-4 & emprestimos & 0.0 \\
-5 & dividas & 0.0 \\
-6 & saude & 50.0 \\
+alimentacao & 0.00 \\
+roupas & 87.50 \\
+bebidas & 0.00 \\
+agua-luz & 0.00 \\
+emprestimos & 0.00 \\
+dividas & 0.00 \\
+saude & 50.00 \\
 \end{longtable}
 
 \end{minipage}%
@@ -403,20 +439,25 @@ frequência?}\label{em-quais-categorias-de-oruxe7amento-estou-estourando-o-limit
 categoria neste
 mês?}\label{quanto-ainda-tenho-disponuxedvel-para-gastar-em-cada-categoria-neste-muxeas}
 
-\begin{longtable}[]{@{}lll@{}}
+\begin{longtable}[]{@{}ll@{}}
+\caption{}\label{T_df07c}\tabularnewline
 \toprule\noalign{}
-& categoria & restou \\
+categoria & restou \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+categoria & restou \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-1 & roupas & -450.0 \\
-4 & emprestimos & 0.0 \\
-5 & dividas & 0.0 \\
-3 & agua-luz & 100.0 \\
-2 & bebidas & 109.0 \\
-6 & saude & 350.0 \\
-0 & alimentacao & 3000.0 \\
+roupas & -450.00 \\
+emprestimos & 0.00 \\
+dividas & 0.00 \\
+agua-luz & 100.00 \\
+bebidas & 109.00 \\
+saude & 350.00 \\
+alimentacao & 3000.00 \\
 \end{longtable}
 
 \end{minipage}%
@@ -426,19 +467,22 @@ mês?}\label{quanto-ainda-tenho-disponuxedvel-para-gastar-em-cada-categoria-nest
 \subsubsection{Qual o meu progresso em relação à minha meta de
 economia?}\label{qual-o-meu-progresso-em-relauxe7uxe3o-uxe0-minha-meta-de-economia}
 
-\begin{longtable}[]{@{}lllllllllllll@{}}
+\begin{longtable}[]{@{}llllllllllll@{}}
+\caption{}\label{T_65a51}\tabularnewline
 \toprule\noalign{}
-month\_name & jan & fev & mar & abr & mai & jun & jul & ago & set & out
-& nov & dez \\
-year & & & & & & & & & & & & \\
+jan & fev & mar & abr & mai & jun & jul & ago & set & out & nov & dez \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+jan & fev & mar & abr & mai & jun & jul & ago & set & out & nov & dez \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-2024 & - & 5016.30 & -2754.86 & 4814.48 & 258.03 & -18631.50 & 18076.00
-& -9593.78 & 3993.22 & 5376.90 & 2051.68 & -11465.19 \\
-2025 & 7066.12 & 4612.37 & 13790.28 & -18777.70 & - & - & - & - & - & -
-& - & - \\
+- & 5016.30 & -2754.86 & 4814.48 & 258.03 & -18631.50 & 18076.00 &
+-9593.78 & 3993.22 & 5376.90 & 2051.68 & -11465.19 \\
+7066.12 & 4612.37 & 13790.28 & -18777.70 & - & - & - & - & - & - & - &
+- \\
 \end{longtable}
 
 \subsubsection{Quanto estou conseguindo economizar em média por
