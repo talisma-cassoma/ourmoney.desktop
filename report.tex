@@ -1,0 +1,452 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  8pt,
+  a4paper,
+  DIV=11,
+  numbers=noendperiod]{scrartcl}
+
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else  
+    % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+% Make \paragraph and \subparagraph free-standing
+\makeatletter
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\makeatother
+
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+
+\usepackage{etoolbox}
+\pretocmd{\tableofcontents}{\clearpage}{}{}
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+
+\usepackage{bookmark}
+
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Our Money Report},
+  pdfauthor={Talisma Manuel},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+
+\title{Our Money Report}
+\author{Talisma Manuel}
+\date{report of 18 April, 2025}
+
+\begin{document}
+\maketitle
+
+\renewcommand*\contentsname{Table of contents}
+{
+\hypersetup{linkcolor=}
+\setcounter{tocdepth}{3}
+\tableofcontents
+}
+
+\subsection{Gestao dos Gastos}\label{gestao-dos-gastos}
+
+\begin{figure}
+
+\begin{minipage}{0.50\linewidth}
+
+\subsubsection{Onde estou gastando mais
+dinheiro?}\label{onde-estou-gastando-mais-dinheiro}
+
+\pandocbounded{\includegraphics[keepaspectratio]{report_files/figure-pdf/cell-3-output-1.pdf}}
+
+\end{minipage}%
+%
+\begin{minipage}{0.50\linewidth}
+
+\subsubsection{Quanto gastei no total o ultimo
+mes?}\label{quanto-gastei-no-total-o-ultimo-mes}
+
+Neste mês: \textbf{18,827.70}
+
+Nos últimos 6 meses \textbf{96,643.44}
+
+\subsubsection{Quais foram minhas maiores dispesas esse
+mes?}\label{quais-foram-minhas-maiores-dispesas-esse-mes}
+
+Categorias com gasto acima de 1000:
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule\noalign{}
+& Total gasto \\
+category & \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+aparelhos & 4799.00 \\
+aluguel & 3100.00 \\
+angola & 2850.00 \\
+alimentaçao & 1785.84 \\
+transporte & 1177.00 \\
+geovana & 1115.00 \\
+\end{longtable}
+
+O maior gasto este mês foi em: \textbf{aparelhos} com \textbf{4,799.00}
+
+\end{minipage}%
+
+\end{figure}%
+
+\subsubsection{Existem despesas recorrentes nos trimeste / simestre
+?}\label{existem-despesas-recorrentes-nos-trimeste-simestre}
+
+ultimo trimeste
+
+\begin{longtable}[]{@{}llll@{}}
+\caption{}\label{T_f754f}\tabularnewline
+\toprule\noalign{}
+~ & category & Total & Percentual (\%) \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+~ & category & Total & Percentual (\%) \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+5 & aluguel & 9,300.00 & 19.07\% \\
+3 & alimentaçao & 7,028.61 & 14.41\% \\
+7 & aparelhos & 5,049.00 & 10.35\% \\
+17 & educaçao & 4,028.00 & 8.26\% \\
+33 & transporte & 3,209.00 & 6.58\% \\
+6 & angola & 2,850.00 & 5.84\% \\
+24 & geovana & 2,605.00 & 5.34\% \\
+29 & roupas & 2,308.85 & 4.73\% \\
+31 & saude & 1,939.70 & 3.98\% \\
+18 & emprestimo & 1,620.00 & 3.32\% \\
+23 & gastos extra & 1,441.13 & 2.95\% \\
+16 & documentos & 1,100.00 & 2.26\% \\
+13 & casa & 972.00 & 1.99\% \\
+26 & internet & 748.00 & 1.53\% \\
+28 & presentes & 622.00 & 1.28\% \\
+19 & emprestmo & 600.00 & 1.23\% \\
+0 & agua e luz & 490.99 & 1.01\% \\
+2 & alimentacao & 410.82 & 0.84\% \\
+10 & babysitting & 400.00 & 0.82\% \\
+9 & babysitter & 400.00 & 0.82\% \\
+4 & alimentçao & 195.00 & 0.40\% \\
+34 & yachane & 180.00 & 0.37\% \\
+21 & estetica & 170.00 & 0.35\% \\
+11 & bebida & 149.30 & 0.31\% \\
+32 & talisma & 139.00 & 0.29\% \\
+30 & saldo & 133.00 & 0.27\% \\
+27 & netflix & 130.00 & 0.27\% \\
+14 & divida & 106.00 & 0.22\% \\
+22 & gas & 100.00 & 0.21\% \\
+15 & documentaçao & 100.00 & 0.21\% \\
+20 & empréstimo & 100.00 & 0.21\% \\
+12 & bebidas & 91.00 & 0.19\% \\
+25 & higiene pessoal & 30.00 & 0.06\% \\
+8 & ayla & 20.00 & 0.04\% \\
+1 & ajuda & 5.00 & 0.01\% \\
+\end{longtable}
+
+ultimo semeste
+
+\begin{longtable}[]{@{}llll@{}}
+\caption{}\label{T_e4a42}\tabularnewline
+\toprule\noalign{}
+~ & category & Total & Percentual (\%) \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+~ & category & Total & Percentual (\%) \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+5 & aluguel & 18,600.00 & 19.19\% \\
+3 & alimentaçao & 13,840.50 & 14.28\% \\
+7 & aparelhos & 7,504.00 & 7.74\% \\
+35 & transporte & 7,313.00 & 7.55\% \\
+17 & educaçao & 6,148.50 & 6.34\% \\
+25 & geovana & 5,607.00 & 5.79\% \\
+13 & casa & 5,206.60 & 5.37\% \\
+31 & roupas & 4,344.85 & 4.48\% \\
+6 & angola & 3,450.00 & 3.56\% \\
+24 & gastos extra & 3,113.88 & 3.21\% \\
+33 & saude & 3,042.70 & 3.14\% \\
+18 & emprestimo & 2,145.00 & 2.21\% \\
+28 & kixikila & 2,000.00 & 2.06\% \\
+11 & bebida & 1,665.70 & 1.72\% \\
+22 & familia & 1,610.00 & 1.66\% \\
+27 & internet & 1,246.00 & 1.29\% \\
+8 & ayla & 1,174.00 & 1.21\% \\
+16 & documentos & 1,100.00 & 1.14\% \\
+34 & talisma & 943.00 & 0.97\% \\
+14 & divida & 936.00 & 0.97\% \\
+30 & presentes & 921.00 & 0.95\% \\
+0 & agua e luz & 860.29 & 0.89\% \\
+2 & alimentacao & 691.82 & 0.71\% \\
+19 & emprestmo & 600.00 & 0.62\% \\
+10 & babysitting & 500.00 & 0.52\% \\
+36 & yachane & 421.00 & 0.43\% \\
+9 & babysitter & 400.00 & 0.41\% \\
+21 & estetica & 335.00 & 0.35\% \\
+23 & gas & 270.00 & 0.28\% \\
+4 & alimentçao & 195.00 & 0.20\% \\
+15 & documentaçao & 172.00 & 0.18\% \\
+32 & saldo & 163.00 & 0.17\% \\
+29 & netflix & 130.00 & 0.13\% \\
+20 & empréstimo & 100.00 & 0.10\% \\
+12 & bebidas & 91.00 & 0.09\% \\
+26 & higiene pessoal & 58.00 & 0.06\% \\
+1 & ajuda & 5.00 & 0.01\% \\
+\end{longtable}
+
+\subsubsection{Meu padrao de gasto mudou comprado ao meses anteriores
+?}\label{meu-padrao-de-gasto-mudou-comprado-ao-meses-anteriores}
+
+\pandocbounded{\includegraphics[keepaspectratio]{report_files/figure-pdf/cell-9-output-1.pdf}}
+
+\subsubsection{Como meus gastos em evoluíram ao longo do
+tempo?}\label{como-meus-gastos-em-evoluuxedram-ao-longo-do-tempo}
+
+\pandocbounded{\includegraphics[keepaspectratio]{report_files/figure-pdf/cell-10-output-1.pdf}}
+
+\subsection{RECEITAS}\label{receitas}
+
+\subsubsection{Quais são minhas principais fontes de
+receita?}\label{quais-suxe3o-minhas-principais-fontes-de-receita}
+
+\begin{longtable}[]{@{}lllll@{}}
+\toprule\noalign{}
+& Categoria & Total & Porcentagem (\%) & Total \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+0 & salario & 217596.0 & 89.3 & 217596.0 \\
+1 & emprestimo & 8471.0 & 3.5 & 8471.0 \\
+2 & seguro & 8385.0 & 3.4 & 8385.0 \\
+3 & kixikila & 4100.0 & 1.7 & 4100.0 \\
+4 & bolsa amci & 2500.0 & 1.0 & 2500.0 \\
+5 & investimento & 1200.0 & 0.5 & 1200.0 \\
+6 & gastos extra & 900.0 & 0.4 & 900.0 \\
+7 & extra & 240.0 & 0.1 & 240.0 \\
+8 & divida & 100.0 & 0.0 & 100.0 \\
+9 & geovana & 50.0 & 0.0 & 50.0 \\
+\end{longtable}
+
+\subsubsection{Minha receita total aumentou ou diminuiu nos últimos
+meses?}\label{minha-receita-total-aumentou-ou-diminuiu-nos-uxfaltimos-meses}
+
+\pandocbounded{\includegraphics[keepaspectratio]{report_files/figure-pdf/cell-12-output-1.pdf}}
+
+\subsection{Orçamento e Metas}\label{oruxe7amento-e-metas}
+
+\subsubsection{Estou conseguindo seguir meu orçamento nesse
+mes?}\label{estou-conseguindo-seguir-meu-oruxe7amento-nesse-mes}
+
+\pandocbounded{\includegraphics[keepaspectratio]{report_files/figure-pdf/cell-14-output-1.pdf}}
+
+\begin{figure}
+
+\begin{minipage}{0.50\linewidth}
+
+\subsubsection{Em quais categorias de orçamento estou estourando o
+limite com mais
+frequência?}\label{em-quais-categorias-de-oruxe7amento-estou-estourando-o-limite-com-mais-frequuxeancia}
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule\noalign{}
+& Categoria & Percentual de Estouro (\%) \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+0 & alimentacao & 0.0 \\
+1 & roupas & 87.5 \\
+2 & bebidas & 0.0 \\
+3 & agua-luz & 0.0 \\
+4 & emprestimos & 0.0 \\
+5 & dividas & 0.0 \\
+6 & saude & 50.0 \\
+\end{longtable}
+
+\end{minipage}%
+%
+\begin{minipage}{0.50\linewidth}
+
+\subsubsection{Quanto ainda tenho disponível para gastar em cada
+categoria neste
+mês?}\label{quanto-ainda-tenho-disponuxedvel-para-gastar-em-cada-categoria-neste-muxeas}
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule\noalign{}
+& categoria & restou \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+1 & roupas & -450.0 \\
+4 & emprestimos & 0.0 \\
+5 & dividas & 0.0 \\
+3 & agua-luz & 100.0 \\
+2 & bebidas & 109.0 \\
+6 & saude & 350.0 \\
+0 & alimentacao & 3000.0 \\
+\end{longtable}
+
+\end{minipage}%
+
+\end{figure}%
+
+\subsubsection{Qual o meu progresso em relação à minha meta de
+economia?}\label{qual-o-meu-progresso-em-relauxe7uxe3o-uxe0-minha-meta-de-economia}
+
+\begin{longtable}[]{@{}lllllllllllll@{}}
+\toprule\noalign{}
+month\_name & jan & fev & mar & abr & mai & jun & jul & ago & set & out
+& nov & dez \\
+year & & & & & & & & & & & & \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+2024 & - & 5016.30 & -2754.86 & 4814.48 & 258.03 & -18631.50 & 18076.00
+& -9593.78 & 3993.22 & 5376.90 & 2051.68 & -11465.19 \\
+2025 & 7066.12 & 4612.37 & 13790.28 & -18777.70 & - & - & - & - & - & -
+& - & - \\
+\end{longtable}
+
+\subsubsection{Quanto estou conseguindo economizar em média por
+mês?}\label{quanto-estou-conseguindo-economizar-em-muxe9dia-por-muxeas}
+
+Média de economia nos últimos 3 meses: \textbf{-125.02}
+
+
+
+
+\end{document}

@@ -101,21 +101,6 @@ class Controller:
 
     def edit_transaction(self, id:str, description:str, type_input:str, category:str, price:float, status: str, date:str)->None:
         
-        # Check if the input is a string
-        # if isinstance(date, str):
-        #     try:
-        #         # Attempt to parse the string in %d-%m-%Y format
-        #         dt = datetime.strptime(date, "%d-%m-%Y")
-        #     except ValueError:
-        #         try:
-        #             # Attempt to parse the string in %Y-%m-%d format
-        #             dt = datetime.strptime(date, "%Y-%m-%d")
-        #         except ValueError:
-        #             # Raise an error if neither format matches
-        #             logging.error("The date string must be in %d-%m-%Y or %Y-%m-%d format.")
-
-        #     date = str(dt.strftime("%Y-%m-%dT%H:%M:%S.%fZ"))[:-4] + "Z"
-        
         # Criar o DTO
         transaction_dto = TransactionDTO(
                 id=id,
@@ -127,9 +112,7 @@ class Controller:
                 created_at= date
             )
         self._update.one(transaction_dto)
-        # else:
-        #     raise ValueError("Input must be a string or a date instance.")
-
+        
     def get_total_of_transactions(self):
          total_income, total_outcome = self._transactions.total()
          return total_income, total_outcome
@@ -139,8 +122,6 @@ class Controller:
 
     def synchronize_data(self):
          """Baixa dados do servidor para o SQLite local e sincroniza as transações baixadas."""
-
-
          if not self.is_online():
              logging.info("Sem conexão. Dados não puxados.")
              return None
@@ -151,13 +132,13 @@ class Controller:
                  data = response.json()
                  self.store_in_local_db(data)
                  self.push_local_transactions()
-                 return data
+                 #return data
              else:
                  logging.error(f"Erro na resposta do servidor: {response.status_code}")
-                 return None
+                 #return None
          except Exception as e:
              logging.error(f"Erro ao puxar dados: {e}")
-             return None
+             #return None
 
     def upadate_status(self, transactions):
         """Atualiza o status de 'synced' das transações baixadas no servidor."""

@@ -1,126 +1,655 @@
 ---
 title: "Our Money Report"
 author: "Talisma Manuel"
-format: pdf
-echo: False  # Não mostra o código Python no PDF
-error: False # Não mostra erros no PDF
-warning: False # Não mostra avisos no PDF
-# A engine jupyter é inferida quando blocos python são usados, mas pode ser explícita
-engine: jupyter 
+date: today
+date-format: report of DD MMMM, YYYY
+format:
+  pdf:
+    typst:
+        font-paths: ["fonts"]
+        format: custom.typ
+    # color-links: true
+    page-layout: full
+    toc: true
+    # toc-depth: 2
+    include-in-header:
+      text: |
+        \usepackage{etoolbox}
+        \pretocmd{\tableofcontents}{\clearpage}{}{}
+    # number-sections: true
+    keep-tex: true
+    papersize: a4
+    fontsize: 8pt
+echo: false
+error: false
+warning: false
+engine: jupyter
+jupyter: python3
+kernel: env
 ---
 
 
+```{python}
+from dateutil.relativedelta import relativedelta
+from scipy.interpolate import make_interp_spline
+from IPython.display import display, Markdown
+from datetime import datetime, timedelta
+import matplotlib.dates as mdates
+import matplotlib.pyplot as plt
+import seaborn as sns 
+import pandas as pd
+import numpy as np
+import calendar
 
-## despesas mensais
+#set the font
+plt.rcParams["font.family"] = "Open Sans"
+
+# Load and prepare the data
+df = pd.read_excel("transactions.xlsx")
+df['category'] = df['category'].str.lower().str.strip()
+df['createdAt'] = pd.to_datetime(df['createdAt'], format='%d-%m-%Y')
+
+# Current date and month
+now = datetime.now()
+first_day_of_month = datetime(now.year, now.month, 1)
+
+# Current month outcome transactions
+current_month_outcomes = df[
+    (df['type'] == 'outcome') &
+    (df['createdAt'].dt.month == now.month) &
+    (df['createdAt'].dt.year == now.year)
+]
+
+# Biggest expense category this month
+category_sum = current_month_outcomes.groupby('category')['price'].sum()
+if not category_sum.empty:
+    biggest_category = category_sum.idxmax()
+    biggest_value = category_sum.max()
+    total_current_month = category_sum.sum()
+    other = total_current_month - biggest_value
+else:
+    biggest_category = None
+    biggest_value = 0
+    total_current_month = 0
+    other = 0
+
+# Outcome in the last 6 months
+six_months_ago = now - timedelta(days=180)
+last_six_months_outcomes = df[
+    (df['type'] == 'outcome') & 
+    (df['createdAt'] >= six_months_ago)
+]
+total_last_six_months = last_six_months_outcomes['price'].sum()
+
+# High expenses this month (> 1000)
+high_expenses = category_sum[category_sum > 1000]
+```
+
+## Gestao dos Gastos 
+
+::: {layout="[[1,1], [1, 1]]"}
+
+### Onde estou gastando mais dinheiro? 
+```{python}
+if biggest_category:
+    labels = [biggest_category, 'Outros']
+    sizes = [biggest_value, other]
+    colors = ['#0077b6', '#90e0ef']
+
+    fig, ax = plt.subplots(figsize=(4, 4)) # Adjust figsize here (width, height in inches)
+    ax.pie(sizes, labels=labels, colors=colors, startangle=90, autopct='%1.1f%%')
+    ax.set_title(f"Maior despesa de {now.strftime('%B/%Y')}")
+    plt.axis('equal')
+    plt.show()
+else:
+   display("Nenhuma despesa registrada para o mês atual.")
+```
+<div>
+
+### Quanto gastei no total o ultimo mes?
+
+```{python} 
+display(Markdown(f"Neste mês: **{total_current_month:,.2f}**"))
+
+display(Markdown(f"Nos últimos 6 meses **{total_last_six_months:,.2f}**"))
+``` 
+
+### Quais foram minhas maiores dispesas esse mes?
+
+Categorias com gasto acima de 1000:
 
 ```{python}
-#| results: 'asis'  
-
-import pandas as pd
-from plotnine import ggplot, aes, geom_line, labs, theme, element_text, scale_x_datetime, element_rect, element_line
-from great_tables import GT, loc, exibble, html  
-from IPython.display import display, Markdown  
-import os
-import sys  
-
-# --- Configurações ---
-file_path = "./transactions.xlsx"
-currency_symbol = "MAD"  
-
-# --- Carregar e Preparar os Dados ---
-try:
-    df = pd.read_excel(file_path)
-except FileNotFoundError:
-    print(f"**ERRO CRÍTICO:** O arquivo '{file_path}' não foi encontrado.", file=sys.stderr)
-    df = pd.DataFrame()
-
-if not df.empty:
-    try:
-        df["createdAt"] = pd.to_datetime(df["createdAt"], dayfirst=True, errors='coerce')
-    except Exception as e:
-        print(f"**ERRO:** Falha ao converter 'createdAt'.", file=sys.stderr)
-        print(f"Detalhes: {e}", file=sys.stderr)
-        df = pd.DataFrame()
-
-    df = df.sort_values("createdAt")
-
-    required_cols = ["createdAt", "category", "price"]
-    if not all(col in df.columns for col in required_cols):
-        print(f"**ERRO:** Faltam colunas essenciais: {required_cols}", file=sys.stderr)
-        df = pd.DataFrame()
-
-# --- Processamento Mês a Mês ---
-if df.empty:
-    display(Markdown("## Dados Indisponíveis."))
+if not high_expenses.empty:
+    display(high_expenses.to_frame("Total gasto").sort_values(by="Total gasto", ascending=False))
 else:
-    grouped_by_month = df.groupby([df["createdAt"].dt.year, df["createdAt"].dt.month])
+    display("Nenhuma categoria ultrapassou 1000 este mês.")
 
-    if grouped_by_month.ngroups == 0:
-        display(Markdown("## Nenhum Dado"))
+if biggest_category:
+    display(Markdown(f"O maior gasto este mês foi em: **{biggest_category}** com **{biggest_value:,.2f}**"))
+``` 
+
+</div>
+
+:::
+
+### Existem despesas recorrentes nos trimeste / simestre ?
+
+```{python}
+# Definir as datas de corte
+three_months_ago = now - relativedelta(months=3)
+six_months_ago = now - relativedelta(months=6)
+
+# Filtrar gastos (outcome) para os períodos
+outcomes_3m = df[(df['type'] == 'outcome') & (df['createdAt'] >= three_months_ago)]
+outcomes_6m = df[(df['type'] == 'outcome') & (df['createdAt'] >= six_months_ago)]
+
+# Agrupar e calcular total e % para os últimos 3 meses
+category_3m = outcomes_3m.groupby('category')['price'].sum().reset_index()
+category_3m['%'] = (category_3m['price'] / category_3m['price'].sum()) * 100
+category_3m = category_3m.rename(columns={'price': 'Total', '%': 'Percentual (%)'})
+category_3m = category_3m.sort_values(by='Total', ascending=False)
+
+# Agrupar e calcular total e % para os últimos 6 meses
+category_6m = outcomes_6m.groupby('category')['price'].sum().reset_index()
+category_6m['%'] = (category_6m['price'] / category_6m['price'].sum()) * 100
+category_6m = category_6m.rename(columns={'price': 'Total', '%': 'Percentual (%)'})
+category_6m = category_6m.sort_values(by='Total', ascending=False)
+```
+
+<b>ultimo trimeste</b>
+
+```{python}
+if not category_3m.empty:
+    display(category_3m.style.format({'Total': '{:,.2f}', 'Percentual (%)': '{:.2f}%'}))
+else:
+    display("Nenhuma despesa registrada nos últimos 3 meses.")
+```
+
+<b>ultimo semeste</b>
+
+```{python}
+if not category_6m.empty:
+    display(category_6m.style.format({'Total': '{:,.2f}', 'Percentual (%)': '{:.2f}%'}))
+else:
+    display("Nenhuma despesa registrada nos últimos 6 meses.")
+
+```
+
+
+
+
+
+### Meu padrao de gasto mudou comprado ao meses anteriores ?
+
+::: {layout-ncol=3}
+
+```{python}
+np.random.seed(42)
+# Filtrar apenas despesas (Original variable name)
+df_outcome = df[df['type'] == 'outcome'].copy()
+
+months = [(now - relativedelta(months=i)) for i in range(2, -1, -1)] 
+recent_outcomes = df_outcome[df_outcome['createdAt'].dt.month.isin([m.month for m in months]) &
+                             df_outcome['createdAt'].dt.year.isin([m.year for m in months])] # Added year check
+categories = recent_outcomes['category'].unique().tolist()
+
+# Dados mensais (Original variable name)
+monthly_data = {}
+
+# Check if there are categories before proceeding
+if categories:
+    for m in months:
+        label = f"{calendar.month_name[m.month]}/{m.year}"
+        monthly_df = df_outcome[(df_outcome['createdAt'].dt.month == m.month) &
+                                (df_outcome['createdAt'].dt.year == m.year)]
+        # Group and reindex to ensure all categories are present for each month
+        grouped = monthly_df.groupby('category')['price'].sum().reindex(categories, fill_value=0)
+        monthly_data[label] = grouped.tolist()
+else:
+    print("No outcome categories found in the specified period.")
+    monthly_data = {} # Ensure monthly_data is empty if no categories
+
+def plot_radar(ax, data, title, categories):
+    # Note: 'data' here is the list of values for THIS specific plot (month)
+    # 'categories' is the list of ALL potential category names
+    labels = np.array(categories)
+    num_vars = len(labels)
+
+    angles = np.linspace(0, 2 * np.pi, num_vars, endpoint=False).tolist()
+
+    plot_values = np.array(data + data[:1])
+    plot_angles = angles + angles[:1]
+
+    ax.plot(plot_angles, plot_values, 'o-', linewidth=2)
+    ax.fill(plot_angles, plot_values, alpha=0.25)
+
+    # Remove circular grid lines and labels
+    ax.set_yticklabels([])
+    ax.yaxis.grid(False)
+
+    # Remove the outer circular spine
+    ax.spines['polar'].set_visible(False)
+
+    visible_labels = []
+    threshold = 200 # o menor numero a ser considerado
+    for i in range(num_vars):
+        # Check the value in the *original data list* for this category
+        if data[i] > threshold:
+            visible_labels.append(labels[i]) # Keep the original label
+        else:
+            visible_labels.append("") # Use an empty string to hide the label
+
+    # Set category ticks and the selectively visible labels
+    ax.set_xticks(angles) # Set tick positions based on original angles
+    ax.set_xticklabels(visible_labels) # Apply the filtered labels
+
+    ax.set_title(title, size=12, y=1.1)
+
+# --- Plotting the graphs side-by-side ---
+if monthly_data and categories:
+    num_plots = len(monthly_data)
+
+    # Using the smaller figsize from the previous example
+    fig, axes = plt.subplots(figsize=(12, 4), nrows=1, ncols=num_plots,
+                             subplot_kw=dict(polar=True))
+
+    if num_plots == 1:
+        axes = [axes]
+
+    plot_index = 0
+    for label, data in monthly_data.items():
+        if plot_index < len(axes):
+            # Pass the specific month's 'data' and the full 'categories' list
+            plot_radar(axes[plot_index], data, f"Gastos por categoria - {label}", categories)
+            plot_index += 1
+
+    plt.tight_layout(pad=1.5)
+    plt.show()
+elif not categories:
+     display("Skipping plotting as no categories were found.")
+else: # No monthly data was generated
+     display("Skipping plotting as no monthly data was generated.")
+```
+
+
+
+### Como meus gastos em evoluíram ao longo do tempo?
+
+```{python}
+# Categorias de interesse (ajustar se houver variações de acentuação)
+categorias_interesse = ['alimentação', 'salario', 'roupas', 'bebidas', 
+                        'agua-luz', 'emprestimos', 'dividas', 'saude']
+
+# Normalizar nomes (remover espaços extras e converter para minúsculas)
+df['category'] = df['category'].str.strip().str.lower()
+
+# Filtrar
+df_filtered = df[
+    (df['type'] == 'outcome') &
+    (df['category'].isin(categorias_interesse))
+].copy()
+
+# Agrupar por mês e categoria
+df_filtered['month'] = df_filtered['createdAt'].dt.to_period('M').dt.to_timestamp()
+monthly_totals = df_filtered.groupby(['month', 'category'])['price'].sum().reset_index()
+
+# --- Matplotlib Plotting Configuration ---
+
+# Create figure and axes
+fig, ax = plt.subplots(figsize=(10, 5)) # Adjusted size slightly for better readability
+
+# Define a color palette (using seaborn's palette for nice colors)
+palette = sns.color_palette("tab10", n_colors=monthly_totals['category'].nunique())
+category_colors = dict(zip(monthly_totals['category'].unique(), palette))
+
+# Loop through each category to plot
+for i, category in enumerate(monthly_totals['category'].unique()):
+    # Filter data for the current category
+    category_data = monthly_totals[monthly_totals['category'] == category].sort_values('month')
+
+    # Prepare data for smoothing
+    x = category_data['month']
+    y = category_data['price']
+
+    # Convert dates to numerical format for interpolation
+    x_num = mdates.date2num(x)
+
+    # Check if we have enough points for spline interpolation (k=3 needs >= 4 points)
+    if len(x_num) >= 4:
+        # Create spline interpolation function (cubic spline, k=3)
+        spl = make_interp_spline(x_num, y, k=3)
+
+        # Generate a smoother set of x-values for the curve
+        x_smooth_num = np.linspace(x_num.min(), x_num.max(), 300) # More points for smoothness
+        y_smooth = spl(x_smooth_num)
+
+        # Convert smoothed x-values back to dates
+        x_smooth = mdates.num2date(x_smooth_num)
+
+        # Plot the smoothed line
+        ax.plot(x_smooth, y_smooth, label=category.capitalize(), color=category_colors[category], linewidth=1.5),
     else:
-        for (year, month), group in grouped_by_month:
-            group = group.copy()
-            month_name = pd.Timestamp(f"{year}-{month}-01").strftime("%B %Y")
+        # Plot original points with straight lines if not enough data for smoothing
+        # Add markers to indicate actual data points clearly in this case
+        ax.plot(x, y, label=category.capitalize(), color=category_colors[category], linewidth=1, marker='o', markersize=5, linestyle='--')
+        # print(f"Warning: Not enough data points ({len(x_num)}) for smoothing category '{category}'. Plotting original points.")
 
-            display(Markdown(f"## {month_name}\n"))
 
-            # --- Tabela de Totais por Categoria ---
-            category_totals = group.groupby("category")["price"].sum().reset_index()
-            category_totals = category_totals.sort_values("price", ascending=False)
+# --- Aesthetics Configuration ---
 
-            if not category_totals.empty:
-                display(Markdown("### Resumo de Gastos por Categoria\n"))
+# Remove borders (spines)
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
+ax.spines['left'].set_visible(False) # Keep bottom spine for reference, or remove if desired
+ax.spines['bottom'].set_visible(False) # Remove bottom spine as requestedspine color
 
-                gt_table = GT(data=category_totals)
+# Set title and labels
+ax.set_title("Evolução dos Gastos por Categoria", pad=20)
+ax.set_xlabel("Mês", labelpad=10)
+ax.set_ylabel("Total Gastos", labelpad=10)
 
-                gt_table = (
-                    gt_table
-                    .cols_label({"category": "Categoria", "price": "Total Gasto"})
-                    .cols_align(align="right", columns="price")
-                    .cols_width({"category": "60%", "price": "40%"})
-                    .tab_options(
-                        table_font_size="10pt",
-                        heading_title_font_size="12pt",
-                        table_border_top_style="solid",
-                        table_border_top_width="2px",
-                        table_border_top_color="#ddd",
-                        column_labels_border_bottom_style="solid",
-                        column_labels_border_bottom_width="1px",
-                        column_labels_border_bottom_color="#ddd",
-                    )
-                )
+# Format x-axis ticks as dates ('Month-Year')
+ax.xaxis.set_major_locator(mdates.MonthLocator(interval=1)) # Tick every month
+ax.xaxis.set_major_formatter(mdates.DateFormatter('%b-%Y')) # Format as 'Jan-2023'
+plt.setp(ax.get_xticklabels(), rotation=45, ha="right") # Rotate labels
 
-                display(gt_table)
-            else:
-                display(Markdown("*Nenhuma transação registrada neste mês.*"))
+# Add a subtle grid for readability (optional)
+ax.yaxis.grid(False, linestyle='--', linewidth=0.5, color='lightgrey', alpha=0.7)
+ax.xaxis.grid(False, linestyle='--', linewidth=0.5, color='lightgrey', alpha=0.7) # Keep x-axis grid off for cleaner look
 
-            # --- Gráfico de Gastos Acumulados ---
-            if not group.empty:
-                display(Markdown("\n### Gastos Acumulados por Categoria ao Longo do Mês\n"))
+# Add legend
+# Place legend outside the plot area for less clutter
+ax.legend(title='Categoria', bbox_to_anchor=(1.04, 1), loc="upper left", frameon=False)
 
-                group = group.sort_values("createdAt")
-                group.loc[:, "cumulative_price"] = group.groupby("category")["price"].cumsum()
+# Add padding to y-axis limits for visual spacing
+ax.set_ylim(bottom=0, top=ax.get_ylim()[1] * 1.1)
 
-                p = (
-                    ggplot(group, aes(x='createdAt', y='cumulative_price', color='category'))
-                    + geom_line(size=1)
-                    + labs(x="Data", y=f"Gasto Acumulado ({currency_symbol})", color="Categoria")
-                    + scale_x_datetime(date_labels="%d/%m", date_breaks="7 days")
-                    + theme(
-                        axis_text_x=element_text(rotation=45, hjust=1),
-                        figure_size=(10, 4),
-                        legend_position="right",
-                        panel_background=element_rect(fill="white", colour="grey"),
-                        panel_grid_major=element_line(colour="lightgrey")
-                    )
-                )
-                display(p)
-            else:
-                if category_totals.empty:
-                    pass
-                else:
-                    display(Markdown("*Não foi possível gerar o gráfico de gastos acumulados.*"))
+# Remove y-axis ticks if desired for extreme minimalism (optional)
+ax.tick_params(axis='y', which='both', left=False)
 
-            display(Markdown("\n---\n"))
+# Ensure layout is tight
+plt.tight_layout(rect=[0, 0, 0.85, 1]) # Adjust rect to make space for external legend if needed
 
+# Show plot
+plt.show()
+```
+
+## RECEITAS
+
+### Quais são minhas principais fontes de receita?
+```{python}
+# Filtrar receitas
+df_income = df[df['type'] == 'income'].copy()
+
+# Agrupar por categoria
+income_grouped = df_income.groupby('category')['price'].sum().sort_values(ascending=False).reset_index()
+
+# Calcular porcentagem
+income_grouped['percent'] = (income_grouped['price'] / income_grouped['price'].sum()) * 100
+
+# Renomear colunas para exibir melhor
+income_grouped.columns = ['Categoria', 'Total ', 'Porcentagem (%)']
+
+# Arredondar valores
+income_grouped['Total'] = income_grouped['Total '].round(2)
+income_grouped['Porcentagem (%)'] = income_grouped['Porcentagem (%)'].round(1)
+
+# Exibir tabela
+display(income_grouped)
+```
+
+### Minha receita total aumentou ou diminuiu nos últimos meses?
+
+```{python}
+# Filtrar receitas
+df_income = df[df['type'] == 'income'].copy()
+
+# Agrupar por mês
+df_income['month'] = df_income['createdAt'].dt.to_period('M').dt.to_timestamp()
+monthly_income = df_income.groupby('month')['price'].sum().reset_index()
+
+# Plot
+plt.figure(figsize=(7, 3.5))
+
+# Barras
+plt.bar(monthly_income['month'], monthly_income['price'], 
+        label='Receita Mensal', width=20, alpha=0.7, color='#90e0ef')
+
+# Linha de tendência
+plt.plot(monthly_income['month'], monthly_income['price'], 
+         color='#0077b6', marker='o', linestyle='-', linewidth=1, label='Tendência')
+
+# Eixos e título
+plt.xlabel('Mês')
+plt.ylabel('Receita Total ')
+plt.title('Evolução da Receita Mensal')
+plt.xticks(rotation=45, ha='right')
+plt.legend()
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+
+# Formatando datas no eixo X
+ax = plt.gca()
+# Remove borders (spines)
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
+ax.spines['left'].set_visible(False) # Keep bottom spine for reference, or remove if desired
+ax.spines['bottom'].set_visible(False) # Remove bottom spine as 
+ax.xaxis.set_major_locator(mdates.MonthLocator(interval=1))
+ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m'))
+
+plt.tight_layout()
+plt.show() 
+```
+
+## Orçamento e Metas
+
+```{python}
+# Definir orçamento mensal por categoria
+budget = {
+    'alimentacao': 3000,
+    'roupas': 200,
+    'bebidas': 200,
+    'agua-luz': 100,
+    'emprestimos': 0,
+    'dividas': 0,
+    'saude': 500
+}
+```
+
+### Estou conseguindo seguir meu orçamento nesse mes?
+```{python}
+# Filtrar o mês atual e tipo=outcome
+df_outcome = df[df['type'] == 'outcome'].copy()
+df_outcome['createdAt'] = pd.to_datetime(df_outcome['createdAt'], format='%d-%m-%Y')
+
+current_month = df_outcome[
+    (df_outcome['createdAt'].dt.month == now.month) &
+    (df_outcome['createdAt'].dt.year == now.year)
+]
+# Somar os gastos nas categorias selecionadas
+selected_categories = list(budget.keys())
+expense_sum = (
+    current_month[current_month['category'].isin(selected_categories)]
+    .groupby('category')['price']
+    .sum()
+    .reindex(selected_categories, fill_value=0)
+)
+
+# Preparar dados para o gráfico
+labels = selected_categories
+budget_values = [budget[cat] for cat in labels]
+actual_values = [expense_sum[cat] for cat in labels]
+
+# Fechar o gráfico radar
+labels += [labels[0]]
+budget_values += [budget_values[0]]
+actual_values += [actual_values[0]]
+
+# Ângulos para o radar
+angles = np.linspace(0, 2 * np.pi, len(labels), endpoint=False).tolist()
+
+# Criar o radar chart
+fig, ax = plt.subplots(figsize=(8, 8), subplot_kw=dict(polar=True))
+
+# Estilo do gráfico
+ax.set_theta_offset(np.pi / 2)
+ax.set_theta_direction(-1)
+
+# Desenhar os eixos e rótulos
+ax.set_xticks(angles[:-1])
+ax.set_xticklabels(labels[:-1])
+ax.set_rlabel_position(0)
+
+ax.yaxis.grid(False)
+# Remove the outer circular spine
+ax.spines['polar'].set_visible(False)
+
+plt.yticks([500, 1000, 1500, 2000, 2500, 3000], ["500", "1000", "1500", "2000", "2500", "3000"], color="grey", size=10)
+plt.ylim(0, max(budget_values + actual_values) + 500)
+
+# Plotar o orçamento
+ax.plot(angles, budget_values, color='blue', linewidth=2, linestyle='solid', label='Orçamento')
+ax.fill(angles, budget_values, color='blue', alpha=0.1)
+
+# Plotar os gastos reais
+ax.plot(angles, actual_values, color='red', linewidth=2, linestyle='solid', label='Gasto Atual')
+ax.fill(angles, actual_values, color='red', alpha=0.2)
+
+# Título e legenda
+ax.set_title(f'Controle de Orçamento - {now.strftime("%B/%Y")}', size=14, y=1.1)
+ax.legend(loc='upper right', bbox_to_anchor=(1.1, 1.1))
+
+plt.show()
+
+```
+
+::: {layout-ncol="2"}
+
+### Em quais categorias de orçamento estou estourando o limite com mais frequência?
+```{python}
+# Filtrar apenas os dados de despesas (type='outcome')
+df_outcome = df[df['type'] == 'outcome'].copy()
+
+# Adicionar uma coluna para o mês e ano
+df_outcome['month_year'] = df_outcome['createdAt'].dt.to_period('M')
+
+# Agrupar os dados por mês e categoria, somando os valores
+monthly_expenses = df_outcome.groupby(['month_year', 'category'])['price'].sum().reset_index()
+
+# Inicializar uma lista para armazenar as porcentagens de estouro por categoria
+over_budget_percentages = []
+
+# Iterar sobre cada categoria para calcular a porcentagem de meses em que o orçamento foi excedido
+for category, limit in budget.items():
+    # Filtrar os dados da categoria atual
+    category_data = monthly_expenses[monthly_expenses['category'] == category]
+    # Contar o número de meses em que o gasto excedeu o orçamento
+    months_over_budget = (category_data['price'] > limit).sum()
+    # Calcular o número total de meses registrados para a categoria
+    total_months = category_data['month_year'].nunique()
+    # Calcular a porcentagem de meses com estouro de orçamento
+    percentage_over = (months_over_budget / total_months) * 100 if total_months > 0 else 0
+    # Adicionar os resultados à lista
+    over_budget_percentages.append({'Categoria': category, 'Percentual de Estouro (%)': round(percentage_over, 2)})
+
+# Criar um DataFrame com os resultados
+over_budget_df = pd.DataFrame(over_budget_percentages)
+
+# Exibir a tabela
+display(over_budget_df)
+```
+
+### Quanto ainda tenho disponível para gastar em cada categoria neste mês?
+
+```{python}
+# Filtrar despesas do mês atual
+current_month_outcome = df[
+    (df['type'] == 'outcome') &
+    (df['createdAt'].dt.month == now.month) &
+    (df['createdAt'].dt.year == now.year)
+]
+
+# Somar gastos por categoria neste mês
+spent_by_category = current_month_outcome.groupby('category')['price'].sum()
+
+# Calcular o restante do orçamento
+remaining_budget = []
+
+for category, limit in budget.items():
+    spent = spent_by_category.get(category, 0)
+    remaining = limit - spent
+    remaining_budget.append({
+        'categoria': category,
+        'restou': round(remaining, 2)
+    })
+
+# Criar a tabela final
+remaining_budget_df = pd.DataFrame(remaining_budget)
+display(remaining_budget_df.sort_values(by='restou'))
+
+```
+
+:::
+
+### Qual o meu progresso em relação à minha meta de economia?
+```{python}
+# Adiciona colunas auxiliares
+df['year'] = df['createdAt'].dt.year
+df['month'] = df['createdAt'].dt.month
+
+# Mapeia número do mês para nome abreviado em português
+month_map = {
+    1: 'jan', 2: 'fev', 3: 'mar', 4: 'abr',
+    5: 'mai', 6: 'jun', 7: 'jul', 8: 'ago',
+    9: 'set', 10: 'out', 11: 'nov', 12: 'dez'
+}
+df['month_name'] = df['month'].map(month_map)
+
+# Soma os valores de receitas e despesas por mês/ano
+income_by_month = df[df['type'] == 'income'].groupby(['year', 'month_name'])['price'].sum()
+outcome_by_month = df[df['type'] == 'outcome'].groupby(['year', 'month_name'])['price'].sum()
+
+# Calcula economia
+economy_by_month = (income_by_month - outcome_by_month)
+
+# Transforma em tabela (pivot)
+economy_table = economy_by_month.reset_index().pivot(index='year', columns='month_name', values='price')
+
+# Ordena colunas dos meses
+ordered_months = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez']
+economy_table = economy_table.reindex(columns=ordered_months)
+
+# Substitui NaN por '-'
+economy_table = economy_table.applymap(lambda x: f"{x:.2f}" if pd.notnull(x) else '-')
+
+
+# Exibe a tabela
+display(economy_table)
+``` 
+
+### Quanto estou conseguindo economizar em média por mês?
+
+```{python}
+# Adiciona colunas auxiliares
+df['year'] = df['createdAt'].dt.year
+df['month'] = df['createdAt'].dt.month
+
+# Agrupa receitas e despesas por ano e mês
+income = df[df['type'] == 'income'].groupby(['year', 'month'])['price'].sum()
+outcome = df[df['type'] == 'outcome'].groupby(['year', 'month'])['price'].sum()
+
+# Calcula economia mensal
+economy = (income - outcome).reset_index()
+economy.columns = ['year', 'month', 'economy']
+
+# Ordena por ano e mês
+economy = economy.sort_values(by=['year', 'month'])
+
+# Filtra os últimos 3 meses disponíveis
+last_three = economy.tail(3)
+
+# Calcula média
+average_saving = last_three['economy'].mean()
+
+display(Markdown(f"Média de economia nos últimos 3 meses: **{average_saving:.2f}**"))
 ```
