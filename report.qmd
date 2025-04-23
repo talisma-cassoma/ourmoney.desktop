@@ -134,7 +134,7 @@ display(Markdown(f"Neste mês: **{total_current_month:,.2f}**"))
 display(Markdown(f"Nos últimos 6 meses **{total_last_six_months:,.2f}**"))
 ``` 
 
-### Quais foram minhas maiores dispesas esse mes?
+### Quais foram minhas maiores despesas esse mes?
 
 Categorias com gasto acima de 1000:
 
@@ -303,8 +303,8 @@ else: # No monthly data was generated
 
 ```{python}
 # Categorias de interesse (ajustar se houver variações de acentuação)
-categorias_interesse = ['alimentação', 'salario', 'roupas', 'bebidas', 
-                        'agua-luz', 'emprestimos', 'dividas', 'saude']
+categorias_interesse = ['alimentaçao', 'salario', 'roupas', 'bebidas', 
+                        'agua e luz', 'emprestimos', 'dividas', 'saude']
 
 # Normalizar nomes (remover espaços extras e converter para minúsculas)
 df['category'] = df['category'].str.strip().str.lower()
@@ -322,7 +322,7 @@ monthly_totals = df_filtered.groupby(['month', 'category'])['price'].sum().reset
 # --- Matplotlib Plotting Configuration ---
 
 # Create figure and axes
-fig, ax = plt.subplots(figsize=(10, 5)) # Adjusted size slightly for better readability
+fig, ax = plt.subplots(figsize=(10, 2.8)) # Adjusted size slightly for better readability
 
 # Define a color palette (using seaborn's palette for nice colors)
 palette = sns.color_palette("tab10", n_colors=monthly_totals['category'].nunique())
@@ -433,7 +433,7 @@ df_income['month'] = df_income['createdAt'].dt.to_period('M').dt.to_timestamp()
 monthly_income = df_income.groupby('month')['price'].sum().reset_index()
 
 # Plot
-plt.figure(figsize=(7, 3.5))
+plt.figure(figsize=(10, 4))
 
 # Barras
 plt.bar(monthly_income['month'], monthly_income['price'], 
@@ -470,82 +470,14 @@ plt.show()
 ```{python}
 # Definir orçamento mensal por categoria
 budget = {
-    'alimentacao': 3000,
+    'alimentaçao': 3000,
     'roupas': 200,
     'bebidas': 200,
-    'agua-luz': 100,
-    'emprestimos': 0,
+    'agua e luz': 100,
+    # 'emprestimos': 0,
     'dividas': 0,
     'saude': 500
 }
-```
-
-### Estou conseguindo seguir meu orçamento nesse mes?
-
-```{python}
-# Filtrar o mês atual e tipo=outcome
-df_outcome = df[df['type'] == 'outcome'].copy()
-df_outcome['createdAt'] = pd.to_datetime(df_outcome['createdAt'], format='%d-%m-%Y')
-
-current_month = df_outcome[
-    (df_outcome['createdAt'].dt.month == now.month) &
-    (df_outcome['createdAt'].dt.year == now.year)
-]
-# Somar os gastos nas categorias selecionadas
-selected_categories = list(budget.keys())
-expense_sum = (
-    current_month[current_month['category'].isin(selected_categories)]
-    .groupby('category')['price']
-    .sum()
-    .reindex(selected_categories, fill_value=0)
-)
-
-# Preparar dados para o gráfico
-labels = selected_categories
-budget_values = [budget[cat] for cat in labels]
-actual_values = [expense_sum[cat] for cat in labels]
-
-# Fechar o gráfico radar
-labels += [labels[0]]
-budget_values += [budget_values[0]]
-actual_values += [actual_values[0]]
-
-# Ângulos para o radar
-angles = np.linspace(0, 2 * np.pi, len(labels), endpoint=False).tolist()
-
-# Criar o radar chart
-fig, ax = plt.subplots(figsize=(8, 8), subplot_kw=dict(polar=True))
-
-# Estilo do gráfico
-ax.set_theta_offset(np.pi / 2)
-ax.set_theta_direction(-1)
-
-# Desenhar os eixos e rótulos
-ax.set_xticks(angles[:-1])
-ax.set_xticklabels(labels[:-1])
-ax.set_rlabel_position(0)
-
-ax.yaxis.grid(False)
-# Remove the outer circular spine
-ax.spines['polar'].set_visible(False)
-
-plt.yticks([500, 1000, 1500, 2000, 2500, 3000], ["500", "1000", "1500", "2000", "2500", "3000"], color="grey", size=10)
-plt.ylim(0, max(budget_values + actual_values) + 500)
-
-# Plotar o orçamento
-ax.plot(angles, budget_values, color='#0077b6', linewidth=2, linestyle='solid', label='Orçamento')
-ax.fill(angles, budget_values, color='#0077b6', alpha=0.1)
-
-# Plotar os gastos reais
-ax.plot(angles, actual_values, color='red', linewidth=2, linestyle='solid', label='Gasto Atual')
-ax.fill(angles, actual_values, color='red', alpha=0.2)
-
-# Título e legenda
-ax.set_title(f'Controle de Orçamento - {now.strftime("%B/%Y")}', size=14, y=1.1)
-ax.legend(loc='upper right', bbox_to_anchor=(1.1, 1.1))
-
-plt.show()
-
 ```
 
 ::: {layout-ncol="2"}
@@ -679,4 +611,78 @@ last_three = economy.tail(3)
 average_saving = last_three['economy'].mean()
 
 display(Markdown(f"Média de economia nos últimos 3 meses: **{average_saving:.2f}**"))
+```
+
+### Estou conseguindo seguir meu orçamento nesse mes?
+
+```{python}
+# Filtrar o mês atual e tipo=outcome
+df_outcome = df[df['type'] == 'outcome'].copy()
+df_outcome['createdAt'] = pd.to_datetime(df_outcome['createdAt'], format='%d-%m-%Y')
+
+current_month = df_outcome[
+    (df_outcome['createdAt'].dt.month == now.month) &
+    (df_outcome['createdAt'].dt.year == now.year)
+]
+# Somar os gastos nas categorias selecionadas
+selected_categories = list(budget.keys())
+expense_sum = (
+    current_month[current_month['category'].isin(selected_categories)]
+    .groupby('category')['price']
+    .sum()
+    .reindex(selected_categories, fill_value=0)
+)
+
+# Preparar dados para o gráfico
+labels = selected_categories
+budget_values = [budget[cat] for cat in labels]
+actual_values = [expense_sum[cat] for cat in labels]
+
+# Fechar o gráfico radar
+labels += [labels[0]]
+budget_values += [budget_values[0]]
+actual_values += [actual_values[0]]
+
+# Ângulos para o radar
+angles = np.linspace(0, 2 * np.pi, len(labels), endpoint=True).tolist()
+
+# Criar o radar chart
+fig, ax = plt.subplots(figsize=(5, 5), subplot_kw=dict(polar=True))
+
+# Estilo do gráfico
+ax.set_theta_offset(np.pi / 2)
+ax.set_theta_direction(-1)
+
+# Desenhar os eixos e rótulos
+ax.set_xticks(angles[:-1])
+ax.set_xticklabels(labels[:-1])
+ax.set_rlabel_position(0)
+
+ax.yaxis.grid(False)
+# Remove the outer circular spine
+ax.spines['polar'].set_visible(False)
+
+plt.yticks([500, 1000, 1500, 2000, 2500, 3000], ["500", "1000", "1500", "2000", "2500", "3000"], color="grey", size=10)
+plt.ylim(0, max(budget_values + actual_values) + 500)
+
+# Plotar o orçamento
+ax.plot(angles, budget_values, color='#0077b6', linewidth=2, linestyle='solid', label='Orçamento')
+
+
+
+ax.fill(angles, budget_values, color='#0077b6', alpha=0.1)
+
+# Plotar os gastos reais
+ax.plot(angles, actual_values, color='red', linewidth=2, linestyle='solid', label='Gasto Atual')
+ax.fill(angles, actual_values, color='red', alpha=0.2)
+
+# Título e legenda
+ax.set_title(f'Controle de Orçamento - {now.strftime("%B/%Y")}', size=8, y=1.1)
+ax.legend(loc='best', bbox_to_anchor=(1.1, 1.1))
+
+ax.tick_params(axis='y', labelsize=7)
+ax.legend(fontsize=8)
+
+plt.show()
+
 ```
