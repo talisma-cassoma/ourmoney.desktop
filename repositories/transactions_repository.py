@@ -142,7 +142,8 @@ class TransactionsRepository:
             transactions = cur.fetchall()
 
         return [TransactionEntity(*t) for t in transactions]
-        
+    
+
     def get_all(self) -> list[TransactionEntity]:
         query = 'SELECT id, description, type, category, price, owner, email, status, createdAt FROM Transactions ORDER BY createdAt DESC'
         with self._connect() as conn:
@@ -308,3 +309,49 @@ class TransactionsRepository:
                 query = "UPDATE Transactions SET status = 'synced' WHERE id = ?"
                 cur.execute(query, (transaction['id'],))  # Marcar cada transação como sincronizada
                 logging.info(f'Transação {transaction['id']} marcada como sincronizada.')
+
+    
+    def search_transactions_by_filters(self, last_date, filters) -> list[TransactionEntity]:
+        
+        query = """
+        SELECT id, description, type, category, price, owner, email, status, createdAt
+        FROM Transactions
+        WHERE 1=1
+        """
+        params = []
+
+        if filters.get("keyword"):
+            query += " AND description LIKE ?"
+            params.append(f"%{filters['keyword']}%")
+
+        if filters.get("category"):
+            query += " AND (" + " OR ".join(["category LIKE ?"] * len(filters["category"])) + ")"
+            params.extend([f"%{val}%" for val in filters["category"]])
+
+        if filters.get("type"):
+            query += " AND (" + " OR ".join(["type LIKE ?"] * len(filters["type"])) + ")"
+            params.extend([f"%{val}%" for val in filters["type"]])
+
+        if filters.get("status"):
+            query += " AND (" + " OR ".join(["status LIKE ?"] * len(filters["status"])) + ")"
+            params.extend([f"%{val}%" for val in filters["status"]])
+
+        if filters.get("year"):
+            query += " AND (" + " OR ".join(["strftime('%Y', createdAt) = ?"] * len(filters["year"])) + ")"
+            params.extend(filters["year"])
+
+        if filters.get("month"):
+            query += " AND (" + " OR ".join(["strftime('%m', createdAt) = ?"] * len(filters["month"])) + ")"
+            params.extend(filters["month"])
+
+        if last_date:
+            query += " AND createdAt < ?"
+            params.append(last_date)
+
+        query += " ORDER BY createdAt DESC LIMIT 20"
+
+        with self._connect() as conn:
+            cursor = conn.execute(query, params)
+            transactions = cursor.fetchall()
+            print(query, params)
+            return [TransactionEntity(*t) for t in transactions]

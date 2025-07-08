@@ -126,7 +126,7 @@ else:
 
 <div>
 
-### Quanto gastei no total o ultimo mes?
+### Quanto gastei no total nos ultimos meses?
 
 ```{python} 
 display(Markdown(f"Neste mês: **{total_current_month:,.2f}**"))
@@ -303,7 +303,7 @@ else: # No monthly data was generated
 
 ```{python}
 # Categorias de interesse (ajustar se houver variações de acentuação)
-categorias_interesse = ['alimentaçao', 'salario', 'roupas', 'bebidas', 
+categorias_interesse = ['alimentaçao', 'salario', 'roupas', 'bebida', 
                         'agua e luz', 'emprestimos', 'dividas', 'saude']
 
 # Normalizar nomes (remover espaços extras e converter para minúsculas)
@@ -397,7 +397,7 @@ plt.tight_layout(rect=[0, 0, 0.85, 1]) # Adjust rect to make space for external 
 plt.show()
 ```
 
-## RECEITAS
+## Receitas
 
 ### Quais são minhas principais fontes de receita?
 
@@ -472,7 +472,7 @@ plt.show()
 budget = {
     'alimentaçao': 3000,
     'roupas': 200,
-    'bebidas': 200,
+    'bebida': 200,
     'agua e luz': 100,
     # 'emprestimos': 0,
     'dividas': 0,

@@ -55,17 +55,44 @@ class Controller:
             response = requests.get(f"{self.api_url}/api/ping", timeout=self.timeout)
             if response.status_code == 200:
                 return True
+            else:
+                 return False
         except (requests.ConnectionError, requests.Timeout):
             return False
+        
 
-    def fetch_transactions(self, last_date=None):
+    def fetch_transactions(self, last_date=None, filters=None):
         
         if last_date:
             date=str(last_date)
             format = "%d-%m-%Y"
             last_date = datetime.strptime(date, format).strftime("%Y-%m-%d") # convert %Y-%m-%d in to search
 
-        transactions = self._transactions.fetch(last_date=last_date)
+        
+        month_map = {
+        "janeiro": "01", "fevereiro": "02", "março": "03", "abril": "04",
+        "maio": "05", "junho": "06", "julho": "07", "agosto": "08",
+        "setempbro": "09", "outubro": "10", "novembro": "11", "dezembro": "12"}
+        # Conversão de status
+        status_map = {
+            "sincronizado": "synced",
+            "dessincronizado": "unsynced"
+            }
+        type_map={
+            "entrada": "income",
+            "saida": "outcome"
+        }
+        parsed_filters = {
+            "keyword": filters["keyword"].strip().lower() if filters["keyword"] else None,
+            "category": list(filters["category"]) if filters["category"] else None,
+            "type": [type_map[t] for t in filters["type"] if t in type_map] if filters["type"] else None,
+            "status": [status_map[s] for s in filters["status"] if s in status_map] if filters["status"] else None,
+            "year": list(filters["year"]) if filters["year"] else None,
+            "month": [month_map[m] for m in filters["month"] if m in month_map] if filters["month"] else None
+            }
+      
+        transactions = self._transactions.fetch(last_date=last_date, filters=parsed_filters)
+        
         dtos = [
             TransactionDTO(
                 id=transaction.id,
@@ -80,6 +107,7 @@ class Controller:
             )
             for transaction in transactions
         ]
+  
         return dtos
     
     def insert_transaction(self, description, 

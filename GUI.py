@@ -3,10 +3,14 @@ from PyQt5.QtWidgets import (QMainWindow, QVBoxLayout,
                              QLineEdit, QFormLayout, QHBoxLayout, QFrame, QPushButton, 
                              QLabel, QComboBox, QProgressBar, QTableWidget, 
                              QTableWidgetItem, QHeaderView, QMessageBox, QMenu,
-                             QDialog, QDateEdit)
+                             QDialog, QDateEdit, QToolButton, QWidgetAction, QCheckBox
+                             )
 
 from PyQt5.QtCore import Qt, QDate
-from PyQt5.QtGui import QFont
+from PyQt5.QtGui import QFont, QPixmap, QIcon, QPainter
+from PyQt5.QtSvg import QSvgWidget
+from PyQt5.QtSvg import QSvgRenderer
+
 
 from datetime import datetime
 import time
@@ -21,8 +25,53 @@ Total_font = QFont()
 Total_font.setPointSize(14)  # Set the font size to 14 (adjust as needed)
 Total_font.setBold(True)  # Make the text bold
 
-
 from PyQt5.QtCore import QThread, pyqtSignal
+
+def create_checkbox_menu_button(title, options, selected_options_set):
+    """
+    Cria um botão com menu suspenso contendo checkboxes.
+    
+    :param title: Título do botão principal.
+    :param options: Lista de strings (opções).
+    :param callback: Função chamada quando checkbox é clicado.
+    :param selected_options_set: Set externo compartilhado para controle de seleção.
+    :return: QPushButton
+    """
+    button = QPushButton(title)
+    button.setStyleSheet("background-color: #333; font-size: 12px; color: white;")
+    button.setCursor(Qt.PointingHandCursor)
+
+    menu = QMenu()
+    menu.setStyleSheet("""
+        QMenu {
+            color: white;
+            border: 1px solid rgb(41, 41, 46);
+            padding: 4px;
+        }
+        QMenu::item {
+            padding: 4px 10px;
+            color: white;          
+        }
+    """)
+
+    for option in options:
+        checkbox = QCheckBox(option)
+        checkbox.setChecked(option in selected_options_set)
+
+        def toggle_option(checked, opt=option):
+            if checked:
+                selected_options_set.add(opt)
+            else:
+                selected_options_set.discard(opt)
+
+        checkbox.stateChanged.connect(toggle_option)
+
+        action = QWidgetAction(menu)
+        action.setDefaultWidget(checkbox)
+        menu.addAction(action)
+
+    button.setMenu(menu)
+    return button
 
 class StatusCheckerThread(QThread):
     status_signal = pyqtSignal(bool)  # Signal to emit the online status
@@ -75,6 +124,15 @@ class MainWindow(QMainWindow):
 
         self.sync_thread = None
 
+        self.filters = {
+            "keyword": "",
+            "category": set(),
+            "type": set(),
+            "status": set(),
+            "year": set(),
+            "month": set(),
+        }
+
     def set_controller(self, controller):
         """Define o controlador para a GUI."""
         self.controller = controller
@@ -98,6 +156,7 @@ class MainWindow(QMainWindow):
         self.status_thread.stop()
         self.status_thread.wait()
         super().closeEvent(event)
+
 
     def initUI(self):
         self.setWindowTitle("OUR-MONKEY")
@@ -199,6 +258,91 @@ class MainWindow(QMainWindow):
         self.blocks_layout.addWidget(self.totals_frame)
 
         self.main_layout.addWidget(self.blocks_frame)
+
+  # --- search + filter area ---
+        self.search_frame = QFrame()
+        hl = QHBoxLayout(self.search_frame)
+        hl.setContentsMargins(0, 0, 0, 0)
+        hl.setSpacing(5)
+
+
+        # Campo de busca
+        self.search_input = QLineEdit()
+        self.search_input.setPlaceholderText("Search...")
+        self.search_input.setStyleSheet("background-color: black; padding: 6px;")
+        hl.addWidget(self.search_input, 1)
+        
+        # Botão de busca com SVG
+        self.search_btn = QToolButton()
+        self.search_btn.setIcon(self.svg_icon(
+            '''<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="white"><path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></svg>'''
+        ))
+        self.search_btn.setAutoRaise(True)
+        self.search_btn.clicked.connect(self.update_keyword_filter)
+        hl.addWidget(self.search_btn)
+
+        # Botão de filtro
+        self.filter_btn = QToolButton()
+        self.filter_btn.setIcon(self.svg_icon(
+            '''<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="white"><path d="M440-120v-240h80v80h320v80H520v80h-80Zm-320-80v-80h240v80H120Zm160-160v-80H120v-80h160v-80h80v240h-80Zm160-80v-80h400v80H440Zm160-160v-240h80v80h160v80H680v80h-80Zm-480-80v-80h400v80H120Z"/></svg>'''
+        ))
+        self.filter_btn.setAutoRaise(True)
+        self.filter_btn.clicked.connect(self.toggle_filters)
+        hl.addWidget(self.filter_btn)
+
+        self.main_layout.addWidget(self.search_frame)
+
+        # Frame de filtros
+        self.filter_frame = QFrame()
+        self.filter_frame.setVisible(False)
+        fl = QHBoxLayout(self.filter_frame)
+        fl.setContentsMargins(0,0,0,0)
+        fl.setSpacing(10)
+
+        # Filtros fixos por categoria
+        category_btn = create_checkbox_menu_button(
+              title="categoria",
+              options=["alimentaçao", "internet", "saude", "bebida"], 
+                selected_options_set= self.filters["category"])
+
+        
+        fl.addWidget(category_btn)
+
+        # Filtro de status
+        status_button = create_checkbox_menu_button(
+            title="status", 
+            options=["sincronizado", "dessincronizado"], 
+            selected_options_set = self.filters["status"]
+        )
+        fl.addWidget(status_button)
+
+        # Filtro de ano
+        year_button = create_checkbox_menu_button(
+            title = "ano", 
+            options = ["2025", "2024"],
+            selected_options_set = self.filters["year"]
+            )
+        fl.addWidget(year_button)
+
+
+        # Filtro de mes
+        month_button = create_checkbox_menu_button(
+            title="mes", 
+            options = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setempbro", "outubro", "novembro", "dezembro"],
+            selected_options_set = self.filters["month"]
+            )
+        fl.addWidget(month_button)
+
+        #Filtro de tipo
+        type_filter_button = create_checkbox_menu_button(
+            title="tipo", 
+            options=["entrada","saida"], 
+             selected_options_set = self.filters["type"]
+            )
+        
+        fl.addWidget(type_filter_button)
+
+        self.main_layout.addWidget(self.filter_frame)
 
         # Block 3: List of registered transactions using QTableWidget
         self.transaction_list_frame = QFrame()
@@ -309,7 +453,7 @@ class MainWindow(QMainWindow):
         self.fetching = True
 
         # Fetch transactions
-        transactions = self.controller.fetch_transactions(self.last_date)
+        transactions = self.controller.fetch_transactions(self.last_date, self.filters)
 
         if not append:
             self.transaction_table.setRowCount(0)  # Clear the table if not appending
@@ -480,7 +624,6 @@ class MainWindow(QMainWindow):
     def save_edited_transaction(self, dialog, id, description_input, type_input, category_input, price, status, date_input):
         # Obter valores dos inputs
         
-        
         self.last_date = None
         id= str(id)
         description = str(description_input.text())
@@ -497,7 +640,29 @@ class MainWindow(QMainWindow):
         # Refresh the table after deletion
         self.load_collection()
 
+    def svg_icon(self, svg_str):
+        """Converte string SVG em QIcon."""
+        renderer = QSvgRenderer(bytearray(svg_str, encoding='utf-8'))
+        pix = QPixmap(24, 24)
+        pix.fill(Qt.transparent)
+        painter = QPainter(pix)
+        renderer.render(painter)
+        painter.end()
+        return QIcon(pix)
+
+    def toggle_filters(self):
+        self.filter_frame.setVisible(not self.filter_frame.isVisible())
+
     def clear_inputs(self):
         self.description_input.clear()
         self.category_input.clear()
         self.price_input.clear()
+
+    def update_keyword_filter(self): 
+        self.last_date = None
+        self.filters["keyword"] = self.search_input.text().strip().lower()
+        self.load_collection()
+        #clear keyword 
+        #self.filters["keyword"] = ""
+
+    
