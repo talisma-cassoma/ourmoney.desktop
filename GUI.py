@@ -661,6 +661,17 @@ class MainWindow(QMainWindow):
     def update_keyword_filter(self): 
         self.last_date = None
         self.filters["keyword"] = self.search_input.text().strip().lower()
+        # Recalculate totals
+        self.total_of_income, self.total_of_outcome = self.controller.get_total_of_transactions()
+
+        # Format totals with space as a thousands separator
+        formatted_income = f"{self.total_of_income:,.2f}".replace(",", " ")
+        formatted_outcome = f"{self.total_of_outcome:,.2f}".replace(",", " ")
+
+        # Update labels with formatted values
+        self.income_label.setText(f"Entradas: {formatted_income} DH$")
+        self.expense_label.setText(f"Saídas: {formatted_outcome} DH$")
+
         self.load_collection()
         #clear keyword 
         #self.filters["keyword"] = ""

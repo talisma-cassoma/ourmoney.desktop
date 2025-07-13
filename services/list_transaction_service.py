@@ -36,8 +36,9 @@ class ListTransactions:
         #print(f"filters: {filters}")
         
         if is_empty:
-            print(f"filters is empty")
-            return self._repository.fetch_somes(last_date)
+            transactions = self._repository.fetch_somes(last_date)
+            self.total()
+            return transactions
 
         transactions = self._repository.search_transactions_by_filters(last_date=last_date, filters=filters)
         return transactions
@@ -51,6 +52,5 @@ class ListTransactions:
     def fetch_unsynced(self)-> list[TransactionEntity]:
         return self._repository.get_unsynced_transactions()
     
-    def total(self):
-        return self._repository.get_total()
+    def total(self):return self._repository.total_income, self._repository.total_outcome
     

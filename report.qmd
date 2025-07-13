@@ -103,11 +103,10 @@ high_expenses = category_sum[category_sum > 1000].reset_index()
 high_expenses.columns = ['Categoria', 'Total']
 ```
 
-## Gestao dos Gastos 
+## Gestao dos Gastos
 
-::: {layout-ncol="2"}
-
-### Onde estou gastando mais dinheiro? 
+:::: {layout-ncol="2"}
+### Onde estou gastando mais dinheiro?
 
 ```{python}
 if biggest_category:
@@ -128,11 +127,11 @@ else:
 
 ### Quanto gastei no total nos ultimos meses?
 
-```{python} 
+```{python}
 display(Markdown(f"Neste mês: **{total_current_month:,.2f}**"))
 
 display(Markdown(f"Nos últimos 6 meses **{total_last_six_months:,.2f}**"))
-``` 
+```
 
 ### Quais foram minhas maiores despesas esse mes?
 
@@ -148,14 +147,12 @@ else:
 
 if biggest_category:
     display(Markdown(f"O maior gasto este mês foi em: **{biggest_category}** com **{biggest_value:,.2f}**"))
-``` 
+```
 
 </div>
+::::
 
-:::
-
-::: {layout-ncol="2"}
-
+::::: {layout-ncol="2"}
 ### Existem despesas recorrentes nos trimeste / simestre ?
 
 ```{python}
@@ -183,7 +180,8 @@ category_6m = category_6m.sort_values(by='Total', ascending=False)
 ultimo trimeste
 
 </div>
- <div>
+
+<div>
 
 ```{python}
 if not category_3m.empty:
@@ -192,8 +190,9 @@ else:
     display("Nenhuma despesa registrada nos últimos 3 meses.")
 ```
 
- </div>
- <div>
+</div>
+
+<div>
 
 ultimo semestre
 
@@ -204,10 +203,10 @@ else:
     display("Nenhuma despesa registrada nos últimos 6 meses.")
 ```
 
- </div>
 </div>
 
-:::
+</div>
+:::::
 
 ### Meu padrao de gasto mudou comprado ao meses anteriores ?
 
@@ -299,103 +298,89 @@ else: # No monthly data was generated
      display("Skipping plotting as no monthly data was generated.")
 ```
 
+
+
 ### Como meus gastos em evoluíram ao longo do tempo?
 
 ```{python}
-# Categorias de interesse (ajustar se houver variações de acentuação)
-categorias_interesse = ['alimentaçao', 'salario', 'roupas', 'bebida', 
-                        'agua e luz', 'emprestimos', 'dividas', 'saude']
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+import seaborn as sns
 
-# Normalizar nomes (remover espaços extras e converter para minúsculas)
+def formatar_valor_compacto(valor):
+    """Formata número como 1.2K, 3.5M etc."""
+    if abs(valor) >= 1_000_000_000:
+        return f'{valor / 1_000_000_000:.1f}B'
+    elif abs(valor) >= 1_000_000:
+        return f'{valor / 1_000_000:.1f}M'
+    elif abs(valor) >= 1_000:
+        return f'{valor / 1_000:.1f}K'
+    else:
+        return f'{valor:.0f}'
+
+def plot_categoria(categoria, dados, cor, figsize=(6, 2.5)):
+    """Plota um gráfico individual para uma única categoria com valores compactos."""
+    dados = dados.sort_values('month')
+    x = dados['month']
+    y = dados['price']
+
+    fig, ax = plt.subplots(figsize=figsize)
+
+    ax.plot(x, y, color=cor, linewidth=1, marker='o', markersize=2, linestyle='--')
+
+    # Adiciona os valores em cada ponto
+    for xi, yi in zip(x, y):
+        ax.annotate(formatar_valor_compacto(yi),
+                    xy=(xi, yi), xytext=(0, 5), textcoords='offset points',
+                    ha='center', fontsize=6, color=cor)
+
+    ax.set_title(f'Gastos: {categoria.capitalize()}', size=8)
+    ax.set_ylim(bottom=0, top=ax.get_ylim()[1] * 1.1)
+    
+    ax.xaxis.set_major_locator(mdates.MonthLocator(interval=1))
+    ax.xaxis.set_major_formatter(mdates.DateFormatter('%b-%Y'))
+    ax.tick_params(axis='x', rotation=45, labelsize=6)
+    ax.tick_params(axis='y', labelsize=6) 
+
+    # Estética
+    ax.spines[['top', 'right', 'left', 'bottom']].set_visible(False)
+    ax.tick_params(axis='y', left=False)
+    ax.grid(True, axis='y')
+
+    plt.tight_layout()
+    plt.show()
+
+# --------------------------------------------------
+# Pré-processamento dos dados
+# --------------------------------------------------
+categorias_interesse = ['alimentaçao', 'gastos extra', 'roupas', 'bebida', 
+                        'agua e luz', 'emprestimo', 'divida', 'saude']
+
 df['category'] = df['category'].str.strip().str.lower()
 
-# Filtrar
 df_filtered = df[
     (df['type'] == 'outcome') &
     (df['category'].isin(categorias_interesse))
 ].copy()
 
-# Agrupar por mês e categoria
 df_filtered['month'] = df_filtered['createdAt'].dt.to_period('M').dt.to_timestamp()
 monthly_totals = df_filtered.groupby(['month', 'category'])['price'].sum().reset_index()
 
-# --- Matplotlib Plotting Configuration ---
+# Paleta de cores para categorias
+palette = sns.color_palette("tab10", n_colors=len(categorias_interesse))
+category_colors = dict(zip(categorias_interesse, palette))
 
-# Create figure and axes
-fig, ax = plt.subplots(figsize=(10, 2.8)) # Adjusted size slightly for better readability
+# --------------------------------------------------
+# Loop de categorias — um gráfico por vez
+# --------------------------------------------------
+for cat in categorias_interesse:
+    dados = monthly_totals[monthly_totals['category'] == cat]
+    plot_categoria(cat, dados, category_colors[cat])
 
-# Define a color palette (using seaborn's palette for nice colors)
-palette = sns.color_palette("tab10", n_colors=monthly_totals['category'].nunique())
-category_colors = dict(zip(monthly_totals['category'].unique(), palette))
-
-# Loop through each category to plot
-for i, category in enumerate(monthly_totals['category'].unique()):
-    # Filter data for the current category
-    category_data = monthly_totals[monthly_totals['category'] == category].sort_values('month')
-
-    # Prepare data for smoothing
-    x = category_data['month']
-    y = category_data['price']
-
-    # Convert dates to numerical format for interpolation
-    x_num = mdates.date2num(x)
-
-    # Check if we have enough points for spline interpolation (k=3 needs >= 4 points)
-    if len(x_num) >= 4:
-        # Create spline interpolation function (cubic spline, k=3)
-        spl = make_interp_spline(x_num, y, k=3)
-
-        # Generate a smoother set of x-values for the curve
-        x_smooth_num = np.linspace(x_num.min(), x_num.max(), 300) # More points for smoothness
-        y_smooth = spl(x_smooth_num)
-
-        # Convert smoothed x-values back to dates
-        x_smooth = mdates.num2date(x_smooth_num)
-
-        # Plot the smoothed line
-        ax.plot(x_smooth, y_smooth, label=category.capitalize(), color=category_colors[category], linewidth=1.5),
-    else:
-        # Plot original points with straight lines if not enough data for smoothing
-        # Add markers to indicate actual data points clearly in this case
-        ax.plot(x, y, label=category.capitalize(), color=category_colors[category], linewidth=1, marker='o', markersize=5, linestyle='--')
-        # print(f"Warning: Not enough data points ({len(x_num)}) for smoothing category '{category}'. Plotting original points.")
-
-# Remove borders (spines)
-ax.spines['top'].set_visible(False)
-ax.spines['right'].set_visible(False)
-ax.spines['left'].set_visible(False) # Keep bottom spine for reference, or remove if desired
-ax.spines['bottom'].set_visible(False) # Remove bottom spine as requestedspine color
-
-# Set title and labels
-ax.set_title("Evolução dos Gastos por Categoria", pad=20)
-ax.set_xlabel("Mês", labelpad=10)
-ax.set_ylabel("Total Gastos", labelpad=10)
-
-# Format x-axis ticks as dates ('Month-Year')
-ax.xaxis.set_major_locator(mdates.MonthLocator(interval=1)) # Tick every month
-ax.xaxis.set_major_formatter(mdates.DateFormatter('%b-%Y')) # Format as 'Jan-2023'
-plt.setp(ax.get_xticklabels(), rotation=45, ha="right") # Rotate labels
-
-# Add a subtle grid for readability (optional)
-ax.yaxis.grid(False, linestyle='--', linewidth=0.5, color='lightgrey', alpha=0.7)
-ax.xaxis.grid(False, linestyle='--', linewidth=0.5, color='lightgrey', alpha=0.7) # Keep x-axis grid off for cleaner look
-
-# Add legend
-# Place legend outside the plot area for less clutter
-ax.legend(title='Categoria', bbox_to_anchor=(1.04, 1), loc="upper left", frameon=False)
-
-# Add padding to y-axis limits for visual spacing
-ax.set_ylim(bottom=0, top=ax.get_ylim()[1] * 1.1)
-
-# Remove y-axis ticks if desired for extreme minimalism (optional)
-ax.tick_params(axis='y', which='both', left=False)
-
-# Ensure layout is tight
-plt.tight_layout(rect=[0, 0, 0.85, 1]) # Adjust rect to make space for external legend if needed
-
-# Show plot
-plt.show()
 ```
+
+
+
 
 ## Receitas
 
@@ -481,7 +466,6 @@ budget = {
 ```
 
 ::: {layout-ncol="2"}
-
 ### Em quais categorias de orçamento estou estourando o limite com mais frequência?
 
 ```{python}
@@ -546,7 +530,6 @@ remaining_budget_df = pd.DataFrame(remaining_budget)
 show(remaining_budget_df.sort_values(by='restou'))
 
 ```
-
 :::
 
 ### Qual o meu progresso em relação à minha meta de economia?
@@ -584,7 +567,7 @@ economy_table = economy_table.applymap(lambda x: f"{x:.2f}" if pd.notnull(x) els
 
 # Exibe a tabela
 show(economy_table)
-``` 
+```
 
 ### Quanto estou conseguindo economizar em média por mês?
 

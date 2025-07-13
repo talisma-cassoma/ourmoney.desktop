@@ -11,6 +11,7 @@ class TransactionsRepository:
     def __init__(self):
         self._db_path = resource_path('database/database.db')
         self.logger = get_logger("TransactionsRepository")
+        self.total_income , self.total_outcome = self.get_total()
         self.create_table()
 
     def _connect(self):
@@ -135,6 +136,7 @@ class TransactionsRepository:
         ORDER BY createdAt DESC 
         LIMIT 20
         """
+        self.total_income , self.total_outcome = self.get_total()
 
         with self._connect() as conn:
             cur = conn.cursor()
@@ -199,13 +201,13 @@ class TransactionsRepository:
 
             # Query to calculate total incomes
             cur.execute("SELECT SUM(price) as total_incomes FROM Transactions WHERE status != 'deleted' AND type = 'income'")
-            total_income = cur.fetchone()[0] or 0.0  # Default to 0.0 if no income
+            self.total_income = cur.fetchone()[0] or 0.0  # Default to 0.0 if no income
 
             # Query to calculate total outcomes
             cur.execute("SELECT SUM(price) as total_outcomes FROM Transactions WHERE status != 'deleted' AND type = 'outcome'")
-            total_outcome = cur.fetchone()[0] or 0.0  # Default to 0.0 if no outcome
+            self.total_outcome = cur.fetchone()[0] or 0.0  # Default to 0.0 if no outcome
 
-            return total_income, total_outcome
+            return self.total_income, self.total_outcome
 
 #delete methods
     def delete_many(self, transaction_ids: list[str]):
@@ -353,5 +355,15 @@ class TransactionsRepository:
         with self._connect() as conn:
             cursor = conn.execute(query, params)
             transactions = cursor.fetchall()
-            print(query, params)
+            # # Reutiliza os mesmos filtros para calcular os totais
+            # sum_query = """
+            # SELECT SUM(CASE WHEN type = 'income' THEN price ELSE 0 END) as total_income, SUM(CASE WHEN type = 'outcome' THEN price ELSE 0 END) as total_outcome
+            # FROM Transactions
+            # WHERE 1=1
+            # """ + query[query.find("AND"):query.find("ORDER BY")]  # pega todos os filtros do SELECT acima, sem o LIMIT
+            # cursor = conn.execute(sum_query, params[:-1] if last_date else params)  # remove LIMIT param se tiver
+            # row = cursor.fetchone()
+            # self.total_income = row[0] or 0.0
+            # self.total_outcome = row[1] or 0.0
+            
             return [TransactionEntity(*t) for t in transactions]
