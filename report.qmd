@@ -318,17 +318,21 @@ def formatar_valor_compacto(valor):
     else:
         return f'{valor:.0f}'
 
-def plot_categoria(categoria, dados, cor, figsize=(6, 2.5)):
-    """Plota um gráfico individual para uma única categoria com valores compactos."""
+def plot_category(categoria, dados, cor, figsize=(6, 2.5)):
+    """Plota gráfico de barras e linha para uma categoria com valores compactos."""
     dados = dados.sort_values('month')
     x = dados['month']
     y = dados['price']
 
     fig, ax = plt.subplots(figsize=figsize)
 
-    ax.plot(x, y, color=cor, linewidth=1, marker='o', markersize=2, linestyle='--')
+    # Gráfico de barras (com cor mais transparente)
+    ax.bar(x, y, color=cor, alpha=0.7, width=20, label='Barras')
 
-    # Adiciona os valores em cada ponto
+    # Gráfico de linhas sobreposto
+    #ax.plot(x, y, color=cor, linewidth=1, marker='o', markersize=2, linestyle='--', label='Linha')
+
+    # Anotações nos pontos
     for xi, yi in zip(x, y):
         ax.annotate(formatar_valor_compacto(yi),
                     xy=(xi, yi), xytext=(0, 5), textcoords='offset points',
@@ -340,15 +344,16 @@ def plot_categoria(categoria, dados, cor, figsize=(6, 2.5)):
     ax.xaxis.set_major_locator(mdates.MonthLocator(interval=1))
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%b-%Y'))
     ax.tick_params(axis='x', rotation=45, labelsize=6)
-    ax.tick_params(axis='y', labelsize=6) 
+    ax.tick_params(axis='y', labelsize=6)
 
     # Estética
     ax.spines[['top', 'right', 'left', 'bottom']].set_visible(False)
     ax.tick_params(axis='y', left=False)
-    ax.grid(True, axis='y')
+    ax.grid(False)
 
     plt.tight_layout()
     plt.show()
+
 
 # --------------------------------------------------
 # Pré-processamento dos dados
@@ -375,7 +380,7 @@ category_colors = dict(zip(categorias_interesse, palette))
 # --------------------------------------------------
 for cat in categorias_interesse:
     dados = monthly_totals[monthly_totals['category'] == cat]
-    plot_categoria(cat, dados, category_colors[cat])
+    plot_category(cat, dados, category_colors[cat])
 
 ```
 
@@ -422,11 +427,11 @@ plt.figure(figsize=(10, 4))
 
 # Barras
 plt.bar(monthly_income['month'], monthly_income['price'], 
-        label='Receita Mensal', width=20, alpha=0.7, color='#90e0ef')
+        label='Receita Mensal', width=20, alpha=0.3, color='#0077b6')
 
 # Linha de tendência
 plt.plot(monthly_income['month'], monthly_income['price'], 
-         color='#0077b6', marker='o', linestyle='-', linewidth=1, label='Tendência')
+         color='#0077b6', marker='o', linestyle='--', linewidth=1.5, label='Tendência')
 
 # Eixos e título
 plt.xlabel('Mês')

@@ -318,7 +318,7 @@ class TransactionsRepository:
         query = """
         SELECT id, description, type, category, price, owner, email, status, createdAt
         FROM Transactions
-        WHERE 1=1
+        WHERE 1=1 AND status != 'deleted' 
         """
         params = []
 

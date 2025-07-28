@@ -302,7 +302,7 @@ class MainWindow(QMainWindow):
         # Filtros fixos por categoria
         category_btn = create_checkbox_menu_button(
               title="categoria",
-              options=["alimentaçao", "internet", "saude", "bebida"], 
+              options=["alimentaçao", "internet", "saude", "bebida", "emprestimo", "divida", "roupa"], 
                 selected_options_set= self.filters["category"])
 
         
@@ -409,14 +409,22 @@ class MainWindow(QMainWindow):
         trans_type = self.type_input.currentText().lower()
         category = self.category_input.text().strip().lower()
         price_text = self.price_input.text().strip()
-    
+        
+        code = compile(price_text, "<string>", "eval")
+
+        if code.co_names:
+            QMessageBox.warning(self,"Expressão contém nomes não permitidos.")
+            return
+
+        input_result = eval(code,{"__builtins__": {}}, {})
+        
         # Validação dos campos
         if not description or not trans_type or not category or not price_text:
             QMessageBox.warning(self, "Erro", "Todos os campos são obrigatórios!")
             return
     
         try:
-            price = float(price_text)  # Tenta converter o preço para número
+            price = float(input_result)  # Tenta converter o preço para número
         except ValueError:
             QMessageBox.warning(self, "Erro", "Preço deve ser um número válido!")
             return
