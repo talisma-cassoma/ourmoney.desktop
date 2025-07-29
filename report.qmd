@@ -324,7 +324,75 @@ for m in months:
 plt.suptitle("Resumo dos Gastos Semanais (últimos 3 meses)", fontsize=15)
 plt.show()
 ```
+#### Padrões nos meus gastos por semana
+```{python}
+# Inicializar dicionário para armazenar presença por (semana, categoria)
+week_category_presence = {}
 
+for idx, m in enumerate(months):
+    df_month = df_outcome[
+        (df_outcome['createdAt'].dt.month == m.month) &
+        (df_outcome['createdAt'].dt.year == m.year)
+    ].copy()
+
+    if df_month.empty:
+        continue
+
+    df_month['week'] = df_month['createdAt'].apply(lambda d: (d.day - 1) // 7 + 1)
+    df_month = df_month[df_month['category'].isin(categorias_ativas)]
+
+    for week, group in df_month.groupby('week'):
+        active_cats = set(group['category'].unique())
+        for cat in categorias_ativas:
+            key = (week, cat)
+            if key not in week_category_presence:
+                week_category_presence[key] = [False, False, False]
+            week_category_presence[key][idx] = cat in active_cats
+
+# Montar matriz de padrões: True se a categoria esteve presente em todas as 3 vezes
+pattern_matrix = pd.DataFrame(index=range(1, 6), columns=sorted(categorias_ativas), dtype=bool)
+
+for (week, cat), presence_list in week_category_presence.items():
+    if all(presence_list):
+        pattern_matrix.loc[week, cat] = True
+    else:
+        pattern_matrix.loc[week, cat] = False
+
+# Substituir NaNs por False para células inexistentes
+pattern_matrix.fillna(False, inplace=True)
+
+# Criar mapa de cores manualmente (True -> yellow, False -> light gray)
+pattern_colors = pattern_matrix.applymap(lambda x: '#fff176' if x else '#f2f2f2')
+
+# Criar nova figura
+fig_pattern, ax_pattern = plt.subplots(figsize=(fig_width, fig_height))
+sns.heatmap(
+    np.ones_like(pattern_matrix, dtype=float),  # dummy data
+    mask=False,
+    annot=False,
+    fmt="",
+    cmap=mcolors.ListedColormap(['white']),  # dummy cmap (será substituído pelo facecolor)
+    linewidths=0.5,
+    linecolor='white',
+    cbar=False,
+    square=False,
+    xticklabels=pattern_matrix.columns,
+    yticklabels=pattern_matrix.index,
+    ax=ax_pattern
+)
+
+# Pintar manualmente as cores das células
+for y in range(pattern_matrix.shape[0]):
+    for x in range(pattern_matrix.shape[1]):
+        ax_pattern.add_patch(plt.Rectangle((x, y), 1, 1, facecolor=pattern_colors.iloc[y, x], edgecolor='white'))
+
+# Títulos e rótulos
+ax_pattern.set_title("Padrão de categorias ativas nas semanas (3 meses)", fontsize=14)
+ax_pattern.set_xlabel("Categoria", fontsize=13)
+ax_pattern.set_ylabel("Semana", fontsize=13)
+ax_pattern.tick_params(axis='x', labelrotation=45, labelsize=11)
+ax_pattern.tick_params(axis='y', labelsize=11)
+```
 
 
 ### Como meus gastos em evoluíram ao longo do tempo?
