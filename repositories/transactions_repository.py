@@ -323,8 +323,9 @@ class TransactionsRepository:
         params = []
 
         if filters.get("keyword"):
-            query += " AND description LIKE ?"
-            params.append(f"%{filters['keyword']}%")
+            query += " AND (description LIKE ? OR category LIKE ? OR CAST(price AS TEXT) LIKE ?)"
+            keyword = f"%{filters['keyword']}%"
+            params.extend([keyword, keyword, keyword])
 
         if filters.get("category"):
             query += " AND (" + " OR ".join(["category LIKE ?"] * len(filters["category"])) + ")"
