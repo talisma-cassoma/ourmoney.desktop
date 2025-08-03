@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import (QMainWindow, QVBoxLayout,
                              QLineEdit, QFormLayout, QHBoxLayout, QFrame, QPushButton, 
                              QLabel, QComboBox, QProgressBar, QTableWidget, 
                              QTableWidgetItem, QHeaderView, QMessageBox, QMenu,
-                             QDialog, QDateEdit, QToolButton, QWidgetAction, QCheckBox
+                             QDialog, QDateEdit, QToolButton, QWidgetAction, QCheckBox, QWidget, QStackedWidget
                              )
 
 from PyQt5.QtCore import Qt, QDate
@@ -16,6 +16,7 @@ from datetime import datetime
 import time
 import logging
 import random
+from household_view import HouseHoldList
 
 # Configuração do logging
 logging.basicConfig(filename='app.log', level=logging.INFO, format='%(asctime)s %(levelname)s:%(message)s')
@@ -157,16 +158,59 @@ class MainWindow(QMainWindow):
         self.status_thread.wait()
         super().closeEvent(event)
 
-
     def initUI(self):
         self.setWindowTitle("OUR-MONKEY")
         self.setGeometry(100, 100, 950, 750)
-        # self.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
-        # self.setMinimumHeight(400)
 
+        # Layout horizontal principal
+        self.outer_layout = QHBoxLayout()
+        outer_widget = QWidget()
+        outer_widget.setLayout(self.outer_layout)
+        outer_widget.setStyleSheet("background-color: rgb(61, 61, 66); color: #D3D3D3;")
+        self.setCentralWidget(outer_widget)
+
+        # --- SIDEBAR ---
+        self.sidebar = QFrame()
+        self.sidebar.setStyleSheet("background-color: rgb(30, 30, 30);")
+        self.sidebar_layout = QVBoxLayout(self.sidebar)
+        self.sidebar_layout.setContentsMargins(0, 0, 0, 0)
+        self.sidebar_layout.setSpacing(10)
+
+        # Botão de navegação 1
+        home_btn = QPushButton("Home")  # pode substituir por ícones
+        home_btn.setStyleSheet("padding: 5px")
+        home_btn.clicked.connect(lambda: self.switch_section(0))
+        self.sidebar_layout.addWidget(home_btn)
+
+        # Botão de navegação 2
+        house_hold_list_btn = QPushButton("lista de compras")
+        #btn2.setStyleSheet("color: white; background-color: transparent; border: none;")
+        house_hold_list_btn.clicked.connect(lambda: self.switch_section(1))
+        #house_hold_list_btn.setStyleSheet("padding: 5px")
+        self.sidebar_layout.addWidget(house_hold_list_btn)
+
+        self.sidebar_layout.addStretch()
+        self.outer_layout.addWidget(self.sidebar)
+
+        # --- ÁREA DE CONTEÚDO ---
+        self.stack = QStackedWidget()
+        self.outer_layout.addWidget(self.stack)
+
+        # Página 0: conteúdo atual
         self.main_frame = QFrame()
         self.main_layout = QVBoxLayout(self.main_frame)
         self.main_frame.setStyleSheet("background-color: rgb(61, 61, 66); color: #D3D3D3;")
+        self.stack.addWidget(self.main_frame)
+
+        # Página 1: futura seção
+        self.household_section = HouseHoldList()
+        self.household_section.setStyleSheet("background-color: rgb(61, 61, 66); color: #D3D3D3;")
+        self.stack.addWidget(self.household_section)
+        
+        self.household_section = HouseHoldList()
+        self.household_section.setStyleSheet("background-color: rgb(61, 61, 66); color: #D3D3D3;")
+        self.stack.addWidget(self.household_section)
+
         # Status and sync area at the top
         self.status_frame = QFrame()
         self.status_layout = QHBoxLayout(self.status_frame)
@@ -374,10 +418,13 @@ class MainWindow(QMainWindow):
 
         self.main_layout.addWidget(self.transaction_list_frame)
 
-        self.setCentralWidget(self.main_frame)
+        #self.setCentralWidget(self.main_frame)
 
         # Load registered transactions
         self.load_collection()
+        
+    def switch_section(self, index):
+        self.stack.setCurrentIndex(index)
 
     def save_file(self, index):
         self.controller.export_file(index)
@@ -683,5 +730,3 @@ class MainWindow(QMainWindow):
         self.load_collection()
         #clear keyword 
         #self.filters["keyword"] = ""
-
-    
