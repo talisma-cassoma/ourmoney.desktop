@@ -5,16 +5,19 @@ date: today
 date-format: report of DD MMMM, YYYY
 format:
   pdf:
+    df-print: kable
     typst:
         font-paths: ["fonts"]
         format: custom.typ
-        margin:
-          left: 1cm
-          rest: 0.5cm
-    # color-links: true
+    color-links: true
     page-layout: full
     toc: true
     # toc-depth: 2
+    geometry:
+        - top=20mm
+        - left=20mm
+        - right=20mm
+        - bottom=20mm
     include-in-header:
         text: |
            \usepackage{etoolbox}
@@ -31,6 +34,7 @@ engine: jupyter
 jupyter: python3
 kernel: env
 ---
+
 
 ```{python}
 from dateutil.relativedelta import relativedelta
@@ -109,18 +113,38 @@ high_expenses.columns = ['Categoria', 'Total']
 ### Onde estou gastando mais dinheiro?
 
 ```{python}
+from matplotlib import font_manager
+
+# Configurações globais de fonte
+plt.rcParams['font.family'] = 'Open Sans'
+plt.rcParams['font.size'] = 8
+
 if biggest_category:
     labels = [biggest_category, 'Outros']
     sizes = [biggest_value, other]
     colors = ['#0077b6', '#90e0ef']
 
-    fig, ax = plt.subplots(figsize=(4, 4)) # Adjust figsize here (width, height in inches)
-    ax.pie(sizes, labels=labels, colors=colors, startangle=90, autopct='%1.1f%%')
-    ax.set_title(f"Maior despesa de {now.strftime('%B/%Y')}")
+    fig, ax = plt.subplots(figsize=(6, 6))  # tamanho em polegadas (largura, altura)
+    wedges, texts, autotexts = ax.pie(
+        sizes,
+        labels=labels,
+        colors=colors,
+        startangle=90,
+        autopct='%1.1f%%',
+        textprops={'fontsize': 11, 'fontfamily': 'Open Sans'}  # garante fonte no texto do gráfico
+    )
+
+    ax.set_title(
+        f"Maior despesa de {now.strftime('%B/%Y')}",
+        fontfamily='Open Sans',
+        fontsize=11
+    )
+
     plt.axis('equal')
     plt.show()
 else:
-   display("Nenhuma despesa registrada para o mês atual.")
+    display("Nenhuma despesa registrada para o mês atual.")
+
 ```
 
 <div>
@@ -128,14 +152,13 @@ else:
 ### Quanto gastei no total nos ultimos meses?
 
 ```{python}
-display(Markdown(f"Neste mês: **{total_current_month:,.2f}**"))
-
-display(Markdown(f"Nos últimos 6 meses **{total_last_six_months:,.2f}**"))
+display(Markdown(f"Neste mês: **{total_current_month:,.2f}** \n Nos últimos 6 meses **{total_last_six_months:,.2f}**"))
 ```
 
 ### Quais foram minhas maiores despesas esse mes?
 
 Categorias com gasto acima de 1000:
+
 
 ```{python}
 if not high_expenses.empty:
@@ -143,19 +166,23 @@ if not high_expenses.empty:
    high_expenses
    show(high_expenses)
 else:
-    display("Nenhuma categoria ultrapassou 1000 este mês.")
+    display(Markdown(f"Nenhuma categoria ultrapassou 1000 este mês."))
 
 if biggest_category:
     display(Markdown(f"O maior gasto este mês foi em: **{biggest_category}** com **{biggest_value:,.2f}**"))
 ```
 
 </div>
+
 ::::
 
 ::::: {layout-ncol="2"}
 ### Existem despesas recorrentes nos trimeste / simestre ?
 
 ```{python}
+#| label: tbl-planet-measures
+#| tbl-cap: Astronomical object
+
 # Definir as datas de corte
 three_months_ago = now - relativedelta(months=3)
 six_months_ago = now - relativedelta(months=6)
@@ -206,6 +233,7 @@ else:
 </div>
 
 </div>
+
 :::::
 
 ### Meu padrao de gasto mudou comprado ao meses anteriores ?
@@ -468,9 +496,6 @@ for cat in categorias_interesse:
 
 ```
 
-
-
-
 ## Receitas
 
 ### Quais são minhas principais fontes de receita?
@@ -506,12 +531,25 @@ df_income = df[df['type'] == 'income'].copy()
 df_income['month'] = df_income['createdAt'].dt.to_period('M').dt.to_timestamp()
 monthly_income = df_income.groupby('month')['price'].sum().reset_index()
 
+# Definir cores: cinza para todas as barras, azul para a última
+colors = ['#d3d3d3'] * len(monthly_income)
+colors[-1] = '#0077b6'  # Última barra azul
+
 # Plot
-plt.figure(figsize=(10, 4))
+plt.figure(figsize=(10, 3))
 
 # Barras
 plt.bar(monthly_income['month'], monthly_income['price'], 
-        label='Receita Mensal', width=20, alpha=0.3, color='#0077b6')
+        label='Receita Mensal', width=20, alpha=0.8, color=colors)
+
+last_month = monthly_income.iloc[-1]
+plt.text(
+    x=last_month['month'], 
+    y=last_month['price'] + (last_month['price'] * 0.02),  # ligeiro deslocamento acima da barra
+    s=formatar_valor_compacto(last_month['price']),
+    ha='center', va='bottom', fontsize=10, fontweight='bold', color='#0077b6'
+)
+
 
 # Linha de tendência
 plt.plot(monthly_income['month'], monthly_income['price'], 
@@ -519,7 +557,7 @@ plt.plot(monthly_income['month'], monthly_income['price'],
 
 # Eixos e título
 plt.xlabel('Mês')
-plt.ylabel('Receita Total ')
+plt.ylabel('Receita Total')
 plt.title('Evolução da Receita Mensal')
 plt.xticks(rotation=45, ha='right')
 plt.legend()
@@ -530,13 +568,14 @@ ax = plt.gca()
 # Remove borders (spines)
 ax.spines['top'].set_visible(False)
 ax.spines['right'].set_visible(False)
-ax.spines['left'].set_visible(False) # Keep bottom spine for reference, or remove if desired
-ax.spines['bottom'].set_visible(False) # Remove bottom spine as 
+ax.spines['left'].set_visible(False)
+ax.spines['bottom'].set_visible(False)
+
 ax.xaxis.set_major_locator(mdates.MonthLocator(interval=1))
 ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m'))
 
 plt.tight_layout()
-plt.show() 
+plt.show()
 ```
 
 ## Orçamento e Metas
@@ -619,6 +658,7 @@ remaining_budget_df = pd.DataFrame(remaining_budget)
 show(remaining_budget_df.sort_values(by='restou'))
 
 ```
+
 :::
 
 ### Qual o meu progresso em relação à minha meta de economia?
@@ -653,7 +693,6 @@ economy_table = economy_table.reindex(columns=ordered_months)
 # Substitui NaN por '-'
 economy_table = economy_table.applymap(lambda x: f"{x:.2f}" if pd.notnull(x) else '-')
 
-
 # Exibe a tabela
 show(economy_table)
 ```
@@ -686,6 +725,7 @@ display(Markdown(f"Média de economia nos últimos 3 meses: **{average_saving:.2
 ```
 
 ### Estou conseguindo seguir meu orçamento nesse mes?
+
 
 ```{python}
 # Filtrar o mês atual e tipo=outcome
@@ -739,8 +779,6 @@ plt.ylim(0, max(budget_values + actual_values) + 500)
 
 # Plotar o orçamento
 ax.plot(angles, budget_values, color='#0077b6', linewidth=2, linestyle='solid', label='Orçamento')
-
-
 
 ax.fill(angles, budget_values, color='#0077b6', alpha=0.1)
 

@@ -184,6 +184,11 @@ class HouseHoldList(QWidget):
         title = QLabel("<h2>Lista Comida 2025</h2>")
         outer_layout.addWidget(title)
         
+        self.total_label = QLabel("Total: 0 DH$")
+        self.total_label.setStyleSheet("color: white; font-size: 16px;")
+        outer_layout.addWidget(self.total_label)
+
+        
         copy_button = QPushButton("📋 Copy List")
         copy_button.setCursor(Qt.PointingHandCursor)
         copy_button.setStyleSheet("background-color: #5a5a5a; color: white; padding: 8px; border-radius: 6px;")
@@ -266,16 +271,28 @@ class HouseHoldList(QWidget):
 
     def copy_list_to_clipboard(self):
         lines = ["Lista Comida 2025", ""]
+        total = 0
+    
         for section in self.sections:
-            section_lines = section.get_checked_items_text()
+            section_lines = []
+            for item in section.item_widgets:
+                if item.is_checked():
+                    section_lines.append(item.get_formatted_text())
+                    total += item.price_input.value() * item.quantity_spin.value()
+    
             if section_lines:
                 lines.append(section.title)
                 lines.extend(["    " + line for line in section_lines])
                 lines.append("")  # Espaço entre seções
-
+    
         full_text = "\n".join(lines).strip()
         QApplication.clipboard().setText(full_text)
+    
+        # Atualiza o QLabel do total
+        self.total_label.setText(f"Total: {total} DH$")
+    
         print("Lista copiada:\n", full_text)
+        print(f"Total: {total} DH$")
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
