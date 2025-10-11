@@ -45,9 +45,6 @@ class Controller:
         self.api_url = "https://our-money-bkd.onrender.com"
         #self.api_url = "http://localhost:3000"
         self.timeout = 10
-        
-        #if empty import transactions from json()
-        import_transactions_from_json()
     
     def is_online(self):
         """Checa se a máquina está conectada ao servidor."""

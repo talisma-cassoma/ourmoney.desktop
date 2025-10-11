@@ -346,7 +346,7 @@ class MainWindow(QMainWindow):
         # Filtros fixos por categoria
         category_btn = create_checkbox_menu_button(
               title="categoria",
-              options=["alimentaçao", "internet", "saude", "bebida", "emprestimo", "divida", "roupa"], 
+              options=["alimentaçao e casa", "internet", "saude", "bebida", "emprestimo", "divida", "roupas e calçados", "transporte", "gas"], 
                 selected_options_set= self.filters["category"])
 
         

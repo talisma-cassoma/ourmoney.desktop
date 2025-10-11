@@ -1,12 +1,15 @@
 from entities.transactions_entity import TransactionEntity
 from repositories.transactions_repository import TransactionsRepository
 from utils.logger import get_logger
+from services.import_json_service import import_transactions_from_json
 
 class ListTransactions:
     def __init__(self):
         self._transactions: list[TransactionEntity] = []
         self._repository = TransactionsRepository()  # Convenção para atributo protegido
         self._logger = get_logger("ListTransactionsOnDemande")
+        #if empty import transactions from json()
+        import_transactions_from_json()
         
     def fetch_all(self)-> list[TransactionEntity]:
         return self._repository.get_all()

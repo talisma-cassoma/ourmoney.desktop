@@ -34,7 +34,7 @@ engine: jupyter
 jupyter: python3
 kernel: env
 ---
-
+::: {.pagebreak}
 
 ```{python}
 from dateutil.relativedelta import relativedelta
@@ -105,11 +105,23 @@ total_last_six_months = last_six_months_outcomes['price'].sum()
 # High expenses this month (> 1000)
 high_expenses = category_sum[category_sum > 1000].reset_index()
 high_expenses.columns = ['Categoria', 'Total']
+
+def format_value_style(valor):
+    """Formata número como 1.2K, 3.5M etc."""
+    if abs(valor) >= 1_000_000_000:
+        return f'{valor / 1_000_000_000:.1f}B'
+    elif abs(valor) >= 1_000_000:
+        return f'{valor / 1_000_000:.1f}M'
+    elif abs(valor) >= 1_000:
+        return f'{valor / 1_000:.1f}K'
+    else:
+        return f'{valor:.0f}'
 ```
 
 ## Gestao dos Gastos
 
 :::: {layout-ncol="2"}
+
 ### Onde estou gastando mais dinheiro?
 
 ```{python}
@@ -176,81 +188,12 @@ if biggest_category:
 
 ::::
 
-::::: {layout-ncol="2"}
-### Existem despesas recorrentes nos trimeste / simestre ?
-
-```{python}
-#| label: tbl-planet-measures
-#| tbl-cap: Astronomical object
-
-# Definir as datas de corte
-three_months_ago = now - relativedelta(months=3)
-six_months_ago = now - relativedelta(months=6)
-
-# Filtrar gastos (outcome) para os períodos
-outcomes_3m = df[(df['type'] == 'outcome') & (df['createdAt'] >= three_months_ago)]
-outcomes_6m = df[(df['type'] == 'outcome') & (df['createdAt'] >= six_months_ago)]
-
-# Agrupar e calcular total e % para os últimos 3 meses
-category_3m = outcomes_3m.groupby('category')['price'].sum().reset_index()
-category_3m['%'] = (category_3m['price'] / category_3m['price'].sum()) * 100
-category_3m = category_3m.rename(columns={'price': 'Total', '%': 'Percentual (%)'})
-category_3m = category_3m.sort_values(by='Total', ascending=False)
-
-# Agrupar e calcular total e % para os últimos 6 meses
-category_6m = outcomes_6m.groupby('category')['price'].sum().reset_index()
-category_6m['%'] = (category_6m['price'] / category_6m['price'].sum()) * 100
-category_6m = category_6m.rename(columns={'price': 'Total', '%': 'Percentual (%)'})
-category_6m = category_6m.sort_values(by='Total', ascending=False)
-```
-
-ultimo trimeste
-
-</div>
-
-<div>
-
-```{python}
-if not category_3m.empty:
-    show(category_3m)
-else:
-    display("Nenhuma despesa registrada nos últimos 3 meses.")
-```
-
-</div>
-
-<div>
-
-ultimo semestre
-
-```{python}
-if not category_6m.empty:
-    show(category_6m)
-else:
-    display("Nenhuma despesa registrada nos últimos 6 meses.")
-```
-
-</div>
-
-</div>
-
-:::::
+:::
 
 ### Meu padrao de gasto mudou comprado ao meses anteriores ?
 
 ```{python}
 import matplotlib.colors as mcolors
-
-def formatar_valor_compacto(valor):
-    """Formata número como 1.2K, 3.5M etc."""
-    if abs(valor) >= 1_000_000_000:
-        return f'{valor / 1_000_000_000:.1f}B'
-    elif abs(valor) >= 1_000_000:
-        return f'{valor / 1_000_000:.1f}M'
-    elif abs(valor) >= 1_000:
-        return f'{valor / 1_000:.1f}K'
-    else:
-        return f'{valor:.0f}'
 
 df_outcome = df[df['type'] == 'outcome'].copy()
 # === Últimos 3 meses ===
@@ -315,7 +258,7 @@ for m in months:
 
 
     # Formatar os valores para anotações
-    annotations = pivot.applymap(lambda v: formatar_valor_compacto(v) if v != 0 else "")
+    annotations = pivot.applymap(lambda v: format_value_style(v) if v != 0 else "")
 
     # Substituir 0 por NaN para que fiquem brancas no heatmap
     pivot_masked = pivot.replace(0, np.nan)
@@ -351,9 +294,9 @@ for m in months:
 
 plt.suptitle("Resumo dos Gastos Semanais (últimos 3 meses)", fontsize=15)
 plt.show()
-```
-#### Padrões nos meus gastos por semana
-```{python}
+
+display(Markdown(f"### Padrões nos meus gastos por semana"))
+
 # Inicializar dicionário para armazenar presença por (semana, categoria)
 week_category_presence = {}
 
@@ -422,10 +365,79 @@ ax_pattern.tick_params(axis='x', labelrotation=45, labelsize=11)
 ax_pattern.tick_params(axis='y', labelsize=11)
 ```
 
+### Existem despesas recorrentes nos simestre ?
+
+```{python}
+#| tbl-align: center
+#| tbl-cap-location: top
+
+# Definir as datas de corte
+three_months_ago = now - relativedelta(months=3)
+six_months_ago = now - relativedelta(months=6)
+
+# Filtrar gastos (outcome) para os períodos
+outcomes_3m = df[(df['type'] == 'outcome') & (df['createdAt'] >= three_months_ago)]
+outcomes_6m = df[(df['type'] == 'outcome') & (df['createdAt'] >= six_months_ago)]
+
+category_3m = (
+    outcomes_3m.groupby('category')['price']
+    .sum()
+    .reset_index()
+    .sort_values(by='price', ascending=True)
+)
+
+# Agrupar e calcular total e % para os últimos 6 meses
+category_6m = (
+    outcomes_6m.groupby('category')['price']
+    .sum()
+    .reset_index()
+    .sort_values(by='price', ascending=True)
+)
+
+```
+
+ultimo trimeste
+
+```{python}
+if not category_6m.empty:
+    # Cria figura e eixo
+    fig, ax = plt.subplots(figsize=(10, 8.5))
+    bars = ax.barh(category_6m['category'], category_6m['price'], color='#90e0ef', height=0.6 )
+
+    # Estilo do gráfico
+    ax.set_title('Despesas recorrente por Categoria - Último Trimestre', weight='bold')
+    ax.set_ylabel('Categoria')
+    ax.tick_params(axis='y', which='major', labelsize=9)
+    ax.tick_params(axis='x', labelbottom=False, bottom=False)
+    #ax.grid(axis='x', linestyle='--', alpha=0.6)
+    for spine in ['top', 'right', 'left', 'bottom']:
+        ax.spines[spine].set_visible(False)
+
+    # === Adiciona labels formatados ao final de cada barra ===
+    for bar in bars:
+        width = bar.get_width()
+        label = format_value_style(width)
+        ax.text(
+            width + 100,  # desloca levemente à direita da barra
+            bar.get_y() + bar.get_height() / 2,  # centraliza verticalmente
+            label,
+            va='center',
+            ha='left',
+            fontsize=8,
+            color='#0077b6',
+        )
+
+    plt.tight_layout()
+    plt.show()
+else:
+    display("Nenhuma despesa registrada nos últimos 6 meses.")
+```
 
 ### Como meus gastos em evoluíram ao longo do tempo?
 
 ```{python}
+#| fig-align: center
+
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import seaborn as sns
@@ -446,7 +458,7 @@ def plot_category(categoria, dados, cor, figsize=(6, 2.5)):
 
     # Anotações nos pontos
     for xi, yi in zip(x, y):
-        ax.annotate(formatar_valor_compacto(yi),
+        ax.annotate(format_value_style(yi),
                     xy=(xi, yi), xytext=(0, 5), textcoords='offset points',
                     ha='center', fontsize=6, color=cor)
 
@@ -470,7 +482,7 @@ def plot_category(categoria, dados, cor, figsize=(6, 2.5)):
 # --------------------------------------------------
 # Pré-processamento dos dados
 # --------------------------------------------------
-categorias_interesse = ['alimentaçao', 'gastos extra', 'roupas', 'bebida', 
+categorias_interesse = ['alimentaçao e casa', 'gastos extra', 'roupas e calçados', 'bebida', 
                         'agua e luz', 'emprestimo', 'divida', 'saude']
 
 df['category'] = df['category'].str.strip().str.lower()
@@ -495,6 +507,7 @@ for cat in categorias_interesse:
     plot_category(cat, dados, category_colors[cat])
 
 ```
+
 
 ## Receitas
 
@@ -546,7 +559,7 @@ last_month = monthly_income.iloc[-1]
 plt.text(
     x=last_month['month'], 
     y=last_month['price'] + (last_month['price'] * 0.02),  # ligeiro deslocamento acima da barra
-    s=formatar_valor_compacto(last_month['price']),
+    s=format_value_style(last_month['price']),
     ha='center', va='bottom', fontsize=10, fontweight='bold', color='#0077b6'
 )
 
@@ -584,7 +597,7 @@ plt.show()
 # Definir orçamento mensal por categoria
 budget = {
     'alimentaçao': 3000,
-    'roupas': 200,
+    'roupas e calçados': 200,
     'bebida': 200,
     'agua e luz': 100,
     # 'emprestimos': 0,
@@ -594,6 +607,7 @@ budget = {
 ```
 
 ::: {layout-ncol="2"}
+
 ### Em quais categorias de orçamento estou estourando o limite com mais frequência?
 
 ```{python}
@@ -726,8 +740,9 @@ display(Markdown(f"Média de economia nos últimos 3 meses: **{average_saving:.2
 
 ### Estou conseguindo seguir meu orçamento nesse mes?
 
-
 ```{python}
+#| fig-align: center
+
 # Filtrar o mês atual e tipo=outcome
 df_outcome = df[df['type'] == 'outcome'].copy()
 df_outcome['createdAt'] = pd.to_datetime(df_outcome['createdAt'], format='%d-%m-%Y')
@@ -788,11 +803,11 @@ ax.fill(angles, actual_values, color='red', alpha=0.2)
 
 # Título e legenda
 ax.set_title(f'Controle de Orçamento - {now.strftime("%B/%Y")}', size=8, y=1.1)
-ax.legend(loc='best', bbox_to_anchor=(1.1, 1.1))
+ax.legend(loc='upper right', bbox_to_anchor=(1.1, 1.1))
 
 ax.tick_params(axis='y', labelsize=7)
 ax.legend(fontsize=8)
 
 plt.show()
-
 ```
+

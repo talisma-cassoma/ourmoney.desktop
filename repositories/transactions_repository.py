@@ -11,8 +11,8 @@ class TransactionsRepository:
     def __init__(self):
         self._db_path = resource_path('database/database.db')
         self.logger = get_logger("TransactionsRepository")
-        self.total_income , self.total_outcome = self.get_total()
         self.create_table()
+        self.total_income , self.total_outcome = self.get_total()
 
     def _connect(self):
         return sqlite3.connect(self._db_path)
