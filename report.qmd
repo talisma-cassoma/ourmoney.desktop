@@ -254,7 +254,7 @@ for m in months:
 
     # Garante todas as categorias ativas como colunas, mesmo que não tenham dados neste mês
     pivot = pivot.reindex(columns=sorted(categorias_ativas), fill_value=0)
-    pivot = pivot.reindex(index=sorted(pivot.index), fill_value=0)
+    pivot = pivot.reindex(index=range(1, 6), fill_value=0)
 
 
     # Formatar os valores para anotações
@@ -402,12 +402,12 @@ ultimo trimeste
 if not category_6m.empty:
     # Cria figura e eixo
     fig, ax = plt.subplots(figsize=(10, 8.5))
-    bars = ax.barh(category_6m['category'], category_6m['price'], color='#90e0ef', height=0.6 )
+    bars = ax.barh(category_6m['category'], category_6m['price'], color='#0077b6', height=0.6 )
 
     # Estilo do gráfico
-    ax.set_title('Despesas recorrente por Categoria - Último Trimestre', weight='bold')
+    ax.set_title('Despesas recorrente por Categoria - Último Semestre', weight='bold')
     ax.set_ylabel('Categoria')
-    ax.tick_params(axis='y', which='major', labelsize=9)
+    ax.tick_params(axis='y', which='major', labelsize=9.5)
     ax.tick_params(axis='x', labelbottom=False, bottom=False)
     #ax.grid(axis='x', linestyle='--', alpha=0.6)
     for spine in ['top', 'right', 'left', 'bottom']:
