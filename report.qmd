@@ -596,12 +596,14 @@ plt.show()
 ```{python}
 # Definir orçamento mensal por categoria
 budget = {
-    'alimentaçao': 3000,
+    'alimentaçao e casa': 3000,
     'roupas e calçados': 200,
     'bebida': 200,
     'agua e luz': 100,
-    # 'emprestimos': 0,
+    'emprestimos': 500,
     'dividas': 0,
+    'lazer e convivio':1000,
+    'agua e luz':300,
     'saude': 500
 }
 ```
@@ -678,6 +680,9 @@ show(remaining_budget_df.sort_values(by='restou'))
 ### Qual o meu progresso em relação à minha meta de economia?
 
 ```{python}
+import matplotlib.pyplot as plt
+import pandas as pd
+
 # Adiciona colunas auxiliares
 df['year'] = df['createdAt'].dt.year
 df['month'] = df['createdAt'].dt.month
@@ -690,25 +695,51 @@ month_map = {
 }
 df['month_name'] = df['month'].map(month_map)
 
-# Soma os valores de receitas e despesas por mês/ano
+# Soma receitas e despesas
 income_by_month = df[df['type'] == 'income'].groupby(['year', 'month_name'])['price'].sum()
 outcome_by_month = df[df['type'] == 'outcome'].groupby(['year', 'month_name'])['price'].sum()
 
 # Calcula economia
-economy_by_month = (income_by_month - outcome_by_month)
+economy_by_month = (income_by_month - outcome_by_month).reset_index(name='economy')
 
-# Transforma em tabela (pivot)
-economy_table = economy_by_month.reset_index().pivot(index='year', columns='month_name', values='price')
-
-# Ordena colunas dos meses
+# Ordena meses
 ordered_months = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez']
-economy_table = economy_table.reindex(columns=ordered_months)
+economy_by_month['month_name'] = pd.Categorical(economy_by_month['month_name'], categories=ordered_months, ordered=True)
+economy_by_month = economy_by_month.sort_values(['year', 'month_name'])
 
-# Substitui NaN por '-'
-economy_table = economy_table.applymap(lambda x: f"{x:.2f}" if pd.notnull(x) else '-')
+# Gera um gráfico por ano
+for year, data in economy_by_month.groupby('year'):
+    fig, ax = plt.subplots(figsize=(14, 6))
+    
+    # Define cores
+    colors = data['economy'].apply(lambda x: '#0077b6' if x >= 0 else '#f08585ff')
+    
+    # Cria gráfico horizontal
+    ax.barh(data['month_name'], data['economy'], color=colors)
+    
+    # Linha central (zero)
+    ax.axvline(0, color='black', linewidth=1)
 
-# Exibe a tabela
-show(economy_table)
+    # Inverte ordem dos meses (jan em cima, dez embaixo)
+    ax.invert_yaxis()
+    
+    # Remove eixos e bordas
+    ax.tick_params(axis='x', labelbottom=False, bottom=False)
+    for spine in ['top', 'right', 'left', 'bottom']:
+        ax.spines[spine].set_visible(False)
+    
+    # Título
+    ax.set_title(f'Economia mensal em {year}', fontsize=14, weight='bold')
+    ax.set_ylabel('')  # Remove rótulo do eixo Y
+    
+    # Exibe valores formatados
+    for i, v in enumerate(data['economy']):
+        label = format_value_style(v)
+        ax.text(v + (500 if v >= 0 else -500), i, label,
+                color='black', va='center', ha='left' if v >= 0 else 'right', fontsize=9)
+    
+    plt.tight_layout()
+    plt.show()
 ```
 
 ### Quanto estou conseguindo economizar em média por mês?
@@ -747,10 +778,13 @@ display(Markdown(f"Média de economia nos últimos 3 meses: **{average_saving:.2
 df_outcome = df[df['type'] == 'outcome'].copy()
 df_outcome['createdAt'] = pd.to_datetime(df_outcome['createdAt'], format='%d-%m-%Y')
 
+now = datetime.now()
+
 current_month = df_outcome[
     (df_outcome['createdAt'].dt.month == now.month) &
     (df_outcome['createdAt'].dt.year == now.year)
 ]
+
 # Somar os gastos nas categorias selecionadas
 selected_categories = list(budget.keys())
 expense_sum = (
@@ -765,49 +799,71 @@ labels = selected_categories
 budget_values = [budget[cat] for cat in labels]
 actual_values = [expense_sum[cat] for cat in labels]
 
-# Fechar o gráfico radar
-labels += [labels[0]]
-budget_values += [budget_values[0]]
-actual_values += [actual_values[0]]
+# Criar o gráfico de barras empilhadas
+x = np.arange(len(labels))
+width = 0.5  # Largura da barra
 
-# Ângulos para o radar
-angles = np.linspace(0, 2 * np.pi, len(labels), endpoint=True).tolist()
+fig, ax = plt.subplots(figsize=(8, 5))
 
-# Criar o radar chart
-fig, ax = plt.subplots(figsize=(5, 5), subplot_kw=dict(polar=True))
+# Calcular partes (restante e excesso)
+remaining = []
+over_budget = []
 
-# Estilo do gráfico
-ax.set_theta_offset(np.pi / 2)
-ax.set_theta_direction(-1)
+for actual, budget_value in zip(actual_values, budget_values):
+    if actual > budget_value:
+        remaining.append(0)
+        over_budget.append(actual - budget_value)
+    else:
+        remaining.append(budget_value - actual)
+        over_budget.append(0)
 
-# Desenhar os eixos e rótulos
-ax.set_xticks(angles[:-1])
-ax.set_xticklabels(labels[:-1])
-ax.set_rlabel_position(0)
+# Plotar gastos dentro do orçamento (vermelho claro)
+ax.bar(x, np.minimum(actual_values, budget_values), width, color='#f08585ff', alpha=0.7, label='Gasto Atual')
 
-ax.yaxis.grid(False)
-# Remove the outer circular spine
-ax.spines['polar'].set_visible(False)
+# Plotar orçamento restante (azul)
+ax.bar(x, remaining, width, bottom=np.minimum(actual_values, budget_values),
+       color='#0077b6', alpha=0.4, label='Orçamento Restante')
 
-plt.yticks([500, 1000, 1500, 2000, 2500, 3000], ["500", "1000", "1500", "2000", "2500", "3000"], color="grey", size=10)
-plt.ylim(0, max(budget_values + actual_values) + 500)
+# Plotar excesso (vermelho escuro)
+ax.bar(x, over_budget, width, bottom=budget_values, color='#ad1010ff', alpha=0.9, label='Excesso')
 
-# Plotar o orçamento
-ax.plot(angles, budget_values, color='#0077b6', linewidth=2, linestyle='solid', label='Orçamento')
+# === Adicionar rótulos ===
+for i, (actual, budget_value, excess, remain) in enumerate(zip(actual_values, budget_values, over_budget, remaining)):
+    # Se há excesso, mostrar o valor excedente dentro da barra
+    if excess > 0:
+        ax.text(x[i], budget_value + excess / 2, f"+{excess:.0f}", ha='center', va='center',
+                fontsize=8, color='white', fontweight='bold')
 
-ax.fill(angles, budget_values, color='#0077b6', alpha=0.1)
+    # Valor restante (vertical, à direita da barra)
+    if remain > 0:
+        ax.text(
+            x[i] + width / 2 + 0.05,   # desloca um pouco à direita
+            (actual + budget_value) / 2,  # centraliza verticalmente
+            f"{remain:.0f}",
+            ha='left', va='top', rotation=90,
+            fontsize=8, color='#0077b6', fontweight='bold'
+        )
+    else:
+        # Se não há orçamento restante, mostra "0"
+        ax.text(
+            x[i] + width / 2 + 0.05,
+            budget_value / 2,
+            "- \n0",
+            ha='left', va='center', rotation=90,
+            fontsize=8, color='gray'
+        )
 
-# Plotar os gastos reais
-ax.plot(angles, actual_values, color='red', linewidth=2, linestyle='solid', label='Gasto Atual')
-ax.fill(angles, actual_values, color='red', alpha=0.2)
+# Estilo e rótulos
+ax.set_title(f'Controle de Orçamento - {now.strftime("%B/%Y")}', fontsize=10)
+ax.tick_params(axis='x', bottom=False)
+for spine in ['top', 'right', 'left', 'bottom']:
+    ax.spines[spine].set_visible(False)
 
-# Título e legenda
-ax.set_title(f'Controle de Orçamento - {now.strftime("%B/%Y")}', size=8, y=1.1)
-ax.legend(loc='upper right', bbox_to_anchor=(1.1, 1.1))
+ax.set_xticks(x)
+ax.set_xticklabels(labels, rotation=45, ha='right')
+ax.legend()
 
-ax.tick_params(axis='y', labelsize=7)
-ax.legend(fontsize=8)
-
+plt.tight_layout()
 plt.show()
 ```
 
