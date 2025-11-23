@@ -40,7 +40,7 @@ class TransactionsRepository:
         INSERT INTO Transactions (id, description, type, category, price, owner, email, status, createdAt)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
         """
-        createdAt = datetime.now().isoformat(timespec='milliseconds') + 'Z' # padrão ISO 8601 para datas
+        # createdAt = datetime.now().isoformat(timespec='milliseconds') + 'Z' # padrão ISO 8601 para datas
         with self._connect() as conn:
             try:
                 conn.execute(query, (
@@ -52,7 +52,7 @@ class TransactionsRepository:
                     transaction.owner,
                     transaction.email,
                     transaction.status,
-                    createdAt 
+                    transaction.created_at 
                 ))
                 self.logger.info(f"Transaction with ID {transaction.id} inserted successfully!")
             except sqlite3.Error as e:

@@ -12,6 +12,7 @@ class TransactionDTO:
         self.price = price  
         self.status = status 
         self.created_at = created_at
+
     
     def __repr__(self):
         return (

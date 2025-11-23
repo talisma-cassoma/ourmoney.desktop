@@ -109,14 +109,15 @@ class Controller:
     
     def insert_transaction(self, description, 
                             type, category, price, 
-                            status='unsynced'):
+                            status='unsynced', date=None):
         # Criar o DTO
         transaction_dto = TransactionDTO(
                 description=description,
                 type=type,
                 category=category,
                 price=float(price),
-                status=status
+                status=status,
+                created_at=date
             )
         
         self._insert.one(transaction_dto)

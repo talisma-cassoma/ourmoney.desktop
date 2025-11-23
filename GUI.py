@@ -265,6 +265,12 @@ class MainWindow(QMainWindow):
         self.price_input = QLineEdit()
         self.price_input.setPlaceholderText('Preço')
 
+        self.date_input = QDateEdit()
+        self.date_input.setCalendarPopup(True)
+        today = datetime.today().strftime("%d-%m-%Y")
+        self.date_input.setDate(QDate.fromString(today, "dd-MM-yyyy"))
+
+
         self.add_button = QPushButton(text="Adicionar Transação")
         self.add_button.clicked.connect(self.add_transaction)
 
@@ -273,6 +279,7 @@ class MainWindow(QMainWindow):
         self.transaction_inputs_layout.addRow('Tipo:', self.type_input)
         self.transaction_inputs_layout.addRow('Categoria:', self.category_input)
         self.transaction_inputs_layout.addRow('Preço:', self.price_input)
+        self.transaction_inputs_layout.addRow('Data:', self.date_input)
         self.transaction_inputs_layout.addRow(self.add_button)
 
         # Add block 1 to the main layout
@@ -456,6 +463,7 @@ class MainWindow(QMainWindow):
         trans_type = self.type_input.currentText().lower()
         category = self.category_input.text().strip().lower()
         price_text = self.price_input.text().strip()
+        date= self.date_input.date().toString("yyyy-MM-dd") +f"T{f'12:34:{f'{random.randint(0, 59):02d}'}.789Z'}"
         
         code = compile(price_text, "<string>", "eval")
 
@@ -481,7 +489,8 @@ class MainWindow(QMainWindow):
             description, 
             "income" if trans_type == "entrada" else "outcome", 
             category, 
-            price
+            price,
+            date=date
         )
         self.last_date = None
     

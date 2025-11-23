@@ -840,7 +840,7 @@ for i, (actual, budget_value, excess, remain) in enumerate(zip(actual_values, bu
             x[i] + width / 2 + 0.05,   # desloca um pouco à direita
             (actual + budget_value) / 2,  # centraliza verticalmente
             f"{remain:.0f}",
-            ha='left', va='top', rotation=90,
+            ha='left', va='center', rotation=90,
             fontsize=8, color='#0077b6', fontweight='bold'
         )
     else:
@@ -848,7 +848,7 @@ for i, (actual, budget_value, excess, remain) in enumerate(zip(actual_values, bu
         ax.text(
             x[i] + width / 2 + 0.05,
             budget_value / 2,
-            "- \n0",
+            "",
             ha='left', va='center', rotation=90,
             fontsize=8, color='gray'
         )
