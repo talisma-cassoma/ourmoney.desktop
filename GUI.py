@@ -17,6 +17,7 @@ import time
 import logging
 import random
 from household_view import HouseHoldList
+from bot_ui import BotUI
 
 # Configuração do logging
 logging.basicConfig(filename='app.log', level=logging.INFO, format='%(asctime)s %(levelname)s:%(message)s')
@@ -189,6 +190,13 @@ class MainWindow(QMainWindow):
         #house_hold_list_btn.setStyleSheet("padding: 5px")
         self.sidebar_layout.addWidget(house_hold_list_btn)
 
+        # Botão de navegação 3
+        bot_ui_btn = QPushButton("chatbot")
+        #btn3.setStyleSheet("color: white; background-color: transparent; border: none;")
+        bot_ui_btn.clicked.connect(lambda: self.switch_section(2))
+        #bot_ui_btn.setStyleSheet("padding: 5px")
+        self.sidebar_layout.addWidget(bot_ui_btn) 
+
         self.sidebar_layout.addStretch()
         self.outer_layout.addWidget(self.sidebar)
 
@@ -202,14 +210,16 @@ class MainWindow(QMainWindow):
         self.main_frame.setStyleSheet("background-color: rgb(61, 61, 66); color: #D3D3D3;")
         self.stack.addWidget(self.main_frame)
 
-        # Página 1: futura seção
+        # Página 1: futura seção        
         self.household_section = HouseHoldList()
         self.household_section.setStyleSheet("background-color: rgb(61, 61, 66); color: #D3D3D3;")
         self.stack.addWidget(self.household_section)
+
+
+        self.bot_ui_section = BotUI()
+        self.bot_ui_section.setStyleSheet("background-color: rgb(61, 61, 66); color: #D3D3D3;")
+        self.stack.addWidget(self.bot_ui_section)
         
-        self.household_section = HouseHoldList()
-        self.household_section.setStyleSheet("background-color: rgb(61, 61, 66); color: #D3D3D3;")
-        self.stack.addWidget(self.household_section)
 
         # Status and sync area at the top
         self.status_frame = QFrame()
