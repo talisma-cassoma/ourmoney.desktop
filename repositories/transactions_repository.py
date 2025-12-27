@@ -145,7 +145,6 @@ class TransactionsRepository:
 
         return [TransactionEntity(*t) for t in transactions]
     
-
     def get_all(self) -> list[TransactionEntity]:
         query = 'SELECT id, description, type, category, price, owner, email, status, createdAt FROM Transactions ORDER BY createdAt DESC'
         with self._connect() as conn:
@@ -310,7 +309,8 @@ class TransactionsRepository:
             for transaction in transactions:
                 query = "UPDATE Transactions SET status = 'synced' WHERE id = ?"
                 cur.execute(query, (transaction['id'],))  # Marcar cada transação como sincronizada
-                logging.info(f'Transação {transaction['id']} marcada como sincronizada.')
+                logging.info(f"Transação {transaction['id']} marcada como sincronizada.")
+
 
     
     def search_transactions_by_filters(self, last_date, filters) -> list[TransactionEntity]:

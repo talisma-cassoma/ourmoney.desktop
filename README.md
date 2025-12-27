@@ -34,8 +34,14 @@ Follow these steps to set up the project locally:
    pip3 freeze > requirements.txt
    ```
    
-5. **create a shortcut in terminal(Optional)** 
-  ...
+5. **system deps** 
+   Make sure you have the following system dependencies installed:
+   - On **Ubuntu/Debian**:  
+     ....
+     
+   - On **macOS** (using Homebrew):  
+     Download: Go to <a href="https://ffmpeg.martin-riedl.de">Martin Riedl’s FFmpeg builds</a>.
+
 
 ### Objectivos
 

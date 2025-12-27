@@ -23,6 +23,8 @@ entrypoint.sh
 *.csv
 *.xlsx
 *.pdf
+*.wav
+*.mp3
 
 # Ignorar configurações do editor/IDE
 #.vscode/
