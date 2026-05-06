@@ -9,7 +9,9 @@ Follow these steps to set up the project locally:
  
    Clone the project and use the following command to create a virtual environment:  
    ```bash
-   python3 -m venv env
+   pyenv install 3.13.5
+   pyenv local 3.13.5
+   python -m venv venv
    ```
 
 2. **Activate the Virtual Environment**  
@@ -25,6 +27,7 @@ Follow these steps to set up the project locally:
 3. **Install Required Dependencies**  
    Run the following command to install the dependencies listed in the `requirements.txt` file:  
    ```bash
+   pip3 install git+https://github.com/moj-analytical-services/laurium.git
    pip3 install -r requirements.txt
    ```
 
@@ -34,8 +37,15 @@ Follow these steps to set up the project locally:
    pip3 freeze > requirements.txt
    ```
    
-5. **create a shortcut in terminal(Optional)** 
-  ...
+5. **system deps** 
+   
+   Make sure you have the following system dependencies installed:
+   - On **Ubuntu/Debian**:  
+     ....
+     
+   - On **macOS** (using Homebrew):  
+     Download: Go to <a href="https://ffmpeg.martin-riedl.de">Martin Riedl’s FFmpeg builds</a>.
+
 
 ### Objectivos
 

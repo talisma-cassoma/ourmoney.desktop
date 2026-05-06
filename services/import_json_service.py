@@ -12,7 +12,7 @@ def import_transactions_from_json():
             batch_size = 1000
             transactions: list[TransactionEntity] = []
 
-            with open('myTransactions_20251011.json', 'r', encoding='utf-8') as file:
+            with open('myTransactions_20251223.json', 'r', encoding='utf-8') as file:
                 parser = ijson.items(file, 'item')  # Ajuste conforme a estrutura do JSON
 
                 for transaction in parser:

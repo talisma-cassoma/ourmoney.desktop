@@ -396,8 +396,6 @@ category_6m = (
 
 ```
 
-ultimo trimeste
-
 ```{python}
 if not category_6m.empty:
     # Cria figura e eixo
