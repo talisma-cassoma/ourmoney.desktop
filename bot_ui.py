@@ -35,7 +35,7 @@ EXTRACTOR_INSTANCE = None
 from typing import Literal
 import pandas as pd
 #from laurium.decoder_models import llm, prompts, pydantic_models, extract
-from langchain_core.output_parsers import PydanticOutputParser
+#from langchain_core.output_parsers import PydanticOutputParser
 
 schema = {
     "id": uuid.UUID,
@@ -61,91 +61,91 @@ descriptions = {
     "status": "Status de sincronização synced ou unsynced, por padrão é unsynced"
 }
 
-# --- CLASSE DE EXTRAÇÃO (Lógica Original) ---
-class ExpenseExtractor:
-    def __init__(self):
-        # Sugestão: Use qwen2.5:1.5b no Mac Air para ser instantâneo. 
-        # Se preferir o 7b, apenas mude o nome abaixo.
-        self.llm = llm.create_llm(
-            llm_platform="ollama",
-            model_name="qwen2.5:1.5b", 
-            temperature=0.0
-        )
+# # --- CLASSE DE EXTRAÇÃO (Lógica Original) ---
+# class ExpenseExtractor:
+#     def __init__(self):
+#         # Sugestão: Use qwen2.5:1.5b no Mac Air para ser instantâneo. 
+#         # Se preferir o 7b, apenas mude o nome abaixo.
+#         self.llm = llm.create_llm(
+#             llm_platform="ollama",
+#             model_name="qwen2.5:1.5b", 
+#             temperature=0.0
+#         )
 
-        system_message = prompts.create_system_message(
-            base_message=(
-                "Você é um sistema de extração de transações financeiras.\n\n"
-                "Sua tarefa é analisar um texto em português brasileiro e extrair "
-                "APENAS transações financeiras reais.\n\n"
+#         system_message = prompts.create_system_message(
+#             base_message=(
+#                 "Você é um sistema de extração de transações financeiras.\n\n"
+#                 "Sua tarefa é analisar um texto em português brasileiro e extrair "
+#                 "APENAS transações financeiras reais.\n\n"
 
-                "REGRAS OBRIGATÓRIAS:\n"
-                "1. Retorne SOMENTE JSON válido, sem explicações, comentários ou texto extra.       \n"
-                "2. O JSON deve seguir EXATAMENTE o schema fornecido.\n"
-                "3. Se não houver nenhuma transação financeira clara, retorne uma lista         vazia [].\n"
-                "4. Cada transação deve gerar UM objeto JSON separado.\n\n"
+#                 "REGRAS OBRIGATÓRIAS:\n"
+#                 "1. Retorne SOMENTE JSON válido, sem explicações, comentários ou texto extra.       \n"
+#                 "2. O JSON deve seguir EXATAMENTE o schema fornecido.\n"
+#                 "3. Se não houver nenhuma transação financeira clara, retorne uma lista         vazia [].\n"
+#                 "4. Cada transação deve gerar UM objeto JSON separado.\n\n"
 
-                "REGRAS DE INTERPRETAÇÃO:\n"
-                "- 'gastei', 'paguei', 'comprei' → type = outcome\n"
-                "- 'recebi', 'ganhei', 'salário', 'pix recebido' → type = income\n"
-                "- Se o valor não for explícito, NÃO crie a transação.\n"
-                "- Valores devem ser convertidos para float (ex: 'vinte reais' → 20.0).\n\n"
+#                 "REGRAS DE INTERPRETAÇÃO:\n"
+#                 "- 'gastei', 'paguei', 'comprei' → type = outcome\n"
+#                 "- 'recebi', 'ganhei', 'salário', 'pix recebido' → type = income\n"
+#                 "- Se o valor não for explícito, NÃO crie a transação.\n"
+#                 "- Valores devem ser convertidos para float (ex: 'vinte reais' → 20.0).\n\n"
 
-                "CATEGORIAS:\n"
-                "- Alimentos (mercado, padaria, restaurante, lanche)\n"
-                "- Transporte (uber, ônibus, gasolina)\n"
-                "- Moradia (aluguel, luz, água, internet)\n"
-                "- Lazer (cinema, jogos, streaming)\n"
-                "- Saúde (farmácia, médico)\n"
-                "- Outros (se não se encaixar claramente)\n\n"
+#                 "CATEGORIAS:\n"
+#                 "- Alimentos (mercado, padaria, restaurante, lanche)\n"
+#                 "- Transporte (uber, ônibus, gasolina)\n"
+#                 "- Moradia (aluguel, luz, água, internet)\n"
+#                 "- Lazer (cinema, jogos, streaming)\n"
+#                 "- Saúde (farmácia, médico)\n"
+#                 "- Outros (se não se encaixar claramente)\n\n"
 
-                "PADRÕES:\n"
-                "- owner: sempre 'Bot'\n"
-                "- email: sempre 'bot@ourmoney.com'\n"
-                "- status: sempre 'unsynced'\n"
-            ),
-            keywords=list(descriptions.values())
-        )       
+#                 "PADRÕES:\n"
+#                 "- owner: sempre 'Bot'\n"
+#                 "- email: sempre 'bot@ourmoney.com'\n"
+#                 "- status: sempre 'unsynced'\n"
+#             ),
+#             keywords=list(descriptions.values())
+#         )       
 
 
-        self.prompt = prompts.create_prompt(
-            system_message=system_message,
-            examples=None,
-            example_human_template=None,
-            example_assistant_template=None,
-            final_query=(
-                "Texto para análise:\n\n{text}\n\n"
-                "Extraia todas as transações financeiras conforme as regras "
-                "e retorne apenas o JSON."),
-            schema=schema,
-            descriptions=descriptions
-        )
+#         self.prompt = prompts.create_prompt(
+#             system_message=system_message,
+#             examples=None,
+#             example_human_template=None,
+#             example_assistant_template=None,
+#             final_query=(
+#                 "Texto para análise:\n\n{text}\n\n"
+#                 "Extraia todas as transações financeiras conforme as regras "
+#                 "e retorne apenas o JSON."),
+#             schema=schema,
+#             descriptions=descriptions
+#         )
 
-        self.OutputModel = pydantic_models.make_dynamic_example_model(
-            schema=schema,
-            descriptions=descriptions,
-            model_name="Expense"
-        )
+#         self.OutputModel = pydantic_models.make_dynamic_example_model(
+#             schema=schema,
+#             descriptions=descriptions,
+#             model_name="Expense"
+#         )
 
-        self.parser = PydanticOutputParser(pydantic_object=self.OutputModel)
+#         self.parser = PydanticOutputParser(pydantic_object=self.OutputModel)
 
-        self.extractor = extract.BatchExtractor(
-            llm=self.llm,
-            prompt=self.prompt,
-            parser=self.parser
-        )
+#         self.extractor = extract.BatchExtractor(
+#             llm=self.llm,
+#             prompt=self.prompt,
+#             parser=self.parser
+#         )
 
-    def extract(self, text: str) -> list:
-        df = pd.DataFrame({"text": [text]})
-        result = self.extractor.process_chunk(df, text_column="text")
-        data = result.to_dict(orient="records")
+#     def extract(self, text: str) -> list:
+#         df = pd.DataFrame({"text": [text]})
+#         result = self.extractor.process_chunk(df, text_column="text")
+#         data = result.to_dict(orient="records")
 
-        now = datetime.utcnow().isoformat() + "Z"
-        for item in data:
-            item["id"] = str(uuid.uuid4())
-            item["createdAt"] = now
-            item["status"] = "unsynced"
-            item.setdefault("owner", "Bot")
-            item.setdefault("email", "bot@ourmoney.com")
+#         now = datetime.utcnow().isoformat() + "Z"
+#         for item in data:
+#             item["id"] = str(uuid.uuid4())
+#             item["createdAt"] = now
+#             item["status"] = "unsynced"
+#             item.setdefault("owner", "Bot")
+#             item.setdefault("email", "bot@ourmoney.com")
 
 
 # --- THREADS DE PROCESSAMENTO ---
