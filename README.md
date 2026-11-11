@@ -87,8 +87,8 @@ Ollama is not required for startup.
    - [x] table dos gastos recurrentes
    - [x] table dos gastos com previsões
 
-- [ ] criar um executavel(pyinstaller)
-- [ ] criar um installer setup wizard(inno setup)
+- [x] criar um executavel(pyinstaller)
+- [-] ~~criar um installer setup wizard(inno setup)~~
 - [ ] automatizar a criaçao do setup wizard com CI/CD a cada commit na branch main 
 
 project structure:
