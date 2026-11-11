@@ -127,17 +127,10 @@ project structure:
 ├── requirements.txt
 └── main.py
 ```
-about the new changes on build process:
+## Build & Startup Stability Updates
 
-The crash reports showed an uncaught `FileNotFoundError` because startup tried to run `ollama`, which wasn’t installed; the exception in a Qt worker thread caused a `SIGABRT`. The app also loaded PyTorch/Whisper before its main window appeared, delaying startup.
-
-The changes now:
-- Start without requiring Ollama; load the Chatbot and voice dependencies only when that section is opened.
-- Catch and log voice-model, recording, and transcription failures instead of letting worker-thread exceptions abort the app.
-- Write startup and error logs under `~/Library/Application Support/OurMoney/app.log`.
-- Store the writable database in Application Support and bundle its initial copy, assets, and icon.
-- Build a macOS onedir app and stage the DMG separately to avoid slow first-launch extraction and DMG overwrite collisions.
-
-The refreshed `OurMoney-Installer.dmg` passed checksum and contents checks. The rebuilt app stayed running for 45 seconds in a clean-profile launch test and wrote its startup log. There are no OurMoney processes running now. The incidental `.DS_Store` change was restored.
-
-The source changes are in `create_installer.sh`, `app.spec`, `GUI.py`, `bot_ui.py`, `main.py`, the database/resource/logging helpers, and `README.md`. Nothing has been committed. Note: this app is still ad-hoc signed, so macOS may still require **Control-click → Open**; normal distribution requires Developer ID signing and notarization.
+* **Resilient Startup & Lazy Loading:** Eliminated startup crashes caused by missing external dependencies like Ollama. Heavy components such as the Chatbot and voice dependencies now load lazily only when their respective sections are accessed.
+* **Robust Error Handling:** Replaced fatal worker-thread exceptions (`SIGABRT`) with graceful exception catching and logging for voice models, recording, and transcription failures.
+* **Standardized Logging & Storage:** Centralized application and error logging to `~/Library/Application Support/OurMoney/app.log`, and configured the app to use a writable database path inside Application Support bundled with necessary assets and icons.
+* **Optimized macOS Packaging:** Switched from a compressed disk image workflow to building a macOS `onedir` app and staging the DMG separately, eliminating slow first-launch extractions and DMG overwrite collisions.
+* **Distribution Note:** The application remains ad-hoc signed (requiring **Control-click → Open** on first launch); full distribution will require official Apple Developer ID signing and notarization.
