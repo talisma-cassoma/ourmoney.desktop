@@ -1,14 +1,7 @@
-import os
 import sys
-import sounddevice as sd
-import numpy as np
-from scipy.io.wavfile import write
 from datetime import datetime
 import json
 import uuid
-import subprocess
-import torch
-import whisper # Oficial para estabilidade no Mac
 
 from PyQt5.QtWidgets import (
     QWidget, QLabel, QVBoxLayout, QApplication, 
@@ -20,20 +13,16 @@ from PyQt5.QtCore import (
 )
 from PyQt5.QtGui import QPainter, QColor
 from PyQt5.QtSvg import QSvgRenderer
-
-# --- CONFIGURAÇÃO DE DISPOSITIVO (MAC MPS) ---
-if torch.backends.mps.is_available():
-    DEVICE = "mps"
-else:
-    DEVICE = "cpu"
+from utils.logger import get_logger
+from utils.helppers import user_data_path
 
 # Variáveis Globais para os Modelos (Carregados via Warmup)
 WHISPER_MODEL = None
 EXTRACTOR_INSTANCE = None
+logger = get_logger(__name__)
 
 # --- SCHEMA E CONFIGURAÇÕES ORIGINAIS ---
 from typing import Literal
-import pandas as pd
 #from laurium.decoder_models import llm, prompts, pydantic_models, extract
 #from langchain_core.output_parsers import PydanticOutputParser
 
@@ -152,37 +141,55 @@ descriptions = {
 
 class WarmupThread(QThread):
     """Thread para carregar os modelos sem travar a UI"""
-    finished = pyqtSignal()
+    warmup_complete = pyqtSignal()
     status = pyqtSignal(str)
+    failed = pyqtSignal(str)
 
     def run(self):
         global WHISPER_MODEL, EXTRACTOR_INSTANCE
-        self.status.emit("Iniciando Ollama...")
-        subprocess.Popen(["ollama", "serve"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        
-        self.status.emit("Carregando Whisper (Base)...")
-        # 'base' é muito mais rápido que 'small' no Mac Air e evita SegFault
-        WHISPER_MODEL = whisper.load_model("base").to(DEVICE)
-        
-        # self.status.emit("Configurando Extrator...")
-        # EXTRACTOR_INSTANCE = ExpenseExtractor()
-        
+        try:
+            self.status.emit("Carregando Whisper (Base)...")
+            import torch
+            import whisper
+
+            device = "mps" if torch.backends.mps.is_available() else "cpu"
+            WHISPER_MODEL = whisper.load_model("base").to(device)
+        except Exception as error:
+            logger.exception("Could not initialize the voice transcription model")
+            self.status.emit("Voice transcription unavailable")
+            self.failed.emit(str(error))
+            return
+
         self.status.emit("Sistema Pronto")
-        self.finished.emit()
+        self.warmup_complete.emit()
 
 class AudioRecorder(QThread):
     finished = pyqtSignal(str)
+    failed = pyqtSignal(str)
+
     def __init__(self, samplerate=16000):
         super().__init__()
         self.samplerate, self.recording, self.audio_data = samplerate, True, []
 
     def run(self):
-        with sd.InputStream(samplerate=self.samplerate, channels=1, callback=self.callback):
-            while self.recording: sd.sleep(100)
-        audio = np.concatenate(self.audio_data, axis=0)
-        filename = f"temp_audio.wav"
-        write(filename, self.samplerate, audio)
-        self.finished.emit(filename)
+        try:
+            import numpy as np
+            import sounddevice as sd
+            from scipy.io.wavfile import write
+
+            with sd.InputStream(samplerate=self.samplerate, channels=1, callback=self.callback):
+                while self.recording:
+                    sd.sleep(100)
+            if not self.audio_data:
+                raise RuntimeError("No audio was recorded")
+
+            audio = np.concatenate(self.audio_data, axis=0)
+            filename = user_data_path("temp_audio.wav")
+            write(filename, self.samplerate, audio)
+            self.finished.emit(filename)
+        except Exception as error:
+            logger.exception("Could not record audio")
+            self.failed.emit(str(error))
 
     def callback(self, indata, frames, time, status):
         if self.recording: self.audio_data.append(indata.copy())
@@ -192,16 +199,20 @@ class ProcessingPipeline(QThread):
     """Executa Transcrição e depois Extração"""
     transcription_ready = pyqtSignal(str)
     extraction_ready = pyqtSignal(list)
+    failed = pyqtSignal(str)
 
     def __init__(self, audio_path):
         super().__init__()
         self.audio_path = audio_path
 
     def run(self):
-        # 1. Transcrição
-        result = WHISPER_MODEL.transcribe(self.audio_path, language="pt", fp16=False)
-        text = result.get("text", "").strip()
-        self.transcription_ready.emit(text)
+        try:
+            result = WHISPER_MODEL.transcribe(self.audio_path, language="pt", fp16=False)
+            text = result.get("text", "").strip()
+            self.transcription_ready.emit(text)
+        except Exception as error:
+            logger.exception("Could not transcribe recorded audio")
+            self.failed.emit(str(error))
 
         # # 2. Extração (se houver texto)
         # if text:
@@ -274,7 +285,8 @@ class BotUI(QWidget):
         # Inicia Warmup
         self.warmup = WarmupThread()
         self.warmup.status.connect(self.status.setText)
-        self.warmup.finished.connect(self.on_warmup_finished)
+        self.warmup.warmup_complete.connect(self.on_warmup_finished)
+        self.warmup.failed.connect(self.on_warmup_failed)
         self.warmup.start()
 
     def on_warmup_finished(self):
@@ -282,10 +294,16 @@ class BotUI(QWidget):
         self.status.setText("Toque para gravar")
         self.button.animate_to("#3498db")
 
+    def on_warmup_failed(self, error):
+        self.button.setEnabled(False)
+        self.status.setText("Voice transcription unavailable; see app.log")
+        self.status.setToolTip(error)
+
     def toggle_recording(self):
         if not self.is_recording:
             self.recorder = AudioRecorder()
             self.recorder.finished.connect(self.start_processing)
+            self.recorder.failed.connect(self.on_recording_failed)
             self.recorder.start()
             self.button.animate_to("#e74c3c")
             self.status.setText("Gravando...")
@@ -300,7 +318,18 @@ class BotUI(QWidget):
         self.pipeline = ProcessingPipeline(filename)
         self.pipeline.transcription_ready.connect(self.show_transcription)
         self.pipeline.extraction_ready.connect(self.show_json)
+        self.pipeline.failed.connect(self.on_processing_failed)
         self.pipeline.start()
+
+    def on_recording_failed(self, error):
+        self.is_recording = False
+        self.button.animate_to("#3498db")
+        self.status.setText("Recording failed; see app.log")
+        self.status.setToolTip(error)
+
+    def on_processing_failed(self, error):
+        self.status.setText("Transcription failed; see app.log")
+        self.status.setToolTip(error)
 
     def show_transcription(self, text):
         self.transcription_display.setPlainText(f"🗣️ Transcrição:\n{text}")

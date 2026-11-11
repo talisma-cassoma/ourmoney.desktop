@@ -46,6 +46,33 @@ Follow these steps to set up the project locally:
    - On **macOS** (using Homebrew):  
      Download: Go to <a href="https://ffmpeg.martin-riedl.de">Martin Riedl’s FFmpeg builds</a>.
 
+### Build the macOS installer
+
+Build the installer on macOS with the same Python environment that contains the
+application's runtime dependencies:
+
+```bash
+source env/bin/activate
+python -m pip install -r requirements-build.txt
+brew install create-dmg
+./create_installer.sh
+```
+
+The script creates `dist/OurMoney.app` and `dist/OurMoney-Installer.dmg`.
+The app icon, database, and assets are included in the bundle. On first launch,
+the bundled database is copied to
+`~/Library/Application Support/OurMoney/database/database.db`; subsequent
+database changes are stored there so they persist across launches and app
+updates. The app log is written to
+`~/Library/Application Support/OurMoney/app.log`. Assets loaded by
+application code should be resolved with `resource_path(...)` from
+`utils.helppers`.
+
+The voice transcription panel and its Whisper model load only when the Chatbot
+section is opened. If the model cannot be loaded, the main app remains usable,
+voice recording stays disabled, and the error is written to the app log.
+Ollama is not required for startup.
+
 
 ### Objectivos
 
@@ -100,3 +127,17 @@ project structure:
 ├── requirements.txt
 └── main.py
 ```
+about the new changes on build process:
+
+The crash reports showed an uncaught `FileNotFoundError` because startup tried to run `ollama`, which wasn’t installed; the exception in a Qt worker thread caused a `SIGABRT`. The app also loaded PyTorch/Whisper before its main window appeared, delaying startup.
+
+The changes now:
+- Start without requiring Ollama; load the Chatbot and voice dependencies only when that section is opened.
+- Catch and log voice-model, recording, and transcription failures instead of letting worker-thread exceptions abort the app.
+- Write startup and error logs under `~/Library/Application Support/OurMoney/app.log`.
+- Store the writable database in Application Support and bundle its initial copy, assets, and icon.
+- Build a macOS onedir app and stage the DMG separately to avoid slow first-launch extraction and DMG overwrite collisions.
+
+The refreshed `OurMoney-Installer.dmg` passed checksum and contents checks. The rebuilt app stayed running for 45 seconds in a clean-profile launch test and wrote its startup log. There are no OurMoney processes running now. The incidental `.DS_Store` change was restored.
+
+The source changes are in `create_installer.sh`, `app.spec`, `GUI.py`, `bot_ui.py`, `main.py`, the database/resource/logging helpers, and `README.md`. Nothing has been committed. Note: this app is still ad-hoc signed, so macOS may still require **Control-click → Open**; normal distribution requires Developer ID signing and notarization.

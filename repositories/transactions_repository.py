@@ -1,15 +1,24 @@
 import sqlite3
 import logging
+import os
+import shutil
 import uuid
 from datetime import datetime
 from utils.logger import get_logger
-from utils.helppers import resource_path
+from utils.helppers import resource_path, user_data_path
 from entities.transactions_entity import TransactionEntity
 
 class TransactionsRepository:
     
     def __init__(self):
-        self._db_path = resource_path('database/database.db')
+        bundled_db_path = resource_path('database/database.db')
+        self._db_path = user_data_path('database/database.db')
+        os.makedirs(os.path.dirname(self._db_path), exist_ok=True)
+        if not os.path.exists(self._db_path):
+            if not os.path.isfile(bundled_db_path):
+                raise FileNotFoundError(f"Bundled database not found: {bundled_db_path}")
+            shutil.copy2(bundled_db_path, self._db_path)
+
         self.logger = get_logger("TransactionsRepository")
         self.create_table()
         self.total_income , self.total_outcome = self.get_total()

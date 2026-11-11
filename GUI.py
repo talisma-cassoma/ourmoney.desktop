@@ -14,14 +14,11 @@ from PyQt5.QtSvg import QSvgRenderer
 
 from datetime import datetime
 import time
-import logging
 import random
+from utils.logger import get_logger
 from household_view import HouseHoldList
-from bot_ui import BotUI
 
-# Configuração do logging
-logging.basicConfig(filename='app.log', level=logging.INFO, format='%(asctime)s %(levelname)s:%(message)s')
-
+logger = get_logger(__name__)
 
 Total_font = QFont()
 Total_font.setPointSize(14)  # Set the font size to 14 (adjust as needed)
@@ -271,9 +268,9 @@ class MainWindow(QMainWindow):
         self.stack.addWidget(self.household_section)
 
 
-        self.bot_ui_section = BotUI()
-        self.bot_ui_section.setStyleSheet("background-color: rgb(61, 61, 66); color: #D3D3D3;")
-        self.stack.addWidget(self.bot_ui_section)
+        self.bot_ui_section = None
+        self.bot_ui_placeholder = QWidget()
+        self.stack.addWidget(self.bot_ui_placeholder)
         
 
         # Status and sync area at the top
@@ -521,6 +518,27 @@ class MainWindow(QMainWindow):
         self.load_collection()
         
     def switch_section(self, index):
+        if index == 2 and self.bot_ui_section is None:
+            try:
+                from bot_ui import BotUI
+
+                self.bot_ui_section = BotUI()
+            except Exception as error:
+                logger.exception("Could not load the chatbot section")
+                QMessageBox.critical(
+                    self,
+                    "Chatbot unavailable",
+                    f"Could not load the chatbot section: {error}",
+                )
+                return
+
+            self.bot_ui_section.setStyleSheet(
+                "background-color: rgb(61, 61, 66); color: #D3D3D3;"
+            )
+            self.stack.removeWidget(self.bot_ui_placeholder)
+            self.bot_ui_placeholder.deleteLater()
+            self.stack.addWidget(self.bot_ui_section)
+
         self.stack.setCurrentIndex(index)
 
     def save_file(self, index):
@@ -648,7 +666,7 @@ class MainWindow(QMainWindow):
 
                 self.transaction_table.setItem(row_position, 5, QTableWidgetItem(date))
             except Exception as e:
-                logging.error(f'Unexpected error with id: {transaction.id} with date: {date} , error: {e}')
+                logger.error(f'Unexpected error with id: {transaction.id} with date: {date} , error: {e}')
 
             # Display synced status
             synced_color = "rgb(79, 255, 203)" if transaction.status =='synced' else "rgb(128, 128, 128)"

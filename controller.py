@@ -1,7 +1,7 @@
-import logging
 import requests
 import json
 
+from utils.logger import get_logger
 from utils.shared.convertTimeFormat import convert_to_iso8601
 from datetime import datetime
 from dto.transaction_dto import TransactionDTO
@@ -16,8 +16,7 @@ from services.export_analytics_report_service import export_analytics_report
 from services.import_json_service import import_transactions_from_json
 
 
-# Configuração do logging
-logging.basicConfig(filename='app.log', level=logging.INFO, format='%(asctime)s %(levelname)s:%(message)s')
+logger = get_logger(__name__)
 
 def format_date_filter(value, end_of_day=False):
      if not value:
@@ -197,7 +196,7 @@ class Controller:
     def synchronize_data(self):
          """Baixa dados do servidor para o SQLite local e sincroniza as transações baixadas."""
          if not self.is_online():
-             logging.info("Sem conexão. Dados não puxados.")
+             logger.info("Sem conexão. Dados não puxados.")
              return None
          
          try:
@@ -208,10 +207,10 @@ class Controller:
                  self.push_local_transactions()
                  #return data
              else:
-                 logging.error(f"Erro na resposta do servidor: {response.status_code}")
+                 logger.error(f"Erro na resposta do servidor: {response.status_code}")
                  #return None
          except Exception as e:
-             logging.error(f"Erro ao puxar dados: {e}")
+             logger.error(f"Erro ao puxar dados: {e}")
              #return None
 
     def upadate_status(self, transactions):
@@ -224,11 +223,11 @@ class Controller:
                     timeout=self.timeout
                 )
                 if response.status_code == 200:
-                    logging.info(f"Transação {transaction['id']} marcada como sincronizada no servidor.")
+                    logger.info(f"Transação {transaction['id']} marcada como sincronizada no servidor.")
                 else:
-                    logging.error(f"Erro ao marcar transação {transaction['id']} como sincronizada: {response.status_code}")
+                    logger.error(f"Erro ao marcar transação {transaction['id']} como sincronizada: {response.status_code}")
             except Exception as e:
-                logging.error(f"Erro ao atualizar status de sincronização no servidor para a transação {transaction['id']}: {e}")
+                logger.error(f"Erro ao atualizar status de sincronização no servidor para a transação {transaction['id']}: {e}")
 
     def push_local_transactions(self):
         """Envia transações locais para o servidor, convertendo o createdAt para o formato ISO 8601 (UTC)."""
@@ -267,7 +266,7 @@ class Controller:
                     }
                     transactions_to_push.append(transaction_dict)
             except Exception as e:
-                logging.error(f"erros ao pegar Dados: {e}")
+                logger.error(f"erros ao pegar Dados: {e}")
             try:
                 # Sending transactions in chunks
                 chunk_size = 100  # Define your chunk size
@@ -278,17 +277,17 @@ class Controller:
                         response = requests.post(f"{self.api_url}/api/offline/transactions", json=chunk, timeout=self.timeout)
                         if response.status_code == 200:
                             self._update.mark_as_synced(chunk)  # Mark only the successfully sent chunk as synced
-                            logging.info(f"{len(chunk)} transações enviadas com sucesso!")
+                            logger.info(f"{len(chunk)} transações enviadas com sucesso!")
                         else:
-                            logging.error(f"Erro ao enviar dados. Status Code: {response.status_code}")
+                            logger.error(f"Erro ao enviar dados. Status Code: {response.status_code}")
                     except Exception as e:
-                        logging.error(f"Erro ao enviar transações offline: {e}")
+                        logger.error(f"Erro ao enviar transações offline: {e}")
             except:
-                logging.error("erros ao enviar Dados ao server.")
+                logger.error("erros ao enviar Dados ao server.")
             self._update.many(updated_transactions_dto)
             self._delete.many(deleted_transactions_ids)
         else:
-            logging.info("Sem conexão. Dados não enviados.")
+            logger.info("Sem conexão. Dados não enviados.")
    
     def store_in_local_db(self, data):
         """Armazena as transações baixadas no banco de dados local."""
@@ -311,11 +310,11 @@ class Controller:
                         )
                     )
                 except ValueError as ve:
-                    logging.error(f"Erro ao analisar a data: {ve}")
+                    logger.error(f"Erro ao analisar a data: {ve}")
                 except KeyError as ke:
-                    logging.error(f"Chave ausente na transação: {ke}")
+                    logger.error(f"Chave ausente na transação: {ke}")
                 except Exception as e:
-                    logging.error(f"Erro ao processar a transação: {e}")
+                    logger.error(f"Erro ao processar a transação: {e}")
 
         # Inserir todas as transações de uma vez no banco
         

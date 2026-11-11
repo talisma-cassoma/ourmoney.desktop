@@ -1,18 +1,18 @@
 # -*- mode: python ; coding: utf-8 -*-
-import os # <-- Add this
+from pathlib import Path
 
 block_cipher = None
-project_root = os.path.dirname(SPEC) # <-- Get the directory containing this spec file
+project_root = Path(SPEC).resolve().parent
 
 a = Analysis(
-    ['main.py'], # Ensure this points to main.py
-    pathex=[project_root], # <-- Explicitly add the project root directory
+    [str(project_root / 'main.py')],
+    pathex=[str(project_root)],
     binaries=[],
     datas=[
-        ('database/database.db', 'database'),
-        ('assets', 'assets')
+        (str(project_root / 'database' / 'database.db'), 'database'),
+        (str(project_root / 'assets'), 'assets')
     ],
-    hiddenimports=[], # <-- See Step 4 if needed
+    hiddenimports=[],
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
@@ -22,17 +22,12 @@ a = Analysis(
     cipher=block_cipher,
     noarchive=False,
 )
-# ... (rest of your spec file - PYZ, EXE, BUNDLE sections) ...
-
-# Make sure the EXE and BUNDLE sections are configured correctly as before
 pyz = PYZ(a.pure, a.zipped_data, cipher=block_cipher)
 exe = EXE(
     pyz,
     a.scripts,
-    a.binaries,
-    a.zipfiles,
-    a.datas,
     [],
+    exclude_binaries=True,
     name='OurMoney',
     debug=False,
     bootloader_ignore_signals=False,
@@ -45,11 +40,20 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon='assets/logo_icon.icns',
+    icon=str(project_root / 'assets' / 'logo_icon.icns'),
+)
+coll = COLLECT(
+    exe,
+    a.binaries,
+    a.datas,
+    strip=False,
+    upx=True,
+    upx_exclude=[],
+    name='OurMoney-runtime',
 )
 app = BUNDLE(
-    exe,
+    coll,
     name='OurMoney.app',
-    icon='assets/logo_icon.icns',
-    bundle_identifier=None,
+    icon=str(project_root / 'assets' / 'logo_icon.icns'),
+    bundle_identifier='com.ourmoney.desktop',
 )
